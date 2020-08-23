@@ -114,6 +114,7 @@ public class AttributeHelper {
 		player.getAttribute(MAX_HEALTH).setBaseValue(100.0D);
 		player.getAttribute(ATTACK_DAMAGE).setBaseValue(5.0D);
 		player.getAttribute(ATTACK_SPEED).setBaseValue(Double.MAX_VALUE);
+		player.setHealth(player.getMaxHealth());
 	}
 
 }

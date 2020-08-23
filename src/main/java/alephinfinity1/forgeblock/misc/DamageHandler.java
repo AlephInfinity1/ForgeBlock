@@ -4,9 +4,12 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -36,9 +39,28 @@ public class DamageHandler {
 			//if(damager instanceof PlayerEntity) damage += 4; //A wonky workaround to setting the player's attack damage to 5. Might be replaced in the future.
 			double strength = damager.getAttribute(FBAttributes.STRENGTH).getValue();
 			result = (damage + Math.floor(strength / 5.0D)) * (1.0D + strength / 100.0D);
+			
+			//Step 2: calculate enchantment multipliers TODO
+			ItemStack weapon = damager.getHeldItemMainhand();
+			double enchMultiplier = 1.0D;
+			enchMultiplier += 0.05 * EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, weapon);
+			
+			result *= enchMultiplier;
+			
+			
+			//Step 3: calculate other multipliers (skill, armor effects, etc) TODO
+			
+			//Step 4: check for critical hit
 			boolean isCrit = (new Random().nextDouble() * 100.0D) < damager.getAttribute(FBAttributes.CRIT_CHANCE).getValue();
 			double critDamage = damager.getAttribute(FBAttributes.CRIT_DAMAGE).getValue();
 			if(isCrit) result *= (1.0D + critDamage / 100.0D);
+			
+			//Step 5: calculate defense reduction on victim.
+			double defense = victim.getAttribute(FBAttributes.DEFENSE).getValue();
+			double damageMultiplier = 100.0D / (defense + 100.0D);
+			result *= damageMultiplier;
+			
+			//Step 6: debug only. Temporary
 			if(damager instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) damager;
 				//For debug purposes only
@@ -48,15 +70,6 @@ public class DamageHandler {
 					player.sendMessage(new StringTextComponent("Dealt " + new DecimalFormat("#.#").format(result) + " damage! (Crit!)"));
 				}
 			}
-			
-			//Step 2: calculate enchantment multipliers TODO
-			
-			//Step 3: calculate other multipliers (skill, armor effects, etc) TODO
-			
-			//Step 4: calculate defense reduction on victim.
-			double defense = victim.getAttribute(FBAttributes.DEFENSE).getValue();
-			double damageMultiplier = 100.0D / (defense + 100.0D);
-			result *= damageMultiplier;
 		}
 		
 		//Regardless of the type of damage:

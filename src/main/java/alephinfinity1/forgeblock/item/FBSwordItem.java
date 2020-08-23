@@ -37,6 +37,8 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	protected static final UUID CRIT_CHANCE_MODIFIER = UUID.fromString("5265014e-5ab6-4e86-a9a5-7c9117818fbb");
 	protected static final UUID CRIT_DAMAGE_MODIFIER = UUID.fromString("dbda354b-eec5-4b86-88ec-04c9f232bc62");
 	
+	//Super constructor, highly recommend not using
+	@Deprecated
 	public FBSwordItem(IItemTier p_i48460_1_, int p_i48460_2_, float p_i48460_3_, Properties p_i48460_4_) {
 		super(p_i48460_1_, p_i48460_2_, p_i48460_3_, p_i48460_4_);
 		rarity = FBTier.COMMON;
@@ -56,7 +58,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	}
 	
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot, ItemStack stack) {
 		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributes : super.getAttributeModifiers(equipmentSlot);
 	}
 	
