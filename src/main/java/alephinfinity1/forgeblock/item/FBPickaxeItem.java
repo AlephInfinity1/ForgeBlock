@@ -1,7 +1,6 @@
 package alephinfinity1.forgeblock.item;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -14,6 +13,9 @@ import alephinfinity1.forgeblock.misc.DisplayHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -21,45 +23,59 @@ import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeableItem {
-
+public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforgeableItem {
+	
 	private final FBTier tier;
 	private final Multimap<String, AttributeModifier> attributes;
-	
-	protected static final UUID STRENGTH_MODIFIER = UUID.fromString("0a8af9f9-7880-40af-a8ff-17e6d98ec482");
-	protected static final UUID CRIT_CHANCE_MODIFIER = UUID.fromString("5265014e-5ab6-4e86-a9a5-7c9117818fbb");
-	protected static final UUID CRIT_DAMAGE_MODIFIER = UUID.fromString("dbda354b-eec5-4b86-88ec-04c9f232bc62");
-	
-	//Super constructor, highly recommend not using
+	private final int harvestLevel;
+	private final float destroySpeed;
+	private final double yield;
+
 	@Deprecated
-	public FBSwordItem(IItemTier p_i48460_1_, int p_i48460_2_, float p_i48460_3_, Properties p_i48460_4_) {
-		super(p_i48460_1_, p_i48460_2_, p_i48460_3_, p_i48460_4_);
-		tier = FBTier.COMMON;
+	public FBPickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties properties) {
+		super(tier, attackDamageIn, attackSpeedIn, properties);
+		this.tier = FBTier.COMMON;
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
 		attributes = builder.build();
+		harvestLevel = 0;
+		destroySpeed = 1;
+		yield = 1;
 	}
 	
-	public FBSwordItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn, double critChanceIn, double critDamageIn) {
-		super(new FBItemTier(), (int) attackDamageIn, (float) Double.MAX_VALUE, props);
-		this.tier = tier;
+	public FBPickaxeItem(Properties props, FBTier tier, double damage, int harvestLevel, float destroySpeed, double yield) {
+		super(new FBItemTier(), (int) damage, (float) Double.MAX_VALUE, props);
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Attack damage modifier", attackDamageIn, Operation.ADDITION));
-		builder.put(FBAttributes.STRENGTH.getName(), new AttributeModifier(STRENGTH_MODIFIER, "Strength modifier", strengthIn, Operation.ADDITION));
-		builder.put(FBAttributes.CRIT_CHANCE.getName(), new AttributeModifier(CRIT_CHANCE_MODIFIER, "Crit chance modifier", critChanceIn, Operation.ADDITION));
-		builder.put(FBAttributes.CRIT_DAMAGE.getName(), new AttributeModifier(CRIT_DAMAGE_MODIFIER, "Crit damage modifier", critDamageIn, Operation.ADDITION));
+		builder.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Attack damage modifier", damage, Operation.ADDITION));
 		attributes = builder.build();
+		
+		this.tier = tier;
+		this.harvestLevel = harvestLevel;
+		this.destroySpeed = destroySpeed;
+		this.yield = yield;
 	}
 	
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
-		return equipmentSlot != EquipmentSlotType.MAINHAND ? this.attributes : super.getAttributeModifiers(equipmentSlot);
+	public boolean canHarvestBlock(BlockState blockIn) {
+		Block block = blockIn.getBlock();
+		int i = harvestLevel;
+		if (blockIn.getHarvestTool() == net.minecraftforge.common.ToolType.PICKAXE) {
+			return i >= blockIn.getHarvestLevel();
+		}
+		Material material = blockIn.getMaterial();
+		return material == Material.ROCK || material == Material.IRON || material == Material.ANVIL;
+	}
+	
+	@Override
+	public float getDestroySpeed(ItemStack stack, BlockState state) {
+		Material material = state.getMaterial();
+		return material != Material.ROCK && material != Material.IRON && material != Material.ANVIL ? super.getDestroySpeed(stack, state) : destroySpeed;
 	}
 	
 	@Override
@@ -70,7 +86,50 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		builder.putAll(this.getReforgeModifiers(stack));
 		return builder.build();
 	}
-	
+
+	@Override
+	@Nullable
+	public Reforge getReforge(ItemStack stack) {
+		if(stack.getTag() == null) return null;
+		String reforgeName = stack.getTag().getString("Reforge");
+		if(reforgeName.isEmpty()) return null;
+		else return Reforge.findReforgeByID(reforgeName);
+	}
+
+	@Override
+	public void setReforge(Reforge reforge, ItemStack stack) {
+		stack.getTag().putString("Reforge", reforge.getID());
+	}
+
+	@Override
+	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack) {
+		if(getReforge(stack) == null) return Reforge.emptyModifier();
+		else {
+			Reforge reforge = getReforge(stack);
+			switch(getStackTier(stack)) {
+			case COMMON:
+				return reforge.commonModifiers;
+			case UNCOMMON:
+				return reforge.uncommonModifiers;
+			case RARE:
+				return reforge.rareModifiers;
+			case EPIC:
+				return reforge.epicModifiers;
+			case LEGENDARY:
+				return reforge.legendaryModifiers;
+			case MYTHIC:
+				return reforge.mythicModifiers;
+			default:
+				return Reforge.emptyModifier();
+			}
+		}
+	}
+
+	@Override
+	public FBTier getFBTier() {
+		return tier;
+	}
+
 	@Override
 	public FBTier getStackTier(ItemStack stack) {
 		if(stack.getTag() != null) {
@@ -83,6 +142,20 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		} else {
 			return tier;
 		}
+	}
+	
+	@Override
+	public ITextComponent getDisplayName(ItemStack stack) {
+		String reforgeName = "";
+		if(this.getReforge(stack) != null) {
+			reforgeName = this.getReforge(stack).getDisplayName();
+		}
+		FBTier tier = getStackTier(stack);
+		String color = tier.color.toString();
+		if(this.getReforge(stack) != null)
+			return new StringTextComponent(color + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+		else
+			return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 	}
 	
 	@Override
@@ -398,61 +471,4 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + " " + new TranslationTextComponent("misc.forgeblock.itemtype.sword").getString() + obfuscated + " n"));
 	}
 
-	@Override
-	public FBTier getFBTier() {
-		return tier;
-	}
-
-	@Override
-	@Nullable
-	public Reforge getReforge(ItemStack stack) {
-		if(stack.getTag() == null) return null;
-		String reforgeName = stack.getTag().getString("Reforge");
-		if(reforgeName.isEmpty()) return null;
-		else return Reforge.findReforgeByID(reforgeName);
-	}
-
-	@Override
-	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack) {
-		if(getReforge(stack) == null) return Reforge.emptyModifier();
-		else {
-			Reforge reforge = getReforge(stack);
-			switch(getStackTier(stack)) {
-			case COMMON:
-				return reforge.commonModifiers;
-			case UNCOMMON:
-				return reforge.uncommonModifiers;
-			case RARE:
-				return reforge.rareModifiers;
-			case EPIC:
-				return reforge.epicModifiers;
-			case LEGENDARY:
-				return reforge.legendaryModifiers;
-			case MYTHIC:
-				return reforge.mythicModifiers;
-			default:
-				return Reforge.emptyModifier();
-			}
-		}
-	}
-	
-	@Override
-	public ITextComponent getDisplayName(ItemStack stack) {
-		String reforgeName = "";
-		if(this.getReforge(stack) != null) {
-			reforgeName = this.getReforge(stack).getDisplayName();
-		}
-		FBTier tier = getStackTier(stack);
-		String color = tier.color.toString();
-		if(this.getReforge(stack) != null)
-			return new StringTextComponent(color + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
-		else
-			return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
-	}
-
-	@Override
-	public void setReforge(Reforge reforge, ItemStack stack) {
-		stack.getTag().putString("Reforge", reforge.getID());
-	}
-	
 }

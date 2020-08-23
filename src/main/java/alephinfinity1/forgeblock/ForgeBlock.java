@@ -13,6 +13,7 @@ public class ForgeBlock {
 	
 	public ForgeBlock() {
 		ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModItems.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::removeLimits);
 	}
 	
