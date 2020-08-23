@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+        "layer0": "forgeblock:item/enchanted_cobblestone"
+    }
+}

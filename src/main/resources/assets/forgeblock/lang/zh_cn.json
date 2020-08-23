@@ -1,0 +1,18 @@
+{
+    "item.forgeblock.enchanted_cobblestone": "\u9644\u9b54\u5706\u77f3",
+    "item.forgeblock.enchanted_iron": "\u9644\u9b54\u94c1",
+    "item.forgeblock.enchanted_gold": "\u9644\u9b54\u91d1",
+    "item.forgeblock.enchanted_redstone": "\u9644\u9b54\u7ea2\u77f3",
+    "item.forgeblock.enchanted_coal": "\u9644\u9b54\u7164",
+    "item.forgeblock.enchanted_diamond": "\u9644\u9b54\u94bb\u77f3",
+    "item.forgeblock.enchanted_nether_quartz": "\u9644\u9b54\u4e0b\u754c\u77f3\u82f1",
+    
+    "misc.forgeblock.tier.common": "\u5e38\u89c1",
+    "misc.forgeblock.tier.uncommon": "\u5c11\u89c1",
+    "misc.forgeblock.tier.rare": "\u7a00\u6709",
+    "misc.forgeblock.tier.epic": "\u53f2\u8bd7",
+    "misc.forgeblock.tier.legendary": "\u4f20\u8bf4",
+    "misc.forgeblock.tier.mythic": "\u5353\u8d8a",
+    "misc.forgeblock.tier.special": "\u7279\u6b8a",
+    "misc.forgeblock.tier.very_special": "\u6781\u5176\u7279\u6b8a"
+}
