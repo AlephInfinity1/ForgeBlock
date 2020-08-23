@@ -10,12 +10,13 @@ import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 //See https://hypixel-skyblock.fandom.com/wiki/Reforging
 public enum Reforge {
 	//Melee weapon reforges
-	GENTLE(new FBItemType[] {FBItemType.SWORD}, "gentle", false, modifierMapFromDoubles(0, 3, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 5, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 7, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 10, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 15, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 20, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0)),
-	ODD(new FBItemType[] {FBItemType.SWORD}, "odd", false, modifierMapFromDoubles(0, 0, 12, 10, 0, 0, 0, 0, 0, -5, 0, 0, 0), modifierMapFromDoubles(0, 0, 15, 15, 0, 0, 0, 0, 0, -10, 0, 0, 0), modifierMapFromDoubles(0, 0, 15, 15, 0, 0, 0, 0, 0, -18, 0, 0, 0), modifierMapFromDoubles(0, 0, 25, 30, 0, 0, 0, 0, 0, -24, 0, 0, 0), modifierMapFromDoubles(0, 0, 25, 30, 0, 0, 0, 0, 0, -50, 0, 0, 0), modifierMapFromDoubles(0, 0, 35, 45, 0, 0, 0, 0, 0, -75, 0, 0, 0));
+	GENTLE(new FBItemType[] {FBItemType.SWORD}, "gentle", "misc.forgeblock.reforge.gentle", false, modifierMapFromDoubles(0, 3, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 5, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 7, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 10, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 15, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 20, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0)),
+	ODD(new FBItemType[] {FBItemType.SWORD}, "odd", "misc.forgeblock.reforge.odd", false, modifierMapFromDoubles(0, 0, 12, 10, 0, 0, 0, 0, 0, -5, 0, 0, 0), modifierMapFromDoubles(0, 0, 15, 15, 0, 0, 0, 0, 0, -10, 0, 0, 0), modifierMapFromDoubles(0, 0, 15, 15, 0, 0, 0, 0, 0, -18, 0, 0, 0), modifierMapFromDoubles(0, 0, 25, 30, 0, 0, 0, 0, 0, -24, 0, 0, 0), modifierMapFromDoubles(0, 0, 25, 30, 0, 0, 0, 0, 0, -50, 0, 0, 0), modifierMapFromDoubles(0, 0, 35, 45, 0, 0, 0, 0, 0, -75, 0, 0, 0));
 	
 	private FBItemType[] types;
 	private String id;
@@ -26,10 +27,12 @@ public enum Reforge {
 	public Multimap<String, AttributeModifier> epicModifiers;
 	public Multimap<String, AttributeModifier> legendaryModifiers;
 	public Multimap<String, AttributeModifier> mythicModifiers;
+	public String translationKey;
 	
-	private Reforge(FBItemType[] types, String id, boolean isSpecial, Multimap<String, AttributeModifier> commonModifiers, Multimap<String, AttributeModifier> uncommonModifiers, Multimap<String, AttributeModifier> rareModifiers, Multimap<String, AttributeModifier> epicModifiers, Multimap<String, AttributeModifier> legendaryModifiers, Multimap<String, AttributeModifier> mythicModifiers) {
+	private Reforge(FBItemType[] types, String id, String translationKey, boolean isSpecial, Multimap<String, AttributeModifier> commonModifiers, Multimap<String, AttributeModifier> uncommonModifiers, Multimap<String, AttributeModifier> rareModifiers, Multimap<String, AttributeModifier> epicModifiers, Multimap<String, AttributeModifier> legendaryModifiers, Multimap<String, AttributeModifier> mythicModifiers) {
 		this.types = types;
 		this.id = id;
+		this.translationKey = translationKey;
 		this.isSpecial = isSpecial;
 		this.commonModifiers = commonModifiers;
 		this.uncommonModifiers = uncommonModifiers;
@@ -92,5 +95,9 @@ public enum Reforge {
 		default:
 			return Reforge.emptyModifier();
 		}
+	}
+	
+	public String getDisplayName() {
+		return (new TranslationTextComponent(translationKey)).getString();
 	}
 }

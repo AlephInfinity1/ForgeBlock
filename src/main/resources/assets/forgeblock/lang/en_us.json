@@ -41,9 +41,18 @@
     "misc.forgeblock.fakeattribute.health": "Health",
     "misc.forgeblock.fakeattribute.speed": "Speed",
     
-    "attribute.name.forgeblock.defense": "Defense",
-    "attribute.name.forgeblock.trueDefense": "True Defense",
     "attribute.name.forgeblock.strength": "Strength",
     "attribute.name.forgeblock.critChance": "Crit Chance",
-    "attribute.name.forgeblock.critDamage": "Crit Damage"
+    "attribute.name.forgeblock.critDamage": "Crit Damage",
+    "attribute.name.forgeblock.bonusAttackSpeed": "Bonus Attack Speed",
+    "attribute.name.forgeblock.seaCreatureChance": "Sea Creature Chance",
+    
+    "attribute.name.forgeblock.defense": "Defense",
+    "attribute.name.forgeblock.intelligence": "Intelligence",
+    "attribute.name.forgeblock.trueDefense": "True Defense",
+    "attribute.name.forgeblock.magicFind": "Magic Find",
+    "attribute.name.forgeblock.petLuck": "Pet Luck",
+    
+    "misc.forgeblock.reforge.gentle": "Gentle",
+    "misc.forgeblock.reforge.odd": "Odd"
 }

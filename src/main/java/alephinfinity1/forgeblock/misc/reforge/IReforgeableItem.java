@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 public interface IReforgeableItem extends IFBTieredItem {
 	public Reforge getReforge(ItemStack stack);
 	
-	public Multimap<String, AttributeModifier> getModifiers(ItemStack stack);
-	
 	public void setReforge(Reforge reforge, ItemStack stack);
+
+	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack);
 }

@@ -12,9 +12,9 @@ public enum FBTier {
 	RARE(TextFormatting.BLUE, "misc.forgeblock.tier.rare"),
 	EPIC(TextFormatting.DARK_PURPLE, "misc.forgeblock.tier.epic"),
 	LEGENDARY(TextFormatting.GOLD, "misc.forgeblock.tier.legendary"),
-	MYTHIC(TextFormatting.LIGHT_PURPLE, "misc.forgeblock.tier.mythic"),
-	SPECIAL(TextFormatting.RED, "misc.forgeblock.tier.special"),
-	VERY_SPECIAL(TextFormatting.RED, "misc.forgeblock.tier.very_special");
+	MYTHIC(TextFormatting.RED, "misc.forgeblock.tier.mythic"),
+	SPECIAL(TextFormatting.LIGHT_PURPLE, "misc.forgeblock.tier.special"),
+	VERY_SPECIAL(TextFormatting.AQUA, "misc.forgeblock.tier.very_special");
 	
 	public TextFormatting color;
 	public TranslationTextComponent name;
