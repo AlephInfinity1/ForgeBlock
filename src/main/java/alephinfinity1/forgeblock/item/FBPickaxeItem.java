@@ -15,8 +15,11 @@ import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
@@ -63,19 +66,13 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 	
 	@Override
 	public boolean canHarvestBlock(BlockState blockIn) {
-		Block block = blockIn.getBlock();
-		int i = harvestLevel;
-		if (blockIn.getHarvestTool() == net.minecraftforge.common.ToolType.PICKAXE) {
-			return i >= blockIn.getHarvestLevel();
-		}
-		Material material = blockIn.getMaterial();
-		return material == Material.ROCK || material == Material.IRON || material == Material.ANVIL;
+		return true;
 	}
 	
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
 		Material material = state.getMaterial();
-		return material != Material.ROCK && material != Material.IRON && material != Material.ANVIL ? super.getDestroySpeed(stack, state) : destroySpeed;
+		return material != Material.ROCK && material != Material.IRON && material != Material.ANVIL ? super.getDestroySpeed(stack, state) : (EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, stack) != 0 ? destroySpeed + EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, stack) * EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, stack) + 1: destroySpeed);
 	}
 	
 	@Override
@@ -166,6 +163,15 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		
 		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(EquipmentSlotType.MAINHAND, stack);
 		Multimap<String, AttributeModifier> reforgeModifiers = this.getReforgeModifiers(stack);
+		
+		float destroySpeed = this.getDestroySpeed(stack, new BlockState(Blocks.STONE, null));
+		
+		tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent("misc.forgeblock.fakeattribute.destroySpeed").getString() + ": " + TextFormatting.GREEN.toString() + Float.toString(destroySpeed)));
+		tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent("misc.forgeblock.fakeattribute.harvestLevel").getString() + ": " + TextFormatting.GREEN.toString() + Integer.toString(harvestLevel)));
+		tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent("misc.forgeblock.fakeattribute.yield").getString() + ": " + TextFormatting.GREEN.toString() + Double.toString(yield)));
+		tooltip.add(new StringTextComponent(""));
+
+
 		
 		//Base weapon stats
 		double damage = 0.0D;
@@ -467,8 +473,8 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		String bold = TextFormatting.BOLD.toString();
 		String obfuscated = TextFormatting.OBFUSCATED.toString();
 		String reset = TextFormatting.RESET.toString();
-		if(!recombobulated) tooltip.add(new StringTextComponent(color + bold + tier.name.getString() + " " + new TranslationTextComponent("misc.forgeblock.itemtype.sword").getString()));
-		else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + " " + new TranslationTextComponent("misc.forgeblock.itemtype.sword").getString() + obfuscated + " n"));
+		if(!recombobulated) tooltip.add(new StringTextComponent(color + bold + tier.name.getString() + " " + new TranslationTextComponent("misc.forgeblock.itemtype.pickaxe").getString()));
+		else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + " " + new TranslationTextComponent("misc.forgeblock.itemtype.pickaxe").getString() + obfuscated + " n"));
 	}
 
 }

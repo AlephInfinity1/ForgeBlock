@@ -40,6 +40,9 @@
     "misc.forgeblock.fakeattribute.damage": "Damage",
     "misc.forgeblock.fakeattribute.health": "Health",
     "misc.forgeblock.fakeattribute.speed": "Speed",
+    "misc.forgeblock.fakeattribute.destroySpeed": "Mining Speed",
+    "misc.forgeblock.fakeattribute.harvestLevel": "Harvest Level",
+    "misc.forgeblock.fakeattribute.yield": "Yield",
     
     "attribute.name.forgeblock.strength": "Strength",
     "attribute.name.forgeblock.critChance": "Crit Chance",
