@@ -7,9 +7,15 @@ import net.minecraft.item.crafting.Ingredient;
  * A placeholder item tier, as SkyBlock items do not have traditional vanilla tiers.
  */
 public class FBItemTier implements IItemTier {
+	
+	private final int harvestLevel;
 
 	public FBItemTier() {
-		// TODO Auto-generated constructor stub
+		harvestLevel = 0;
+	}
+	
+	public FBItemTier(int harvestLevel) {
+		this.harvestLevel = harvestLevel;
 	}
 
 	@Override
@@ -32,8 +38,7 @@ public class FBItemTier implements IItemTier {
 
 	@Override
 	public int getHarvestLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return harvestLevel;
 	}
 
 	@Override

@@ -13,9 +13,11 @@
     "item.forgeblock.silver_fang": "Silver Fang",
     "item.forgeblock.leaping_sword": "Leaping Sword",
     "item.forgeblock.aspect_of_the_dragons": "Aspect of the Dragons",
+    "item.forgeblock.stonk": "Stonk",
     
-    "itemgroup.forgeblockMaterials": "ForgeBlock Materials",
-    "itemgroup.forgeblockSwords": "ForgeBlock Swords",
+    "itemGroup.forgeblock_materials": "ForgeBlock Materials",
+    "itemGroup.forgeblock_swords": "ForgeBlock Swords",
+    "itemGroup.forgeblock_harvesting_tools": "ForgeBlock Tools",
     
     "misc.forgeblock.tier.common": "COMMON",
     "misc.forgeblock.tier.uncommon": "UNCOMMON",
@@ -40,6 +42,9 @@
     "misc.forgeblock.fakeattribute.damage": "Damage",
     "misc.forgeblock.fakeattribute.health": "Health",
     "misc.forgeblock.fakeattribute.speed": "Speed",
+    "misc.forgeblock.fakeattribute.destroySpeed": "Mining Speed",
+    "misc.forgeblock.fakeattribute.harvestLevel": "Harvest Level",
+    "misc.forgeblock.fakeattribute.yield": "Yield",
     
     "attribute.name.forgeblock.strength": "Strength",
     "attribute.name.forgeblock.critChance": "Crit Chance",

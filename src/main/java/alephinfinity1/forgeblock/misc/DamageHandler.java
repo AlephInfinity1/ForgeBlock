@@ -34,6 +34,10 @@ public class DamageHandler {
 		
 		//For physical damage only:
 		if(event.getSource().damageType.equals("player") || event.getSource().damageType.equals("mob") || event.getSource().damageType.equals("arrow")) {
+			//Prevents crashes
+			if(damager == null) return;
+			if(damager.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) == null) return;
+			
 			//Step 1: calculate base damage from attackDamage, strength, critChance, and critDamage.
 			double damage = damager.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
 			//if(damager instanceof PlayerEntity) damage += 4; //A wonky workaround to setting the player's attack damage to 5. Might be replaced in the future.
