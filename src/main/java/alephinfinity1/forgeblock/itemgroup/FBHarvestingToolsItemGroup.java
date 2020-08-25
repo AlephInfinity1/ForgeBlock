@@ -25,7 +25,7 @@ public class FBHarvestingToolsItemGroup extends ItemGroup {
 
 	@Override
 	public ItemStack createIcon() {
-		return new ItemStack(Items.IRON_PICKAXE);
+		return new ItemStack(ModItems.STONK.get());
 	}
 	
 	@OnlyIn(Dist.CLIENT)
