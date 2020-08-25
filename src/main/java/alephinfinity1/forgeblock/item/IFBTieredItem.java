@@ -3,7 +3,7 @@ package alephinfinity1.forgeblock.item;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.item.ItemStack;
 
-public interface IFBTieredItem {
+public interface IFBTieredItem extends IFBItem {
 	/*
 	 * Gets the base tier of this item.
 	 */
