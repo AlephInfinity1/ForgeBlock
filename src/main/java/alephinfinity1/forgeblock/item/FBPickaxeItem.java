@@ -1,6 +1,8 @@
 package alephinfinity1.forgeblock.item;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -18,6 +20,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -493,6 +496,15 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		}
 		
 		tooltip.add(new StringTextComponent(""));
+		
+		//Insert enchantments here
+		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
+		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
+		for(Map.Entry<Enchantment, Integer> entry : set) {
+			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + Integer.toString(entry.getValue())));
+		}
+		
+		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));
 		
 		//Insert item ability description here (unused for some swords)
 		

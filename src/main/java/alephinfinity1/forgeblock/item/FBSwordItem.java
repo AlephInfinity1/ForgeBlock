@@ -1,6 +1,8 @@
 package alephinfinity1.forgeblock.item;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -15,6 +17,8 @@ import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
@@ -385,6 +389,15 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		}
 		
 		tooltip.add(new StringTextComponent(""));
+		
+		//Insert enchantments here
+		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
+		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
+		for(Map.Entry<Enchantment, Integer> entry : set) {
+			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + Integer.toString(entry.getValue())));
+		}
+		
+		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));
 		
 		//Insert item ability description here (unused for some swords)
 		
