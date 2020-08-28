@@ -18,7 +18,7 @@ public class ModItems {
 	
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ForgeBlock.MOD_ID);
 	
-	public static final DeferredRegister<Item> OVERRIDE = DeferredRegister.create(ForgeRegistries.ITEMS, "minecraft");
+	public static final DeferredRegister<Item> OVERRIDE = DeferredRegister.create(ForgeRegistries.ITEMS, ForgeBlock.MINECRAFT_ID);
 	
 	/*
 	 * Enchanted items

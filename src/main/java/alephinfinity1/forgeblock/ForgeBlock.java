@@ -10,6 +10,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class ForgeBlock {
 
 	public static final String MOD_ID = "forgeblock";
+	public static final String MINECRAFT_ID = "minecraft";
 	
 	public ForgeBlock() {
 		ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
