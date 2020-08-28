@@ -179,22 +179,25 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		
 		switch(harvestLevel) {
 		case 0:
-			harvestLevelDescriptor = TextFormatting.GRAY + "(None)";
+			harvestLevelDescriptor = TextFormatting.GRAY + new TranslationTextComponent("misc.forgeblock.harvestLevel.0").getString();
 			break;
 		case 1:
-			harvestLevelDescriptor = TextFormatting.GRAY + "(Stone)";
+			harvestLevelDescriptor = TextFormatting.GRAY + new TranslationTextComponent("misc.forgeblock.harvestLevel.1").getString();
 			break;
 		case 2:
-			harvestLevelDescriptor = TextFormatting.WHITE + "(Iron)";
+			harvestLevelDescriptor = TextFormatting.WHITE + new TranslationTextComponent("misc.forgeblock.harvestLevel.2").getString();
 			break;
 		case 3:
-			harvestLevelDescriptor = TextFormatting.AQUA + "(Diamond)";
+			harvestLevelDescriptor = TextFormatting.AQUA + new TranslationTextComponent("misc.forgeblock.harvestLevel.3").getString();
 			break;
 		case 4:
-			harvestLevelDescriptor = TextFormatting.DARK_PURPLE + "(Obsidian)";
+			harvestLevelDescriptor = TextFormatting.DARK_PURPLE + new TranslationTextComponent("misc.forgeblock.harvestLevel.4").getString();
+			break;
+		case 5:
+			harvestLevelDescriptor = TextFormatting.BLUE + new TranslationTextComponent("misc.forgeblock.harvestLevel.5").getString();
 			break;
 		default:
-			harvestLevelDescriptor = TextFormatting.LIGHT_PURPLE + "(Obsidian+)";
+			harvestLevelDescriptor = TextFormatting.LIGHT_PURPLE + new TranslationTextComponent("misc.forgeblock.harvestLevel.high").getString();
 			break;
 		}
 		

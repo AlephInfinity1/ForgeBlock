@@ -45,6 +45,14 @@
     "misc.forgeblock.fakeattribute.destroySpeed": "Mining Speed",
     "misc.forgeblock.fakeattribute.harvestLevel": "Harvest Level",
     "misc.forgeblock.fakeattribute.yield": "Yield",
+
+    "misc.forgeblock.harvestLevel.0": "(None)",
+    "misc.forgeblock.harvestLevel.1": "(Stone)",
+    "misc.forgeblock.harvestLevel.2": "(Iron)",
+    "misc.forgeblock.harvestLevel.3": "(Diamond)",
+    "misc.forgeblock.harvestLevel.4": "(Obsidian)",
+    "misc.forgeblock.harvestLevel.5": "(Cobalt)",
+    "misc.forgeblock.harvestLevel.high": "(Obsidian+)",
     
     "attribute.name.forgeblock.strength": "Strength",
     "attribute.name.forgeblock.critChance": "Crit Chance",
