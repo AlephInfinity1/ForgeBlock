@@ -1,11 +1,16 @@
 package alephinfinity1.forgeblock;
 
 import alephinfinity1.forgeblock.attribute.AttributeHelper;
+import alephinfinity1.forgeblock.config.CustomModConfig;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModItems;
+import alephinfinity1.forgeblock.init.ModPotions;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 @Mod(value = ForgeBlock.MOD_ID)
 public class ForgeBlock {
@@ -18,7 +23,12 @@ public class ForgeBlock {
 		ModItems.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModEffects.POTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModEffects.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModPotions.POTION_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModPotions.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::removeLimits);
+		
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CustomModConfig.GENERAL_CONFIG);
+        CustomModConfig.loadConfig(CustomModConfig.GENERAL_CONFIG, FMLPaths.CONFIGDIR.get().resolve("forgeblock_common.toml"));
 	}
 	
 	private void removeLimits(FMLCommonSetupEvent event) {
