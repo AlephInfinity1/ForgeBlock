@@ -17,6 +17,7 @@ public class ForgeBlock {
 		ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModItems.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModEffects.POTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModEffects.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::removeLimits);
 	}
 	

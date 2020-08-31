@@ -14,6 +14,7 @@
     "item.forgeblock.leaping_sword": "Leaping Sword",
     "item.forgeblock.aspect_of_the_dragons": "Aspect of the Dragons",
     "item.forgeblock.stonk": "Stonk",
+    "item.forgeblock.rogue_sword": "Rogue Sword",
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
@@ -69,6 +70,21 @@
     "effect.forgeblock.ender_warp": "Ender Warp",
     "effect.forgeblock.rogue_speed_boost": "Rogue Speed Boost",
     
+    "potion.potency.6": "VII",
+    "potion.potency.7": "VIII",
+    "potion.potency.8": "IX",
+    "potion.potency.9": "X",
+    "potion.potency.10": "XI",
+    "potion.potency.11": "XII",
+    "potion.potency.12": "XIII",
+    "potion.potency.13": "XIV",
+    "potion.potency.14": "XV",
+    "potion.potency.15": "XVI",
+    "potion.potency.16": "XVII",
+    "potion.potency.17": "XVIII",
+    "potion.potency.18": "XIX",
+    "potion.potency.19": "XX",
+
     "misc.forgeblock.reforge.gentle": "Gentle",
     "misc.forgeblock.reforge.odd": "Odd"
 }
