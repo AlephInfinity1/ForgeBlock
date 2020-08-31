@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.item;
 
+import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
@@ -42,7 +43,7 @@ public class AspectOfTheEndItem extends FBSwordItem {
 		}
 		playerIn.setPosition(playerIn.getPosX() + direction.x * i, playerIn.getPosYEye() + direction.y * i, playerIn.getPosZ() + direction.z * i);
 		playerIn.setVelocity(0.0d, 0.0d, 0.0d);
-		playerIn.addPotionEffect(new EffectInstance(Effects.SPEED, 60, 2, false, false, false));
+		playerIn.addPotionEffect(new EffectInstance(ModEffects.ENDER_WARP_OBJECT.get(), 60, 0));
 		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 	}
 

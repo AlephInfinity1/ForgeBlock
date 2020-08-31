@@ -1,6 +1,7 @@
 package alephinfinity1.forgeblock;
 
 import alephinfinity1.forgeblock.attribute.AttributeHelper;
+import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModItems;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -15,6 +16,7 @@ public class ForgeBlock {
 	public ForgeBlock() {
 		ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModItems.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModEffects.POTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::removeLimits);
 	}
 	

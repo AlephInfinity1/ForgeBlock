@@ -65,6 +65,9 @@
     "attribute.name.forgeblock.trueDefense": "True Defense",
     "attribute.name.forgeblock.magicFind": "Magic Find",
     "attribute.name.forgeblock.petLuck": "Pet Luck",
+
+    "effect.forgeblock.ender_warp": "Ender Warp",
+    "effect.forgeblock.rogue_speed_boost": "Rogue Speed Boost",
     
     "misc.forgeblock.reforge.gentle": "Gentle",
     "misc.forgeblock.reforge.odd": "Odd"
