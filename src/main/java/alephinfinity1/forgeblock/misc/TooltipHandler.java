@@ -37,78 +37,79 @@ public class TooltipHandler {
 		return decimalformat;
 	}
 
-	/*
+	
 	
 	@SubscribeEvent
 	public static void modifyTooltip(ItemTooltipEvent event) {
-
-		List<ITextComponent> tooltip = event.getToolTip();
-		PlayerEntity playerIn = event.getPlayer();
-		UUID ATTACK_DAMAGE_MODIFIER = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
-		UUID ATTACK_SPEED_MODIFIER = UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
-		ItemStack stack = event.getItemStack();
-		DecimalFormat DECIMALFORMAT = createAttributeModifierDecimalFormat();
-
-		
-		if(event.getItemStack().getItem() instanceof IFBItem) {
-			for(EquipmentSlotType equipmentslottype : EquipmentSlotType.values()) {
-				Multimap<String, AttributeModifier> multimap = stack.getAttributeModifiers(equipmentslottype);
-				if (!multimap.isEmpty()) {
-					tooltip.remove(tooltip.size() - 1);
-					tooltip.remove(tooltip.size() - 1);
-
-					for(Entry<String, AttributeModifier> entry : multimap.entries()) {
-						AttributeModifier attributemodifier = entry.getValue();
-						double d0 = attributemodifier.getAmount();
-						boolean flag = false;
-						if (playerIn != null) {
-							if (attributemodifier.getID() == ATTACK_DAMAGE_MODIFIER) {
-								d0 = d0 + playerIn.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
-								d0 = d0 + (double)EnchantmentHelper.getModifierForCreature(stack, CreatureAttribute.UNDEFINED);
-								flag = true;
-							} else if (attributemodifier.getID() == ATTACK_SPEED_MODIFIER) {
-								d0 += playerIn.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).getBaseValue();
-								flag = true;
+		if(!event.getFlags().isAdvanced()) {
+			List<ITextComponent> tooltip = event.getToolTip();
+			PlayerEntity playerIn = event.getPlayer();
+			UUID ATTACK_DAMAGE_MODIFIER = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
+			UUID ATTACK_SPEED_MODIFIER = UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
+			ItemStack stack = event.getItemStack();
+			DecimalFormat DECIMALFORMAT = createAttributeModifierDecimalFormat();
+	
+			
+			if(event.getItemStack().getItem() instanceof IFBItem) {
+				for(EquipmentSlotType equipmentslottype : EquipmentSlotType.values()) {
+					Multimap<String, AttributeModifier> multimap = stack.getAttributeModifiers(equipmentslottype);
+					if (!multimap.isEmpty()) {
+						tooltip.remove(tooltip.size() - 1);
+						tooltip.remove(tooltip.size() - 1);
+	
+						for(Entry<String, AttributeModifier> entry : multimap.entries()) {
+							AttributeModifier attributemodifier = entry.getValue();
+							double d0 = attributemodifier.getAmount();
+							boolean flag = false;
+							if (playerIn != null) {
+								if (attributemodifier.getID() == ATTACK_DAMAGE_MODIFIER) {
+									d0 = d0 + playerIn.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+									d0 = d0 + (double)EnchantmentHelper.getModifierForCreature(stack, CreatureAttribute.UNDEFINED);
+									flag = true;
+								} else if (attributemodifier.getID() == ATTACK_SPEED_MODIFIER) {
+									d0 += playerIn.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).getBaseValue();
+									flag = true;
+								}
 							}
-						}
-
-						double d1;
-						if (attributemodifier.getOperation() != AttributeModifier.Operation.MULTIPLY_BASE && attributemodifier.getOperation() != AttributeModifier.Operation.MULTIPLY_TOTAL) {
-							d1 = d0;
-						} else {
-							d1 = d0 * 100.0D;
-						}
-
-						if (flag) {
-							tooltip.remove(tooltip.size() - 1);
-						} else if (d0 > 0.0D) {
-							tooltip.remove(tooltip.size() - 1);
-						} else if (d0 < 0.0D) {
-							d1 = d1 * -1.0D;
-							tooltip.remove(tooltip.size() - 1);
+	
+							double d1;
+							if (attributemodifier.getOperation() != AttributeModifier.Operation.MULTIPLY_BASE && attributemodifier.getOperation() != AttributeModifier.Operation.MULTIPLY_TOTAL) {
+								d1 = d0;
+							} else {
+								d1 = d0 * 100.0D;
+							}
+	
+							if (flag) {
+								tooltip.remove(tooltip.size() - 1);
+							} else if (d0 > 0.0D) {
+								tooltip.remove(tooltip.size() - 1);
+							} else if (d0 < 0.0D) {
+								d1 = d1 * -1.0D;
+								tooltip.remove(tooltip.size() - 1);
+							}
 						}
 					}
 				}
 			}
-		}
-
-
-
-		//Remove enchantment tooltips in favour of FB tooltips
-		if(event.getItemStack().isEnchanted()) {
-			Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(stack);
-			Set<Map.Entry<Enchantment, Integer>> set = enchants.entrySet();
-			for(Map.Entry<Enchantment, Integer> entry : set) {
-				ITextComponent text = entry.getKey().getDisplayName(entry.getValue());
-				tooltip.remove(text);
+	
+	
+	
+			//Remove enchantment tooltips in favour of FB tooltips
+			if(event.getItemStack().isEnchanted()) {
+				Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(stack);
+				Set<Map.Entry<Enchantment, Integer>> set = enchants.entrySet();
+				for(Map.Entry<Enchantment, Integer> entry : set) {
+					ITextComponent text = entry.getKey().getDisplayName(entry.getValue());
+					tooltip.remove(text);
+				}
+			}
+	
+			//Add common tier to all non-FB items
+			if(!(event.getItemStack().getItem() instanceof IFBItem)) {
+				tooltip.add(new StringTextComponent(TextFormatting.BOLD.toString() + FBTier.COMMON.name.getString()));
 			}
 		}
-
-		//Add common tier to all non-FB items
-		if(!(event.getItemStack().getItem() instanceof IFBItem)) {
-			tooltip.add(new StringTextComponent(TextFormatting.BOLD.toString() + FBTier.COMMON.name.getString()));
-		}
 	}
-	*/
+	
 
 }
