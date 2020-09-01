@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.misc.tier;
 
+import alephinfinity1.forgeblock.config.CustomModConfig;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -7,14 +8,14 @@ import net.minecraft.util.text.TranslationTextComponent;
  * The rarity/tier of an item.
  */
 public enum FBTier {
-	COMMON(TextFormatting.WHITE, "misc.forgeblock.tier.common"),
-	UNCOMMON(TextFormatting.GREEN, "misc.forgeblock.tier.uncommon"),
-	RARE(TextFormatting.BLUE, "misc.forgeblock.tier.rare"),
-	EPIC(TextFormatting.DARK_PURPLE, "misc.forgeblock.tier.epic"),
-	LEGENDARY(TextFormatting.GOLD, "misc.forgeblock.tier.legendary"),
-	MYTHIC(TextFormatting.RED, "misc.forgeblock.tier.mythic"),
-	SPECIAL(TextFormatting.LIGHT_PURPLE, "misc.forgeblock.tier.special"),
-	VERY_SPECIAL(TextFormatting.AQUA, "misc.forgeblock.tier.very_special");
+	COMMON(CustomModConfig.COMMON_TIER_COLOR.get(), "misc.forgeblock.tier.common"),
+	UNCOMMON(CustomModConfig.UNCOMMON_TIER_COLOR.get(), "misc.forgeblock.tier.uncommon"),
+	RARE(CustomModConfig.RARE_TIER_COLOR.get(), "misc.forgeblock.tier.rare"),
+	EPIC(CustomModConfig.EPIC_TIER_COLOR.get(), "misc.forgeblock.tier.epic"),
+	LEGENDARY(CustomModConfig.LEGENDARY_TIER_COLOR.get(), "misc.forgeblock.tier.legendary"),
+	MYTHIC(CustomModConfig.MYTHIC_TIER_COLOR.get(), "misc.forgeblock.tier.mythic"),
+	SPECIAL(CustomModConfig.SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.special"),
+	VERY_SPECIAL(CustomModConfig.VERY_SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.very_special");
 	
 	public TextFormatting color;
 	public TranslationTextComponent name;

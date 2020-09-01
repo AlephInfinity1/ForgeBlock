@@ -25,13 +25,13 @@ public class ForgeBlock {
 		ModEffects.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModPotions.POTION_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModPotions.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::removeLimits);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CustomModConfig.GENERAL_CONFIG);
-        CustomModConfig.loadConfig(CustomModConfig.GENERAL_CONFIG, FMLPaths.CONFIGDIR.get().resolve("forgeblock_common.toml"));
+        CustomModConfig.loadConfig(CustomModConfig.GENERAL_CONFIG, FMLPaths.CONFIGDIR.get().resolve("forgeblock-common.toml"));
 	}
 	
-	private void removeLimits(FMLCommonSetupEvent event) {
+	private void setup(FMLCommonSetupEvent event) {
 		AttributeHelper.removeLimits();
 	}
 	
