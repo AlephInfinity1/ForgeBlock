@@ -5,6 +5,10 @@ import alephinfinity1.forgeblock.config.CustomModConfig;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModItems;
 import alephinfinity1.forgeblock.init.ModPotions;
+import alephinfinity1.forgeblock.misc.mana.IMana;
+import alephinfinity1.forgeblock.misc.mana.Mana;
+import alephinfinity1.forgeblock.misc.mana.ManaStorage;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -29,10 +33,12 @@ public class ForgeBlock {
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CustomModConfig.GENERAL_CONFIG);
         CustomModConfig.loadConfig(CustomModConfig.GENERAL_CONFIG, FMLPaths.CONFIGDIR.get().resolve("forgeblock-common.toml"));
+        
 	}
 	
 	private void setup(FMLCommonSetupEvent event) {
 		AttributeHelper.removeLimits();
+		CapabilityManager.INSTANCE.register(IMana.class, new ManaStorage(), Mana::new);
 	}
 	
 }
