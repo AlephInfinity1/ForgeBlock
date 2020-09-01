@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.misc.DisplayHelper.SuffixType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -69,9 +70,9 @@ public class DamageHandler {
 				PlayerEntity player = (PlayerEntity) damager;
 				//For debug purposes only
 				if(!isCrit) {
-					player.sendMessage(new StringTextComponent("Dealt " + new DecimalFormat("#.#").format(result) + " damage!"));
+					player.sendMessage(new StringTextComponent("Dealt " + DisplayHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage!"));
 				} else {
-					player.sendMessage(new StringTextComponent("Dealt " + new DecimalFormat("#.#").format(result) + " damage! (Crit!)"));
+					player.sendMessage(new StringTextComponent("Dealt " + DisplayHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage! (Crit!)"));
 				}
 			}
 		}
