@@ -71,7 +71,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot, ItemStack stack) {
 		if(equipmentSlot != EquipmentSlotType.MAINHAND) return super.getAttributeModifiers(equipmentSlot);
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.putAll(this.attributes);
+		builder.putAll(super.getAttributeModifiers(equipmentSlot, stack));
 		builder.putAll(this.getReforgeModifiers(stack));
 		return builder.build();
 	}

@@ -3,6 +3,7 @@ package alephinfinity1.forgeblock;
 import alephinfinity1.forgeblock.attribute.AttributeHelper;
 import alephinfinity1.forgeblock.config.CustomModConfig;
 import alephinfinity1.forgeblock.init.ModEffects;
+import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModItems;
 import alephinfinity1.forgeblock.init.ModPotions;
 import alephinfinity1.forgeblock.misc.mana.IMana;
@@ -29,6 +30,8 @@ public class ForgeBlock {
 		ModEffects.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModPotions.POTION_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModPotions.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModEnchantments.ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModEnchantments.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CustomModConfig.GENERAL_CONFIG);
