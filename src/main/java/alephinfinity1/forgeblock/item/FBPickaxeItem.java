@@ -12,6 +12,7 @@ import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.misc.DisplayHelper;
+import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
@@ -517,8 +518,13 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		String bold = TextFormatting.BOLD.toString();
 		String obfuscated = TextFormatting.OBFUSCATED.toString();
 		String reset = TextFormatting.RESET.toString();
-		if(!recombobulated) tooltip.add(new StringTextComponent(color + bold + tier.name.getString() + " " + new TranslationTextComponent("misc.forgeblock.itemtype.pickaxe").getString()));
-		else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + " " + new TranslationTextComponent("misc.forgeblock.itemtype.pickaxe").getString() + obfuscated + " n"));
+		if(!recombobulated) tooltip.add(new StringTextComponent(color + bold + tier.name.getString() + " " + this.getFBItemType().getDisplayName()));
+		else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + " " + this.getFBItemType().getDisplayName() + obfuscated + " n"));
+	}
+
+	@Override
+	public FBItemType getFBItemType() {
+		return FBItemType.PICKAXE;
 	}
 
 }

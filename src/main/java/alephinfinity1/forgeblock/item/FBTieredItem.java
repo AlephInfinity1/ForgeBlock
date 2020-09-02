@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -70,6 +71,11 @@ public class FBTieredItem extends Item implements IFBTieredItem {
 		FBTier tier = getStackTier(stack);
 		String color = tier.color.toString();
 		return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+	}
+
+	@Override
+	public FBItemType getFBItemType() {
+		return FBItemType.GENERAL;
 	}
 
 }
