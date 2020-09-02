@@ -2,12 +2,14 @@ package alephinfinity1.forgeblock.init;
 
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.item.AspectOfTheEndItem;
+import alephinfinity1.forgeblock.item.FBArmorItem;
 import alephinfinity1.forgeblock.item.FBGlintedItem;
 import alephinfinity1.forgeblock.item.FBPickaxeItem;
 import alephinfinity1.forgeblock.item.FBSwordItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
 import alephinfinity1.forgeblock.item.StonkItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -60,4 +62,12 @@ public class ModItems {
 	
 	public static final RegistryObject<Item> STONK = ITEMS.register("stonk", () -> new StonkItem(new Item.Properties(), FBTier.EPIC, 15, 1, 12, 1));
 	
+	/*
+	 * Armor
+	 */
+	public static final RegistryObject<Item> IRON_HELMET = OVERRIDE.register("iron_helmet", () -> new FBArmorItem(EquipmentSlotType.HEAD, new Item.Properties(), FBTier.COMMON, 10, 0));
+	public static final RegistryObject<Item> IRON_CHESTPLATE = OVERRIDE.register("iron_chestplate", () -> new FBArmorItem(EquipmentSlotType.CHEST, new Item.Properties(), FBTier.COMMON, 30, 0));
+	public static final RegistryObject<Item> IRON_LEGGINGS = OVERRIDE.register("iron_leggings", () -> new FBArmorItem(EquipmentSlotType.LEGS, new Item.Properties(), FBTier.COMMON, 25, 0));
+	public static final RegistryObject<Item> IRON_BOOTS = OVERRIDE.register("iron_boots", () -> new FBArmorItem(EquipmentSlotType.FEET, new Item.Properties(), FBTier.COMMON, 10, 0));
+
 }

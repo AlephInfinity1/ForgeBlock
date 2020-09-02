@@ -75,6 +75,18 @@ public class DamageHandler {
 					player.sendMessage(new StringTextComponent("Dealt " + DisplayHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage! (Crit!)"));
 				}
 			}
+			
+			if(victim instanceof PlayerEntity) {
+				PlayerEntity player = (PlayerEntity) victim;
+				//For debug purposes only
+				if(!isCrit) {
+					player.sendMessage(new StringTextComponent("Taken " + DisplayHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage!"));
+					player.sendMessage(new StringTextComponent("Defense: " + Double.toString(defense)));
+				} else {
+					player.sendMessage(new StringTextComponent("Taken " + DisplayHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage! (Crit!)"));
+					player.sendMessage(new StringTextComponent("Defense: " + Double.toString(defense)));
+				}
+			}
 		}
 		
 		//Regardless of the type of damage:

@@ -24,58 +24,141 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeableItem {
+public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeableItem {
 
 	private final FBTier tier;
 	private final Multimap<String, AttributeModifier> attributes;
 	
-	protected static final UUID STRENGTH_MODIFIER = UUID.fromString("0a8af9f9-7880-40af-a8ff-17e6d98ec482");
-	protected static final UUID CRIT_CHANCE_MODIFIER = UUID.fromString("5265014e-5ab6-4e86-a9a5-7c9117818fbb");
-	protected static final UUID CRIT_DAMAGE_MODIFIER = UUID.fromString("dbda354b-eec5-4b86-88ec-04c9f232bc62");
+	protected static final UUID HELMET_DEFENSE_MODIFIER = UUID.fromString("bf36f795-91a0-4020-97bd-d03ddfc8bed2");
+	protected static final UUID HELMET_HEALTH_MODIFIER = UUID.fromString("00feeb8f-5673-4416-9307-3490644cd458");
 	
-	//Super constructor, highly recommend not using
+	protected static final UUID CHESTPLATE_DEFENSE_MODIFIER = UUID.fromString("3a4787d7-9225-4315-bc66-4c87019a4d30");
+	protected static final UUID CHESTPLATE_HEALTH_MODIFIER = UUID.fromString("705d3e0d-a019-45e6-9fe0-b3a8e5fce2c2");
+	
+	protected static final UUID LEGGINGS_DEFENSE_MODIFIER = UUID.fromString("e240962e-4802-44f3-a8fc-f7f613476e8f");
+	protected static final UUID LEGGINGS_HEALTH_MODIFIER = UUID.fromString("191d4d61-eb5b-4036-94fa-f779d65496e3");
+	
+	protected static final UUID BOOTS_DEFENSE_MODIFIER = UUID.fromString("c2ab9230-c894-4d7e-b65e-4ca25be42bfc");
+	protected static final UUID BOOTS_HEALTH_MODIFIER = UUID.fromString("93a736f1-2668-417f-8062-b72b43c08427");
+	
+	//Super constructor, don't use
 	@Deprecated
-	public FBSwordItem(IItemTier p_i48460_1_, int p_i48460_2_, float p_i48460_3_, Properties p_i48460_4_) {
-		super(p_i48460_1_, p_i48460_2_, p_i48460_3_, p_i48460_4_);
+	public FBArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
+		super(materialIn, slot, builder);
 		tier = FBTier.COMMON;
-		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
-		attributes = builder.build();
+		attributes = Reforge.emptyModifier();
+		// TODO Auto-generated constructor stub
 	}
 	
-	public FBSwordItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn, double critChanceIn, double critDamageIn) {
-		super(new FBItemTier(), (int) attackDamageIn, (float) Double.MAX_VALUE, props);
+	public FBArmorItem(EquipmentSlotType slot, Properties props, FBTier tier, double defenseIn, double healthIn) {
+		super(new FBArmorMaterial(), slot, props);
 		this.tier = tier;
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Attack damage modifier", attackDamageIn, Operation.ADDITION));
-		builder.put(FBAttributes.STRENGTH.getName(), new AttributeModifier(STRENGTH_MODIFIER, "Strength modifier", strengthIn, Operation.ADDITION));
-		builder.put(FBAttributes.CRIT_CHANCE.getName(), new AttributeModifier(CRIT_CHANCE_MODIFIER, "Crit chance modifier", critChanceIn, Operation.ADDITION));
-		builder.put(FBAttributes.CRIT_DAMAGE.getName(), new AttributeModifier(CRIT_DAMAGE_MODIFIER, "Crit damage modifier", critDamageIn, Operation.ADDITION));
+		switch(slot) {
+		case HEAD:
+			builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(HELMET_DEFENSE_MODIFIER, "Defense modifier", defenseIn, Operation.ADDITION));
+			builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(HELMET_HEALTH_MODIFIER, "Health modifier", healthIn, Operation.ADDITION));
+			break;
+		case CHEST:
+			builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(CHESTPLATE_DEFENSE_MODIFIER, "Defense modifier", defenseIn, Operation.ADDITION));
+			builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(CHESTPLATE_HEALTH_MODIFIER, "Health modifier", healthIn, Operation.ADDITION));
+			break;
+		case LEGS:
+			builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(LEGGINGS_DEFENSE_MODIFIER, "Defense modifier", defenseIn, Operation.ADDITION));
+			builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(LEGGINGS_HEALTH_MODIFIER, "Health modifier", healthIn, Operation.ADDITION));
+			break;
+		case FEET:
+			builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(BOOTS_DEFENSE_MODIFIER, "Defense modifier", defenseIn, Operation.ADDITION));
+			builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(BOOTS_HEALTH_MODIFIER, "Health modifier", healthIn, Operation.ADDITION));
+			break;
+		default:
+			break;
+		}
 		attributes = builder.build();
 	}
 	
 	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
-		return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributes : super.getAttributeModifiers(equipmentSlot);
+		return equipmentSlot == this.slot ? this.attributes : super.getAttributeModifiers(equipmentSlot);
 	}
 	
 	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot, ItemStack stack) {
-		if(equipmentSlot != EquipmentSlotType.MAINHAND) return super.getAttributeModifiers(equipmentSlot);
+		if(equipmentSlot != this.slot) return super.getAttributeModifiers(equipmentSlot);
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.putAll(this.attributes);
 		builder.putAll(this.getReforgeModifiers(stack));
 		return builder.build();
 	}
-	
+
+	@Override
+	public FBItemType getFBItemType() {
+		switch(this.slot) {
+		case HEAD:
+			return FBItemType.HELMET;
+		case CHEST:
+			return FBItemType.CHESTPLATE;
+		case LEGS:
+			return FBItemType.LEGGINGS;
+		case FEET:
+			return FBItemType.BOOTS;
+		default:
+			return FBItemType.GENERAL;
+		}
+	}
+
+	@Override
+	@Nullable
+	public Reforge getReforge(ItemStack stack) {
+		if(stack.getTag() == null) return null;
+		String reforgeName = stack.getTag().getString("Reforge");
+		if(reforgeName.isEmpty()) return null;
+		else return Reforge.findReforgeByID(reforgeName);
+	}
+
+	@Override
+	public void setReforge(Reforge reforge, ItemStack stack) {
+		stack.getTag().putString("Reforge", reforge.getID());
+	}
+
+	@Override
+	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack) {
+		if(getReforge(stack) == null) return Reforge.emptyModifier();
+		else {
+			Reforge reforge = getReforge(stack);
+			switch(getStackTier(stack)) {
+			case COMMON:
+				return reforge.commonModifiers;
+			case UNCOMMON:
+				return reforge.uncommonModifiers;
+			case RARE:
+				return reforge.rareModifiers;
+			case EPIC:
+				return reforge.epicModifiers;
+			case LEGENDARY:
+				return reforge.legendaryModifiers;
+			case MYTHIC:
+				return reforge.mythicModifiers;
+			default:
+				return Reforge.emptyModifier();
+			}
+		}
+	}
+
+	@Override
+	public FBTier getFBTier() {
+		return tier;
+	}
+
 	@Override
 	public FBTier getStackTier(ItemStack stack) {
 		if(stack.getTag() != null) {
@@ -91,12 +174,26 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	}
 	
 	@Override
+	public ITextComponent getDisplayName(ItemStack stack) {
+		String reforgeName = "";
+		if(this.getReforge(stack) != null) {
+			reforgeName = this.getReforge(stack).getDisplayName();
+		}
+		FBTier tier = getStackTier(stack);
+		String color = tier.color.toString();
+		if(this.getReforge(stack) != null)
+			return new StringTextComponent(color + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+		else
+			return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+	}
+	
+	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		FBTier tier = this.getStackTier(stack);
 		tooltip.add(new StringTextComponent(tier.color.toString() + tooltip.get(0).getString()));
 		tooltip.remove(0);
 		
-		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(EquipmentSlotType.MAINHAND, stack);
+		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(this.slot, stack);
 		Multimap<String, AttributeModifier> reforgeModifiers = this.getReforgeModifiers(stack);
 		
 		//Base weapon stats
@@ -412,66 +509,4 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + " " + this.getFBItemType().getDisplayName() + obfuscated + " n"));
 	}
 
-	@Override
-	public FBTier getFBTier() {
-		return tier;
-	}
-
-	@Override
-	@Nullable
-	public Reforge getReforge(ItemStack stack) {
-		if(stack.getTag() == null) return null;
-		String reforgeName = stack.getTag().getString("Reforge");
-		if(reforgeName.isEmpty()) return null;
-		else return Reforge.findReforgeByID(reforgeName);
-	}
-
-	@Override
-	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack) {
-		if(getReforge(stack) == null) return Reforge.emptyModifier();
-		else {
-			Reforge reforge = getReforge(stack);
-			switch(getStackTier(stack)) {
-			case COMMON:
-				return reforge.commonModifiers;
-			case UNCOMMON:
-				return reforge.uncommonModifiers;
-			case RARE:
-				return reforge.rareModifiers;
-			case EPIC:
-				return reforge.epicModifiers;
-			case LEGENDARY:
-				return reforge.legendaryModifiers;
-			case MYTHIC:
-				return reforge.mythicModifiers;
-			default:
-				return Reforge.emptyModifier();
-			}
-		}
-	}
-	
-	@Override
-	public ITextComponent getDisplayName(ItemStack stack) {
-		String reforgeName = "";
-		if(this.getReforge(stack) != null) {
-			reforgeName = this.getReforge(stack).getDisplayName();
-		}
-		FBTier tier = getStackTier(stack);
-		String color = tier.color.toString();
-		if(this.getReforge(stack) != null)
-			return new StringTextComponent(color + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
-		else
-			return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
-	}
-
-	@Override
-	public void setReforge(Reforge reforge, ItemStack stack) {
-		stack.getTag().putString("Reforge", reforge.getID());
-	}
-
-	@Override
-	public FBItemType getFBItemType() {
-		return FBItemType.SWORD;
-	}
-	
 }
