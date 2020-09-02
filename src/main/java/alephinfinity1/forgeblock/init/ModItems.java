@@ -7,6 +7,7 @@ import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
 import alephinfinity1.forgeblock.item.FBGlintedItem;
 import alephinfinity1.forgeblock.item.FBLapisArmorItem;
 import alephinfinity1.forgeblock.item.FBPickaxeItem;
+import alephinfinity1.forgeblock.item.FBPotionItem;
 import alephinfinity1.forgeblock.item.FBSwordItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
 import alephinfinity1.forgeblock.item.StonkItem;
@@ -96,5 +97,10 @@ public class ModItems {
 	public static final RegistryObject<Item> LAPIS_CHESTPLATE = ITEMS.register("lapis_chestplate", () -> new FBLapisArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 40, 0));
 	public static final RegistryObject<Item> LAPIS_LEGGINGS = ITEMS.register("lapis_leggings", () -> new FBLapisArmorItem(EquipmentSlotType.LEGS, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 35, 0));
 	public static final RegistryObject<Item> LAPIS_BOOTS = ITEMS.register("lapis_boots", () -> new FBLapisArmorItem(EquipmentSlotType.FEET, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 20, 0));
+	
+	/*
+	 * Potion
+	 */
+	public static final RegistryObject<Item> FB_POTION = OVERRIDE.register("potion", () -> new FBPotionItem(new Item.Properties().group(ModItemGroups.FB_POTIONS)));
 
 }

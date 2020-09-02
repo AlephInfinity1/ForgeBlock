@@ -18,7 +18,8 @@ public enum FBItemType {
 	LEGGINGS("misc.forgeblock.itemtype.leggings"),
 	BOOTS("misc.forgeblock.itemtype.boots"),
 	ACCESSORY("misc.forgeblock.itemtype.accessory"),
-	RING("misc.forgeblock.itemtype.ring");
+	RING("misc.forgeblock.itemtype.ring"),
+	POTION("misc.forgeblock.itemtype.potion");
 	
 	String unlocalizedName;
 	

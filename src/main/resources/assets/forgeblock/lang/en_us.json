@@ -49,6 +49,7 @@
     "misc.forgeblock.itemtype.boots": "BOOTS",
     "misc.forgeblock.itemtype.accessory": "ACCESSORY",
     "misc.forgeblock.itemtype.ring": "RING",
+    "misc.forgeblock.itemtype.potion": "POTION",
     
     "misc.forgeblock.fakeattribute.damage": "Damage",
     "misc.forgeblock.fakeattribute.health": "Health",
@@ -76,6 +77,8 @@
     "attribute.name.forgeblock.trueDefense": "True Defense",
     "attribute.name.forgeblock.magicFind": "Magic Find",
     "attribute.name.forgeblock.petLuck": "Pet Luck",
+    
+    "enchantment.forgeblock.growth": "Growth",
 
     "effect.forgeblock.ender_warp": "Ender Warp",
     "effect.forgeblock.rogue_speed_boost": "Rogue Speed Boost",

@@ -12,5 +12,6 @@ public class ModItemGroups {
 	public static final ItemGroup FB_SWORDS = new FBSwordsItemGroup("forgeblock_swords");
 	public static final ItemGroup FB_HARVESTING_TOOLS = new FBHarvestingToolsItemGroup("forgeblock_harvesting_tools");
 	public static final ItemGroup FB_ARMOR = new FBArmorItemGroup("forgeblock_armor");
+	public static final ItemGroup FB_POTIONS = new FBPotionsItemGroup("forgeblock_potions");
 
 }
