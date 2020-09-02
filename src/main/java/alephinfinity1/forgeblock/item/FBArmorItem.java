@@ -59,8 +59,8 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		// TODO Auto-generated constructor stub
 	}
 	
-	public FBArmorItem(EquipmentSlotType slot, Properties props, FBTier tier, double defenseIn, double healthIn) {
-		super(new FBArmorMaterial(), slot, props);
+	public FBArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn, double healthIn) {
+		super(new FBArmorMaterial(name), slot, props);
 		this.tier = tier;
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
 		switch(slot) {
@@ -187,6 +187,13 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 			return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 	}
 	
+	/*
+	 * Any additional information to appear on the tooltip, to be overridden.
+	 */
+	public List<ITextComponent> additionalInformation() {
+		return List.of();
+	}
+	
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		FBTier tier = this.getStackTier(stack);
@@ -195,6 +202,7 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		
 		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(this.slot, stack);
 		Multimap<String, AttributeModifier> reforgeModifiers = this.getReforgeModifiers(stack);
+		List<ITextComponent> additional = this.additionalInformation();
 		
 		//Base weapon stats
 		double damage = 0.0D;
@@ -486,18 +494,18 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 			tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent("attribute.name.forgeblock.petLuck").getString() + ": " + TextFormatting.GREEN.toString() + DisplayHelper.formatModifier(petLuck) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + DisplayHelper.formatModifier(reforgePetLuck) + ")"));
 		}
 		
-		tooltip.add(new StringTextComponent(""));
-		
 		//Insert enchantments here
 		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
 		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
+		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));
 		for(Map.Entry<Enchantment, Integer> entry : set) {
 			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + Integer.toString(entry.getValue())));
 		}
 		
-		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));
+		//Insert item ability description here (unused for some items)
+		tooltip.addAll(additional);
 		
-		//Insert item ability description here (unused for some swords)
+		tooltip.add(new StringTextComponent(""));
 		
 		boolean recombobulated = false;
 		if(stack.getTag() != null) recombobulated = (stack.getTag().getByte("Recombobulated") == 1);

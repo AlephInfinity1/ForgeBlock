@@ -6,9 +6,11 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 
 public class FBArmorMaterial implements IArmorMaterial {
+	
+	private final String name;
 
-	public FBArmorMaterial() {
-		// TODO Auto-generated constructor stub
+	public FBArmorMaterial(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public class FBArmorMaterial implements IArmorMaterial {
 
 	@Override
 	public String getName() {
-		return "";
+		return name;
 	}
 
 	@Override

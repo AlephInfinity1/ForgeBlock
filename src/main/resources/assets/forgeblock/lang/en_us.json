@@ -15,10 +15,15 @@
     "item.forgeblock.aspect_of_the_dragons": "Aspect of the Dragons",
     "item.forgeblock.stonk": "Stonk",
     "item.forgeblock.rogue_sword": "Rogue Sword",
+    "item.forgeblock.lapis_helmet": "Lapis Helmet",
+    "item.forgeblock.lapis_chestplate": "Lapis Chestplate",
+    "item.forgeblock.lapis_leggings": "Lapis Leggings",
+    "item.forgeblock.lapis_boots": "Lapis Boots",
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
     "itemGroup.forgeblock_harvesting_tools": "ForgeBlock Tools",
+    "itemGroup.forgeblock_armor": "ForgeBlock Armor",
     
     "misc.forgeblock.tier.common": "COMMON",
     "misc.forgeblock.tier.uncommon": "UNCOMMON",
@@ -91,5 +96,14 @@
     "potion.potency.19": "XX",
 
     "misc.forgeblock.reforge.gentle": "Gentle",
-    "misc.forgeblock.reforge.odd": "Odd"
+    "misc.forgeblock.reforge.odd": "Odd",
+    
+    "text.forgeblock.armor_desc.lapis_0": "",
+    "text.forgeblock.armor_desc.lapis_1": "\u00A77Each piece of this armor grants",
+    "text.forgeblock.armor_desc.lapis_2": "\u00A7a50%\u00A77 bonus experience when",
+    "text.forgeblock.armor_desc.lapis_3": "\u00A77mining ores.",
+    "text.forgeblock.armor_desc.lapis_4": "",
+    "text.forgeblock.armor_desc.lapis_5": "\u00A76Full Set Bonus: Health",
+    "text.forgeblock.armor_desc.lapis_6": "\u00A77Increase the wearer\u0027s maximum",
+    "text.forgeblock.armor_desc.lapis_7": "\u00A7cHealth\u00A77 by \u00A7a60\u00A77."
 }

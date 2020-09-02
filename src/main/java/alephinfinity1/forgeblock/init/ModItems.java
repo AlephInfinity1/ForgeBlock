@@ -3,7 +3,9 @@ package alephinfinity1.forgeblock.init;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.item.AspectOfTheEndItem;
 import alephinfinity1.forgeblock.item.FBArmorItem;
+import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
 import alephinfinity1.forgeblock.item.FBGlintedItem;
+import alephinfinity1.forgeblock.item.FBLapisArmorItem;
 import alephinfinity1.forgeblock.item.FBPickaxeItem;
 import alephinfinity1.forgeblock.item.FBSwordItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
@@ -65,9 +67,34 @@ public class ModItems {
 	/*
 	 * Armor
 	 */
-	public static final RegistryObject<Item> IRON_HELMET = OVERRIDE.register("iron_helmet", () -> new FBArmorItem(EquipmentSlotType.HEAD, new Item.Properties(), FBTier.COMMON, 10, 0));
-	public static final RegistryObject<Item> IRON_CHESTPLATE = OVERRIDE.register("iron_chestplate", () -> new FBArmorItem(EquipmentSlotType.CHEST, new Item.Properties(), FBTier.COMMON, 30, 0));
-	public static final RegistryObject<Item> IRON_LEGGINGS = OVERRIDE.register("iron_leggings", () -> new FBArmorItem(EquipmentSlotType.LEGS, new Item.Properties(), FBTier.COMMON, 25, 0));
-	public static final RegistryObject<Item> IRON_BOOTS = OVERRIDE.register("iron_boots", () -> new FBArmorItem(EquipmentSlotType.FEET, new Item.Properties(), FBTier.COMMON, 10, 0));
+	public static final RegistryObject<Item> LEATHER_HELMET = OVERRIDE.register("leather_helmet", () -> new FBDyeableArmorItem(EquipmentSlotType.HEAD, "leather", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 5, 0));
+	public static final RegistryObject<Item> LEATHER_CHESTPLATE = OVERRIDE.register("leather_chestplate", () -> new FBDyeableArmorItem(EquipmentSlotType.CHEST, "leather", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 15, 0));
+	public static final RegistryObject<Item> LEATHER_LEGGINGS = OVERRIDE.register("leather_leggings", () -> new FBDyeableArmorItem(EquipmentSlotType.LEGS, "leather", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 10, 0));
+	public static final RegistryObject<Item> LEATHER_BOOTS = OVERRIDE.register("leather_boots", () -> new FBDyeableArmorItem(EquipmentSlotType.FEET, "leather", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 5, 0));
+	
+	public static final RegistryObject<Item> GOLDEN_HELMET = OVERRIDE.register("golden_helmet", () -> new FBArmorItem(EquipmentSlotType.HEAD, "gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 10, 0));
+	public static final RegistryObject<Item> GOLDEN_CHESTPLATE = OVERRIDE.register("golden_chestplate", () -> new FBArmorItem(EquipmentSlotType.CHEST, "gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 25, 0));
+	public static final RegistryObject<Item> GOLDEN_LEGGINGS = OVERRIDE.register("golden_leggings", () -> new FBArmorItem(EquipmentSlotType.LEGS, "gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 15, 0));
+	public static final RegistryObject<Item> GOLDEN_BOOTS = OVERRIDE.register("golden_boots", () -> new FBArmorItem(EquipmentSlotType.FEET, "gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 5, 0));
+	
+	public static final RegistryObject<Item> CHAINMAIL_HELMET = OVERRIDE.register("chainmail_helmet", () -> new FBArmorItem(EquipmentSlotType.HEAD, "chainmail", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 12, 0));
+	public static final RegistryObject<Item> CHAINMAIL_CHESTPLATE = OVERRIDE.register("chainmail_chestplate", () -> new FBArmorItem(EquipmentSlotType.CHEST, "chainmail", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 30, 0));
+	public static final RegistryObject<Item> CHAINMAIL_LEGGINGS = OVERRIDE.register("chainmail_leggings", () -> new FBArmorItem(EquipmentSlotType.LEGS, "chainmail", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 20, 0));
+	public static final RegistryObject<Item> CHAINMAIL_BOOTS = OVERRIDE.register("chainmail_boots", () -> new FBArmorItem(EquipmentSlotType.FEET, "chainmail", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 7, 0));
+	
+	public static final RegistryObject<Item> IRON_HELMET = OVERRIDE.register("iron_helmet", () -> new FBArmorItem(EquipmentSlotType.HEAD, "iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 10, 0));
+	public static final RegistryObject<Item> IRON_CHESTPLATE = OVERRIDE.register("iron_chestplate", () -> new FBArmorItem(EquipmentSlotType.CHEST, "iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 30, 0));
+	public static final RegistryObject<Item> IRON_LEGGINGS = OVERRIDE.register("iron_leggings", () -> new FBArmorItem(EquipmentSlotType.LEGS, "iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 25, 0));
+	public static final RegistryObject<Item> IRON_BOOTS = OVERRIDE.register("iron_boots", () -> new FBArmorItem(EquipmentSlotType.FEET, "iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, 10, 0));
+	
+	public static final RegistryObject<Item> DIAMOND_HELMET = OVERRIDE.register("diamond_helmet", () -> new FBArmorItem(EquipmentSlotType.HEAD, "diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 15, 0));
+	public static final RegistryObject<Item> DIAMOND_CHESTPLATE = OVERRIDE.register("diamond_chestplate", () -> new FBArmorItem(EquipmentSlotType.CHEST, "diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 40, 0));
+	public static final RegistryObject<Item> DIAMOND_LEGGINGS = OVERRIDE.register("diamond_leggings", () -> new FBArmorItem(EquipmentSlotType.LEGS, "diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 30, 0));
+	public static final RegistryObject<Item> DIAMOND_BOOTS = OVERRIDE.register("diamond_boots", () -> new FBArmorItem(EquipmentSlotType.FEET, "diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 15, 0));
+	
+	public static final RegistryObject<Item> LAPIS_HELMET = ITEMS.register("lapis_helmet", () -> new FBLapisArmorItem(EquipmentSlotType.HEAD, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 25, 0));
+	public static final RegistryObject<Item> LAPIS_CHESTPLATE = ITEMS.register("lapis_chestplate", () -> new FBLapisArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 40, 0));
+	public static final RegistryObject<Item> LAPIS_LEGGINGS = ITEMS.register("lapis_leggings", () -> new FBLapisArmorItem(EquipmentSlotType.LEGS, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 35, 0));
+	public static final RegistryObject<Item> LAPIS_BOOTS = ITEMS.register("lapis_boots", () -> new FBLapisArmorItem(EquipmentSlotType.FEET, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 20, 0));
 
 }
