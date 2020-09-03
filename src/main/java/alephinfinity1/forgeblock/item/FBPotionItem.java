@@ -7,13 +7,13 @@ import javax.annotation.Nullable;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import alephinfinity1.forgeblock.potion.FBPotionUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
@@ -42,7 +42,7 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 
 	@Override
 	public FBTier getStackTier(ItemStack stack) {
-		List<EffectInstance> effects = PotionUtils.getEffectsFromStack(stack);
+		List<EffectInstance> effects = FBPotionUtils.getEffectsFromStack(stack);
 		int maxAmplifier = 0;
 		for(EffectInstance effect : effects) {
 			if(effect.getAmplifier() > maxAmplifier) {
@@ -80,7 +80,7 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 			tier = FBTier.MYTHIC;
 			break;
 		default:
-			tier = FBTier.COMMON;
+			tier = FBTier.SPECIAL;
 			break;
 		}
 		
@@ -126,7 +126,7 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 		if (this.isInGroup(group)) {
 			for(Potion potion : ForgeRegistries.POTION_TYPES) {
 				if (potion != Potions.EMPTY && potion.getRegistryName().getNamespace().equals(ForgeBlock.MOD_ID)) {
-					items.add(PotionUtils.addPotionToItemStack(new ItemStack(this), potion));
+					items.add(FBPotionUtils.addPotionToItemStack(new ItemStack(this), potion));
 				}
 			}
 		}

@@ -9,12 +9,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -55,6 +57,17 @@ public class FBLapisArmorItem extends FBArmorItem {
 		if(living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getModifier(UUID.fromString("f7d4b68f-728b-40a5-a66e-4a195bc48442")) == null) {
 			living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(new AttributeModifier(UUID.fromString("f7d4b68f-728b-40a5-a66e-4a195bc48442"), "Lapis armor health boost", 60.0D, Operation.ADDITION));
 		}
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerBreakBlock(BlockEvent.BreakEvent event) {
+		PlayerEntity player = event.getPlayer();
+		Iterable<ItemStack> armor = player.getArmorInventoryList();
+		int piecesCount = 0;
+		for(ItemStack stack : armor) {
+			if(stack.getItem() instanceof FBLapisArmorItem) ++piecesCount;
+		}
+		event.setExpToDrop((int) (event.getExpToDrop() * (1 + 0.5 * piecesCount)));
 	}
 
 }
