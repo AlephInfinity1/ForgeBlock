@@ -19,6 +19,11 @@
     "item.forgeblock.lapis_chestplate": "Lapis Chestplate",
     "item.forgeblock.lapis_leggings": "Lapis Leggings",
     "item.forgeblock.lapis_boots": "Lapis Boots",
+    "item.forgeblock.miner_outfit_helmet": "Miner's Outfit Helmet",
+    "item.forgeblock.miner_outfit_chestplate": "Miner's Outfit Chestplate",
+    "item.forgeblock.miner_outfit_leggings": "Miner's Outfit Leggings",
+    "item.forgeblock.miner_outfit_boots": "Miner's Outfit Boots",
+
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
@@ -108,5 +113,10 @@
     "text.forgeblock.armor_desc.lapis_4": "",
     "text.forgeblock.armor_desc.lapis_5": "\u00A76Full Set Bonus: Health",
     "text.forgeblock.armor_desc.lapis_6": "\u00A77Increase the wearer\u0027s maximum",
-    "text.forgeblock.armor_desc.lapis_7": "\u00A7c\u2764 Health\u00A77 by \u00A7a60\u00A77."
+    "text.forgeblock.armor_desc.lapis_7": "\u00A7c\u2764 Health\u00A77 by \u00A7a60\u00A77.",
+    
+    "text.forgeblock.armor_desc.miner_outfit_0": "",
+    "text.forgeblock.armor_desc.miner_outfit_1": "\u00A76Full Set Bonus: Haste",
+    "text.forgeblock.armor_desc.miner_outfit_2": "\u00A77Grants the wearer",
+    "text.forgeblock.armor_desc.miner_outfit_3": "\u00A7apermanent Haste II\u00A77 when worn."
 }

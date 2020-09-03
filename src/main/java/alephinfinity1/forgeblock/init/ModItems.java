@@ -6,6 +6,7 @@ import alephinfinity1.forgeblock.item.FBArmorItem;
 import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
 import alephinfinity1.forgeblock.item.FBGlintedItem;
 import alephinfinity1.forgeblock.item.FBLapisArmorItem;
+import alephinfinity1.forgeblock.item.FBMinerOutfitArmorItem;
 import alephinfinity1.forgeblock.item.FBPickaxeItem;
 import alephinfinity1.forgeblock.item.FBPotionItem;
 import alephinfinity1.forgeblock.item.FBSwordItem;
@@ -97,6 +98,11 @@ public class ModItems {
 	public static final RegistryObject<Item> LAPIS_CHESTPLATE = ITEMS.register("lapis_chestplate", () -> new FBLapisArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 40, 0));
 	public static final RegistryObject<Item> LAPIS_LEGGINGS = ITEMS.register("lapis_leggings", () -> new FBLapisArmorItem(EquipmentSlotType.LEGS, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 35, 0));
 	public static final RegistryObject<Item> LAPIS_BOOTS = ITEMS.register("lapis_boots", () -> new FBLapisArmorItem(EquipmentSlotType.FEET, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 20, 0));
+	
+	public static final RegistryObject<Item> MINER_OUTFIT_HELMET = ITEMS.register("miner_outfit_helmet", () -> new FBMinerOutfitArmorItem(EquipmentSlotType.HEAD, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 15, 0));
+	public static final RegistryObject<Item> MINER_OUTFIT_CHESTPLATE = ITEMS.register("miner_outfit_chestplate", () -> new FBMinerOutfitArmorItem(EquipmentSlotType.CHEST, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 40, 0));
+	public static final RegistryObject<Item> MINER_OUTFIT_LEGGINGS = ITEMS.register("miner_outfit_leggings", () -> new FBMinerOutfitArmorItem(EquipmentSlotType.LEGS, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 30, 0));
+	public static final RegistryObject<Item> MINER_OUTFIT_BOOTS = ITEMS.register("miner_outfit_boots", () -> new FBMinerOutfitArmorItem(EquipmentSlotType.FEET, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 15, 0));
 	
 	/*
 	 * Potion
