@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.misc.DisplayHelper;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
@@ -20,6 +21,7 @@ import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
@@ -398,6 +400,10 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 			}
 		}
 		
+		//Enchantment bonuses
+		health += 15 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.GROWTH.get(), stack);
+		defense += 3 * EnchantmentHelper.getEnchantmentLevel(Enchantments.PROTECTION, stack);
+		
 		boolean offensiveStats = damage != 0.0D || strength != 0.0D || critChance != 0.0D || critDamage != 0.0D || bonusAttackSpeed != 0.0D || seaCreatureChance != 0.0D;
 		boolean defensiveStats = health != 0.0D || defense != 0.0D || speed != 0.0D || intelligence != 0.0D || trueDefense != 0.0D || magicFind != 0.0D || petLuck != 0.0D;
 		
@@ -504,6 +510,9 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		
 		//Insert item ability description here (unused for some items)
 		tooltip.addAll(additional);
+		
+		//If this item is reforgeable but not reforged
+		if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));
 		
 		tooltip.add(new StringTextComponent(""));
 		

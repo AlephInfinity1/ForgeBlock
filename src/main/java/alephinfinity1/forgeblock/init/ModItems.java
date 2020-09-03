@@ -5,6 +5,7 @@ import alephinfinity1.forgeblock.item.AspectOfTheEndItem;
 import alephinfinity1.forgeblock.item.FBArmorItem;
 import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
 import alephinfinity1.forgeblock.item.FBGlintedItem;
+import alephinfinity1.forgeblock.item.FBGolemArmorItem;
 import alephinfinity1.forgeblock.item.FBLapisArmorItem;
 import alephinfinity1.forgeblock.item.FBMinerOutfitArmorItem;
 import alephinfinity1.forgeblock.item.FBPickaxeItem;
@@ -104,6 +105,11 @@ public class ModItems {
 	public static final RegistryObject<Item> MINER_OUTFIT_LEGGINGS = ITEMS.register("miner_outfit_leggings", () -> new FBMinerOutfitArmorItem(EquipmentSlotType.LEGS, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 30, 0));
 	public static final RegistryObject<Item> MINER_OUTFIT_BOOTS = ITEMS.register("miner_outfit_boots", () -> new FBMinerOutfitArmorItem(EquipmentSlotType.FEET, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.UNCOMMON, 15, 0));
 	
+	public static final RegistryObject<Item> GOLEM_HELMET = ITEMS.register("golem_helmet", () -> new FBGolemArmorItem(EquipmentSlotType.HEAD, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.RARE, 45, 45));
+	public static final RegistryObject<Item> GOLEM_CHESTPLATE = ITEMS.register("golem_chestplate", () -> new FBGolemArmorItem(EquipmentSlotType.CHEST, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.RARE, 90, 65));
+	public static final RegistryObject<Item> GOLEM_LEGGINGS = ITEMS.register("golem_leggings", () -> new FBGolemArmorItem(EquipmentSlotType.LEGS, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.RARE, 75, 55));
+	public static final RegistryObject<Item> GOLEM_BOOTS = ITEMS.register("golem_boots", () -> new FBGolemArmorItem(EquipmentSlotType.FEET, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.RARE, 40, 40));
+
 	/*
 	 * Potion
 	 */

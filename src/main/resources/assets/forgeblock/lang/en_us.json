@@ -23,6 +23,10 @@
     "item.forgeblock.miner_outfit_chestplate": "Miner's Outfit Chestplate",
     "item.forgeblock.miner_outfit_leggings": "Miner's Outfit Leggings",
     "item.forgeblock.miner_outfit_boots": "Miner's Outfit Boots",
+    "item.forgeblock.golem_helmet": "Golem Helmet",
+    "item.forgeblock.golem_chestplate": "Golem Chestplate",
+    "item.forgeblock.golem_leggings": "Golem Leggings",
+    "item.forgeblock.golem_boots": "Golem Boots",
 
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
@@ -106,6 +110,8 @@
     "misc.forgeblock.reforge.gentle": "Gentle",
     "misc.forgeblock.reforge.odd": "Odd",
     
+    "text.forgeblock.reforgeable": "\u00A78This item can be reforged!",
+    
     "text.forgeblock.armor_desc.lapis_0": "",
     "text.forgeblock.armor_desc.lapis_1": "\u00A77Each piece of this armor grants",
     "text.forgeblock.armor_desc.lapis_2": "\u00A7a50%\u00A77 bonus experience when",
@@ -118,5 +124,11 @@
     "text.forgeblock.armor_desc.miner_outfit_0": "",
     "text.forgeblock.armor_desc.miner_outfit_1": "\u00A76Full Set Bonus: Haste",
     "text.forgeblock.armor_desc.miner_outfit_2": "\u00A77Grants the wearer",
-    "text.forgeblock.armor_desc.miner_outfit_3": "\u00A7apermanent Haste II\u00A77 when worn."
+    "text.forgeblock.armor_desc.miner_outfit_3": "\u00A7apermanent Haste II\u00A77 when worn.",
+    
+    "text.forgeblock.armor_desc.golem_0": "",
+    "text.forgeblock.armor_desc.golem_1": "\u00A76Full Set Bonus: Absorption",
+    "text.forgeblock.armor_desc.golem_2": "\u00A77Grants the wearer \u00A7aAbsorption",
+    "text.forgeblock.armor_desc.golem_3": "\u00A7aIII\u00A77 for \u00A7a20 seconds\u00A77 when they",
+    "text.forgeblock.armor_desc.golem_4": "\u00A77kill an enemy."
 }

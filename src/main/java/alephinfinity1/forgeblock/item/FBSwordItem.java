@@ -402,6 +402,9 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		
 		//Insert item ability description here (unused for some swords)
 		
+		//If this item is reforgeable but not reforged
+		if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));
+		
 		boolean recombobulated = false;
 		if(stack.getTag() != null) recombobulated = (stack.getTag().getByte("Recombobulated") == 1);
 		String color = tier.color.toString();
