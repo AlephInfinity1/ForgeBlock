@@ -505,16 +505,16 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
 		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));
 		for(Map.Entry<Enchantment, Integer> entry : set) {
-			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + Integer.toString(entry.getValue())));
+			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + DisplayHelper.getRomanNumeral(entry.getValue())));
 		}
 		
 		//Insert item ability description here (unused for some items)
 		tooltip.addAll(additional);
 		
+		tooltip.add(new StringTextComponent(""));
+		
 		//If this item is reforgeable but not reforged
 		if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));
-		
-		tooltip.add(new StringTextComponent(""));
 		
 		boolean recombobulated = false;
 		if(stack.getTag() != null) recombobulated = (stack.getTag().getByte("Recombobulated") == 1);

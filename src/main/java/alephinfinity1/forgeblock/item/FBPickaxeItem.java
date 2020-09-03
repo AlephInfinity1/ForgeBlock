@@ -505,7 +505,7 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
 		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
 		for(Map.Entry<Enchantment, Integer> entry : set) {
-			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + Integer.toString(entry.getValue())));
+			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + DisplayHelper.getRomanNumeral(entry.getValue())));
 		}
 		
 		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));

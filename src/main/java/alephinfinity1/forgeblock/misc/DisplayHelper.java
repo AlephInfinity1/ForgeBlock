@@ -99,5 +99,128 @@ public class DisplayHelper {
 		String suffixStr = suffix.dictionary.get(magnitude);
 		return (new DecimalFormat("0.#")).format(c) + suffixStr;
 	}
+	
+	public static String getRomanNumeral(int value) {
+		if(value > 3999 || value < 1) {
+			return Integer.toString(value);
+		}
+		String ones = "", tens = "", hundreds = "", thousands = "";
+		
+		switch(value % 10) {
+		case 0:
+			ones = "";
+			break;
+		case 1:
+			ones = "I";
+			break;
+		case 2:
+			ones = "II";
+			break;
+		case 3:
+			ones = "III";
+			break;
+		case 4:
+			ones = "IV";
+			break;
+		case 5:
+			ones = "V";
+			break;
+		case 6:
+			ones = "VI";
+			break;
+		case 7:
+			ones = "VII";
+			break;
+		case 8:
+			ones = "VIII";
+			break;
+		case 9:
+			ones = "IX";
+			break;
+		}
+		
+		switch(value / 10 % 10) {
+		case 0:
+			tens = "";
+			break;
+		case 1:
+			tens = "X";
+			break;
+		case 2:
+			tens = "XX";
+			break;
+		case 3:
+			tens = "XXX";
+			break;
+		case 4:
+			tens = "XL";
+			break;
+		case 5:
+			tens = "L";
+			break;
+		case 6:
+			tens = "LX";
+			break;
+		case 7:
+			tens = "LXX";
+			break;
+		case 8:
+			tens = "LXXX";
+			break;
+		case 9:
+			tens = "XC";
+			break;
+		}
+		
+		switch(value / 100 % 10) {
+		case 0:
+			hundreds = "";
+			break;
+		case 1:
+			hundreds = "C";
+			break;
+		case 2:
+			hundreds = "CC";
+			break;
+		case 3:
+			hundreds = "CCC";
+			break;
+		case 4:
+			hundreds = "CD";
+			break;
+		case 5:
+			hundreds = "D";
+			break;
+		case 6:
+			hundreds = "DC";
+			break;
+		case 7:
+			hundreds = "DCC";
+			break;
+		case 8:
+			hundreds = "DCCC";
+			break;
+		case 9:
+			hundreds = "CM";
+			break;
+		}
+		
+		switch(value / 1000) {
+		case 0:
+			thousands = "";
+			break;
+		case 1:
+			thousands = "M";
+			break;
+		case 2:
+			thousands = "MM";
+			break;
+		case 3:
+			thousands = "MMM";
+			break;
+		}
+		
+		return thousands + hundreds + tens + ones;
+	}
 
 }
