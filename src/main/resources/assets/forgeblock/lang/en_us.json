@@ -112,6 +112,13 @@
     
     "text.forgeblock.reforgeable": "\u00A78This item can be reforged!",
     
+    "text.forgeblock.sword_desc.aote_0": "\u00A76Item Ability: Instant Transmission \u00A7e\u00A7lRIGHT CLICK",
+    "text.forgeblock.sword_desc.aote_1": "\u00A77Teleport \u00A7a8 blocks\u00A77 ahead of",
+    "text.forgeblock.sword_desc.aote_2": "\u00A77you and gain \u00A7a+50\u00A77 \u00A7f\u2726 Speed",
+    "text.forgeblock.sword_desc.aote_3": "\u00A77for \u00A7a3 seconds\u00A77.",
+    "text.forgeblock.sword_desc.aote_4": "\u00A78Mana Cost: \u00A7350",
+    "text.forgeblock.sword_desc.aote_5": "",
+    
     "text.forgeblock.armor_desc.lapis_0": "",
     "text.forgeblock.armor_desc.lapis_1": "\u00A77Each piece of this armor grants",
     "text.forgeblock.armor_desc.lapis_2": "\u00A7a50%\u00A77 bonus experience when",

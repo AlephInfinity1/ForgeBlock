@@ -90,6 +90,10 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		}
 	}
 	
+	public List<ITextComponent> additionalInformation() {
+		return List.of();
+	}
+	
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		FBTier tier = this.getStackTier(stack);
@@ -98,6 +102,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		
 		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(EquipmentSlotType.MAINHAND, stack);
 		Multimap<String, AttributeModifier> reforgeModifiers = this.getReforgeModifiers(stack);
+		List<ITextComponent> additional = this.additionalInformation();
 		
 		//Base weapon stats
 		double damage = 0.0D;
@@ -401,6 +406,8 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));
 		
 		//Insert item ability description here (unused for some swords)
+		tooltip.addAll(additional);
+		
 		
 		//If this item is reforgeable but not reforged
 		if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));

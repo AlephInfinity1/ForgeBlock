@@ -114,5 +114,5 @@ public class ModItems {
 	 * Potion
 	 */
 	public static final RegistryObject<Item> FB_POTION = OVERRIDE.register("potion", () -> new FBPotionItem(new Item.Properties().group(ModItemGroups.FB_POTIONS)));
-
+	
 }
