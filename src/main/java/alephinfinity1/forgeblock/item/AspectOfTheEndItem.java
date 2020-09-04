@@ -18,7 +18,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class AspectOfTheEndItem extends FBSwordItem {
-	}
 	
 	public AspectOfTheEndItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn, double critChanceIn, double critDamageIn) {
 		super(props, tier, attackDamageIn, strengthIn, critChanceIn, critDamageIn);

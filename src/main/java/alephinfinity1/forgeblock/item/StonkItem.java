@@ -32,7 +32,7 @@ public class StonkItem extends FBPickaxeItem {
 		ItemStack heldItem = player.getHeldItemMainhand();
 		if(heldItem.getItem() instanceof StonkItem && event.getState().getBlock().equals(Blocks.END_STONE)) {
 			Random random = new Random();
-			event.setExpToDrop(random.nextInt(2));
+			event.setExpToDrop(random.nextInt(3));
 		}
 	}
 
