@@ -17,6 +17,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -59,7 +60,8 @@ public class FBLapisArmorItem extends FBArmorItem {
 		}
 	}
 	
-	@SubscribeEvent
+	//Multiplies the ore XP drop. Priority set to low to allow accurate multiplication.
+	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void onPlayerBreakBlock(BlockEvent.BreakEvent event) {
 		PlayerEntity player = event.getPlayer();
 		Iterable<ItemStack> armor = player.getArmorInventoryList();
