@@ -34,8 +34,8 @@ public class ForgeBlock {
 		ModEnchantments.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CustomModConfig.GENERAL_CONFIG);
-        CustomModConfig.loadConfig(CustomModConfig.GENERAL_CONFIG, FMLPaths.CONFIGDIR.get().resolve("forgeblock-common.toml"));
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CustomModConfig.CLIENT_CONFIG);
+        CustomModConfig.loadConfig(CustomModConfig.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve("forgeblock-client.toml"));
         
 	}
 	

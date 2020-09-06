@@ -87,6 +87,21 @@
     "attribute.name.forgeblock.magicFind": "Magic Find",
     "attribute.name.forgeblock.petLuck": "Pet Luck",
     
+    "misc.forgeblock.attributeicon.damage": "\u00A7c\u2741",
+    "misc.forgeblock.attributeicon.strength": "\u00A7c\u2741",
+    "misc.forgeblock.attributeicon.critChance": "\u00A79\u2623",
+    "misc.forgeblock.attributeicon.critDamage": "\u00A79\u2620",
+    "misc.forgeblock.attributeicon.bonusAttackSpeed": "\u00A7e\u2694",
+    "misc.forgeblock.attributeicon.seaCreatureChance": "",
+    "misc.forgeblock.attributeicon.health": "\u00A7c\u2764",
+    "misc.forgeblock.attributeicon.defense": "\u00A7a\u2748",
+    "misc.forgeblock.attributeicon.speed": "\u00A7f\u2726",
+    "misc.forgeblock.attributeicon.intelligence": "\u00A7b\u270E",
+    "misc.forgeblock.attributeicon.trueDefense": "\u00A7f\u2742",
+    "misc.forgeblock.attributeicon.magicFind": "\u00A7b\u20AA",
+    "misc.forgeblock.attributeicon.petLuck": "\u00A7d\u2663",
+    
+    
     "enchantment.forgeblock.growth": "Growth",
     "enchantment.forgeblock.telekinesis": "Telekinesis",
     "enchantment.forgeblock.life_steal": "Life Steal",

@@ -101,7 +101,6 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		tooltip.remove(0);
 		
 		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(EquipmentSlotType.MAINHAND, stack);
-		Multimap<String, AttributeModifier> reforgeModifiers = this.getReforgeModifiers(stack);
 		List<ITextComponent> additional = this.additionalInformation();
 		
 		tooltip.addAll(DisplayHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));

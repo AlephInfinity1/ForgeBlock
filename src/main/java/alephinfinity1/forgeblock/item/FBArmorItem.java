@@ -231,7 +231,6 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		tooltip.remove(0);
 		
 		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(this.slot, stack);
-		Multimap<String, AttributeModifier> reforgeModifiers = this.getReforgeModifiers(stack);
 		List<ITextComponent> additional = this.additionalInformation();
 		
 		tooltip.addAll(DisplayHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
