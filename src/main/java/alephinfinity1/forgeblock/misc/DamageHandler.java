@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.misc.DisplayHelper.SuffixType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -22,9 +23,16 @@ public class DamageHandler {
 	@SubscribeEvent
 	public static void onLivingAttack(LivingHurtEvent event) {
 		//Pre: get damager and victim.
-		if(!(event.getSource().getTrueSource() instanceof LivingEntity)) { //If attack is environmental then only apply true defense bonus
+		if(!(event.getSource().getTrueSource() instanceof LivingEntity)) { //If attack is environmental then only apply defense bonus
+			double damageMultiplier = 1.0D;
+			//If the damage is affected by armor, also apply normal defense bonus
+			if(!event.getSource().isUnblockable()) {
+				double defense = event.getEntityLiving().getAttribute(FBAttributes.DEFENSE).getValue();
+				damageMultiplier = 100.0D / (defense + 100.0D);
+			}
+			
 			double trueDefense = event.getEntityLiving().getAttribute(FBAttributes.TRUE_DEFENSE).getValue();
-			double damageMultiplier = 100.0D / (trueDefense + 100.0D);
+			damageMultiplier *= 100.0D / (trueDefense + 100.0D);
 			event.setAmount((float) (event.getAmount() * damageMultiplier));
 			return;
 		}
@@ -59,6 +67,10 @@ public class DamageHandler {
 			boolean isCrit = (new Random().nextDouble() * 100.0D) < damager.getAttribute(FBAttributes.CRIT_CHANCE).getValue();
 			double critDamage = damager.getAttribute(FBAttributes.CRIT_DAMAGE).getValue();
 			if(isCrit) result *= (1.0D + critDamage / 100.0D);
+			
+			//Step 4b: activate life steal enchantment
+			int lifeSteal = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.LIFE_STEAL.get(), damager.getHeldItemMainhand());
+			damager.heal((float) (result * lifeSteal * 0.001));
 			
 			//Step 5: calculate defense reduction on victim.
 			double defense = victim.getAttribute(FBAttributes.DEFENSE).getValue();
