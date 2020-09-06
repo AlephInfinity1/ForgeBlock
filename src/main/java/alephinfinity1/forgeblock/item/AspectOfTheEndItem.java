@@ -31,7 +31,7 @@ public class AspectOfTheEndItem extends FBSwordItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_2").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_3").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_4").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_5").getString()));
+		list.add(new StringTextComponent(""));
 		return list;
 	}
 	

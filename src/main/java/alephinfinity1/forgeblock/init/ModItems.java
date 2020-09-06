@@ -15,6 +15,7 @@ import alephinfinity1.forgeblock.item.MinerOutfitArmorItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
 import alephinfinity1.forgeblock.item.StonkItem;
 import alephinfinity1.forgeblock.item.SwordOfTheStarsItem;
+import alephinfinity1.forgeblock.item.YoungDragonArmorItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
@@ -116,6 +117,11 @@ public class ModItems {
 	public static final RegistryObject<Item> CHESTPLATE_OF_THE_STARS = ITEMS.register("chestplate_of_the_stars", () -> new FBArmorItem(EquipmentSlotType.CHEST, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.SPECIAL, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 20000, 5000, 0, 2000, 0, 0, 0)));
 	public static final RegistryObject<Item> LEGGINGS_OF_THE_STARS = ITEMS.register("leggings_of_the_stars", () -> new FBArmorItem(EquipmentSlotType.LEGS, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.SPECIAL, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 15000, 4000, 0, 1500, 0, 0, 0)));
 	public static final RegistryObject<Item> BOOTS_OF_THE_STARS = ITEMS.register("boots_of_the_stars", () -> new FBArmorItem(EquipmentSlotType.FEET, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.SPECIAL, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 7500, 2500, 0, 1000, 0, 0, 0)));
+	
+	public static final RegistryObject<Item> YOUNG_DRAGON_HELMET = ITEMS.register("young_dragon_helmet", () -> new YoungDragonArmorItem(EquipmentSlotType.HEAD, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 70, 110, 0.02, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> YOUNG_DRAGON_CHESTPLATE = ITEMS.register("young_dragon_chestplate", () -> new YoungDragonArmorItem(EquipmentSlotType.CHEST, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 120, 160, 0.02, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> YOUNG_DRAGON_LEGGINGS = ITEMS.register("young_dragon_leggings", () -> new YoungDragonArmorItem(EquipmentSlotType.LEGS, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 100, 140, 0.02, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> YOUNG_DRAGON_BOOTS = ITEMS.register("young_dragon_boots", () -> new YoungDragonArmorItem(EquipmentSlotType.FEET, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 60, 90, 0.02, 0, 0, 0, 0)));
 
 	/*
 	 * Potion

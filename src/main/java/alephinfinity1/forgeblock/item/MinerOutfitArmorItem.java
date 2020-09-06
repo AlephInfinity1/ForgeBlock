@@ -27,10 +27,10 @@ public class MinerOutfitArmorItem extends FBArmorItem {
 	@Override
 	public List<ITextComponent> additionalInformation() {
 		List<ITextComponent> list = new ArrayList<>();
+		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.miner_outfit_0").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.miner_outfit_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.miner_outfit_2").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.miner_outfit_3").getString()));
 		return list;
 	}
 	

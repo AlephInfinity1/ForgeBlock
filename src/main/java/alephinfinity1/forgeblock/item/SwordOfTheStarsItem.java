@@ -21,7 +21,7 @@ public class SwordOfTheStarsItem extends FBSwordItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.sots_0").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.sots_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.sots_2").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.sots_3").getString()));
+		list.add(new StringTextComponent(""));
 		return list;
 	}
 

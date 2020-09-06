@@ -27,11 +27,11 @@ public class GolemArmorItem extends FBArmorItem {
 	@Override
 	public List<ITextComponent> additionalInformation() {
 		List<ITextComponent> list = new ArrayList<>();
+		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.golem_0").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.golem_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.golem_2").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.golem_3").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.golem_4").getString()));
 		return list;
 	}
 	

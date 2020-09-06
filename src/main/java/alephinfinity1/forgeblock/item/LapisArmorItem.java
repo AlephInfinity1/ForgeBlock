@@ -23,6 +23,8 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
 public class LapisArmorItem extends FBArmorItem {
+	
+	private static final UUID LAPIS_HEALTH_BOOST = UUID.fromString("654d36d0-50ea-4d7d-9a93-1c0b7e9ddaea");
 
 	public LapisArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn,
 			double healthIn) {
@@ -32,6 +34,7 @@ public class LapisArmorItem extends FBArmorItem {
 	@Override
 	public List<ITextComponent> additionalInformation() {
 		List<ITextComponent> list = new ArrayList<>();
+		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_0").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_2").getString()));
@@ -39,7 +42,6 @@ public class LapisArmorItem extends FBArmorItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_4").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_5").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_6").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_7").getString()));
 		return list;
 	}
 	
@@ -49,14 +51,14 @@ public class LapisArmorItem extends FBArmorItem {
 		Iterable<ItemStack> armor = living.getArmorInventoryList();
 		for(ItemStack stack : armor) {
 			if(!(stack.getItem() instanceof LapisArmorItem)) {
-				if(living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getModifier(UUID.fromString("f7d4b68f-728b-40a5-a66e-4a195bc48442")) != null) {
-					living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(UUID.fromString("f7d4b68f-728b-40a5-a66e-4a195bc48442"));
+				if(living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getModifier(LAPIS_HEALTH_BOOST) != null) {
+					living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(LAPIS_HEALTH_BOOST);
 				}
 				return;
 			}
 		}
-		if(living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getModifier(UUID.fromString("f7d4b68f-728b-40a5-a66e-4a195bc48442")) == null) {
-			living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(new AttributeModifier(UUID.fromString("f7d4b68f-728b-40a5-a66e-4a195bc48442"), "Lapis armor health boost", 60.0D, Operation.ADDITION));
+		if(living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getModifier(LAPIS_HEALTH_BOOST) == null) {
+			living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(new AttributeModifier(LAPIS_HEALTH_BOOST, "Lapis armor health boost", 60.0D, Operation.ADDITION));
 		}
 	}
 	
