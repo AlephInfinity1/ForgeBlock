@@ -1,6 +1,7 @@
 package alephinfinity1.forgeblock.init;
 
 import alephinfinity1.forgeblock.ForgeBlock;
+import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.item.AspectOfTheEndItem;
 import alephinfinity1.forgeblock.item.FBArmorItem;
 import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
@@ -17,6 +18,7 @@ import alephinfinity1.forgeblock.item.SwordOfTheStarsItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.Properties;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -110,6 +112,11 @@ public class ModItems {
 	public static final RegistryObject<Item> GOLEM_CHESTPLATE = ITEMS.register("golem_chestplate", () -> new GolemArmorItem(EquipmentSlotType.CHEST, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.RARE, 90, 65));
 	public static final RegistryObject<Item> GOLEM_LEGGINGS = ITEMS.register("golem_leggings", () -> new GolemArmorItem(EquipmentSlotType.LEGS, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.RARE, 75, 55));
 	public static final RegistryObject<Item> GOLEM_BOOTS = ITEMS.register("golem_boots", () -> new GolemArmorItem(EquipmentSlotType.FEET, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.RARE, 40, 40));
+	
+	public static final RegistryObject<Item> HELMET_OF_THE_STARS = ITEMS.register("helmet_of_the_stars", () -> new FBArmorItem(EquipmentSlotType.HEAD, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.SPECIAL, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 10000, 3000, 0, 1000, 0, 0, 0)));
+	public static final RegistryObject<Item> CHESTPLATE_OF_THE_STARS = ITEMS.register("chestplate_of_the_stars", () -> new FBArmorItem(EquipmentSlotType.CHEST, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.SPECIAL, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 20000, 5000, 0, 2000, 0, 0, 0)));
+	public static final RegistryObject<Item> LEGGINGS_OF_THE_STARS = ITEMS.register("leggings_of_the_stars", () -> new FBArmorItem(EquipmentSlotType.LEGS, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.SPECIAL, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 15000, 4000, 0, 1500, 0, 0, 0)));
+	public static final RegistryObject<Item> BOOTS_OF_THE_STARS = ITEMS.register("boots_of_the_stars", () -> new FBArmorItem(EquipmentSlotType.FEET, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.SPECIAL, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 7500, 2500, 0, 1000, 0, 0, 0)));
 
 	/*
 	 * Potion
