@@ -17,9 +17,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class FBMinerOutfitArmorItem extends FBArmorItem {
+public class MinerOutfitArmorItem extends FBArmorItem {
 
-	public FBMinerOutfitArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn,
+	public MinerOutfitArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn,
 			double healthIn) {
 		super(slot, name, props, tier, defenseIn, healthIn);
 	}
@@ -39,7 +39,7 @@ public class FBMinerOutfitArmorItem extends FBArmorItem {
 		LivingEntity living = event.getEntityLiving();
 		Iterable<ItemStack> armor = living.getArmorInventoryList();
 		for(ItemStack stack : armor) {
-			if(!(stack.getItem() instanceof FBMinerOutfitArmorItem)) return;
+			if(!(stack.getItem() instanceof MinerOutfitArmorItem)) return;
 		}
 		EffectInstance haste = new EffectInstance(Effects.HASTE, 5, 1, true, true);
 		living.addPotionEffect(haste);

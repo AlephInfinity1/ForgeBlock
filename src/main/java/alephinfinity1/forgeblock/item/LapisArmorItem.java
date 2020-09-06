@@ -22,9 +22,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class FBLapisArmorItem extends FBArmorItem {
+public class LapisArmorItem extends FBArmorItem {
 
-	public FBLapisArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn,
+	public LapisArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn,
 			double healthIn) {
 		super(slot, name, props, tier, defenseIn, healthIn);
 	}
@@ -48,7 +48,7 @@ public class FBLapisArmorItem extends FBArmorItem {
 		LivingEntity living = event.getEntityLiving();
 		Iterable<ItemStack> armor = living.getArmorInventoryList();
 		for(ItemStack stack : armor) {
-			if(!(stack.getItem() instanceof FBLapisArmorItem)) {
+			if(!(stack.getItem() instanceof LapisArmorItem)) {
 				if(living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getModifier(UUID.fromString("f7d4b68f-728b-40a5-a66e-4a195bc48442")) != null) {
 					living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(UUID.fromString("f7d4b68f-728b-40a5-a66e-4a195bc48442"));
 				}
@@ -67,7 +67,7 @@ public class FBLapisArmorItem extends FBArmorItem {
 		Iterable<ItemStack> armor = player.getArmorInventoryList();
 		int piecesCount = 0;
 		for(ItemStack stack : armor) {
-			if(stack.getItem() instanceof FBLapisArmorItem) ++piecesCount;
+			if(stack.getItem() instanceof LapisArmorItem) ++piecesCount;
 		}
 		event.setExpToDrop((int) (event.getExpToDrop() * (1 + 0.5 * piecesCount)));
 	}

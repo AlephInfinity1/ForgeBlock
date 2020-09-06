@@ -17,9 +17,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class FBGolemArmorItem extends FBArmorItem {
+public class GolemArmorItem extends FBArmorItem {
 
-	public FBGolemArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn,
+	public GolemArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn,
 			double healthIn) {
 		super(slot, name, props, tier, defenseIn, healthIn);
 	}
@@ -42,7 +42,7 @@ public class FBGolemArmorItem extends FBArmorItem {
 				LivingEntity living = (LivingEntity) event.getSource().getTrueSource();
 				Iterable<ItemStack> armor = living.getArmorInventoryList();
 				for(ItemStack stack : armor) {
-					if(!(stack.getItem() instanceof FBGolemArmorItem)) return;
+					if(!(stack.getItem() instanceof GolemArmorItem)) return;
 				}
 				EffectInstance absorptionIn = new EffectInstance(ModEffects.ABSORPTION, 400, 2);
 				living.addPotionEffect(absorptionIn);
