@@ -15,8 +15,69 @@ import net.minecraft.util.text.TranslationTextComponent;
 //See https://hypixel-skyblock.fandom.com/wiki/Reforging
 public enum Reforge {
 	//Melee weapon reforges
-	GENTLE(new FBItemType[] {FBItemType.SWORD}, "gentle", "misc.forgeblock.reforge.gentle", false, modifierMapFromDoubles(0, 3, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 5, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 7, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 10, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 15, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0), modifierMapFromDoubles(0, 20, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0)),
-	ODD(new FBItemType[] {FBItemType.SWORD}, "odd", "misc.forgeblock.reforge.odd", false, modifierMapFromDoubles(0, 0, 12, 10, 0, 0, 0, 0, 0, -5, 0, 0, 0), modifierMapFromDoubles(0, 0, 15, 15, 0, 0, 0, 0, 0, -10, 0, 0, 0), modifierMapFromDoubles(0, 0, 15, 15, 0, 0, 0, 0, 0, -18, 0, 0, 0), modifierMapFromDoubles(0, 0, 25, 30, 0, 0, 0, 0, 0, -24, 0, 0, 0), modifierMapFromDoubles(0, 0, 25, 30, 0, 0, 0, 0, 0, -50, 0, 0, 0), modifierMapFromDoubles(0, 0, 35, 45, 0, 0, 0, 0, 0, -75, 0, 0, 0));
+	GENTLE(new FBItemType[] {FBItemType.SWORD}, "gentle", "misc.forgeblock.reforge.gentle", false, 
+			modifierMapFromDoubles(0, 3, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0), 
+			modifierMapFromDoubles(0, 5, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0), 
+			modifierMapFromDoubles(0, 7, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0), 
+			modifierMapFromDoubles(0, 10, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0), 
+			modifierMapFromDoubles(0, 15, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0), 
+			modifierMapFromDoubles(0, 20, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0)),
+	ODD(new FBItemType[] {FBItemType.SWORD}, "odd", "misc.forgeblock.reforge.odd", false, 
+			modifierMapFromDoubles(0, 0, 12, 10, 0, 0, 0, 0, 0, -5, 0, 0, 0), 
+			modifierMapFromDoubles(0, 0, 15, 15, 0, 0, 0, 0, 0, -10, 0, 0, 0), 
+			modifierMapFromDoubles(0, 0, 15, 15, 0, 0, 0, 0, 0, -18, 0, 0, 0), 
+			modifierMapFromDoubles(0, 0, 25, 30, 0, 0, 0, 0, 0, -24, 0, 0, 0), 
+			modifierMapFromDoubles(0, 0, 25, 30, 0, 0, 0, 0, 0, -50, 0, 0, 0), 
+			modifierMapFromDoubles(0, 0, 35, 45, 0, 0, 0, 0, 0, -75, 0, 0, 0)),
+	FAST(new FBItemType[] {FBItemType.SWORD}, "fast", "misc.forgeblock.reforge.fast", false, 
+			modifierMapFromDoubles(0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0)),
+	FAIR(new FBItemType[] {FBItemType.SWORD}, "fair", "misc.forgeblock.reforge.fair", false,
+			modifierMapFromDoubles(0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0),
+			modifierMapFromDoubles(0, 3, 3, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0),
+			modifierMapFromDoubles(0, 4, 4, 4, 4, 0, 0, 0, 0, 4, 0, 0, 0),
+			modifierMapFromDoubles(0, 7, 7, 7, 7, 0, 0, 0, 0, 7, 0, 0, 0),
+			modifierMapFromDoubles(0, 10, 10, 10, 10, 0, 0, 0, 0, 10, 0, 0, 0),
+			modifierMapFromDoubles(0, 14, 14, 14, 14, 0, 0, 0, 0, 14, 0, 0, 0)),
+	EPIC(new FBItemType[] {FBItemType.SWORD}, "epic", "misc.forgeblock.reforge.epic", false,
+			modifierMapFromDoubles(0, 15, 0, 10, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 20, 0, 15, 2, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 25, 0, 20, 4, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 32, 0, 27, 7, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 40, 0, 35, 10, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 49, 0, 45, 14, 0, 0, 0, 0, 0, 0, 0, 0)),
+	SHARP(new FBItemType[] {FBItemType.SWORD}, "sharp", "misc.forgeblock.reforge.sharp", false,
+			modifierMapFromDoubles(0, 0, 10, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 12, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 14, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 17, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 20, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 0, 25, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0)),
+	HEROIC(new FBItemType[] {FBItemType.SWORD}, "heroic", "misc.forgeblock.reforge.heroic", false,
+			modifierMapFromDoubles(0, 15, 0, 0, 1, 0, 0, 0, 0, 40, 0, 0, 0),
+			modifierMapFromDoubles(0, 20, 0, 0, 2, 0, 0, 0, 0, 50, 0, 0, 0),
+			modifierMapFromDoubles(0, 25, 0, 0, 2, 0, 0, 0, 0, 65, 0, 0, 0),
+			modifierMapFromDoubles(0, 32, 0, 0, 3, 0, 0, 0, 0, 80, 0, 0, 0),
+			modifierMapFromDoubles(0, 40, 0, 0, 5, 0, 0, 0, 0, 100, 0, 0, 0),
+			modifierMapFromDoubles(0, 49, 0, 0, 7, 0, 0, 0, 0, 125, 0, 0, 0)),
+	SPICY(new FBItemType[] {FBItemType.SWORD}, "spicy", "misc.forgeblock.reforge.spicy", false,
+			modifierMapFromDoubles(0, 2, 1, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 3, 1, 35, 2, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 4, 1, 45, 4, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 7, 1, 60, 7, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 10, 1, 80, 10, 0, 0, 0, 0, 0, 0, 0, 0),
+			modifierMapFromDoubles(0, 14, 1, 105, 14, 0, 0, 0, 0, 0, 0, 0, 0)),
+	LEGENDARY(new FBItemType[] {FBItemType.SWORD}, "legendary", "misc.forgeblock.reforge.legendary", false,
+			modifierMapFromDoubles(0, 3, 5, 5, 2, 0, 0, 0, 0, 5, 0, 0, 0),
+			modifierMapFromDoubles(0, 7, 7, 10, 3, 0, 0, 0, 0, 8, 0, 0, 0),
+			modifierMapFromDoubles(0, 12, 9, 15, 5, 0, 0, 0, 0, 12, 0, 0, 0),
+			modifierMapFromDoubles(0, 18, 12, 22, 7, 0, 0, 0, 0, 18, 0, 0, 0),
+			modifierMapFromDoubles(0, 25, 15, 28, 10, 0, 0, 0, 0, 25, 0, 0, 0),
+			modifierMapFromDoubles(0, 33, 20, 35, 14, 0, 0, 0, 0, 33, 0, 0, 0));
 	
 	private FBItemType[] types;
 	private String id;
@@ -65,7 +126,7 @@ public enum Reforge {
 		return builder.build();
 	}
 	
-	public static final Reforge[] REFORGES = new Reforge[] {GENTLE, ODD};
+	public static final Reforge[] REFORGES = new Reforge[] {GENTLE, ODD, FAST, FAIR, EPIC, SHARP, HEROIC, SPICY, LEGENDARY};
 	
 	public String getID() {
 		return id;

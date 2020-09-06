@@ -1,5 +1,7 @@
 package alephinfinity1.forgeblock.item;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
@@ -11,6 +13,9 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +28,17 @@ public class YoungDragonArmorItem extends FBArmorItem {
 	public YoungDragonArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier,
 			Multimap<String, AttributeModifier> modifiers) {
 		super(slot, name, props, tier, modifiers);
+	}
+	
+	@Override
+	public List<ITextComponent> additionalInformation() {
+		List<ITextComponent> list = new ArrayList<>();
+		list.add(new StringTextComponent(""));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.young_0").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.young_1").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.young_2").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.young_3").getString()));
+		return list;
 	}
 	
 	@SubscribeEvent

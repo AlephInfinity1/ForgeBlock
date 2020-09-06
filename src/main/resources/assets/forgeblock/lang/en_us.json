@@ -134,6 +134,13 @@
 
     "misc.forgeblock.reforge.gentle": "Gentle",
     "misc.forgeblock.reforge.odd": "Odd",
+    "misc.forgeblock.reforge.fast": "Fast",
+    "misc.forgeblock.reforge.fair": "Fair",
+    "misc.forgeblock.reforge.epic": "Epic",
+    "misc.forgeblock.reforge.sharp": "Sharp",
+    "misc.forgeblock.reforge.heroic": "Heroic",
+    "misc.forgeblock.reforge.spicy": "Spicy",
+    "misc.forgeblock.reforge.legendary": "Legendary",
     
     "text.forgeblock.reforgeable": "\u00A78This item can be reforged!",
     
@@ -162,5 +169,10 @@
     "text.forgeblock.armor_desc.golem_0": "\u00A76Full Set Bonus: Absorption",
     "text.forgeblock.armor_desc.golem_1": "\u00A77Grants the wearer \u00A7aAbsorption",
     "text.forgeblock.armor_desc.golem_2": "\u00A7aIII\u00A77 for \u00A7a20 seconds\u00A77 when they",
-    "text.forgeblock.armor_desc.golem_3": "\u00A77kill an enemy."
+    "text.forgeblock.armor_desc.golem_3": "\u00A77kill an enemy.",
+    
+    "text.forgeblock.armor_desc.young_0": "\u00A76Full Set Bonus: Young Blood",
+    "text.forgeblock.armor_desc.young_1": "\u00A77Gain \u00A7a+70\u00A77 Walk Speed while",
+    "text.forgeblock.armor_desc.young_2": "\u00A77you are above \u00A7a50%\u00A77 HP.",
+    "text.forgeblock.armor_desc.young_3": "\u00A78+100 Walk Speed Cap"
 }
