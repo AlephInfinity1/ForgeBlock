@@ -35,6 +35,10 @@
     "item.forgeblock.young_dragon_chestplate": "Young Dragon Chestplate",
     "item.forgeblock.young_dragon_leggings": "Young Dragon Leggings",
     "item.forgeblock.young_dragon_boots": "Young Dragon Boots",
+    "item.forgeblock.wise_dragon_helmet": "Wise Dragon Helmet",
+    "item.forgeblock.wise_dragon_chestplate": "Wise Dragon Chestplate",
+    "item.forgeblock.wise_dragon_leggings": "Wise Dragon Leggings",
+    "item.forgeblock.wise_dragon_boots": "Wise Dragon Boots",
 
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
@@ -109,6 +113,7 @@
     "misc.forgeblock.attributeicon.magicFind": "\u00A7b\u20AA",
     "misc.forgeblock.attributeicon.petLuck": "\u00A7d\u2663",
     
+    "misc.forgeblock.mana": "Mana",
     
     "enchantment.forgeblock.growth": "Growth",
     "enchantment.forgeblock.telekinesis": "Telekinesis",
@@ -174,5 +179,13 @@
     "text.forgeblock.armor_desc.young_0": "\u00A76Full Set Bonus: Young Blood",
     "text.forgeblock.armor_desc.young_1": "\u00A77Gain \u00A7a+70\u00A77 Walk Speed while",
     "text.forgeblock.armor_desc.young_2": "\u00A77you are above \u00A7a50%\u00A77 HP.",
-    "text.forgeblock.armor_desc.young_3": "\u00A78+100 Walk Speed Cap"
+    "text.forgeblock.armor_desc.young_3": "\u00A78+100 Walk Speed Cap",
+    
+    "text.forgeblock.armor_desc.wise_0": "\u00A76Full Set Bonus: Wise Blood",
+    "text.forgeblock.armor_desc.wise_1": "\u00A77Abilities have \u00A7a2/3\u00A77 of the",
+    "text.forgeblock.armor_desc.wise_2": "\u00A77mana cost.",
+    
+    "text.forgeblock.notEnoughMana": "\u00A7cNot enough mana!",
+    
+    "text.forgeblock.useAbility.aote": "\u00A7aUsed \u00A76Instant Transmission\u00A7a!"
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.World;
 
 /*
  * An interface for every item that has an ability.
@@ -17,7 +18,7 @@ public interface IAbilityItem {
 	/*
 	 * Returns whether the ability was successfully activated
 	 */
-	public boolean activateAbility(PlayerEntity player, ItemStack stack);
+	public boolean activateAbility(World world, PlayerEntity player, ItemStack stack);
 	
-	public double getAbilityCost(ItemStack stack);
+	public double getAbilityCost(ItemStack stack, PlayerEntity player);
 }

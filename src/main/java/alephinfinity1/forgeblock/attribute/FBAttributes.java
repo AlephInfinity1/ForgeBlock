@@ -32,6 +32,7 @@ public final class FBAttributes {
 	public static final IAttribute COMBAT_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.combatXPBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Combat XP Boost").setShouldWatch(true); //The percentage increase in Combat XP gain. Affected by Slayers and XP Boost potions.
 	public static final IAttribute DODGE = (new RangedAttribute((IAttribute) null, "forgeblock.dodge", 0.0D, 0.0D, 1.0D)).setDescription("Dodge chance").setShouldWatch(true); //The chance that an enemy attack should miss. Affected by Dodge and Agility potions.
 	public static final IAttribute HEALTH_REGEN = (new RangedAttribute((IAttribute) null, "forgeblock.healthRegen", 0.0D, 0.0D, Double.MAX_VALUE)).setDescription("Health Regeneration").setShouldWatch(true); //The amount of health regenerated every second. Non-negative. Affected by regen potions.
+	public static final IAttribute MANA_EFFICIENCY = (new RangedAttribute((IAttribute) null, "forgeblock.manaEfficiency", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Mana Efficiency").setShouldWatch(true); //How efficient mana is used. Affected by a variety of effects.
 	
 	//List
 	public static final IAttribute[] PRIMARY_ATTRIBUTES = new IAttribute[] {SharedMonsterAttributes.ATTACK_DAMAGE, STRENGTH, CRIT_CHANCE, CRIT_DAMAGE, BONUS_ATTACK_SPEED, SEA_CREATURE_CHANCE, SharedMonsterAttributes.MAX_HEALTH, DEFENSE, SharedMonsterAttributes.MOVEMENT_SPEED, INTELLIGENCE, TRUE_DEFENSE, MAGIC_FIND, PET_LUCK};

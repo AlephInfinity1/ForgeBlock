@@ -15,6 +15,7 @@ import alephinfinity1.forgeblock.item.MinerOutfitArmorItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
 import alephinfinity1.forgeblock.item.StonkItem;
 import alephinfinity1.forgeblock.item.SwordOfTheStarsItem;
+import alephinfinity1.forgeblock.item.WiseDragonArmorItem;
 import alephinfinity1.forgeblock.item.YoungDragonArmorItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -122,6 +123,11 @@ public class ModItems {
 	public static final RegistryObject<Item> YOUNG_DRAGON_CHESTPLATE = ITEMS.register("young_dragon_chestplate", () -> new YoungDragonArmorItem(EquipmentSlotType.CHEST, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 120, 160, 0.02, 0, 0, 0, 0)));
 	public static final RegistryObject<Item> YOUNG_DRAGON_LEGGINGS = ITEMS.register("young_dragon_leggings", () -> new YoungDragonArmorItem(EquipmentSlotType.LEGS, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 100, 140, 0.02, 0, 0, 0, 0)));
 	public static final RegistryObject<Item> YOUNG_DRAGON_BOOTS = ITEMS.register("young_dragon_boots", () -> new YoungDragonArmorItem(EquipmentSlotType.FEET, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 60, 90, 0.02, 0, 0, 0, 0)));
+	
+	public static final RegistryObject<Item> WISE_DRAGON_HELMET = ITEMS.register("wise_dragon_helmet", () -> new WiseDragonArmorItem(EquipmentSlotType.HEAD, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 70, 110, 0, 125, 0, 0, 0)));
+	public static final RegistryObject<Item> WISE_DRAGON_CHESTPLATE = ITEMS.register("wise_dragon_chestplate", () -> new WiseDragonArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 120, 160, 0, 75, 0, 0, 0)));
+	public static final RegistryObject<Item> WISE_DRAGON_LEGGINGS = ITEMS.register("wise_dragon_leggings", () -> new WiseDragonArmorItem(EquipmentSlotType.LEGS, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 100, 140, 0, 75, 0, 0, 0)));
+	public static final RegistryObject<Item> WISE_DRAGON_BOOTS = ITEMS.register("wise_dragon_boots", () -> new WiseDragonArmorItem(EquipmentSlotType.FEET, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 60, 90, 0, 75, 0, 0, 0)));
 
 	/*
 	 * Potion

@@ -98,6 +98,8 @@ public class AttributeHelper {
 				living.getAttribute(FBAttributes.PET_LUCK).setBaseValue(0.0D);
 				living.getAttributes().registerAttribute(FBAttributes.HEALTH_REGEN);
 				living.getAttribute(FBAttributes.HEALTH_REGEN).setBaseValue(0.0D);
+				living.getAttributes().registerAttribute(FBAttributes.MANA_EFFICIENCY);
+				living.getAttribute(FBAttributes.MANA_EFFICIENCY).setBaseValue(0.0D);
 			}
 		}
 	}
