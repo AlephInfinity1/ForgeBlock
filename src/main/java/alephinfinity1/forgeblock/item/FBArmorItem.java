@@ -41,6 +41,18 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 	private final FBTier tier;
 	private final Multimap<String, AttributeModifier> attributes;
 	
+	protected static final UUID HELMET_GROWTH_HEALTH_MODIFIER = UUID.fromString("1422aa8d-d317-4f6d-8152-56a14eb61f69");
+	protected static final UUID HELMET_PROTECTION_DEFENSE_MODIFIER = UUID.fromString("bc8a6c13-c59c-4e25-b2b5-cf1c5b7e96d4");
+	
+	protected static final UUID CHESTPLATE_GROWTH_HEALTH_MODIFIER = UUID.fromString("659c565a-51e5-4456-b516-922722564f33");
+	protected static final UUID CHESTPLATE_PROTECTION_DEFENSE_MODIFIER = UUID.fromString("983b7709-bb61-4065-9891-efcd26d27caa");
+	
+	protected static final UUID LEGGINGS_GROWTH_HEALTH_MODIFIER = UUID.fromString("8d7e0b86-f0fe-4c59-84eb-d19bdc7517e8");
+	protected static final UUID LEGGINGS_PROTECTION_DEFENSE_MODIFIER = UUID.fromString("1390f2e6-ad10-4124-9fd8-d5959f5369af");
+	
+	protected static final UUID BOOTS_GROWTH_HEALTH_MODIFIER = UUID.fromString("089ccfb9-e549-4285-8ddc-95351c80bef5");
+	protected static final UUID BOOTS_PROTECTION_DEFENSE_MODIFIER = UUID.fromString("03d6bd2f-641f-46e3-adfa-53f0ec21f16a");
+	
 	protected static final UUID HELMET_DEFENSE_MODIFIER = UUID.fromString("bf36f795-91a0-4020-97bd-d03ddfc8bed2");
 	protected static final UUID HELMET_HEALTH_MODIFIER = UUID.fromString("00feeb8f-5673-4416-9307-3490644cd458");
 	
@@ -127,6 +139,30 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.putAll(this.attributes);
 		builder.putAll(this.getReforgeModifiers(stack));
+		
+		int protectionLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.PROTECTION.get(), stack);
+		int growthLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.GROWTH.get(), stack);
+		switch(this.slot) {
+		case HEAD:
+			builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(HELMET_PROTECTION_DEFENSE_MODIFIER, "Enchantment modifier", 3 * protectionLevel, Operation.ADDITION));
+			builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(HELMET_GROWTH_HEALTH_MODIFIER, "Enchantment modifier", 15 * growthLevel, Operation.ADDITION));
+			break;
+		case CHEST:
+			builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(CHESTPLATE_PROTECTION_DEFENSE_MODIFIER, "Enchantment modifier", 3 * protectionLevel, Operation.ADDITION));
+			builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(CHESTPLATE_GROWTH_HEALTH_MODIFIER, "Enchantment modifier", 15 * growthLevel, Operation.ADDITION));
+			break;
+		case LEGS:
+			builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(LEGGINGS_PROTECTION_DEFENSE_MODIFIER, "Enchantment modifier", 3 * protectionLevel, Operation.ADDITION));
+			builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(LEGGINGS_GROWTH_HEALTH_MODIFIER, "Enchantment modifier", 15 * growthLevel, Operation.ADDITION));
+			break;
+		case FEET:
+			builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(BOOTS_PROTECTION_DEFENSE_MODIFIER, "Enchantment modifier", 3 * protectionLevel, Operation.ADDITION));
+			builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(BOOTS_GROWTH_HEALTH_MODIFIER, "Enchantment modifier", 15 * growthLevel, Operation.ADDITION));
+			break;
+		default:
+			break;
+		}
+		
 		return builder.build();
 	}
 

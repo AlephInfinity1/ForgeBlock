@@ -16,9 +16,9 @@ public class TickHandler {
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		if(event.phase == Phase.START && event.player instanceof ServerPlayerEntity) {
 			++tickElapsed;
-			if(tickElapsed % 20 == 0) {
+			if(tickElapsed % 1 == 0) {
 				PlayerEntity player = event.player;
-				player.heal((float) (player.getMaxHealth() / 100.0D + player.getAttribute(FBAttributes.HEALTH_REGEN).getValue()));
+				player.heal((float) (player.getMaxHealth() / 2000.0D + player.getAttribute(FBAttributes.HEALTH_REGEN).getValue() / 20.0D));
 			}
 		}
 	}

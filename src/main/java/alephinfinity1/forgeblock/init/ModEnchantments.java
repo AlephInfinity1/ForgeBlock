@@ -3,6 +3,7 @@ package alephinfinity1.forgeblock.init;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.enchantment.GrowthEnchantment;
 import alephinfinity1.forgeblock.enchantment.LifeStealEnchantment;
+import alephinfinity1.forgeblock.enchantment.ProtectionEnchantment;
 import alephinfinity1.forgeblock.enchantment.TelekinesisEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.fml.RegistryObject;
@@ -17,5 +18,7 @@ public class ModEnchantments {
 	public static final RegistryObject<Enchantment> GROWTH = ENCHANTMENTS.register("growth", () -> new GrowthEnchantment());
 	public static final RegistryObject<Enchantment> TELEKINESIS = ENCHANTMENTS.register("telekinesis", () -> new TelekinesisEnchantment());
 	public static final RegistryObject<Enchantment> LIFE_STEAL = ENCHANTMENTS.register("life_steal", () -> new LifeStealEnchantment());
+	
+	public static final RegistryObject<Enchantment> PROTECTION = OVERRIDE.register("protection", () -> new ProtectionEnchantment());
 
 }
