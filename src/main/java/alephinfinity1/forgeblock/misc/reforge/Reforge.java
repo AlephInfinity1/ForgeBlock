@@ -1,15 +1,21 @@
 package alephinfinity1.forgeblock.misc.reforge;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.item.IFBItem;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TranslationTextComponent;
 
 //See https://hypixel-skyblock.fandom.com/wiki/Reforging
@@ -158,7 +164,27 @@ public enum Reforge {
 		}
 	}
 	
+	public boolean isSpecial() {
+		return this.isSpecial;
+	}
+	
+	public FBItemType[] getTypes() {
+		return this.types;
+	}
+	
 	public String getDisplayName() {
 		return (new TranslationTextComponent(translationKey)).getString();
+	}
+	
+	public static Reforge getRandomReforge(ItemStack stack) {
+		FBItemType type = ((IFBItem) stack.getItem()).getFBItemType();
+		java.util.List<Reforge> applicable = new ArrayList<>();
+		for(Reforge reforge : REFORGES) {
+			if((Arrays.asList(reforge.getTypes())).contains(type) && !reforge.isSpecial() && !reforge.equals(((IReforgeableItem) stack.getItem()).getReforge(stack))) {
+				applicable.add(reforge);
+			}
+		}
+		
+		return applicable.get((new Random()).nextInt(applicable.size()));
 	}
 }
