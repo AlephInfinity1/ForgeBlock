@@ -5,7 +5,7 @@ import java.util.Random;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModEnchantments;
-import alephinfinity1.forgeblock.misc.DisplayHelper.SuffixType;
+import alephinfinity1.forgeblock.misc.TextFormatHelper.SuffixType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -82,9 +82,9 @@ public class DamageHandler {
 				PlayerEntity player = (PlayerEntity) damager;
 				//For debug purposes only
 				if(!isCrit) {
-					player.sendMessage(new StringTextComponent("Dealt " + DisplayHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage!"));
+					player.sendMessage(new StringTextComponent("Dealt " + TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage!"));
 				} else {
-					player.sendMessage(new StringTextComponent("Dealt " + DisplayHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage! (Crit!)"));
+					player.sendMessage(new StringTextComponent("Dealt " + TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage! (Crit!)"));
 				}
 			}
 			
@@ -92,10 +92,10 @@ public class DamageHandler {
 				PlayerEntity player = (PlayerEntity) victim;
 				//For debug purposes only
 				if(!isCrit) {
-					player.sendMessage(new StringTextComponent("Taken " + DisplayHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage!"));
+					player.sendMessage(new StringTextComponent("Taken " + TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage!"));
 					player.sendMessage(new StringTextComponent("Defense: " + Double.toString(defense)));
 				} else {
-					player.sendMessage(new StringTextComponent("Taken " + DisplayHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage! (Crit!)"));
+					player.sendMessage(new StringTextComponent("Taken " + TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage! (Crit!)"));
 					player.sendMessage(new StringTextComponent("Defense: " + Double.toString(defense)));
 				}
 			}

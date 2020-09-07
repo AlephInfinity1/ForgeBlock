@@ -11,7 +11,7 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
-import alephinfinity1.forgeblock.misc.DisplayHelper;
+import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
@@ -207,7 +207,7 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent("misc.forgeblock.fakeattribute.yield").getString() + ": " + TextFormatting.GREEN.toString() + Double.toString(yield)));
 		tooltip.add(new StringTextComponent(""));
 
-		tooltip.addAll(DisplayHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
+		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
 		
 		tooltip.add(new StringTextComponent(""));
 		
@@ -215,7 +215,7 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
 		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
 		for(Map.Entry<Enchantment, Integer> entry : set) {
-			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + DisplayHelper.getRomanNumeral(entry.getValue())));
+			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
 		}
 		
 		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));

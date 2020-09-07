@@ -14,7 +14,7 @@ import com.google.common.collect.Multimap;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.init.ModEnchantments;
-import alephinfinity1.forgeblock.misc.DisplayHelper;
+import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
@@ -233,14 +233,14 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(this.slot, stack);
 		List<ITextComponent> additional = this.additionalInformation();
 		
-		tooltip.addAll(DisplayHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
+		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
 		
 		//Insert enchantments here
 		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
 		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
 		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));
 		for(Map.Entry<Enchantment, Integer> entry : set) {
-			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + DisplayHelper.getRomanNumeral(entry.getValue())));
+			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
 		}
 		
 		//Insert item ability description here (unused for some items)
