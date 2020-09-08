@@ -26,7 +26,7 @@ public class ManaEventHandler {
 		PlayerEntity player = event.getPlayer();
 		IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
 		
-		player.sendMessage(new StringTextComponent(Double.toString(mana.getMana())));
+		//player.sendMessage(new StringTextComponent(Double.toString(mana.getMana())));
 		manaValue = mana.getMana();
 	}
 	

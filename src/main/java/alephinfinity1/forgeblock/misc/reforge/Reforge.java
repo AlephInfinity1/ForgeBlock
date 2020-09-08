@@ -151,7 +151,14 @@ public enum Reforge {
 			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 10, 0, 1, 75, 0, 0, 0, uuid),
 			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 12, 0, 2, 100, 0, 0, 0, uuid),
 			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 15, 0, 2, 125, 0, 0, 0, uuid),
-			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 20, 0, 2, 150, 0, 0, 0, uuid));
+			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 20, 0, 2, 150, 0, 0, 0, uuid)),
+	NECROTIC(new FBItemType[] {FBItemType.HELMET, FBItemType.CHESTPLATE, FBItemType.LEGGINGS, FBItemType.BOOTS}, "necrotic", "misc.forgeblock.reforge.necrotic", true,
+			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, uuid),
+			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 0, 0, 0, uuid),
+			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 0, 0, 0, uuid),
+			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, uuid),
+			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, uuid),
+			(uuid) -> modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 0, uuid));
 	
 	private FBItemType[] types;
 	private String id;
@@ -201,7 +208,8 @@ public enum Reforge {
 	}
 	
 	public static final Reforge[] REFORGES = new Reforge[] {GENTLE, ODD, FAST, FAIR, EPIC, SHARP, HEROIC, SPICY, LEGENDARY,
-			CLEAN, FIERCE, HEAVY, LIGHT, MYTHIC, PURE, SMART, TITANIC, WISE};
+			CLEAN, FIERCE, HEAVY, LIGHT, MYTHIC, PURE, SMART, TITANIC, WISE,
+			NECROTIC};
 	
 	public String getID() {
 		return id;
