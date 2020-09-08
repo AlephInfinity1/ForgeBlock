@@ -147,6 +147,16 @@
     "misc.forgeblock.reforge.spicy": "Spicy",
     "misc.forgeblock.reforge.legendary": "Legendary",
     
+    "misc.forgeblock.reforge.clean": "Clean",
+    "misc.forgeblock.reforge.fierce": "Fierce",
+    "misc.forgeblock.reforge.heavy": "Heavy",
+    "misc.forgeblock.reforge.light": "Light",
+    "misc.forgeblock.reforge.mythic": "Mythic",
+    "misc.forgeblock.reforge.pure": "Pure",
+    "misc.forgeblock.reforge.smart": "Smart",
+    "misc.forgeblock.reforge.titanic": "Titanic",
+    "misc.forgeblock.reforge.wise": "Wise",
+    
     "text.forgeblock.reforgeable": "\u00A78This item can be reforged!",
     
     "text.forgeblock.sword_desc.aote_0": "\u00A76Item Ability: Instant Transmission \u00A7e\u00A7lRIGHT CLICK",

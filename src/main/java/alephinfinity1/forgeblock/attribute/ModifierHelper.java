@@ -26,7 +26,7 @@ public class ModifierHelper {
 		if(seaCreatureChance != 0.0D) builder.put(FBAttributes.SEA_CREATURE_CHANCE.getName(), new AttributeModifier(name + " sea creature chance modifier", seaCreatureChance, Operation.ADDITION));
 		if(health != 0.0D) builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(name + " health modifier", health, Operation.ADDITION));
 		if(defense != 0.0D) builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(name + " defense modifier", defense, Operation.ADDITION));
-		if(speed != 0.0D) builder.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(name + " speed modifier", speed, Operation.ADDITION));
+		if(speed != 0.0D) builder.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(name + " speed modifier", speed * 0.001D, Operation.ADDITION));
 		if(intelligence != 0.0D) builder.put(FBAttributes.INTELLIGENCE.getName(), new AttributeModifier(name + " intelligence modifier", intelligence, Operation.ADDITION));
 		if(trueDefense != 0.0D) builder.put(FBAttributes.TRUE_DEFENSE.getName(), new AttributeModifier(name + " true defense modifier", trueDefense, Operation.ADDITION));
 		if(magicFind != 0.0D) builder.put(FBAttributes.MAGIC_FIND.getName(), new AttributeModifier(name + " magic find modifier", magicFind, Operation.ADDITION));
@@ -44,7 +44,7 @@ public class ModifierHelper {
 		if(seaCreatureChance != 0.0D) builder.put(FBAttributes.SEA_CREATURE_CHANCE.getName(), new AttributeModifier(uuid, name + " sea creature chance modifier", seaCreatureChance, Operation.ADDITION));
 		if(health != 0.0D) builder.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(uuid, name + " health modifier", health, Operation.ADDITION));
 		if(defense != 0.0D) builder.put(FBAttributes.DEFENSE.getName(), new AttributeModifier(uuid, name + " defense modifier", defense, Operation.ADDITION));
-		if(speed != 0.0D) builder.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(uuid, name + " speed modifier", speed, Operation.ADDITION));
+		if(speed != 0.0D) builder.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(uuid, name + " speed modifier", speed * 0.001D, Operation.ADDITION));
 		if(intelligence != 0.0D) builder.put(FBAttributes.INTELLIGENCE.getName(), new AttributeModifier(uuid, name + " intelligence modifier", intelligence, Operation.ADDITION));
 		if(trueDefense != 0.0D) builder.put(FBAttributes.TRUE_DEFENSE.getName(), new AttributeModifier(uuid, name + " true defense modifier", trueDefense, Operation.ADDITION));
 		if(magicFind != 0.0D) builder.put(FBAttributes.MAGIC_FIND.getName(), new AttributeModifier(uuid, name + " magic find modifier", magicFind, Operation.ADDITION));

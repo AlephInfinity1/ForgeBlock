@@ -3,6 +3,7 @@ package alephinfinity1.forgeblock.item;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -44,6 +45,8 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 	private final int harvestLevel;
 	private final float destroySpeed;
 	private final double yield;
+	
+	protected static final UUID PICKAXE_REFORGE_MODIFIER = UUID.fromString("d443b451-ca3c-413d-a03b-e07088f21ad3");
 
 	@Deprecated
 	public FBPickaxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties properties) {
@@ -115,17 +118,17 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 			Reforge reforge = getReforge(stack);
 			switch(getStackTier(stack)) {
 			case COMMON:
-				return reforge.commonModifiers;
+				return reforge.commonModifiers.apply(PICKAXE_REFORGE_MODIFIER);
 			case UNCOMMON:
-				return reforge.uncommonModifiers;
+				return reforge.uncommonModifiers.apply(PICKAXE_REFORGE_MODIFIER);
 			case RARE:
-				return reforge.rareModifiers;
+				return reforge.rareModifiers.apply(PICKAXE_REFORGE_MODIFIER);
 			case EPIC:
-				return reforge.epicModifiers;
+				return reforge.epicModifiers.apply(PICKAXE_REFORGE_MODIFIER);
 			case LEGENDARY:
-				return reforge.legendaryModifiers;
+				return reforge.legendaryModifiers.apply(PICKAXE_REFORGE_MODIFIER);
 			case MYTHIC:
-				return reforge.mythicModifiers;
+				return reforge.mythicModifiers.apply(PICKAXE_REFORGE_MODIFIER);
 			default:
 				return Reforge.emptyModifier();
 			}

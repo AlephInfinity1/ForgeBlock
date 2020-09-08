@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -283,7 +284,7 @@ public class TextFormatHelper {
 		
 		Multimap<String, AttributeModifier> reforgeModifiers;
 		
-		if(reforge != null) reforgeModifiers = reforge.getModifierMapByTier(tier);
+		if(reforge != null) reforgeModifiers = reforge.getModifierMapByTier(tier, UUID.randomUUID());
 		else reforgeModifiers = ModifierHelper.emptyModifier();
 		
 		for(AttributeModifier modifier : modifiers.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName())) {

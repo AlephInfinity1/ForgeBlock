@@ -65,6 +65,12 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 	protected static final UUID BOOTS_DEFENSE_MODIFIER = UUID.fromString("c2ab9230-c894-4d7e-b65e-4ca25be42bfc");
 	protected static final UUID BOOTS_HEALTH_MODIFIER = UUID.fromString("93a736f1-2668-417f-8062-b72b43c08427");
 	
+	protected static final UUID HELMET_REFORGE_MODIFIER = UUID.fromString("93603319-6583-4b10-8f5c-93206b84f91c");
+	protected static final UUID CHESTPLATE_REFORGE_MODIFIER = UUID.fromString("87cc5544-7e0c-489b-9150-afb9e862ae59");
+	protected static final UUID LEGGINGS_REFORGE_MODIFIER = UUID.fromString("c2d21770-30c0-4995-9353-13ea119d2208");
+	protected static final UUID BOOTS_REFORGE_MODIFIER = UUID.fromString("ee72082d-cdc5-4b51-9178-a049ad7b954e");
+
+	
 	//Super constructor, don't use
 	@Deprecated
 	public FBArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
@@ -201,22 +207,78 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		if(getReforge(stack) == null) return Reforge.emptyModifier();
 		else {
 			Reforge reforge = getReforge(stack);
-			switch(getStackTier(stack)) {
-			case COMMON:
-				return reforge.commonModifiers;
-			case UNCOMMON:
-				return reforge.uncommonModifiers;
-			case RARE:
-				return reforge.rareModifiers;
-			case EPIC:
-				return reforge.epicModifiers;
-			case LEGENDARY:
-				return reforge.legendaryModifiers;
-			case MYTHIC:
-				return reforge.mythicModifiers;
-			default:
-				return Reforge.emptyModifier();
+			switch(this.slot) {
+			case HEAD:
+				switch(getStackTier(stack)) {
+				case COMMON:
+					return reforge.commonModifiers.apply(HELMET_REFORGE_MODIFIER);
+				case UNCOMMON:
+					return reforge.uncommonModifiers.apply(HELMET_REFORGE_MODIFIER);
+				case RARE:
+					return reforge.rareModifiers.apply(HELMET_REFORGE_MODIFIER);
+				case EPIC:
+					return reforge.epicModifiers.apply(HELMET_REFORGE_MODIFIER);
+				case LEGENDARY:
+					return reforge.legendaryModifiers.apply(HELMET_REFORGE_MODIFIER);
+				case MYTHIC:
+					return reforge.mythicModifiers.apply(HELMET_REFORGE_MODIFIER);
+				default:
+					return Reforge.emptyModifier();
+				}
+			case CHEST:
+				switch(getStackTier(stack)) {
+				case COMMON:
+					return reforge.commonModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
+				case UNCOMMON:
+					return reforge.uncommonModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
+				case RARE:
+					return reforge.rareModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
+				case EPIC:
+					return reforge.epicModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
+				case LEGENDARY:
+					return reforge.legendaryModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
+				case MYTHIC:
+					return reforge.mythicModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
+				default:
+					return Reforge.emptyModifier();
+				}
+			case LEGS:
+				switch(getStackTier(stack)) {
+				case COMMON:
+					return reforge.commonModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
+				case UNCOMMON:
+					return reforge.uncommonModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
+				case RARE:
+					return reforge.rareModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
+				case EPIC:
+					return reforge.epicModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
+				case LEGENDARY:
+					return reforge.legendaryModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
+				case MYTHIC:
+					return reforge.mythicModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
+				default:
+					return Reforge.emptyModifier();
+				}
+			case FEET:
+				switch(getStackTier(stack)) {
+				case COMMON:
+					return reforge.commonModifiers.apply(BOOTS_REFORGE_MODIFIER);
+				case UNCOMMON:
+					return reforge.uncommonModifiers.apply(BOOTS_REFORGE_MODIFIER);
+				case RARE:
+					return reforge.rareModifiers.apply(BOOTS_REFORGE_MODIFIER);
+				case EPIC:
+					return reforge.epicModifiers.apply(BOOTS_REFORGE_MODIFIER);
+				case LEGENDARY:
+					return reforge.legendaryModifiers.apply(BOOTS_REFORGE_MODIFIER);
+				case MYTHIC:
+					return reforge.mythicModifiers.apply(BOOTS_REFORGE_MODIFIER);
+				default:
+					return Reforge.emptyModifier();
+				}
 			}
+			
+			return Reforge.emptyModifier();
 		}
 	}
 

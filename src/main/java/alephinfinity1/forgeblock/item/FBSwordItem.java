@@ -42,6 +42,8 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	protected static final UUID CRIT_CHANCE_MODIFIER = UUID.fromString("5265014e-5ab6-4e86-a9a5-7c9117818fbb");
 	protected static final UUID CRIT_DAMAGE_MODIFIER = UUID.fromString("dbda354b-eec5-4b86-88ec-04c9f232bc62");
 	
+	protected static final UUID SWORD_REFORGE_MODIFIER = UUID.fromString("ff67deae-89a0-4ec4-95ad-a50795ff6ad2");
+	
 	//Super constructor, highly recommend not using
 	@Deprecated
 	public FBSwordItem(IItemTier p_i48460_1_, int p_i48460_2_, float p_i48460_3_, Properties p_i48460_4_) {
@@ -154,17 +156,17 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 			Reforge reforge = getReforge(stack);
 			switch(getStackTier(stack)) {
 			case COMMON:
-				return reforge.commonModifiers;
+				return reforge.commonModifiers.apply(SWORD_REFORGE_MODIFIER);
 			case UNCOMMON:
-				return reforge.uncommonModifiers;
+				return reforge.uncommonModifiers.apply(SWORD_REFORGE_MODIFIER);
 			case RARE:
-				return reforge.rareModifiers;
+				return reforge.rareModifiers.apply(SWORD_REFORGE_MODIFIER);
 			case EPIC:
-				return reforge.epicModifiers;
+				return reforge.epicModifiers.apply(SWORD_REFORGE_MODIFIER);
 			case LEGENDARY:
-				return reforge.legendaryModifiers;
+				return reforge.legendaryModifiers.apply(SWORD_REFORGE_MODIFIER);
 			case MYTHIC:
-				return reforge.mythicModifiers;
+				return reforge.mythicModifiers.apply(SWORD_REFORGE_MODIFIER);
 			default:
 				return Reforge.emptyModifier();
 			}
