@@ -12,8 +12,8 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
-import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.FBItemType;
+import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
@@ -23,6 +23,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
@@ -96,6 +97,14 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		return List.of();
 	}
 	
+	public List<ITextComponent> additionalInformation(ItemStack stack) {
+		return List.of();
+	}
+	
+	public List<ITextComponent> additionalInformation(ItemStack stack, PlayerEntity player) {
+		return List.of();
+	}
+	
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		FBTier tier = this.getStackTier(stack);
@@ -104,6 +113,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		
 		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(EquipmentSlotType.MAINHAND, stack);
 		List<ITextComponent> additional = this.additionalInformation();
+		List<ITextComponent> additional1 = this.additionalInformation(stack);
 		
 		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
 		
@@ -120,7 +130,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		
 		//Insert item ability description here (unused for some swords)
 		tooltip.addAll(additional);
-		
+		tooltip.addAll(additional1);
 		
 		//If this item is reforgeable but not reforged
 		if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));

@@ -1,6 +1,11 @@
 {
     "parent": "minecraft:block/cube_all",
     "textures": {
-        "layer0": "forgeblock:item/enchanted_cobblestone"
+        "#up": "forgeblock:item/enchanted_cobblestone",
+        "#down": "forgeblock:item/enchanted_cobblestone",
+        "#north": "forgeblock:item/enchanted_cobblestone",
+        "#south": "forgeblock:item/enchanted_cobblestone",
+        "#east": "forgeblock:item/enchanted_cobblestone",
+        "#west": "forgeblock:item/enchanted_cobblestone"
     }
 }

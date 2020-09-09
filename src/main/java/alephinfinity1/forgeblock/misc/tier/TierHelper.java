@@ -16,5 +16,18 @@ public class TierHelper {
 			return baseTier;
 		}
 	}
+	
+	public static FBTier getItemTier(ItemStack stack) {
+		if(stack.getTag() != null) {
+			boolean recombobulated = (stack.getTag().getByte("Recombobulated") == 1);
+			boolean woodSingularity = (stack.getTag().getByte("WoodSingularity") == 1);
+			int tierBoost = 0;
+			if(recombobulated) tierBoost++;
+			if(woodSingularity) tierBoost++;
+			return FBTier.changeTier(FBTier.COMMON, tierBoost);
+		} else {
+			return FBTier.COMMON;
+		}
+	}
 
 }

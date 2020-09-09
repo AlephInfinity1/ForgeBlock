@@ -20,6 +20,7 @@ public class ManaEventHandler {
 	private static final Minecraft mc = Minecraft.getInstance(); 
 	private static double manaValue;
 	private static double maxManaValue;
+	private static int tickElapsed = 0;
 	
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(PlayerLoggedInEvent event) {
@@ -33,15 +34,18 @@ public class ManaEventHandler {
 	@SubscribeEvent
 	public static void onTick(TickEvent.PlayerTickEvent event) {
 		if(event.phase == Phase.END && !event.player.getEntityWorld().isRemote) {
+			++tickElapsed;
 			PlayerEntity player = event.player;
 			IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
 			double maxMana = player.getAttribute(FBAttributes.INTELLIGENCE).getValue() + 100;
 			maxManaValue = maxMana;
-			if(mana.getMana() >= maxMana) return;
-			else {
-				mana.increase(maxMana / 1000.0);
+			if(tickElapsed % 20 == 0) {
+				if(mana.getMana() >= maxMana) return;
+				else {
+					mana.increase(Math.min(maxMana / 50.0, maxMana - mana.getMana()));
+				}
+				ManaProvider.MANA_CAPABILITY.getStorage().writeNBT(ManaProvider.MANA_CAPABILITY, mana, null);
 			}
-			ManaProvider.MANA_CAPABILITY.getStorage().writeNBT(ManaProvider.MANA_CAPABILITY, mana, null);
 			manaValue = mana.getMana();
 		}
 	}

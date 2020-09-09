@@ -13,6 +13,7 @@ import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.item.IFBItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import alephinfinity1.forgeblock.misc.tier.TierHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.CreatureAttribute;
@@ -106,7 +107,17 @@ public class TooltipHandler {
 	
 			//Add common tier to all non-FB items
 			if(!(event.getItemStack().getItem() instanceof IFBItem)) {
-				tooltip.add(new StringTextComponent(TextFormatting.BOLD.toString() + FBTier.COMMON.name.getString()));
+				FBTier tier = TierHelper.getItemTier(event.getItemStack());
+				boolean recombobulated = false;
+				if(event.getItemStack().getTag() != null) {
+					if(event.getItemStack().getTag().getByte("Recombobulated") != 0) recombobulated = true;
+				}
+				String color = tier.color.toString();
+				String bold = TextFormatting.BOLD.toString();
+				String obfuscated = TextFormatting.OBFUSCATED.toString();
+				String reset = TextFormatting.RESET.toString();
+				if(!recombobulated) tooltip.add(new StringTextComponent(color + bold + tier.name.getString()));
+				else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + obfuscated + " n"));
 			}
 		}
 	}

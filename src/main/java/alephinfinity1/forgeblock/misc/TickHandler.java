@@ -13,13 +13,14 @@ public class TickHandler {
 	private static long tickElapsed = 0;
 
 	@SubscribeEvent
-	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+	public static void onPlayerTick(TickEvent.PlayerTickEvent event) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		if(event.phase == Phase.START && event.player instanceof ServerPlayerEntity) {
 			++tickElapsed;
-			if(tickElapsed % 1 == 0) {
-				PlayerEntity player = event.player;
-				player.heal((float) (player.getMaxHealth() / 2000.0D + player.getAttribute(FBAttributes.HEALTH_REGEN).getValue() / 20.0D));
+			PlayerEntity player = event.player;
+			if(tickElapsed % 40 == 0) {
+				player.heal((float) (player.getMaxHealth() / 50.0D));
 			}
+			player.heal((float) (player.getAttribute(FBAttributes.HEALTH_REGEN).getValue() / 20.0D));
 		}
 	}
 

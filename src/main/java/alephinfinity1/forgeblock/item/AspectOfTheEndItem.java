@@ -28,13 +28,9 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 	}
 	
 	@Override
-	public List<ITextComponent> additionalInformation() {
+	public List<ITextComponent> additionalInformation(ItemStack stack) {
 		List<ITextComponent> list = new ArrayList<>();
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_0").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_1").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_2").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_3").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_4").getString()));
+		list.addAll(this.abilityDescription(stack));
 		list.add(new StringTextComponent(""));
 		return list;
 	}
@@ -45,17 +41,22 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if(playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(() -> new NullPointerException()).consume(this.getAbilityCost(stack, playerIn))) {
 			activateAbility(worldIn, playerIn, stack);
-			playerIn.sendMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.useAbility.aote").getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(this.getAbilityCost(stack, playerIn)) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"));
+			playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.useAbility.aote").getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(this.getAbilityCost(stack, playerIn)) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"), true);
 			return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 		}
-		playerIn.sendMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.notEnoughMana").getString()));
+		playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.notEnoughMana").getString()), true);
 		return ActionResult.resultFail(playerIn.getHeldItem(handIn));
 	}
 
 	@Override
 	public List<ITextComponent> abilityDescription(ItemStack stack) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ITextComponent> list = new ArrayList<>();
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_0").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_1").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_2").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_3").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_4").getString()));
+		return list;
 	}
 
 	@Override
