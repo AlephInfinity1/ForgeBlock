@@ -27,10 +27,10 @@ public class DamageHandler {
 		if(!(event.getSource().getTrueSource() instanceof LivingEntity)) { //If attack is environmental then only apply defense bonus
 			double damageMultiplier = 1.0D;
 			//If the damage is affected by armor, also apply normal defense bonus
-			if(!(event.getSource().equals(DamageSource.OUT_OF_WORLD))) {
+			if(!(event.getSource().isUnblockable())) {
 				double defense = event.getEntityLiving().getAttribute(FBAttributes.DEFENSE).getValue();
 				damageMultiplier = 100.0D / (defense + 100.0D);
-			} else {
+			} else if (event.getSource().equals(DamageSource.OUT_OF_WORLD)){
 				event.setAmount(Float.MAX_VALUE);
 				return;
 			}

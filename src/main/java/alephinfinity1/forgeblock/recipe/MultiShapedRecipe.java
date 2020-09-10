@@ -3,7 +3,6 @@ package alephinfinity1.forgeblock.recipe;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ICraftingRecipe;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -57,5 +56,5 @@ public class MultiShapedRecipe implements ICraftingRecipe, net.minecraftforge.co
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 }

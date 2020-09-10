@@ -7,6 +7,7 @@ import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModEntities;
 import alephinfinity1.forgeblock.init.ModItems;
 import alephinfinity1.forgeblock.init.ModPotions;
+import alephinfinity1.forgeblock.init.ModRecipes;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.Mana;
 import alephinfinity1.forgeblock.misc.mana.ManaStorage;
@@ -35,6 +36,7 @@ public class ForgeBlock {
 		ModEnchantments.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModEntities.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModRecipes.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CustomModConfig.CLIENT_CONFIG);
