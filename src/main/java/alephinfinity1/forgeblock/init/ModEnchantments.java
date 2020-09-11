@@ -5,6 +5,7 @@ import alephinfinity1.forgeblock.enchantment.GrowthEnchantment;
 import alephinfinity1.forgeblock.enchantment.LifeStealEnchantment;
 import alephinfinity1.forgeblock.enchantment.ProtectionEnchantment;
 import alephinfinity1.forgeblock.enchantment.TelekinesisEnchantment;
+import alephinfinity1.forgeblock.enchantment.UltimateWiseEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,6 +19,8 @@ public class ModEnchantments {
 	public static final RegistryObject<Enchantment> GROWTH = ENCHANTMENTS.register("growth", () -> new GrowthEnchantment());
 	public static final RegistryObject<Enchantment> TELEKINESIS = ENCHANTMENTS.register("telekinesis", () -> new TelekinesisEnchantment());
 	public static final RegistryObject<Enchantment> LIFE_STEAL = ENCHANTMENTS.register("life_steal", () -> new LifeStealEnchantment());
+	
+	public static final RegistryObject<Enchantment> ULTIMATE_WISE = ENCHANTMENTS.register("ultimate_wise", () -> new UltimateWiseEnchantment());
 	
 	public static final RegistryObject<Enchantment> PROTECTION = OVERRIDE.register("protection", () -> new ProtectionEnchantment());
 

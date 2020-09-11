@@ -333,13 +333,10 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		
 		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
 		
+		tooltip.add(new StringTextComponent(""));
+		
 		//Insert enchantments here
-		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
-		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));
-		for(Map.Entry<Enchantment, Integer> entry : set) {
-			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
-		}
+		tooltip.addAll(TextFormatHelper.formatEnchantments(stack));
 		
 		//Insert item ability description here (unused for some items)
 		tooltip.addAll(additional);

@@ -215,13 +215,7 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		tooltip.add(new StringTextComponent(""));
 		
 		//Insert enchantments here
-		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
-		for(Map.Entry<Enchantment, Integer> entry : set) {
-			tooltip.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
-		}
-		
-		if(!set.isEmpty()) tooltip.add(new StringTextComponent(""));
+		tooltip.addAll(TextFormatHelper.formatEnchantments(stack));
 		
 		//Insert item ability description here (unused for some swords)
 		

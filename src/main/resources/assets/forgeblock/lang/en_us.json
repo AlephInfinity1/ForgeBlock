@@ -132,11 +132,13 @@
     "misc.forgeblock.attributeshort.petLuck": "\u00A7d\u2663 PL",
     
     "misc.forgeblock.mana": "Mana",
+    "text.forgeblock.mana_cost": "\u00A78Mana Cost: ",
     "misc.forgeblock.woodSingularity": "Thick",
     
     "enchantment.forgeblock.growth": "Growth",
     "enchantment.forgeblock.telekinesis": "Telekinesis",
     "enchantment.forgeblock.life_steal": "Life Steal",
+    "enchantment.forgeblock.ultimate_wise": "Ultimate Wise",
 
     "effect.forgeblock.ender_warp": "Ender Warp",
     "effect.forgeblock.rogue_speed_boost": "Rogue Speed Boost",
@@ -184,7 +186,6 @@
     "text.forgeblock.sword_desc.aote_1": "\u00A77Teleport \u00A7a8 blocks\u00A77 ahead of",
     "text.forgeblock.sword_desc.aote_2": "\u00A77you and gain \u00A7a+50\u00A77 \u00A7f\u2726 Speed",
     "text.forgeblock.sword_desc.aote_3": "\u00A77for \u00A7a3 seconds\u00A77.",
-    "text.forgeblock.sword_desc.aote_4": "\u00A78Mana Cost: \u00A7350",
     
     "text.forgeblock.sword_desc.sots_0": "\u00A7d\"Only those with the power to",
     "text.forgeblock.sword_desc.sots_1": "\u00A7dcreate this world can wield this",

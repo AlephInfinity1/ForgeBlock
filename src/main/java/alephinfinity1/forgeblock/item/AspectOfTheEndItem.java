@@ -6,8 +6,10 @@ import java.util.List;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModEffects;
+import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.misc.mana.ManaProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
@@ -55,7 +57,7 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_2").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_3").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_4").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost").getString() + TextFormatting.DARK_AQUA.toString() + new DecimalFormat("#").format(this.getAbilityCost(stack))));
 		return list;
 	}
 
@@ -85,7 +87,11 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 
 	@Override
 	public double getAbilityCost(ItemStack stack, PlayerEntity player) {
-		return player.isCreative() ? 0 : 50.0D / (100.0D + player.getAttribute(FBAttributes.MANA_EFFICIENCY).getValue()) * 100.0D;
+		return player.isCreative() ? 0 : (50.0D / (100.0D + player.getAttribute(FBAttributes.MANA_EFFICIENCY).getValue()) * 100.0D) * (1 - 0.1 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ULTIMATE_WISE.get(), stack));
+	}
+	
+	public double getAbilityCost(ItemStack stack) {
+		return 50.0D * (1 - 0.1 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ULTIMATE_WISE.get(), stack));
 	}
 
 }

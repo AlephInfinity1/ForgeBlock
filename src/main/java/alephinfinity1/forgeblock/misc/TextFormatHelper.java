@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -14,11 +15,15 @@ import com.google.common.collect.Multimap;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.config.CustomModConfig;
+import alephinfinity1.forgeblock.enchantment.UltimateEnchantment;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -740,6 +745,24 @@ public class TextFormatHelper {
 		}
 		
 		return tooltip;
+	}
+	
+	public static List<ITextComponent> formatEnchantments(ItemStack stack) {
+		List<ITextComponent> list = new ArrayList<>();
+		
+		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
+		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
+		for(Map.Entry<Enchantment, Integer> entry : set) {
+			if(entry.getKey() instanceof UltimateEnchantment) {
+				list.add(new StringTextComponent(TextFormatting.LIGHT_PURPLE.toString() + TextFormatting.BOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+			} else {
+				list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+			}
+		}
+		
+		if(!set.isEmpty()) list.add(new StringTextComponent(""));
+		
+		return list;
 	}
 
 }
