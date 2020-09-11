@@ -547,7 +547,99 @@ public class TextFormatHelper {
 				tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent("attribute.name.forgeblock.petLuck").getString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(petLuck) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgePetLuck) + ")"));
 			}
 			break;
-		case ICON:
+		case SHORT:
+			if(damage != 0.0D) {
+				if(reforgeDamage == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.damage").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(damage)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.damage").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(damage) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeDamage) + ")"));
+			} else if(reforgeDamage != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.damage").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(damage) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeDamage) + ")"));
+			}
+			
+			if(strength != 0.0D) {
+				if(reforgeStrength == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.strength").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(strength)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.strength").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(strength) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeStrength) + ")"));
+			} else if(reforgeStrength != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.strength").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(strength) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeStrength) + ")"));
+			}
+			
+			if(critChance != 0.0D) {
+				if(reforgeCritChance == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.critChance").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(critChance)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.critChance").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(critChance) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeCritChance) + ")"));
+			} else if(reforgeCritChance != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.critChance").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(critChance) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeCritChance) + ")"));
+			}
+			
+			if(critDamage != 0.0D) {
+				if(reforgeCritDamage == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.critDamage").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(critDamage)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.critDamage").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(critDamage) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeCritDamage) + ")"));
+			} else if(reforgeCritDamage != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.critDamage").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(critDamage) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeCritDamage) + ")"));
+			}
+			
+			if(bonusAttackSpeed != 0.0D) {
+				if(reforgeBonusAttackSpeed == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.bonusAttackSpeed").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(bonusAttackSpeed)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.bonusAttackSpeed").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(bonusAttackSpeed) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeBonusAttackSpeed) + ")"));
+			} else if(reforgeBonusAttackSpeed != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.bonusAttackSpeed").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(bonusAttackSpeed) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeBonusAttackSpeed) + ")"));
+			}
+			
+			if(seaCreatureChance != 0.0D) {
+				if(reforgeSeaCreatureChance == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.seaCreatureChance").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(seaCreatureChance)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.seaCreatureChance").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(seaCreatureChance) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeSeaCreatureChance) + ")"));
+			} else if(reforgeSeaCreatureChance != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.seaCreatureChance").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.RED.toString() + TextFormatHelper.formatModifier(seaCreatureChance) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeSeaCreatureChance) + ")"));
+			}
+			
+			if(offensiveStats && defensiveStats) tooltip.add(new StringTextComponent("")); //Separates offensive and defensive stats
+			
+			if(health != 0.0D) {
+				if(reforgeHealth == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.health").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(health)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.health").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(health) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeHealth) + ")"));
+			} else if(reforgeHealth != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.health").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(health) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeHealth) + ")"));
+			}
+			
+			if(defense != 0.0D) {
+				if(reforgeDefense == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.defense").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(defense)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.defense").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(defense) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeDefense) + ")"));
+			} else if(reforgeDefense != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.defense").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(defense) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeDefense) + ")"));
+			}
+			
+			if(speed != 0.0D) {
+				if(reforgeSpeed == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.speed").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(speed * 1000.0D)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.speed").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(speed * 1000.0D) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeSpeed * 1000.0D) + ")"));
+			} else if(reforgeSpeed != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.speed").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(speed * 1000.0D) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeSpeed * 1000.0D) + ")"));
+			}
+			
+			if(intelligence != 0.0D) {
+				if(reforgeIntelligence == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.intelligence").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(intelligence)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.intelligence").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(intelligence) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeIntelligence) + ")"));
+			} else if(reforgeIntelligence != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.intelligence").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(intelligence) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeIntelligence) + ")"));
+			}
+			
+			if(trueDefense != 0.0D) {
+				if(reforgeTrueDefense == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.trueDefense").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(trueDefense)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.trueDefense").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(trueDefense) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeTrueDefense) + ")"));
+			} else if(reforgeTrueDefense != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.trueDefense").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(trueDefense) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeTrueDefense) + ")"));
+			}
+			
+			if(magicFind != 0.0D) {
+				if(reforgeMagicFind == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.magicFind").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(magicFind)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.magicFind").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(magicFind) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeMagicFind) + ")"));
+			} else if(reforgeMagicFind != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.magicFind").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(magicFind) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeMagicFind) + ")"));
+			}
+			
+			if(petLuck != 0.0D) {
+				if(reforgePetLuck == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.petLuck").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(petLuck)));
+				else tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.petLuck").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(petLuck) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgePetLuck) + ")"));
+			} else if(reforgePetLuck != 0.0D) {
+				tooltip.add(new StringTextComponent(new TranslationTextComponent("misc.forgeblock.attributeshort.petLuck").getString() + TextFormatting.GRAY.toString() + ": " + TextFormatting.GREEN.toString() + TextFormatHelper.formatModifier(petLuck) + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgePetLuck) + ")"));
+			}
 			break;
 		case BOTH:
 			if(damage != 0.0D) {

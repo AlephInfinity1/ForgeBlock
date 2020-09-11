@@ -45,6 +45,8 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	
 	protected static final UUID SWORD_REFORGE_MODIFIER = UUID.fromString("ff67deae-89a0-4ec4-95ad-a50795ff6ad2");
 	
+	protected static final UUID WOOD_SINGULARITY_MODIFIER = UUID.fromString("fae06830-e6e7-4df2-927b-2beaa3affb27");
+	
 	//Super constructor, highly recommend not using
 	@Deprecated
 	public FBSwordItem(IItemTier p_i48460_1_, int p_i48460_2_, float p_i48460_3_, Properties p_i48460_4_) {
@@ -76,6 +78,13 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.putAll(super.getAttributeModifiers(equipmentSlot, stack));
 		builder.putAll(this.getReforgeModifiers(stack));
+		
+		boolean woodSingularity = false;
+		if(stack.getTag() != null) {
+			woodSingularity = (stack.getTag().getByte("WoodSingularity") == 1);
+		}
+		if(woodSingularity) builder.put(FBAttributes.STRENGTH.getName(), new AttributeModifier(WOOD_SINGULARITY_MODIFIER, "Wood singularity strength modifier", 100.0D, Operation.ADDITION));
+		
 		return builder.build();
 	}
 	
@@ -191,10 +200,21 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		}
 		FBTier tier = getStackTier(stack);
 		String color = tier.color.toString();
-		if(this.getReforge(stack) != null)
-			return new StringTextComponent(color + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
-		else
-			return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+		boolean woodSingularity = false;
+		if(stack.getTag() != null) {
+			woodSingularity = (stack.getTag().getByte("WoodSingularity") == 1);
+		}
+		if(woodSingularity) {
+			if(this.getReforge(stack) != null)
+				return new StringTextComponent(color + new TranslationTextComponent("misc.forgeblock.woodSingularity").getString() + " " + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+			else
+				return new StringTextComponent(color + new TranslationTextComponent("misc.forgeblock.woodSingularity").getString() + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+		} else {
+			if(this.getReforge(stack) != null)
+				return new StringTextComponent(color + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+			else
+				return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+		}
 	}
 
 	@Override

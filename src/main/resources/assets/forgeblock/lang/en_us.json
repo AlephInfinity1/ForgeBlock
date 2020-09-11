@@ -117,7 +117,22 @@
     "misc.forgeblock.attributeicon.magicFind": "\u00A7b\u20AA",
     "misc.forgeblock.attributeicon.petLuck": "\u00A7d\u2663",
     
+    "misc.forgeblock.attributeshort.damage": "\u00A7c\u2741 Dmg",
+    "misc.forgeblock.attributeshort.strength": "\u00A7c\u2741 Str",
+    "misc.forgeblock.attributeshort.critChance": "\u00A79\u2623 Cr Chnc",
+    "misc.forgeblock.attributeshort.critDamage": "\u00A79\u2620 Cr Dmg",
+    "misc.forgeblock.attributeshort.bonusAttackSpeed": "\u00A7e\u2694 Atk Spd",
+    "misc.forgeblock.attributeshort.seaCreatureChance": "\u00A73\u221D SCC",
+    "misc.forgeblock.attributeshort.health": "\u00A7c\u2764 HP",
+    "misc.forgeblock.attributeshort.defense": "\u00A7a\u2748 Def",
+    "misc.forgeblock.attributeshort.speed": "\u00A7f\u2726 Spd",
+    "misc.forgeblock.attributeshort.intelligence": "\u00A7b\u270E Int",
+    "misc.forgeblock.attributeshort.trueDefense": "\u00A7f\u2742 Tr Def",
+    "misc.forgeblock.attributeshort.magicFind": "\u00A7b\u20AA MF",
+    "misc.forgeblock.attributeshort.petLuck": "\u00A7d\u2663 PL",
+    
     "misc.forgeblock.mana": "Mana",
+    "misc.forgeblock.woodSingularity": "Thick",
     
     "enchantment.forgeblock.growth": "Growth",
     "enchantment.forgeblock.telekinesis": "Telekinesis",

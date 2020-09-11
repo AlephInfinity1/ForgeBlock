@@ -12,6 +12,8 @@ import net.minecraft.item.crafting.Ingredient.IItemList;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class CountIngredient implements Predicate<ItemStack> {
+	
+	IItemList list;
 
 	protected CountIngredient(Stream<? extends IItemList> itemLists) {
 		super();

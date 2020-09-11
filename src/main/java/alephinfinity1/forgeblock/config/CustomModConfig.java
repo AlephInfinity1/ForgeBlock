@@ -67,7 +67,7 @@ public class CustomModConfig {
 	}
 	
 	public static void setupAttributesConfig() {
-		List<AttributeDisplayType> acceptableValues = Arrays.asList(AttributeDisplayType.TEXT, AttributeDisplayType.ICON, AttributeDisplayType.BOTH);
+		List<AttributeDisplayType> acceptableValues = Arrays.asList(AttributeDisplayType.TEXT, AttributeDisplayType.SHORT, AttributeDisplayType.BOTH);
 		
 		ATTRIBUTE_DISPLAY_TYPE = CLIENT_BUILDER.comment("Stat display type").defineEnum("attributesDisplayType", AttributeDisplayType.TEXT, acceptableValues);
 	}
