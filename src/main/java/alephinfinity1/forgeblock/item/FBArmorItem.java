@@ -340,9 +340,7 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		
 		//Insert item ability description here (unused for some items)
 		tooltip.addAll(additional);
-		
-		tooltip.add(new StringTextComponent(""));
-		
+				
 		//If this item is reforgeable but not reforged
 		if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));
 		

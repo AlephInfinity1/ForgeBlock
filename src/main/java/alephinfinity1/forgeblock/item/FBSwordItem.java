@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
@@ -47,6 +48,8 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	
 	protected static final UUID WOOD_SINGULARITY_MODIFIER = UUID.fromString("fae06830-e6e7-4df2-927b-2beaa3affb27");
 	
+	protected static final UUID CRITICAL_ENCHANTMENT_MODIFIER = UUID.fromString("ab2c9437-5c8c-4986-8034-4a85dd261c54");
+	
 	//Super constructor, highly recommend not using
 	@Deprecated
 	public FBSwordItem(IItemTier p_i48460_1_, int p_i48460_2_, float p_i48460_3_, Properties p_i48460_4_) {
@@ -78,6 +81,9 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.putAll(super.getAttributeModifiers(equipmentSlot, stack));
 		builder.putAll(this.getReforgeModifiers(stack));
+		
+		int criticalLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.CRITICAL.get(), stack);
+		if(criticalLevel != 0) builder.put(FBAttributes.CRIT_DAMAGE.getName(), new AttributeModifier(CRITICAL_ENCHANTMENT_MODIFIER, "Crit enchant modifier", 10.0D * criticalLevel, Operation.ADDITION));
 		
 		boolean woodSingularity = false;
 		if(stack.getTag() != null) {

@@ -34,6 +34,7 @@ public class WiseDragonArmorItem extends FBArmorItem {
 	@Override
 	public List<ITextComponent> additionalInformation() {
 		List<ITextComponent> list = new ArrayList<>();
+		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.wise_0").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.wise_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.wise_2").getString()));
