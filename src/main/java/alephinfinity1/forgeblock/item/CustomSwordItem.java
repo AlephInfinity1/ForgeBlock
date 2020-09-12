@@ -15,14 +15,17 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.ByteNBT;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.StringNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class CustomSwordItem extends FBSwordItem {
@@ -132,8 +135,12 @@ public class CustomSwordItem extends FBSwordItem {
 	public List<ITextComponent> additionalInformation(ItemStack stack) {
 		List<ITextComponent> list = new ArrayList<>();
 		if(stack.getTag() != null) {
-			ListNBT lore = stack.getTag().getList("Lore", 9);
-			lore.forEach((line) -> {list.add(new StringTextComponent(TextFormatting.GRAY.toString() + line.getString()));});
+			ListNBT lore = stack.getTag().getList("Lore", 8);
+			lore.forEach((line) -> {
+				String str = line.getString();
+				String newStr = str.replace('&', '\u00A7');
+				list.add(new StringTextComponent(newStr));
+			});
 			return list;
 		}
 		return list;
@@ -144,11 +151,30 @@ public class CustomSwordItem extends FBSwordItem {
 		ItemStack stack = playerIn.getHeldItemMainhand();
 		if(stack.getTag() != null) {
 			String command = stack.getTag().getString("RightClickAction");
+			if(command.equals("")) return ActionResult.resultPass(stack);
 			if(!worldIn.isRemote())
 				worldIn.getServer().getCommandManager().handleCommand(playerIn.getCommandSource(), command);
 			return ActionResult.resultSuccess(stack);
 		}
 		return ActionResult.resultPass(stack);
+	}
+	
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		if(this.isInGroup(group)) {
+			ItemStack item = new ItemStack(this);
+			ListNBT list = new ListNBT();
+			list.add(StringNBT.valueOf("&7This is a customizable sword item"));
+			list.add(StringNBT.valueOf("&aCustomize it using commands!"));
+			list.add(StringNBT.valueOf("&eMore info on the wiki (coming soon TM)"));
+			list.add(StringNBT.valueOf("&bFor now, have some AotE stats :p"));
+			list.add(StringNBT.valueOf(""));
+			item.getOrCreateTag().put("Lore", list);
+			item.getOrCreateTag().put("Rarity", ByteNBT.valueOf((byte) 6));
+			item.getOrCreateTag().putInt("Damage", 100);
+			item.getOrCreateTag().putInt("Strength", 100);
+			items.add(item);
+		}
 	}
 
 }

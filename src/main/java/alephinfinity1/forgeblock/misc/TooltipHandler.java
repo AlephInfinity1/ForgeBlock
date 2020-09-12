@@ -119,6 +119,13 @@ public class TooltipHandler {
 				if(!recombobulated) tooltip.add(new StringTextComponent(color + bold + tier.name.getString()));
 				else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + obfuscated + " n"));
 			}
+			
+			/*
+			 * A temporary fix for CustomSwordItem having 1 extra newline at end
+			 */
+			if(tooltip.get(tooltip.size() - 1).equals(new StringTextComponent(""))) {
+				tooltip.remove(tooltip.size() - 1);
+			}
 		}
 	}
 	
