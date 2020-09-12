@@ -1,8 +1,6 @@
 package alephinfinity1.forgeblock.item;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -19,7 +17,6 @@ import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
