@@ -34,7 +34,6 @@ public class LapisArmorItem extends FBArmorItem {
 	@Override
 	public List<ITextComponent> additionalInformation() {
 		List<ITextComponent> list = new ArrayList<>();
-		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_0").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_2").getString()));
@@ -42,6 +41,7 @@ public class LapisArmorItem extends FBArmorItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_4").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_5").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.lapis_6").getString()));
+		list.add(new StringTextComponent(""));
 		return list;
 	}
 	

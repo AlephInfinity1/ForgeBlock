@@ -33,11 +33,11 @@ public class YoungDragonArmorItem extends FBArmorItem {
 	@Override
 	public List<ITextComponent> additionalInformation() {
 		List<ITextComponent> list = new ArrayList<>();
-		list.add(new StringTextComponent(""));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.young_0").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.young_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.young_2").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.young_3").getString()));
+		list.add(new StringTextComponent(""));
 		return list;
 	}
 	

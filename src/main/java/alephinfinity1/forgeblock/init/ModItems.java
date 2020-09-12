@@ -3,6 +3,7 @@ package alephinfinity1.forgeblock.init;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.item.AspectOfTheEndItem;
+import alephinfinity1.forgeblock.item.CustomSwordItem;
 import alephinfinity1.forgeblock.item.FBArmorItem;
 import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
 import alephinfinity1.forgeblock.item.FBGlintedItem;
@@ -59,6 +60,8 @@ public class ModItems {
 	public static final RegistryObject<Item> ASPECT_OF_THE_DRAGONS = ITEMS.register("aspect_of_the_dragons", () -> new FBSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.LEGENDARY, 225, 100, 0, 0));
 	public static final RegistryObject<Item> SWORD_OF_THE_STARS = ITEMS.register("sword_of_the_stars", () -> new SwordOfTheStarsItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.SPECIAL, 99999, 0, 0, 0));
 	public static final RegistryObject<Item> ROGUE_SWORD = ITEMS.register("rogue_sword", () -> new RogueSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
+	
+	public static final RegistryObject<Item> CUSTOM_SWORD = ITEMS.register("custom_sword", () -> new CustomSwordItem());
 	
 	/*
 	 * Pickaxes

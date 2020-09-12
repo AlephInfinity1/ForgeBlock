@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"x x",
+		"xxx",
+		"xxx"
+	],
+	"key": {
+		"x": {
+			"item": "forgeblock:enchanted_cobblestone"
+		}
+	},
+	"result": {
+		"item": "forgeblock:miner_outfit_chestplate"
+	}
+}
