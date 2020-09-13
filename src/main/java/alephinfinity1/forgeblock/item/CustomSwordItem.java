@@ -1,7 +1,9 @@
 package alephinfinity1.forgeblock.item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import com.google.common.collect.ImmutableMultimap;
@@ -9,8 +11,12 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
+import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModItemGroups;
+import alephinfinity1.forgeblock.init.ModItems;
+import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -175,6 +181,216 @@ public class CustomSwordItem extends FBSwordItem {
 			item.getOrCreateTag().putInt("Strength", 100);
 			items.add(item);
 		}
+	}
+	
+	/*
+	 * Creates a completely random sword cuz RNG is fun
+	 */
+	public static ItemStack randomSword() {
+		ItemStack sword = new ItemStack(ModItems.CUSTOM_SWORD.get());
+		CompoundNBT nbt = sword.getOrCreateTag();
+		Random rng = new Random();
+		
+		/*
+		 * Stats randomization
+		 */
+		nbt.putInt("Damage", rng.nextInt(101) + rng.nextInt(101));
+		nbt.putInt("Strength", rng.nextInt(101) + rng.nextInt(101));
+		if(rng.nextDouble() < 0.35) {
+			nbt.putInt("CritChance", rng.nextInt(10) + rng.nextInt(15));
+		}
+		if(rng.nextDouble() < 0.35) {
+			nbt.putInt("CritDamage", rng.nextInt(25) + rng.nextInt(45));
+		}
+		if(rng.nextDouble() < 0.27) {
+			nbt.putInt("Intelligence", rng.nextInt(125) + rng.nextInt(175));
+		}
+		
+		/*
+		 * Enchantments randomization
+		 */
+		int sharpnessLevel = rng.nextInt(6);
+		int lootingLevel = rng.nextInt(4);
+		int sweepingLevel = rng.nextInt(4);
+		int lifeStealLevel = rng.nextInt(4);
+		int ultimateWiseLevel = 0;
+		if(rng.nextDouble() < 0.2) ultimateWiseLevel = rng.nextInt(6);
+		int telekinesisLevel = rng.nextInt(2);
+		
+		//1% chance for enchantment levels to be increased by 1
+		if(rng.nextDouble() < 0.01) ++sharpnessLevel;
+		if(rng.nextDouble() < 0.01) ++lootingLevel;
+		if(rng.nextDouble() < 0.01) ++sweepingLevel;
+		if(rng.nextDouble() < 0.01) ++lifeStealLevel;
+		if(rng.nextDouble() < 0.01) ++ultimateWiseLevel;
+		
+		if(sharpnessLevel != 0) sword.addEnchantment(Enchantments.SHARPNESS, sharpnessLevel);
+		if(lootingLevel != 0) sword.addEnchantment(Enchantments.LOOTING, lootingLevel);
+		if(sweepingLevel != 0) sword.addEnchantment(Enchantments.SWEEPING, sweepingLevel);
+		if(lifeStealLevel != 0) sword.addEnchantment(ModEnchantments.LIFE_STEAL.get(), lifeStealLevel);
+		if(ultimateWiseLevel != 0) sword.addEnchantment(ModEnchantments.ULTIMATE_WISE.get(), ultimateWiseLevel);
+		if(telekinesisLevel != 0) sword.addEnchantment(ModEnchantments.TELEKINESIS.get(), telekinesisLevel);
+		
+		/*
+		 * Rarity randomization
+		 */
+		int rarity = rng.nextInt(20);
+		switch(rarity) {
+		case 0:
+			nbt.putInt("Rarity", 0);
+			break;
+		case 1:
+		case 2:
+		case 3:
+			nbt.putInt("Rarity", 1);
+			break;
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+			nbt.putInt("Rarity", 2);
+			break;
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+			nbt.putInt("Rarity", 3);
+			break;
+		default:
+			nbt.putInt("Rarity", 4);
+		}
+		
+		//1% chance to increase rarity by 1. This allows mythic rarity (albeit very rarely, 0.2% chance).
+		if(rng.nextDouble() < 0.01) nbt.putByte("Recombobulated", (byte) 1);
+		
+		/*
+		 * Name randomization
+		 */
+		List<String> name1 = Arrays.asList("Classy", "Dreamy", "Fancy", "Xyzzy", "Cool", "Stupid", "Simple", "Complex", "Bouncy", "Durable", "Superb", "Aristocratic", "Sharpened", "Dull", "Uninteresting", "Average", "Unusual", "Unique", "Fickle", "Crystalline", "Aspect of the");
+		List<String> name2 = Arrays.asList("Dagger", "Sword", "Broadsword", "Cleaver", "Longsword", "Dirk", "Spear", "Trident", "Cutlass", "Foil", "Blade", "Frypan");
+		
+		String name = name1.get(rng.nextInt(name1.size())) + " " + name2.get(rng.nextInt(name2.size()));
+		nbt.putString("Name", name);
+		
+		/*
+		 * Reforge randomization
+		 */
+		if(rng.nextDouble() < 0.75) {
+			Reforge reforge = Reforge.getRandomReforge(sword);
+			nbt.putString("Reforge", reforge.getID());
+		}
+		
+		return sword;
+		
+	}
+	
+	public static ItemStack randomSword(int quality) {
+		ItemStack sword = new ItemStack(ModItems.CUSTOM_SWORD.get());
+		CompoundNBT nbt = sword.getOrCreateTag();
+		Random rng = new Random();
+		
+		/*
+		 * Stats randomization
+		 */
+		nbt.putInt("Damage", rng.nextInt(101) + rng.nextInt(101) + quality);
+		nbt.putInt("Strength", rng.nextInt(101) + rng.nextInt(101) + quality);
+		if(rng.nextDouble() < 0.35 + quality * 0.01) {
+			nbt.putInt("CritChance", rng.nextInt(10) + rng.nextInt(15));
+		}
+		if(rng.nextDouble() < 0.35 + quality * 0.01) {
+			nbt.putInt("CritDamage", rng.nextInt(25) + rng.nextInt(45));
+		}
+		if(rng.nextDouble() < 0.27 + quality * 0.0085) {
+			nbt.putInt("Intelligence", rng.nextInt(125) + rng.nextInt(175));
+		}
+		
+		/*
+		 * Enchantments randomization
+		 */
+		int sharpnessLevel = rng.nextInt(6);
+		int lootingLevel = rng.nextInt(4);
+		int sweepingLevel = rng.nextInt(4);
+		int lifeStealLevel = rng.nextInt(4);
+		int ultimateWiseLevel = 0;
+		if(rng.nextDouble() < 0.2 + quality * 0.002) ultimateWiseLevel = rng.nextInt(6);
+		int telekinesisLevel = rng.nextInt(2);
+		
+		//1% chance for enchantment levels to be increased by 1
+		if(rng.nextDouble() < 0.01 + quality * 0.0001) ++sharpnessLevel;
+		if(rng.nextDouble() < 0.01 + quality * 0.0001) ++lootingLevel;
+		if(rng.nextDouble() < 0.01 + quality * 0.0001) ++sweepingLevel;
+		if(rng.nextDouble() < 0.01 + quality * 0.0001) ++lifeStealLevel;
+		if(rng.nextDouble() < 0.01 + quality * 0.0001) ++ultimateWiseLevel;
+		
+		if(sharpnessLevel != 0) sword.addEnchantment(Enchantments.SHARPNESS, sharpnessLevel);
+		if(lootingLevel != 0) sword.addEnchantment(Enchantments.LOOTING, lootingLevel);
+		if(sweepingLevel != 0) sword.addEnchantment(Enchantments.SWEEPING, sweepingLevel);
+		if(lifeStealLevel != 0) sword.addEnchantment(ModEnchantments.LIFE_STEAL.get(), lifeStealLevel);
+		if(ultimateWiseLevel != 0) sword.addEnchantment(ModEnchantments.ULTIMATE_WISE.get(), ultimateWiseLevel);
+		if(telekinesisLevel != 0) sword.addEnchantment(ModEnchantments.TELEKINESIS.get(), telekinesisLevel);
+		
+		/*
+		 * Rarity randomization
+		 */
+		int rarity = rng.nextInt(20);
+		if(quality > rng.nextInt(20)) ++rarity;
+		if(quality > rng.nextInt(50)) ++rarity;
+		if(quality > rng.nextInt(100)) ++rarity;
+		switch(rarity) {
+		case 0:
+			nbt.putInt("Rarity", 0);
+			break;
+		case 1:
+		case 2:
+		case 3:
+			nbt.putInt("Rarity", 1);
+			break;
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+			nbt.putInt("Rarity", 2);
+			break;
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+			nbt.putInt("Rarity", 3);
+			break;
+		default:
+			nbt.putInt("Rarity", 4);
+		}
+		
+		//1% chance to increase rarity by 1. This allows mythic rarity (albeit very rarely, 0.2% chance).
+		if(rng.nextDouble() < 0.01 + quality * 0.0001) nbt.putByte("Recombobulated", (byte) 1);
+		
+		/*
+		 * Name randomization
+		 */
+		List<String> name1 = Arrays.asList("Classy", "Dreamy", "Fancy", "Xyzzy", "Cool", "Stupid", "Simple", "Complex", "Bouncy", "Durable", "Superb", "Aristocratic", "Sharpened", "Dull", "Uninteresting", "Average", "Unusual", "Unique", "Fickle", "Crystalline", "Aspect of the");
+		List<String> name2 = Arrays.asList("Dagger", "Sword", "Broadsword", "Cleaver", "Longsword", "Dirk", "Spear", "Trident", "Cutlass", "Foil", "Blade", "Frypan");
+		
+		String name = name1.get(rng.nextInt(name1.size())) + " " + name2.get(rng.nextInt(name2.size()));
+		nbt.putString("Name", name);
+		
+		/*
+		 * Reforge randomization
+		 */
+		if(rng.nextDouble() < 0.75 + quality * 0.01) {
+			Reforge reforge = Reforge.getRandomReforge(sword);
+			nbt.putString("Reforge", reforge.getID());
+		}
+		
+		return sword;
+		
 	}
 
 }
