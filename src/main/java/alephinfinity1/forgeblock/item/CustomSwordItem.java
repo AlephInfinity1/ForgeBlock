@@ -75,45 +75,70 @@ public class CustomSwordItem extends FBSwordItem {
 	
 	@Override
 	public FBTier getStackTier(ItemStack stack) {
+		FBTier tier = FBTier.COMMON;
+		
 		if(stack.getTag() != null) {
 			switch(stack.getTag().getString("Rarity").toLowerCase()) {
 			case "common":
-				return FBTier.COMMON;
+				tier = FBTier.COMMON;
+				break;
 			case "uncommon":
-				return FBTier.UNCOMMON;
+				tier = FBTier.UNCOMMON;
+				break;
 			case "rare":
-				return FBTier.RARE;
+				tier = FBTier.RARE;
+				break;
 			case "epic":
-				return FBTier.EPIC;
+				tier = FBTier.EPIC;
+				break;
 			case "legendary":
-				return FBTier.LEGENDARY;
+				tier = FBTier.LEGENDARY;
+				break;
 			case "mythic":
-				return FBTier.MYTHIC;
+				tier = FBTier.MYTHIC;
+				break;
 			case "special":
-				return FBTier.SPECIAL;
+				tier = FBTier.SPECIAL;
+				break;
 			case "very_special":
 			case "very special":
-				return FBTier.VERY_SPECIAL;
+				tier = FBTier.VERY_SPECIAL;
+				break;
 			}
 			
 			switch(stack.getTag().getByte("Rarity")) {
 			case 0:
-				return FBTier.COMMON;
+				tier = FBTier.COMMON;
+				break;
 			case 1:
-				return FBTier.UNCOMMON;
+				tier = FBTier.UNCOMMON;
+				break;
 			case 2:
-				return FBTier.RARE;
+				tier = FBTier.RARE;
+				break;
 			case 3:
-				return FBTier.EPIC;
+				tier = FBTier.EPIC;
+				break;
 			case 4:
-				return FBTier.LEGENDARY;
+				tier = FBTier.LEGENDARY;
+				break;
 			case 5:
-				return FBTier.MYTHIC;
+				tier = FBTier.MYTHIC;
+				break;
 			case 6:
-				return FBTier.SPECIAL;
+				tier = FBTier.SPECIAL;
+				break;
 			case 7:
-				return FBTier.VERY_SPECIAL;
+				tier = FBTier.VERY_SPECIAL;
+				break;
 			}
+			
+			boolean recombobulated = (stack.getTag().getByte("Recombobulated") == 1);
+			boolean woodSingularity = (stack.getTag().getByte("WoodSingularity") == 1);
+			int tierBoost = 0;
+			if(recombobulated) tierBoost++;
+			if(woodSingularity) tierBoost++;
+			return FBTier.changeTier(tier, tierBoost);
 		}
 		
 		return FBTier.COMMON;
