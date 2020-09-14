@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "forgeblock:item/enchanted_iron"
+        "layer0": "minecraft:item/iron_ingot"
     }
 }
