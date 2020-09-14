@@ -20,9 +20,9 @@ public class ReforgeCommand {
 			return commander.hasPermissionLevel(2);
 		}).executes((commandSource) -> {
 			return reforgeCommand(commandSource.getSource(), Arrays.asList(commandSource.getSource().getEntity()), commandSource.getSource().asPlayer().getHeldItemMainhand());
-		}).then(Commands.argument("reforge", StringArgumentType.string())).executes((commandSource2) -> {
+		}).then(Commands.argument("reforge", StringArgumentType.string()).executes((commandSource2) -> {
 			return reforgeCommand(commandSource2.getSource(), Arrays.asList(commandSource2.getSource().getEntity()), commandSource2.getSource().asPlayer().getHeldItemMainhand(), StringArgumentType.getString(commandSource2, "reforge"));
-		}));
+		})));
 	}
 	
 	public static int reforgeCommand(CommandSource source, Collection<? extends Entity> targets, ItemStack stack) {

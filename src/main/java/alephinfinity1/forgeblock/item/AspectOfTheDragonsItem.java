@@ -74,7 +74,7 @@ public class AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem 
 		world.setBlockState(new BlockPos(player.getPositionVector().add(player.getLookVec().scale(8.0)).add(player.getLookVec().rotateYaw(90.0f).rotatePitch(45.0f).scale(-2))), Blocks.MAGENTA_WOOL.getDefaultState());
 		*/
 		
-		List<Entity> list = world.getEntitiesInAABBexcluding(null, bound, EntityPredicates.NOT_SPECTATING);
+		List<Entity> list = world.getEntitiesInAABBexcluding(player, bound, EntityPredicates.NOT_SPECTATING);
 		for(Entity entity : list) {
 			if(entity instanceof LivingEntity) {
 				LivingEntity living = (LivingEntity) entity;
