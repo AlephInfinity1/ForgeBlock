@@ -309,10 +309,11 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		}
 		FBTier tier = getStackTier(stack);
 		String color = tier.color.toString();
+		String recombobulateBold = stack.getOrCreateTag().getByte("Recombobulated") == 1 ? TextFormatting.BOLD.toString() : "";
 		if(this.getReforge(stack) != null)
-			return new StringTextComponent(color + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+			return new StringTextComponent(color + recombobulateBold + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 		else
-			return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+			return new StringTextComponent(color + recombobulateBold + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 	}
 	
 	/*

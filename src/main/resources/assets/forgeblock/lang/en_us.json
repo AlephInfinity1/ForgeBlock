@@ -221,5 +221,6 @@
     
     "text.forgeblock.notEnoughMana": "\u00A7cNot enough mana!",
     
-    "text.forgeblock.useAbility.aote": "\u00A7aUsed \u00A76Instant Transmission\u00A7a!"
+    "text.forgeblock.useAbility.aote": "\u00A7aUsed \u00A76Instant Transmission\u00A7a!",
+    "text.forgeblock.useAbility.aotd": "\u00A7aUsed \u00A76Dragon Rage\u00A7a!"
 }

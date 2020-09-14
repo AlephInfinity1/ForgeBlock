@@ -197,20 +197,21 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		}
 		FBTier tier = getStackTier(stack);
 		String color = tier.color.toString();
+		String recombobulateBold = stack.getOrCreateTag().getByte("Recombobulated") == 1 ? TextFormatting.BOLD.toString() : "";
 		boolean woodSingularity = false;
 		if(stack.getTag() != null) {
 			woodSingularity = (stack.getTag().getByte("WoodSingularity") == 1);
 		}
 		if(woodSingularity) {
 			if(this.getReforge(stack) != null)
-				return new StringTextComponent(color + new TranslationTextComponent("misc.forgeblock.woodSingularity").getString() + " " + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+				return new StringTextComponent(color + recombobulateBold + new TranslationTextComponent("misc.forgeblock.woodSingularity").getString() + " " + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 			else
-				return new StringTextComponent(color + new TranslationTextComponent("misc.forgeblock.woodSingularity").getString() + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+				return new StringTextComponent(color + recombobulateBold + new TranslationTextComponent("misc.forgeblock.woodSingularity").getString() + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 		} else {
 			if(this.getReforge(stack) != null)
-				return new StringTextComponent(color + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+				return new StringTextComponent(color + recombobulateBold + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 			else
-				return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
+				return new StringTextComponent(color + recombobulateBold + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 		}
 	}
 
