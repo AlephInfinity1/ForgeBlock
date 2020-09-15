@@ -104,7 +104,6 @@ public class AttributeHelper {
 		}
 	}
 	
-	/*
 	@SubscribeEvent
 	public static void onPlayerLogin(PlayerLoggedInEvent event) {
 		LivingEntity player = event.getPlayer();
@@ -112,7 +111,6 @@ public class AttributeHelper {
 		player.getAttribute(ATTACK_DAMAGE).setBaseValue(5.0D);
 		player.getAttribute(ATTACK_SPEED).setBaseValue(Double.MAX_VALUE);
 	}
-	*/
 	
 	@SubscribeEvent
 	public static void onPlayerRespawn(PlayerRespawnEvent event) {

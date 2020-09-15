@@ -9,6 +9,8 @@ import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class StrongDragonArmorItem extends FBArmorItem {
 
@@ -20,6 +22,11 @@ public class StrongDragonArmorItem extends FBArmorItem {
 	@Override
 	public List<ITextComponent> additionalInformation() {
 		List<ITextComponent> list = new ArrayList<>();
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.strong_0").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.strong_1").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.strong_2").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.strong_3").getString()));
+		list.add(new StringTextComponent(""));
 		return list;
 	}
 

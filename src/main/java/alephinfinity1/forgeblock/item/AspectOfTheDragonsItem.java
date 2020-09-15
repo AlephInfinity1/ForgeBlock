@@ -61,7 +61,12 @@ public class AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem 
 	@Override
 	public List<ITextComponent> abilityDescription(ItemStack stack) {
 		List<ITextComponent> list = new ArrayList<>();
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost").getString() + TextFormatting.DARK_AQUA.toString() + new DecimalFormat("#").format(this.getAbilityCost(stack))));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aotd_0").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aotd_1").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aotd_2").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aotd_3").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost", new DecimalFormat("#").format(this.getAbilityCost(stack))).getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.cooldown", "0.5 s").getString()));
 		return list;
 	}
 
@@ -78,12 +83,13 @@ public class AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem 
 		for(Entity entity : list) {
 			if(entity instanceof LivingEntity) {
 				LivingEntity living = (LivingEntity) entity;
-				living.attackEntityFrom(DamageSource.causeIndirectMagicDamage(player, player), (float) (1000 * (1 + 0.01 * player.getAttribute(FBAttributes.INTELLIGENCE).getValue())));
+				living.attackEntityFrom(DamageSource.causeIndirectMagicDamage(player, player), (float) (12000 * (1 + 0.001 * player.getAttribute(FBAttributes.INTELLIGENCE).getValue())));
 				living.setVelocity(player.getLookVec().getX() * 7.5, player.getLookVec().getY() * 7.5, player.getLookVec().getZ() * 7.5);
 			}
 		}
 				
 		player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.PLAYERS, 1.0f, 1.0f);
+		player.getCooldownTracker().setCooldown(this, 10);
 		return true;
 	}
 

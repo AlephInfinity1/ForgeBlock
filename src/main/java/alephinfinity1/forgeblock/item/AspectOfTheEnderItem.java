@@ -46,7 +46,7 @@ public class AspectOfTheEnderItem extends AspectOfTheEndItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_2").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_3").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost").getString() + TextFormatting.DARK_AQUA.toString() + new DecimalFormat("#").format(this.getAbilityCost(stack))));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost", new DecimalFormat("#").format(this.getAbilityCost(stack))).getString()));
 		return list;
 	}
 	

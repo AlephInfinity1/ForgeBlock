@@ -141,7 +141,9 @@
     "misc.forgeblock.attributeshort.petLuck": "\u00A7d\u2663 PL",
     
     "misc.forgeblock.mana": "Mana",
-    "text.forgeblock.mana_cost": "\u00A78Mana Cost: ",
+    "text.forgeblock.mana_cost": "\u00A78Mana Cost: \u00A73%s",
+    "text.forgeblock.intel_scaling": "\u00A78Intelligence Scaling: \u00A73%s",
+    "text.forgeblock.cooldown": "\u00A78Cooldown: \u00A73%s",
     "misc.forgeblock.woodSingularity": "Thick",
     
     "enchantment.forgeblock.growth": "Growth",
@@ -206,6 +208,11 @@
     "text.forgeblock.sword_desc.sots_1": "\u00A7dcreate this world can wield this",
     "text.forgeblock.sword_desc.sots_2": "\u00A7dblade.\"",
     
+    "text.forgeblock.sword_desc.aotd_0": "\u00A76Item Ability: Dragon Rage \u00A7e\u00A7lRIGHT CLICK",
+    "text.forgeblock.sword_desc.aotd_1": "\u00A77All monsters in front of you",
+    "text.forgeblock.sword_desc.aotd_2": "\u00A77take \u00A7a12,000 (+0.1% per \u00A7b\u20AA Intelligence\u00A7a)\u00A77 damage.",
+    "text.forgeblock.sword_desc.aotd_3": "\u00A77Hit monsters take large knockback.",
+    
     "text.forgeblock.armor_desc.lapis_0": "\u00A77Each piece of this armor grants",
     "text.forgeblock.armor_desc.lapis_1": "\u00A7a50%\u00A77 bonus experience when",
     "text.forgeblock.armor_desc.lapis_2": "\u00A77mining ores.",
@@ -235,6 +242,11 @@
     "text.forgeblock.armor_desc.unstable_0": "\u00A76Full Set Bonus: Unstable Blood",
     "text.forgeblock.armor_desc.unstable_1": "\u00A77Sometimes strike nearby mobs",
     "text.forgeblock.armor_desc.unstable_2": "\u00A77with lightning. It's unstable!",
+    
+    "text.forgeblock.armor_desc.strong_0": "\u00A76Full Set Bonus: Strong Blood",
+    "text.forgeblock.armor_desc.strong_1": "\u00A77Upgrades your \u00A79Aspect of the End",
+    "text.forgeblock.armor_desc.strong_2": "\u00A77into an \u00A75Aspect of the Ender",
+    "text.forgeblock.armor_desc.strong_3": "\u00A77when worn.",
     
     "text.forgeblock.notEnoughMana": "\u00A7cNot enough mana!",
     
