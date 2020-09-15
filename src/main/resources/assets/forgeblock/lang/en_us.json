@@ -223,6 +223,10 @@
     "text.forgeblock.armor_desc.wise_1": "\u00A77Abilities have \u00A7a2/3\u00A77 of the",
     "text.forgeblock.armor_desc.wise_2": "\u00A77mana cost.",
     
+    "text.forgeblock.armor_desc.unstable_0": "\u00A76Full Set Bonus: Unstable Blood",
+    "text.forgeblock.armor_desc.unstable_1": "\u00A77Sometimes strike nearby mobs",
+    "text.forgeblock.armor_desc.unstable_2": "\u00A77with lightning. It's unstable!",
+    
     "text.forgeblock.notEnoughMana": "\u00A7cNot enough mana!",
     
     "text.forgeblock.useAbility.aote": "\u00A7aUsed \u00A76Instant Transmission\u00A7a!",

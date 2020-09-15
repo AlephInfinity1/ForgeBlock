@@ -36,8 +36,8 @@ public class UnstableDragonArmorHandler {
 					return;
 				}
 			}
-			if(rng.nextDouble() < 1/200) {
-				AxisAlignedBB bound = new AxisAlignedBB(player.getPosition().add(-5, -5, -5), player.getPosition().add(5, 5, 5));
+			if(rng.nextDouble() < 0.005f) {
+				AxisAlignedBB bound = new AxisAlignedBB(player.getPosition().add(-4, -4, -4), player.getPosition().add(4, 4, 4));
 				List<Entity> entities = world.getEntitiesInAABBexcluding(player, bound, EntityPredicates.NOT_SPECTATING);
 				for(Entity entity : entities) {
 					if(!(entity instanceof LivingEntity)) return;
