@@ -48,7 +48,11 @@
     "item.forgeblock.unstable_dragon_chestplate": "Unstable Dragon Chestplate",
     "item.forgeblock.unstable_dragon_leggings": "Unstable Dragon Leggings",
     "item.forgeblock.unstable_dragon_boots": "Unstable Dragon Boots",
-
+    "item.forgeblock.strong_dragon_helmet": "Strong Dragon Helmet",
+    "item.forgeblock.strong_dragon_chestplate": "Strong Dragon Chestplate",
+    "item.forgeblock.strong_dragon_leggings": "Strong Dragon Leggings",
+    "item.forgeblock.strong_dragon_boots": "Strong Dragon Boots",
+    "item.forgeblock.aspect_of_the_ender": "Aspect of the Ender",
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
@@ -193,6 +197,11 @@
     "text.forgeblock.sword_desc.aote_2": "\u00A77you and gain \u00A7a+50\u00A77 \u00A7f\u2726 Speed",
     "text.forgeblock.sword_desc.aote_3": "\u00A77for \u00A7a3 seconds\u00A77.",
     
+    "text.forgeblock.sword_desc.strongaote_0": "\u00A76Item Ability: Instant Transmission II \u00A7e\u00A7lRIGHT CLICK",
+    "text.forgeblock.sword_desc.strongaote_1": "\u00A77Teleport \u00A7a10 blocks\u00A77 ahead of",
+    "text.forgeblock.sword_desc.strongaote_2": "\u00A77you and gain \u00A7a+50\u00A77 \u00A7f\u2726 Speed",
+    "text.forgeblock.sword_desc.strongaote_3": "\u00A77for \u00A7a6 seconds\u00A77.",
+    
     "text.forgeblock.sword_desc.sots_0": "\u00A7d\"Only those with the power to",
     "text.forgeblock.sword_desc.sots_1": "\u00A7dcreate this world can wield this",
     "text.forgeblock.sword_desc.sots_2": "\u00A7dblade.\"",
@@ -230,5 +239,6 @@
     "text.forgeblock.notEnoughMana": "\u00A7cNot enough mana!",
     
     "text.forgeblock.useAbility.aote": "\u00A7aUsed \u00A76Instant Transmission\u00A7a!",
+    "text.forgeblock.useAbility.strongaote": "\u00A7aUsed \u00A76Instant Transmission II\u00A7a!",
     "text.forgeblock.useAbility.aotd": "\u00A7aUsed \u00A76Dragon Rage\u00A7a!"
 }

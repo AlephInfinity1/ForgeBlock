@@ -32,17 +32,21 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
-	
-	public AspectOfTheEndItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn, double critChanceIn, double critDamageIn) {
+public class AspectOfTheEnderItem extends AspectOfTheEndItem {
+
+	public AspectOfTheEnderItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn,
+			double critChanceIn, double critDamageIn) {
 		super(props, tier, attackDamageIn, strengthIn, critChanceIn, critDamageIn);
 	}
 	
 	@Override
-	public List<ITextComponent> additionalInformation(ItemStack stack) {
+	public List<ITextComponent> abilityDescription(ItemStack stack) {
 		List<ITextComponent> list = new ArrayList<>();
-		list.addAll(this.abilityDescription(stack));
-		list.add(new StringTextComponent(""));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_0").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_1").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_2").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_3").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost").getString() + TextFormatting.DARK_AQUA.toString() + new DecimalFormat("#").format(this.getAbilityCost(stack))));
 		return list;
 	}
 	
@@ -52,29 +56,18 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		if(playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(() -> new NullPointerException()).consume(this.getAbilityCost(stack, playerIn))) {
 			activateAbility(worldIn, playerIn, stack);
-			playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.useAbility.aote").getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(this.getAbilityCost(stack, playerIn)) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"), true);
+			playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.useAbility.strongaote").getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(this.getAbilityCost(stack, playerIn)) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"), true);
 			return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 		}
 		playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.notEnoughMana").getString()), true);
 		return ActionResult.resultFail(playerIn.getHeldItem(handIn));
 	}
-
-	@Override
-	public List<ITextComponent> abilityDescription(ItemStack stack) {
-		List<ITextComponent> list = new ArrayList<>();
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_0").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_1").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_2").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_3").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost").getString() + TextFormatting.DARK_AQUA.toString() + new DecimalFormat("#").format(this.getAbilityCost(stack))));
-		return list;
-	}
-
+	
 	@Override
 	public boolean activateAbility(World world, PlayerEntity player, ItemStack stack) {
 		Vec3d direction = player.getLookVec();
 		
-		int teleportDistance = 8;
+		int teleportDistance = 10;
 		if(stack.getTag() != null) {
 			if(stack.getTag().getInt("Teleport") > 0) teleportDistance = stack.getTag().getInt("Teleport");
 		}
@@ -90,18 +83,19 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 		}
 		player.setPositionAndUpdate(player.getPosX() + direction.x * i, player.getPosYEye() + direction.y * i, player.getPosZ() + direction.z * i);
 		player.setVelocity(0.0d, 0.0d, 0.0d);
-		player.addPotionEffect(new EffectInstance(ModEffects.ENDER_WARP_OBJECT.get(), 60, 0));
+		player.addPotionEffect(new EffectInstance(ModEffects.ENDER_WARP_OBJECT.get(), 120, 0));
 		player.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
 		return true;
 	}
-
+	
 	@Override
 	public double getAbilityCost(ItemStack stack, PlayerEntity player) {
-		return player.isCreative() ? 0 : (50.0D / (100.0D + player.getAttribute(FBAttributes.MANA_EFFICIENCY).getValue()) * 100.0D) * (1 - 0.1 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ULTIMATE_WISE.get(), stack));
+		return player.isCreative() ? 0 : (40.0D / (100.0D + player.getAttribute(FBAttributes.MANA_EFFICIENCY).getValue()) * 100.0D) * (1 - 0.1 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ULTIMATE_WISE.get(), stack));
 	}
 	
+	@Override
 	public double getAbilityCost(ItemStack stack) {
-		return 50.0D * (1 - 0.1 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ULTIMATE_WISE.get(), stack));
+		return 40.0D * (1 - 0.1 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ULTIMATE_WISE.get(), stack));
 	}
 	
 	@SubscribeEvent
@@ -109,15 +103,13 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 		LivingEntity living = event.getEntityLiving();
 		Iterable<ItemStack> armor = living.getArmorInventoryList();
 		for(ItemStack item : armor) {
-			if(!(item.getItem() instanceof StrongDragonArmorItem)) {
+			if(!(item.getItem() instanceof StrongDragonArmorItem) && living.getHeldItemMainhand().getItem() instanceof AspectOfTheEnderItem) {
+				ItemStack aoteItem = new ItemStack(ModItems.ASPECT_OF_THE_END.get());
+				CompoundNBT tag = aoteItem.getOrCreateTag();
+				tag.merge(living.getHeldItemMainhand().getOrCreateTag());
+				living.setHeldItem(Hand.MAIN_HAND, aoteItem);
 				return;
 			}
-		}
-		if(living.getHeldItemMainhand().getItem() instanceof AspectOfTheEndItem && !(living.getHeldItemMainhand().getItem() instanceof AspectOfTheEnderItem)) {
-			ItemStack aoteItem = new ItemStack(ModItems.ASPECT_OF_THE_ENDER.get());
-			CompoundNBT tag = aoteItem.getOrCreateTag();
-			tag.merge(living.getHeldItemMainhand().getOrCreateTag());
-			living.setHeldItem(Hand.MAIN_HAND, aoteItem);
 		}
 	}
 

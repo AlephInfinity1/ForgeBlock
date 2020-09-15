@@ -4,6 +4,7 @@ import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.item.AspectOfTheDragonsItem;
 import alephinfinity1.forgeblock.item.AspectOfTheEndItem;
+import alephinfinity1.forgeblock.item.AspectOfTheEnderItem;
 import alephinfinity1.forgeblock.item.CustomSwordItem;
 import alephinfinity1.forgeblock.item.FBArmorItem;
 import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
@@ -16,6 +17,7 @@ import alephinfinity1.forgeblock.item.LapisArmorItem;
 import alephinfinity1.forgeblock.item.MinerOutfitArmorItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
 import alephinfinity1.forgeblock.item.StonkItem;
+import alephinfinity1.forgeblock.item.StrongDragonArmorItem;
 import alephinfinity1.forgeblock.item.SwordOfTheStarsItem;
 import alephinfinity1.forgeblock.item.UnstableDragonArmorItem;
 import alephinfinity1.forgeblock.item.WiseDragonArmorItem;
@@ -63,6 +65,7 @@ public class ModItems {
 	public static final RegistryObject<Item> SWORD_OF_THE_STARS = ITEMS.register("sword_of_the_stars", () -> new SwordOfTheStarsItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.SPECIAL, 99999, 0, 0, 0));
 	public static final RegistryObject<Item> ROGUE_SWORD = ITEMS.register("rogue_sword", () -> new RogueSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
 	
+	public static final RegistryObject<Item> ASPECT_OF_THE_ENDER = ITEMS.register("aspect_of_the_ender", () -> new AspectOfTheEnderItem(new Item.Properties(), FBTier.EPIC, 175, 100, 0, 0));
 	public static final RegistryObject<Item> CUSTOM_SWORD = ITEMS.register("custom_sword", () -> new CustomSwordItem());
 	
 	/*
@@ -143,6 +146,11 @@ public class ModItems {
 	public static final RegistryObject<Item> UNSTABLE_DRAGON_CHESTPLATE = ITEMS.register("unstable_dragon_chestplate", () -> new UnstableDragonArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 5, 15, 0, 0, 120, 160, 0, 0, 0, 0, 0)));
 	public static final RegistryObject<Item> UNSTABLE_DRAGON_LEGGINGS = ITEMS.register("unstable_dragon_leggings", () -> new UnstableDragonArmorItem(EquipmentSlotType.LEGS, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 5, 15, 0, 0, 100, 140, 0, 0, 0, 0, 0)));
 	public static final RegistryObject<Item> UNSTABLE_DRAGON_BOOTS = ITEMS.register("unstable_dragon_boots", () -> new UnstableDragonArmorItem(EquipmentSlotType.FEET, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 5, 15, 0, 0, 60, 90, 0, 0, 0, 0, 0)));
+	
+	public static final RegistryObject<Item> STRONG_DRAGON_HELMET = ITEMS.register("strong_dragon_helmet", () -> new StrongDragonArmorItem(EquipmentSlotType.HEAD, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 25, 0, 0, 0, 0, 70, 110, 0, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> STRONG_DRAGON_CHESTPLATE = ITEMS.register("strong_dragon_chestplate", () -> new StrongDragonArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 25, 0, 0, 0, 0, 120, 160, 0, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> STRONG_DRAGON_LEGGINGS = ITEMS.register("strong_dragon_leggings", () -> new StrongDragonArmorItem(EquipmentSlotType.LEGS, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 25, 0, 0, 0, 0, 100, 140, 0, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> STRONG_DRAGON_BOOTS = ITEMS.register("strong_dragon_boots", () -> new StrongDragonArmorItem(EquipmentSlotType.FEET, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 25, 0, 0, 0, 0, 60, 90, 0, 0, 0, 0, 0)));
 
 	/*
 	 * Potion
