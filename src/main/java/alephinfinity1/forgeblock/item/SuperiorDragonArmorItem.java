@@ -1,5 +1,7 @@
 package alephinfinity1.forgeblock.item;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
@@ -13,6 +15,9 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,6 +30,17 @@ public class SuperiorDragonArmorItem extends FBArmorItem {
 	public SuperiorDragonArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier,
 			Multimap<String, AttributeModifier> modifiers) {
 		super(slot, name, props, tier, modifiers);
+	}
+	
+	@Override
+	public List<ITextComponent> additionalInformation() {
+		List<ITextComponent> list = new ArrayList<>();
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.superior_0").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.superior_1").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.superior_2").getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.superior_3").getString()));
+		list.add(new StringTextComponent(""));
+		return list;
 	}
 	
 	@SubscribeEvent

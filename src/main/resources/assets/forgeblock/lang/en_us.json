@@ -53,6 +53,14 @@
     "item.forgeblock.strong_dragon_leggings": "Strong Dragon Leggings",
     "item.forgeblock.strong_dragon_boots": "Strong Dragon Boots",
     "item.forgeblock.aspect_of_the_ender": "Aspect of the Ender",
+    "item.forgeblock.superior_dragon_helmet": "Superior Dragon Helmet",
+    "item.forgeblock.superior_dragon_chestplate": "Superior Dragon Chestplate",
+    "item.forgeblock.superior_dragon_leggings": "Superior Dragon Leggings",
+    "item.forgeblock.superior_dragon_boots": "Superior Dragon Boots",
+    "item.forgeblock.protector_dragon_helmet": "Protector Dragon Helmet",
+    "item.forgeblock.protector_dragon_chestplate": "Protector Dragon Chestplate",
+    "item.forgeblock.protector_dragon_leggings": "Protector Dragon Leggings",
+    "item.forgeblock.protector_dragon_boots": "Protector Dragon Boots",
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
@@ -247,6 +255,11 @@
     "text.forgeblock.armor_desc.strong_1": "\u00A77Upgrades your \u00A79Aspect of the End",
     "text.forgeblock.armor_desc.strong_2": "\u00A77into an \u00A75Aspect of the Ender",
     "text.forgeblock.armor_desc.strong_3": "\u00A77when worn.",
+    
+    "text.forgeblock.armor_desc.superior_0": "\u00A76Full Set Bonus: Superior Blood",
+    "text.forgeblock.armor_desc.superior_1": "\u00A77All your stats are increased by",
+    "text.forgeblock.armor_desc.superior_2": "\u00A7a5%\u00A77 and \u00A76Aspect of the Dragons",
+    "text.forgeblock.armor_desc.superior_3": "\u00A77ability deals \u00A7a50%\u00A77 more damage.",
     
     "text.forgeblock.notEnoughMana": "\u00A7cNot enough mana!",
     

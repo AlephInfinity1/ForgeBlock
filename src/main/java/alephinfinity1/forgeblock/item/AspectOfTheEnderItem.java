@@ -10,6 +10,7 @@ import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModItems;
 import alephinfinity1.forgeblock.misc.mana.ManaProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -46,7 +47,7 @@ public class AspectOfTheEnderItem extends AspectOfTheEndItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_2").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.strongaote_3").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost", new DecimalFormat("#").format(this.getAbilityCost(stack))).getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost", new DecimalFormat("#").format(this.getAbilityCost(stack, Minecraft.getInstance().player))).getString()));
 		return list;
 	}
 	
@@ -90,7 +91,8 @@ public class AspectOfTheEnderItem extends AspectOfTheEndItem {
 	
 	@Override
 	public double getAbilityCost(ItemStack stack, PlayerEntity player) {
-		return player.isCreative() ? 0 : (40.0D / (100.0D + player.getAttribute(FBAttributes.MANA_EFFICIENCY).getValue()) * 100.0D) * (1 - 0.1 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ULTIMATE_WISE.get(), stack));
+		if(player == null) return this.getAbilityCost(stack);
+		else return player.isCreative() ? 0 : (40.0D / (100.0D + player.getAttribute(FBAttributes.MANA_EFFICIENCY).getValue()) * 100.0D) * (1 - 0.1 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ULTIMATE_WISE.get(), stack));
 	}
 	
 	@Override
