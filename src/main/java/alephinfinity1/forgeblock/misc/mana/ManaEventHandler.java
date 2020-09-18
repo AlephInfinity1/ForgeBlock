@@ -12,7 +12,10 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -46,9 +49,9 @@ public class ManaEventHandler {
 					mana.increase(Math.min(maxMana / 50.0, maxMana - mana.getMana()));
 				}
 				ManaProvider.MANA_CAPABILITY.getStorage().writeNBT(ManaProvider.MANA_CAPABILITY, mana, null);
+				
+				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new ManaUpdatePacket(mana.getMana()));
 			}
-			
-			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new ManaUpdatePacket(mana.getMana()));
 		}
 		
 	}
@@ -60,13 +63,27 @@ public class ManaEventHandler {
 		int height = mc.getMainWindow().getScaledHeight();
 		
 		PlayerEntity player = mc.getInstance().player;
-		IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
-		manaValue = mana.getMana();
-		maxManaValue = player.getAttribute(FBAttributes.INTELLIGENCE).getValue() + 100;
+		IMana mana;
+		manaValue = 0;
+		maxManaValue = 100;
+		
+		try {
+			mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
+			manaValue = mana.getMana();
+			maxManaValue = player.getAttribute(FBAttributes.INTELLIGENCE).getValue() + 100;
+		} catch(Exception e) {
+			;
+		}
 		
 		if(event.getType() == ElementType.FOOD) {
 			mc.fontRenderer.drawStringWithShadow((new DecimalFormat("#")).format(manaValue) + "/" + (new DecimalFormat("#")).format(maxManaValue), width / 2 + 25, height - 40, 0x5555FF);
 		}
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerClone(PlayerEvent.Clone event) {
+		if(!event.isWasDeath()) return;
+		IMana manaOld = event.getOriginal().getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
 	}
 
 }

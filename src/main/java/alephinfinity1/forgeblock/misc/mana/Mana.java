@@ -2,7 +2,7 @@ package alephinfinity1.forgeblock.misc.mana;
 
 public class Mana implements IMana {
 
-	private double mana;
+	private double mana = 100;
 
 	@Override
 	public void decrease(double amount) {
