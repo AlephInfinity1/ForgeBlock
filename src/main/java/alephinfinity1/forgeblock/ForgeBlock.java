@@ -11,6 +11,7 @@ import alephinfinity1.forgeblock.init.ModRecipes;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.Mana;
 import alephinfinity1.forgeblock.misc.mana.ManaStorage;
+import alephinfinity1.forgeblock.network.FBPacketHandler;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -38,6 +39,8 @@ public class ForgeBlock {
 		ModEntities.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModRecipes.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+		
+		FBPacketHandler.register();
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CustomModConfig.CLIENT_CONFIG);
         CustomModConfig.loadConfig(CustomModConfig.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve("forgeblock-client.toml"));
