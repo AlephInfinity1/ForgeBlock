@@ -97,6 +97,9 @@ public class CustomSwordItem extends FBSwordItem {
 			case "mythic":
 				tier = FBTier.MYTHIC;
 				break;
+			case "supreme":
+				tier = FBTier.SUPREME;
+				break;
 			case "special":
 				tier = FBTier.SPECIAL;
 				break;
@@ -126,9 +129,12 @@ public class CustomSwordItem extends FBSwordItem {
 				tier = FBTier.MYTHIC;
 				break;
 			case 6:
-				tier = FBTier.SPECIAL;
+				tier = FBTier.SUPREME;
 				break;
 			case 7:
+				tier = FBTier.SPECIAL;
+				break;
+			case 8:
 				tier = FBTier.VERY_SPECIAL;
 				break;
 			}

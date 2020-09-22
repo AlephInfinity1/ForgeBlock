@@ -23,8 +23,8 @@ public class SkillsEventHandler {
 	public static void onPlayerLoggedIn(PlayerLoggedInEvent event) {
 		PlayerEntity player = event.getPlayer();
 		ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
-		FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SkillUpdatePacket(skills.getCompoundNBTFor(SkillType.COMBAT)));
-		player.sendMessage(new StringTextComponent(Integer.toString(skills.getLevel(SkillType.ALCHEMY))));
+		for(SkillType type : SkillType.values())
+			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SkillUpdatePacket(skills.getCompoundNBTFor(type)));
 	}
 	
 	/*

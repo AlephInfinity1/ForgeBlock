@@ -31,6 +31,7 @@ public class CustomModConfig {
 	public static ForgeConfigSpec.EnumValue<TextFormatting> EPIC_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> LEGENDARY_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> MYTHIC_TIER_COLOR;
+	public static ForgeConfigSpec.EnumValue<TextFormatting> SUPREME_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> SPECIAL_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> VERY_SPECIAL_TIER_COLOR;
 	
@@ -61,6 +62,7 @@ public class CustomModConfig {
 		EPIC_TIER_COLOR = CLIENT_BUILDER.comment("Epic rarity color").defineEnum("epicColor", TextFormatting.DARK_PURPLE, acceptableValues);
 		LEGENDARY_TIER_COLOR = CLIENT_BUILDER.comment("Legendary rarity color").defineEnum("legendaryColor", TextFormatting.GOLD, acceptableValues);
 		MYTHIC_TIER_COLOR = CLIENT_BUILDER.comment("Mythic rarity color").defineEnum("mythicColor", TextFormatting.LIGHT_PURPLE, acceptableValues);
+		SUPREME_TIER_COLOR = CLIENT_BUILDER.comment("Supreme rarity color").defineEnum("supremeColor", TextFormatting.DARK_RED, acceptableValues);
 		SPECIAL_TIER_COLOR = CLIENT_BUILDER.comment("Special rarity color").defineEnum("specialColor", TextFormatting.RED, acceptableValues);
 		VERY_SPECIAL_TIER_COLOR = CLIENT_BUILDER.comment("Very special rarity color").defineEnum("verySpecialColor", TextFormatting.RED, acceptableValues);
 
