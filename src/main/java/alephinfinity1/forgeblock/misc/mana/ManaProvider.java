@@ -19,17 +19,17 @@ public class ManaProvider implements ICapabilitySerializable<INBT> {
 		if(cap == MANA_CAPABILITY) {
 			return defaultInstance.cast();
 		}
-		return null;
+		return LazyOptional.empty();
 	}
 
 	@Override
 	public INBT serializeNBT() {
-		return MANA_CAPABILITY.getStorage().writeNBT(MANA_CAPABILITY, this.defaultInstance.orElseThrow(() -> new NullPointerException()), null);
+		return MANA_CAPABILITY.getStorage().writeNBT(MANA_CAPABILITY, this.defaultInstance.orElseThrow(NullPointerException::new), null);
 	}
 
 	@Override
 	public void deserializeNBT(INBT nbt) {
-		MANA_CAPABILITY.getStorage().readNBT(MANA_CAPABILITY, this.defaultInstance.orElseThrow(() -> new NullPointerException()), null, nbt);
+		MANA_CAPABILITY.getStorage().readNBT(MANA_CAPABILITY, this.defaultInstance.orElseThrow(NullPointerException::new), null, nbt);
 	}
 
 }

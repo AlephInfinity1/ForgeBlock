@@ -11,6 +11,9 @@ import alephinfinity1.forgeblock.init.ModRecipes;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.Mana;
 import alephinfinity1.forgeblock.misc.mana.ManaStorage;
+import alephinfinity1.forgeblock.misc.skills.ISkills;
+import alephinfinity1.forgeblock.misc.skills.SkillsFactory;
+import alephinfinity1.forgeblock.misc.skills.SkillsStorage;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -50,6 +53,7 @@ public class ForgeBlock {
 	private void setup(FMLCommonSetupEvent event) {
 		AttributeHelper.removeLimits();
 		CapabilityManager.INSTANCE.register(IMana.class, new ManaStorage(), Mana::new);
+		CapabilityManager.INSTANCE.register(ISkills.class, new SkillsStorage(), new SkillsFactory());
 	}
 	
 }

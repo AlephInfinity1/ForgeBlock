@@ -2,12 +2,15 @@ package alephinfinity1.forgeblock.misc.mana;
 
 import java.text.DecimalFormat;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.ManaUpdatePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.TickEvent;
@@ -75,8 +78,14 @@ public class ManaEventHandler {
 			;
 		}
 		
+		double progress = manaValue / maxManaValue;
+		if(progress > 1.0D) progress = 1.0D;
 		if(event.getType() == ElementType.FOOD) {
-			mc.fontRenderer.drawStringWithShadow((new DecimalFormat("#")).format(manaValue) + "/" + (new DecimalFormat("#")).format(maxManaValue), width / 2 + 25, height - 40, 0x5555FF);
+			mc.fontRenderer.drawStringWithShadow((new DecimalFormat("#")).format(manaValue) + "/" + (new DecimalFormat("#")).format(maxManaValue), width / 2 + 25, height - 50, 0x5555FF);
+			mc.getTextureManager().bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
+			RenderSystem.color3f(0.5f, 0.5f, 1.0f);
+			mc.ingameGUI.blit(width / 2, height - 40, 91, 64, 91, 5);
+			mc.ingameGUI.blit(width / 2 + 91 - (int) (91.0 * progress), height - 40, 182 - (int) (91.0 * progress), 69, (int) (91.0 * progress), 5);
 		}
 	}
 	

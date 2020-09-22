@@ -219,7 +219,7 @@ public enum Reforge {
 		for(Reforge reforge : REFORGES) {
 			if(reforge.getID().contentEquals(ID)) return reforge;
 		}
-		return null;
+		throw new IllegalArgumentException(ID + " is not a valid reforge ID!");
 	}
 	
 	public Multimap<String, AttributeModifier> getModifierMapByTier(FBTier tier, UUID uuid) {

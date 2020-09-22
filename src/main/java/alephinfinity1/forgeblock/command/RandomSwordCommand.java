@@ -13,7 +13,9 @@ import net.minecraft.entity.player.PlayerEntity;
 public class RandomSwordCommand {
 
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
-		dispatcher.register(Commands.literal("randomsword").executes((commandSource) -> {
+		dispatcher.register(Commands.literal("randomsword").requires((commandSource) -> {
+			return commandSource.hasPermissionLevel(2);
+		}).executes((commandSource) -> {
 			return randomSwordCommand(commandSource.getSource());
 		}).then(Commands.argument("count", IntegerArgumentType.integer(1)).executes((commandSource) -> {
 			return randomSwordCommand(commandSource.getSource(), IntegerArgumentType.getInteger(commandSource, "count"));

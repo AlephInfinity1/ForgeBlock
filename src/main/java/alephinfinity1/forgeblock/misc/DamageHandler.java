@@ -1,11 +1,13 @@
 package alephinfinity1.forgeblock.misc;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.misc.TextFormatHelper.SuffixType;
+import alephinfinity1.forgeblock.misc.skills.ISkills;
+import alephinfinity1.forgeblock.misc.skills.SkillType;
+import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -66,6 +68,11 @@ public class DamageHandler {
 			
 			
 			//Step 3: calculate other multipliers (skill, armor effects, etc) TODO
+			if(damager instanceof PlayerEntity) {
+				PlayerEntity player = (PlayerEntity) damager;
+				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				result *= (1.0D + 0.04D * skills.getLevel(SkillType.COMBAT));
+			}
 			
 			//Step 4: check for critical hit
 			boolean isCrit = (new Random().nextDouble() * 100.0D) < damager.getAttribute(FBAttributes.CRIT_CHANCE).getValue();
@@ -112,6 +119,7 @@ public class DamageHandler {
 		
 		//Post: sets damage.
 		event.setAmount((float) result);
+		victim.hurtResistantTime = (int) (20 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue()));
 	}
 
 }
