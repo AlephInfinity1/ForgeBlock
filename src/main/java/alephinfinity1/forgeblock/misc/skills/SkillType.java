@@ -4,28 +4,35 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import javax.annotation.Nullable;
+
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public enum SkillType {
-	FARMING(false, "farming"),
-	MINING(false, "mining"),
-	COMBAT(false, "combat"),
-	FORAGING(false, "foraging"),
-	FISHING(false, "fishing"),
-	ENCHANTING(false, "enchanting"),
-	ALCHEMY(false, "alchemy"),
-	TAMING(false, "taming"),
-	CARPENTRY(true, "carpentry"),
-	RUNECRAFTING(true, "runecrafting");
+	FARMING(false, "farming", 50),
+	MINING(false, "mining", 50),
+	COMBAT(false, "combat", 50),
+	FORAGING(false, "foraging", 50),
+	FISHING(false, "fishing", 50),
+	ENCHANTING(false, "enchanting", 50),
+	ALCHEMY(false, "alchemy", 50),
+	TAMING(false, "taming", 50),
+	CARPENTRY(true, "carpentry", 50),
+	RUNECRAFTING(true, "runecrafting", 25);
 	
 	private boolean isCosmetic;
+	private final String id;
+	private final int maxLevel;
+	public Function<Integer, Double> expTable;
+	public @Nullable Function<Integer, Double> coinsTable; //If null, the skill doesn't reward coins.
+	
 	private static final Map<Integer, Double> DEFAULT_XP_TABLE;
 	private static final Map<Integer, Double> DEFAULT_COINS_TABLE;
 	private static final Map<Integer, Double> RUNECRAFTING_XP_TABLE;
-	private final String id;
+	
 	static {
 		Map<Integer, Double> aMap = new HashMap<>();
 		aMap.put(0, 50.0);
@@ -161,28 +168,82 @@ public enum SkillType {
 		cMap.put(23, 15300.0);
 		cMap.put(24, 19050.0);
 		RUNECRAFTING_XP_TABLE = ImmutableMap.copyOf(cMap);
+		
+		Function<Integer, Double> DEFAULT_XP = (level) -> {
+			if(level < 0) throw new IllegalArgumentException();
+			else if (level >= 50) return Double.MAX_VALUE;
+			else return DEFAULT_XP_TABLE.get(level);
+		};
+		
+		Function<Integer, Double> RUNECRAFTING_XP = (level) -> {
+			if(level < 0) throw new IllegalArgumentException();
+			else if (level >= 25) return Double.MAX_VALUE;
+			else return RUNECRAFTING_XP_TABLE.get(level);
+		};
+		
+		Function<Integer, Double> DEFAULT_COINS = (level) -> {
+			if(level < 0) throw new IllegalArgumentException();
+			else if (level >= 50) return Double.MAX_VALUE;
+			else return DEFAULT_COINS_TABLE.get(level);
+		};
+		
+		for(SkillType type : SkillType.values()) {
+			if(type != RUNECRAFTING) {
+				type.expTable = DEFAULT_XP;
+				type.coinsTable = DEFAULT_COINS;
+			} else {
+				type.expTable = RUNECRAFTING_XP;
+				type.coinsTable = null;
+			}
+		}
 	}
 	
-	public static final Function<Integer, Double> DEFAULT_XP = (level) -> {
-		if(level < 0) throw new IllegalArgumentException();
-		else if (level >= 50) return Double.MAX_VALUE;
-		else return DEFAULT_XP_TABLE.get(level);
-	};
-	
-	public static final Function<Integer, Double> RUNECRAFTING_XP = (level) -> {
-		if(level < 0) throw new IllegalArgumentException();
-		else if (level >= 25) return Double.MAX_VALUE;
-		else return RUNECRAFTING_XP_TABLE.get(level);
-	};
-	
-	private SkillType(boolean isCosmetic, String id) {
+	private SkillType(boolean isCosmetic, String id, int maxLevel, Function<Integer, Double> expTable) {
 		this.isCosmetic = isCosmetic;
 		this.id = id;
+		this.maxLevel = maxLevel;
+		this.expTable = expTable;
+		this.coinsTable = null;
+	}
+	
+	private SkillType(boolean isCosmetic, String id, int maxLevel, Function<Integer, Double> expTable, Function<Integer, Double> coinsTable) {
+		this.isCosmetic = isCosmetic;
+		this.id = id;
+		this.maxLevel = maxLevel;
+		this.expTable = expTable;
+		this.coinsTable = coinsTable;
+	}
+	
+	private SkillType(boolean isCosmetic, String id, int maxLevel) {
+		this.isCosmetic = isCosmetic;
+		this.id = id;
+		this.maxLevel = maxLevel;
+		this.expTable = null;
+		this.coinsTable = null;
 	}
 	
 	public double getXPForLevel(int level) {
-		if(this.equals(RUNECRAFTING)) return RUNECRAFTING_XP.apply(level);
-		else return DEFAULT_XP.apply(level);
+		if(this.expTable != null) {
+			return this.expTable.apply(level);
+		} else return 0;
+	}
+	
+	public boolean getIsMaxLevel(int level) {
+		return level == this.maxLevel;
+	}
+	
+	public boolean getIsValidLevel(int level) {
+		return level >= 0 && level <= this.maxLevel;
+	}
+	
+	public int getMaxLevel() {
+		return this.maxLevel;
+	}
+	
+	public double getCoinsRewardUponReachingLevel(int level) {
+		if(this.coinsTable != null) {
+			return this.coinsTable.apply(level);
+		} else return 0;
 	}
 	
 	public boolean isCosmetic() {

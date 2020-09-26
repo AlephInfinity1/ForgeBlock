@@ -170,22 +170,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		if(getReforge(stack) == null) return Reforge.emptyModifier();
 		else {
 			Reforge reforge = getReforge(stack);
-			switch(getStackTier(stack)) {
-			case COMMON:
-				return reforge.commonModifiers.apply(SWORD_REFORGE_MODIFIER);
-			case UNCOMMON:
-				return reforge.uncommonModifiers.apply(SWORD_REFORGE_MODIFIER);
-			case RARE:
-				return reforge.rareModifiers.apply(SWORD_REFORGE_MODIFIER);
-			case EPIC:
-				return reforge.epicModifiers.apply(SWORD_REFORGE_MODIFIER);
-			case LEGENDARY:
-				return reforge.legendaryModifiers.apply(SWORD_REFORGE_MODIFIER);
-			case MYTHIC:
-				return reforge.mythicModifiers.apply(SWORD_REFORGE_MODIFIER);
-			default:
-				return Reforge.emptyModifier();
-			}
+			return reforge.getModifierMapByTier(getStackTier(stack), SWORD_REFORGE_MODIFIER);
 		}
 	}
 	

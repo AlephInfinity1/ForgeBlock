@@ -4,6 +4,7 @@ import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ICraftingRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -55,6 +56,11 @@ public class MultiShapedRecipe implements ICraftingRecipe, net.minecraftforge.co
 	public int getRecipeHeight() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public NonNullList<ItemStack> getRemainingItems(CraftingInventory inv) {
+		return null;
 	}
 	
 }

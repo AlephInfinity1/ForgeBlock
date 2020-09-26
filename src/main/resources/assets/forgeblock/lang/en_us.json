@@ -61,11 +61,14 @@
     "item.forgeblock.protector_dragon_chestplate": "Protector Dragon Chestplate",
     "item.forgeblock.protector_dragon_leggings": "Protector Dragon Leggings",
     "item.forgeblock.protector_dragon_boots": "Protector Dragon Boots",
+    "item.forgeblock.dimensius": "Dimensius",
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
     "itemGroup.forgeblock_harvesting_tools": "ForgeBlock Tools",
     "itemGroup.forgeblock_armor": "ForgeBlock Armor",
+    "itemGroup.forgeblock_potions": "ForgeBlock Potions",
+    "itemGroup.forgeblock_custom": "ForgeBlock Custom Items",
     
     "misc.forgeblock.tier.common": "COMMON",
     "misc.forgeblock.tier.uncommon": "UNCOMMON",

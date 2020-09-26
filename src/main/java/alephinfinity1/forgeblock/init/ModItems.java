@@ -27,6 +27,7 @@ import alephinfinity1.forgeblock.item.YoungDragonArmorItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.Properties;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -169,4 +170,8 @@ public class ModItems {
 	 */
 	public static final RegistryObject<Item> FB_POTION = OVERRIDE.register("potion", () -> new FBPotionItem(new Item.Properties().group(ModItemGroups.FB_POTIONS)));
 	
+	/*
+	 * Custom items/ideas
+	 */
+	public static final RegistryObject<Item> DIMENSIUS = ITEMS.register("dimensius", () -> new FBArmorItem(EquipmentSlotType.HEAD, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.MYTHIC, ModifierHelper.modifierMapFromDoubles(0, -1000, 0, 0, 0, 0, -1000, 0, 0, 3000, 0, 0, 0)));
 }

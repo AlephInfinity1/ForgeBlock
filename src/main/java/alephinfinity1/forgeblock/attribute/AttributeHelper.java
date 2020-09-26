@@ -12,12 +12,13 @@ import static net.minecraft.entity.SharedMonsterAttributes.LUCK;
 import static net.minecraft.entity.SharedMonsterAttributes.MAX_HEALTH;
 import static net.minecraft.entity.SharedMonsterAttributes.MOVEMENT_SPEED;
 
+import alephinfinity1.forgeblock.misc.TickHandler;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -50,7 +51,8 @@ public class AttributeHelper {
 			if(attribute instanceof RangedAttribute) {
 				RangedAttribute ranged = (RangedAttribute) attribute;
 				ranged.maximumValue = Double.MAX_VALUE;
-				ranged.minimumValue = -Double.MAX_VALUE;
+				if(attribute.equals(MAX_HEALTH)) ranged.minimumValue = 1.0D;
+				else ranged.minimumValue = -Double.MAX_VALUE;
 			}
 		}
 	}
@@ -111,7 +113,6 @@ public class AttributeHelper {
 		player.getAttribute(MAX_HEALTH).setBaseValue(100.0D);
 		player.getAttribute(ATTACK_DAMAGE).setBaseValue(5.0D);
 		player.getAttribute(ATTACK_SPEED).setBaseValue(Double.MAX_VALUE);
-		player.setHealth(player.getMaxHealth());
 	}
 	
 	@SubscribeEvent
@@ -120,7 +121,7 @@ public class AttributeHelper {
 		player.getAttribute(MAX_HEALTH).setBaseValue(100.0D);
 		player.getAttribute(ATTACK_DAMAGE).setBaseValue(5.0D);
 		player.getAttribute(ATTACK_SPEED).setBaseValue(Double.MAX_VALUE);
-		player.setHealth(player.getMaxHealth());
+		TickHandler.healthDirty.put((PlayerEntity) player, TickHandler.tickElapsed);
 	}
 
 }

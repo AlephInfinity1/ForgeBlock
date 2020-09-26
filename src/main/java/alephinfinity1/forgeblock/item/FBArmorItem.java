@@ -209,73 +209,13 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 			Reforge reforge = getReforge(stack);
 			switch(this.slot) {
 			case HEAD:
-				switch(getStackTier(stack)) {
-				case COMMON:
-					return reforge.commonModifiers.apply(HELMET_REFORGE_MODIFIER);
-				case UNCOMMON:
-					return reforge.uncommonModifiers.apply(HELMET_REFORGE_MODIFIER);
-				case RARE:
-					return reforge.rareModifiers.apply(HELMET_REFORGE_MODIFIER);
-				case EPIC:
-					return reforge.epicModifiers.apply(HELMET_REFORGE_MODIFIER);
-				case LEGENDARY:
-					return reforge.legendaryModifiers.apply(HELMET_REFORGE_MODIFIER);
-				case MYTHIC:
-					return reforge.mythicModifiers.apply(HELMET_REFORGE_MODIFIER);
-				default:
-					return Reforge.emptyModifier();
-				}
+				return reforge.getModifierMapByTier(getStackTier(stack), HELMET_REFORGE_MODIFIER);
 			case CHEST:
-				switch(getStackTier(stack)) {
-				case COMMON:
-					return reforge.commonModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
-				case UNCOMMON:
-					return reforge.uncommonModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
-				case RARE:
-					return reforge.rareModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
-				case EPIC:
-					return reforge.epicModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
-				case LEGENDARY:
-					return reforge.legendaryModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
-				case MYTHIC:
-					return reforge.mythicModifiers.apply(CHESTPLATE_REFORGE_MODIFIER);
-				default:
-					return Reforge.emptyModifier();
-				}
+				return reforge.getModifierMapByTier(getStackTier(stack), CHESTPLATE_REFORGE_MODIFIER);
 			case LEGS:
-				switch(getStackTier(stack)) {
-				case COMMON:
-					return reforge.commonModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
-				case UNCOMMON:
-					return reforge.uncommonModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
-				case RARE:
-					return reforge.rareModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
-				case EPIC:
-					return reforge.epicModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
-				case LEGENDARY:
-					return reforge.legendaryModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
-				case MYTHIC:
-					return reforge.mythicModifiers.apply(LEGGINGS_REFORGE_MODIFIER);
-				default:
-					return Reforge.emptyModifier();
-				}
+				return reforge.getModifierMapByTier(getStackTier(stack), LEGGINGS_REFORGE_MODIFIER);
 			case FEET:
-				switch(getStackTier(stack)) {
-				case COMMON:
-					return reforge.commonModifiers.apply(BOOTS_REFORGE_MODIFIER);
-				case UNCOMMON:
-					return reforge.uncommonModifiers.apply(BOOTS_REFORGE_MODIFIER);
-				case RARE:
-					return reforge.rareModifiers.apply(BOOTS_REFORGE_MODIFIER);
-				case EPIC:
-					return reforge.epicModifiers.apply(BOOTS_REFORGE_MODIFIER);
-				case LEGENDARY:
-					return reforge.legendaryModifiers.apply(BOOTS_REFORGE_MODIFIER);
-				case MYTHIC:
-					return reforge.mythicModifiers.apply(BOOTS_REFORGE_MODIFIER);
-				default:
-					return Reforge.emptyModifier();
-				}
+				return reforge.getModifierMapByTier(getStackTier(stack), BOOTS_REFORGE_MODIFIER);
 			}
 			
 			return Reforge.emptyModifier();

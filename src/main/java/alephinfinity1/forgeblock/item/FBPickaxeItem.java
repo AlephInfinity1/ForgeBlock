@@ -116,22 +116,7 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		if(getReforge(stack) == null) return Reforge.emptyModifier();
 		else {
 			Reforge reforge = getReforge(stack);
-			switch(getStackTier(stack)) {
-			case COMMON:
-				return reforge.commonModifiers.apply(PICKAXE_REFORGE_MODIFIER);
-			case UNCOMMON:
-				return reforge.uncommonModifiers.apply(PICKAXE_REFORGE_MODIFIER);
-			case RARE:
-				return reforge.rareModifiers.apply(PICKAXE_REFORGE_MODIFIER);
-			case EPIC:
-				return reforge.epicModifiers.apply(PICKAXE_REFORGE_MODIFIER);
-			case LEGENDARY:
-				return reforge.legendaryModifiers.apply(PICKAXE_REFORGE_MODIFIER);
-			case MYTHIC:
-				return reforge.mythicModifiers.apply(PICKAXE_REFORGE_MODIFIER);
-			default:
-				return Reforge.emptyModifier();
-			}
+			return reforge.getModifierMapByTier(getStackTier(stack), PICKAXE_REFORGE_MODIFIER);
 		}
 	}
 
