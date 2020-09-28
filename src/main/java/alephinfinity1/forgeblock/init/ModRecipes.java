@@ -11,5 +11,5 @@ public class ModRecipes {
 	
 	public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ForgeBlock.MOD_ID);
 	
-	//public static final RegistryObject<IRecipeSerializer<?>> MULTI_SHAPED_RECIPE = RECIPE_SERIALIZERS.register("multi_shaped_recipe", () -> new MultiShapedRecipe.Serializer());
+	public static final RegistryObject<IRecipeSerializer<?>> MULTI_SHAPED_RECIPE = RECIPE_SERIALIZERS.register("multi_crafting_shaped", () -> new MultiShapedRecipe.Serializer());
 }

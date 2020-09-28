@@ -1,5 +1,7 @@
 package alephinfinity1.forgeblock.client;
 
+import static alephinfinity1.forgeblock.ForgeBlock.MINECRAFT;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import alephinfinity1.forgeblock.misc.skills.ISkills;
@@ -7,7 +9,6 @@ import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.SkillUpdatePacket;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -28,7 +29,7 @@ public class GuiMenu extends Screen {
 			
 			@Override
 			public void onPress(Button p_onPress_1_) {
-				ClientPlayerEntity player = Minecraft.getInstance().player;
+				ClientPlayerEntity player = MINECRAFT.player;
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
 				skills.setLevel(SkillType.COMBAT, skills.getLevel(SkillType.COMBAT) + 1);
 				CompoundNBT nbt = new CompoundNBT();
@@ -43,7 +44,7 @@ public class GuiMenu extends Screen {
 
 			@Override
 			public void onPress(Button p_onPress_1_) {
-				ClientPlayerEntity player = Minecraft.getInstance().player;
+				ClientPlayerEntity player = MINECRAFT.player;
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
 				skills.setLevel(SkillType.COMBAT, skills.getLevel(SkillType.COMBAT) + 100);
 				CompoundNBT nbt = new CompoundNBT();

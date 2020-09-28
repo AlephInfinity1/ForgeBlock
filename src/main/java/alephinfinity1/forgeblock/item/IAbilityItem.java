@@ -21,4 +21,14 @@ public interface IAbilityItem {
 	public boolean activateAbility(World world, PlayerEntity player, ItemStack stack);
 	
 	public double getAbilityCost(ItemStack stack, PlayerEntity player);
+	
+	/*
+	 * Get the cooldown of the item, in game ticks (1/20 s).
+	 */
+	public int getCooldown(ItemStack stack);
+	
+	/*
+	 * Player-specific version of getCooldown
+	 */
+	public int getCooldown(ItemStack stack, PlayerEntity player);
 }

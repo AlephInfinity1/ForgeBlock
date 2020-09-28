@@ -31,8 +31,8 @@ public class TickHandler {
 			}
 			player.heal((float) (player.getAttribute(FBAttributes.HEALTH_REGEN).getValue() / 20.0D));
 			if(healthDirty.get(player) != null) {
-				if(healthDirty.get(player) - tickElapsed > 5) {
-					player.heal(1000000000.0f);
+				if(healthDirty.get(player) - tickElapsed < -5) {
+					player.heal(Float.MAX_VALUE);
 					healthDirty.remove(player);
 				}
 			}

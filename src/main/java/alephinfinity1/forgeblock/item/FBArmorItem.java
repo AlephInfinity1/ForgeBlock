@@ -30,6 +30,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -293,6 +294,11 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		String reset = TextFormatting.RESET.toString();
 		if(!recombobulated) tooltip.add(new StringTextComponent(color + bold + tier.name.getString() + " " + this.getFBItemType().getDisplayName()));
 		else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + " " + this.getFBItemType().getDisplayName() + obfuscated + " n"));
+	}
+	
+	@Override
+	public Rarity getRarity(ItemStack stack) {
+		return getStackTier(stack).getVanillaRarity();
 	}
 
 }

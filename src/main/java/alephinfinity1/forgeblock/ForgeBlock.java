@@ -15,6 +15,7 @@ import alephinfinity1.forgeblock.misc.skills.ISkills;
 import alephinfinity1.forgeblock.misc.skills.SkillsFactory;
 import alephinfinity1.forgeblock.misc.skills.SkillsStorage;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +29,8 @@ public class ForgeBlock {
 
 	public static final String MOD_ID = "forgeblock";
 	public static final String MINECRAFT_ID = "minecraft";
+	
+	public static final Minecraft MINECRAFT = Minecraft.getInstance();
 	
 	public ForgeBlock() {
 		ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

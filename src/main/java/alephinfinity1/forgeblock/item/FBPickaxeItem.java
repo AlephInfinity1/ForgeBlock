@@ -32,6 +32,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -218,6 +219,11 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 	@Override
 	public FBItemType getFBItemType() {
 		return FBItemType.PICKAXE;
+	}
+	
+	@Override
+	public Rarity getRarity(ItemStack stack) {
+		return getStackTier(stack).getVanillaRarity();
 	}
 
 }

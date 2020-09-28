@@ -1,86 +1,98 @@
 package alephinfinity1.forgeblock.recipe;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import javax.annotation.Nullable;
+
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient.IItemList;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.IIngredientSerializer;
 
-public class CountIngredient implements Predicate<ItemStack> {
+public class CountIngredient extends Ingredient {
 	
-	IItemList list;
+	public static final CountIngredient EMPTY = new CountIngredient(new ItemStack(Items.AIR));
 
-	protected CountIngredient(Stream<? extends IItemList> itemLists) {
-		super();
+	private final ItemStack stack;
+	public CountIngredient(ItemStack stack)
+	{
+		super(Stream.of(new Ingredient.SingleItemList(stack)));
+		this.stack = stack;
 	}
 
 	@Override
-	public boolean test(ItemStack t) {
+	public boolean test(@Nullable ItemStack input)
+	{
+		if (input == null)
+			return false;
+		//As long as the input's stack size >= required, it works.
+		return this.stack.getItem() == input.getItem() && this.stack.getDamage() == input.getDamage() && this.stack.areShareTagsEqual(input) && this.stack.getCount() <= input.getCount();
+	}
+
+	@Override
+	public boolean isSimple() {
 		return false;
 	}
-	
-	public static class SingleItemList implements IItemList {
 
-		private ItemStack stack;
-		
-		public SingleItemList(ItemStack stack) {
-			this.stack = stack;
-		}
-		
-		public SingleItemList(ItemStack stack, int count) {
-			this.stack = stack;
-			this.stack.setCount(count);
-		}
-		
-		@Override
-		public Collection<ItemStack> getStacks() {
-			return Collections.singleton(stack);
-		}
+	@Override
+	public IIngredientSerializer<? extends Ingredient> getSerializer() {
+		return Serializer.INSTANCE;
+	}
 
-		@Override
-		public JsonObject serialize() {
-			JsonObject json = new JsonObject();
-			json.addProperty("item", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
-			json.addProperty("count", stack.getCount());
-			return json;
-		}
-		
+	@Override
+	public JsonElement serialize()
+	{
+		JsonObject json = new JsonObject();
+		json.addProperty("type", CraftingHelper.getID(Serializer.INSTANCE).toString());
+		json.addProperty("item", stack.getItem().getRegistryName().toString());
+		json.addProperty("count", stack.getCount());
+		if (stack.hasTag())
+			json.addProperty("nbt", stack.getTag().toString());
+		return json;
 	}
 	
-	/*
-	public static class MultiItemList implements IItemList {
-
-		private List<ItemStack> stacks;
-		
-		public MultiItemList(ItemStack stack) {
-			stacks = Collections.singletonList(stack);
+	public static CountIngredient deserialize(JsonElement element) {
+		if(element == null) throw new JsonSyntaxException("Json cannot be null");
+		else if(!element.isJsonObject()) throw new JsonSyntaxException("Json must be an object");
+		else {
+			return (CountIngredient) Serializer.INSTANCE.parse((JsonObject) element);
 		}
-		
-		public MultiItemList(ItemStack... stacks) {
-			this.stacks = Arrays.asList(stacks);
-		}
-		
-		@Override
-		public Collection<ItemStack> getStacks() {
-			return stacks;
-		}
-
-		@Override
-		public JsonObject serialize() {
-			JsonObject json = new JsonObject();
-			json.addProperty("item", ForgeRegistries.ITEMS.getKey(stacks.get(0).getItem()).toString());
-			json.addProperty("count", stacks.get(0).getCount());
-			return json;
-		}
-		
 	}
-	*/
-
 	
+	public int getCount() {
+		return this.stack.getCount();
+	}
+	
+	public static CountIngredient read(PacketBuffer buffer) {
+	      int i = buffer.readVarInt();
+	      return new CountIngredient(buffer.readItemStack());
+	}
+
+	public static class Serializer implements IIngredientSerializer<CountIngredient>
+	{
+		public static final Serializer INSTANCE = new Serializer();
+
+		@Override
+		public CountIngredient parse(PacketBuffer buffer) {
+			return new CountIngredient(buffer.readItemStack());
+		}
+
+		@Override
+		public CountIngredient parse(JsonObject json) {
+			return new CountIngredient(CraftingHelper.getItemStack(json, true));
+		}
+
+		@Override
+		public void write(PacketBuffer buffer, CountIngredient ingredient) {
+			buffer.writeItemStack(ingredient.stack);
+		}
+	}
 
 }

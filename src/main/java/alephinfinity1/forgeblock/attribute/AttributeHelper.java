@@ -18,7 +18,6 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -78,31 +77,29 @@ public class AttributeHelper {
 			
 			//Registers custom attributes
 			living.getAttributes().registerAttribute(FBAttributes.STRENGTH);
-			living.getAttribute(FBAttributes.STRENGTH).setBaseValue(0.0D);
 			living.getAttributes().registerAttribute(FBAttributes.DEFENSE);
-			living.getAttribute(FBAttributes.DEFENSE).setBaseValue(0.0D);
 			living.getAttributes().registerAttribute(FBAttributes.TRUE_DEFENSE);
-			living.getAttribute(FBAttributes.TRUE_DEFENSE).setBaseValue(0.0D);
 			living.getAttributes().registerAttribute(FBAttributes.CRIT_CHANCE);
-			living.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(30.0D);
 			living.getAttributes().registerAttribute(FBAttributes.CRIT_DAMAGE);
-			living.getAttribute(FBAttributes.CRIT_DAMAGE).setBaseValue(50.0D);
 			living.getAttributes().registerAttribute(FBAttributes.BONUS_ATTACK_SPEED);
-			living.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).setBaseValue(0.0D);
 			living.getAttributes().registerAttribute(FBAttributes.INTELLIGENCE);
-			living.getAttribute(FBAttributes.INTELLIGENCE).setBaseValue(0.0D);
 			//Player-only attributes
 			if(living instanceof PlayerEntity) {
 				living.getAttributes().registerAttribute(FBAttributes.SEA_CREATURE_CHANCE);
-				living.getAttribute(FBAttributes.SEA_CREATURE_CHANCE).setBaseValue(0.0D);
 				living.getAttributes().registerAttribute(FBAttributes.MAGIC_FIND);
-				living.getAttribute(FBAttributes.MAGIC_FIND).setBaseValue(0.0D);
 				living.getAttributes().registerAttribute(FBAttributes.PET_LUCK);
-				living.getAttribute(FBAttributes.PET_LUCK).setBaseValue(0.0D);
-				living.getAttributes().registerAttribute(FBAttributes.HEALTH_REGEN);
-				living.getAttribute(FBAttributes.HEALTH_REGEN).setBaseValue(0.0D);
-				living.getAttributes().registerAttribute(FBAttributes.MANA_EFFICIENCY);
-				living.getAttribute(FBAttributes.MANA_EFFICIENCY).setBaseValue(0.0D);
+				for(IAttribute attribute : FBAttributes.ADDITIONAL_ATTRIBUTES) {
+					living.getAttributes().registerAttribute(attribute);
+				}
+				for(IAttribute attribute : FBAttributes.RAW_ATTRIBUTES) {
+					living.getAttributes().registerAttribute(attribute);
+				}
+				for(IAttribute attribute : FBAttributes.SKILL_XP_BOOSTS) {
+					living.getAttributes().registerAttribute(attribute);
+				}
+				for(IAttribute attribute : FBAttributes.SLAYER_LUCKS) {
+					living.getAttributes().registerAttribute(attribute);
+				}
 			}
 		}
 	}

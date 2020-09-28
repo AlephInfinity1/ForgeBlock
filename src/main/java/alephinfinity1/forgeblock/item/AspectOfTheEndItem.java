@@ -1,5 +1,7 @@
 package alephinfinity1.forgeblock.item;
 
+import static alephinfinity1.forgeblock.ForgeBlock.MINECRAFT;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,6 @@ import alephinfinity1.forgeblock.misc.mana.ManaProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.ManaUpdatePacket;
-import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -74,7 +75,7 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_1").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_2").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aote_3").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost", new DecimalFormat("#").format(this.getAbilityCost(stack, Minecraft.getInstance().player))).getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost", new DecimalFormat("#").format(this.getAbilityCost(stack, MINECRAFT.player))).getString()));
 		return list;
 	}
 
@@ -128,6 +129,16 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 			tag.merge(living.getHeldItemMainhand().getOrCreateTag());
 			living.setHeldItem(Hand.MAIN_HAND, aoteItem);
 		}
+	}
+
+	@Override
+	public int getCooldown(ItemStack stack) {
+		return 0;
+	}
+
+	@Override
+	public int getCooldown(ItemStack stack, PlayerEntity player) {
+		return 0;
 	}
 
 }

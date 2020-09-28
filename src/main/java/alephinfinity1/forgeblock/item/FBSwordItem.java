@@ -25,6 +25,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -65,6 +66,12 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		builder.put(FBAttributes.CRIT_CHANCE.getName(), new AttributeModifier(CRIT_CHANCE_MODIFIER, "Crit chance modifier", critChanceIn, Operation.ADDITION));
 		builder.put(FBAttributes.CRIT_DAMAGE.getName(), new AttributeModifier(CRIT_DAMAGE_MODIFIER, "Crit damage modifier", critDamageIn, Operation.ADDITION));
 		attributes = builder.build();
+	}
+	
+	public FBSwordItem(Properties props, FBTier tier, Multimap<String, AttributeModifier> attributes) {
+		super(new FBItemTier(), 0, (float) Double.MAX_VALUE, props);
+		this.tier = tier;
+		this.attributes = attributes;
 	}
 	
 	@Override
@@ -210,4 +217,8 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		return FBItemType.SWORD;
 	}
 	
+	@Override
+	public Rarity getRarity(ItemStack stack) {
+		return getStackTier(stack).getVanillaRarity();
+	}
 }

@@ -9,6 +9,7 @@ import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -76,6 +77,11 @@ public class FBTieredItem extends Item implements IFBTieredItem {
 	@Override
 	public FBItemType getFBItemType() {
 		return FBItemType.GENERAL;
+	}
+	
+	@Override
+	public Rarity getRarity(ItemStack stack) {
+		return getStackTier(stack).getVanillaRarity();
 	}
 
 }

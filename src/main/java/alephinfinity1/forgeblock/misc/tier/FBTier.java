@@ -1,6 +1,7 @@
 package alephinfinity1.forgeblock.misc.tier;
 
 import alephinfinity1.forgeblock.config.CustomModConfig;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -262,6 +263,31 @@ public enum FBTier {
 			return 32001;
 		default:
 			return -1;
+		}
+	}
+	
+	public Rarity getVanillaRarity() {
+		switch(this) {
+		case COMMON:
+			return Rarity.create("FB_COMMON", CustomModConfig.COMMON_TIER_COLOR.get());
+		case UNCOMMON:
+			return Rarity.create("FB_UNCOMMON", CustomModConfig.UNCOMMON_TIER_COLOR.get());
+		case RARE:
+			return Rarity.create("FB_RARE", CustomModConfig.RARE_TIER_COLOR.get());
+		case EPIC:
+			return Rarity.create("FB_EPIC", CustomModConfig.EPIC_TIER_COLOR.get());
+		case LEGENDARY:
+			return Rarity.create("FB_LEGENDARY", CustomModConfig.LEGENDARY_TIER_COLOR.get());
+		case MYTHIC:
+			return Rarity.create("FB_MYTHIC", CustomModConfig.MYTHIC_TIER_COLOR.get());
+		case SUPREME:
+			return Rarity.create("FB_SUPREME", CustomModConfig.SUPREME_TIER_COLOR.get());
+		case SPECIAL:
+			return Rarity.create("FB_SPECIAL", CustomModConfig.SPECIAL_TIER_COLOR.get());
+		case VERY_SPECIAL:
+			return Rarity.create("FB_VERY_SPECIAL", CustomModConfig.VERY_SPECIAL_TIER_COLOR.get());
+		default:
+			return Rarity.COMMON;
 		}
 	}
 }

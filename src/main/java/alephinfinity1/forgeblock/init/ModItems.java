@@ -15,6 +15,7 @@ import alephinfinity1.forgeblock.item.FBSwordItem;
 import alephinfinity1.forgeblock.item.GolemArmorItem;
 import alephinfinity1.forgeblock.item.LapisArmorItem;
 import alephinfinity1.forgeblock.item.MinerOutfitArmorItem;
+import alephinfinity1.forgeblock.item.OneSwordItem;
 import alephinfinity1.forgeblock.item.ProtectorDragonArmorItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
 import alephinfinity1.forgeblock.item.StonkItem;
@@ -171,7 +172,8 @@ public class ModItems {
 	public static final RegistryObject<Item> FB_POTION = OVERRIDE.register("potion", () -> new FBPotionItem(new Item.Properties().group(ModItemGroups.FB_POTIONS)));
 	
 	/*
-	 * Custom items/ideas
+	 * Custom items/ideas/debug
 	 */
 	public static final RegistryObject<Item> DIMENSIUS = ITEMS.register("dimensius", () -> new FBArmorItem(EquipmentSlotType.HEAD, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.MYTHIC, ModifierHelper.modifierMapFromDoubles(0, -1000, 0, 0, 0, 0, -1000, 0, 0, 3000, 0, 0, 0)));
+	public static final RegistryObject<Item> ONE = ITEMS.register("one", () -> new OneSwordItem(new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.SPECIAL));
 }

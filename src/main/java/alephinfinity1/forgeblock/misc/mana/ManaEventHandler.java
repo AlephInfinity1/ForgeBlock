@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.ManaUpdatePacket;
@@ -15,10 +16,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -32,14 +30,6 @@ public class ManaEventHandler {
 	private static int tickElapsed = 0;
 	
 	@SubscribeEvent
-	public static void onPlayerLoggedIn(PlayerLoggedInEvent event) {
-		PlayerEntity player = event.getPlayer();
-		IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
-		
-		//player.sendMessage(new StringTextComponent(Double.toString(mana.getMana())));
-	}
-	
-	@SubscribeEvent
 	public static void onTick(TickEvent.PlayerTickEvent event) {
 		if(event.phase == Phase.END && !event.player.getEntityWorld().isRemote) {
 			++tickElapsed;
@@ -49,7 +39,7 @@ public class ManaEventHandler {
 			if(tickElapsed % 20 == 0) {
 				if(mana.getMana() >= maxMana) return;
 				else {
-					mana.increase(Math.min(maxMana / 50.0, maxMana - mana.getMana()));
+					mana.increase(Math.min(maxMana / 50.0 + player.getAttribute(FBAttributes.MANA_REGEN).getValue(), maxMana - mana.getMana()));
 				}
 				ManaProvider.MANA_CAPABILITY.getStorage().writeNBT(ManaProvider.MANA_CAPABILITY, mana, null);
 				
@@ -65,7 +55,7 @@ public class ManaEventHandler {
 		int width = mc.getMainWindow().getScaledWidth();
 		int height = mc.getMainWindow().getScaledHeight();
 		
-		PlayerEntity player = mc.getInstance().player;
+		PlayerEntity player = ForgeBlock.MINECRAFT.player;
 		IMana mana;
 		manaValue = 0;
 		maxManaValue = 100;
@@ -93,7 +83,7 @@ public class ManaEventHandler {
 	@SubscribeEvent
 	public static void onPlayerClone(PlayerEvent.Clone event) {
 		if(!event.isWasDeath()) return;
-		IMana manaOld = event.getOriginal().getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
+		//IMana manaOld = event.getOriginal().getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
 	}
 
 }
