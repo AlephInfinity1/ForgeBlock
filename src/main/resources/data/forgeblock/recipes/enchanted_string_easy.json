@@ -1,0 +1,15 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		"xxx"
+	],
+	"key": {
+		"x": {
+			"item": "minecraft:string",
+			"count": 64
+		}
+	},
+	"result": {
+		"item": "forgeblock:enchanted_string"
+	}
+}

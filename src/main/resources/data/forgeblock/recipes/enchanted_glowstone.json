@@ -1,0 +1,16 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		"xx",
+		"xx"
+	],
+	"key": {
+		"x": {
+			"item": "forgeblock:enchanted_glowstone_dust",
+			"count": 48
+		}
+	},
+	"result": {
+		"item": "forgeblock:enchanted_glowstone"
+	}
+}

@@ -341,12 +341,73 @@ public class MultiShapedRecipe implements ICraftingRecipe, net.minecraftforge.co
 	public NonNullList<ItemStack> getRemainingItems(CraftingInventory inv) {
 		NonNullList<ItemStack> nonnulllist = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
-		for(int i = 0; i < nonnulllist.size(); ++i) {
-			ItemStack item = inv.getStackInSlot(i);
-			if (item.hasContainerItem()) {
-				nonnulllist.set(i, item.getContainerItem());
-			} else {
-				item.shrink(this.recipeItems.get(i).getCount() - 1);
+		if(inv.getSizeInventory() == 9) { //3x3 crafting grid
+			boolean row0, row1, row2, col0, col1, col2; //Check if each of the rows/slots is empty or not.
+			row0 = !(inv.getStackInSlot(0).isEmpty() && inv.getStackInSlot(1).isEmpty() && inv.getStackInSlot(2).isEmpty());
+			row1 = !(inv.getStackInSlot(3).isEmpty() && inv.getStackInSlot(4).isEmpty() && inv.getStackInSlot(5).isEmpty());
+			row2 = !(inv.getStackInSlot(6).isEmpty() && inv.getStackInSlot(7).isEmpty() && inv.getStackInSlot(8).isEmpty());
+			
+			col0 = !(inv.getStackInSlot(0).isEmpty() && inv.getStackInSlot(3).isEmpty() && inv.getStackInSlot(6).isEmpty());
+			col1 = !(inv.getStackInSlot(1).isEmpty() && inv.getStackInSlot(4).isEmpty() && inv.getStackInSlot(7).isEmpty());
+			col2 = !(inv.getStackInSlot(2).isEmpty() && inv.getStackInSlot(5).isEmpty() && inv.getStackInSlot(8).isEmpty());
+			
+			int rows = 0, cols = 0, rowstart = 0, colstart = 0; //Rows: the number of rows in the grid. Start: when does the rows/columns start.
+			if(row0) {++rows;} else {if(rowstart == 0) rowstart = 1;}
+			if(row1) {++rows;} else {if(rowstart == 1) rowstart = 2;}
+			if(row2) {++rows;} else {if(rowstart == 2) rowstart = 3;}
+			if(row0 && row2 && !row1) ++rows; //If the middle row is skipped
+			
+			if(col0) {++cols;} else {if(colstart == 0) colstart = 1;}
+			if(col1) {++cols;} else {if(colstart == 1) colstart = 2;}
+			if(col2) {++cols;} else {if(colstart == 2) colstart = 3;}
+			if(col0 && col2 && !col1) ++cols; //If the middle column is skipped
+			
+			NonNullList<ItemStack> newList = NonNullList.withSize(rows * cols, ItemStack.EMPTY);
+			
+			for(int i = rowstart; i < rowstart + rows; ++i) { //Gets all grids with an item in it.
+				for(int j = colstart; j < colstart + cols; ++j) {
+					newList.set((i - rowstart) * cols + (j - colstart), nonnulllist.get(i * 3 + j));
+				}
+			}
+	
+			for(int i = 0; i < newList.size(); ++i) {
+				ItemStack item = inv.getStackInSlot(3 * (i / cols + rowstart) + i % cols + colstart); //Gets the corresponding item.
+				if (item.hasContainerItem()) {
+					newList.set(i, item.getContainerItem());
+				} else {
+					item.shrink(this.recipeItems.get(i).getCount() - 1);
+				}
+			}
+		} else if(inv.getSizeInventory() == 4) { //Inventory crafting grid, 2x2
+			boolean row0, row1, col0, col1;
+			row0 = !(inv.getStackInSlot(0).isEmpty() && inv.getStackInSlot(1).isEmpty());
+			row1 = !(inv.getStackInSlot(2).isEmpty() && inv.getStackInSlot(3).isEmpty());
+			
+			col0 = !(inv.getStackInSlot(0).isEmpty() && inv.getStackInSlot(2).isEmpty());
+			col1 = !(inv.getStackInSlot(1).isEmpty() && inv.getStackInSlot(3).isEmpty());
+			
+			int rows = 0, cols = 0, rowstart = 0, colstart = 0;
+			if(row0) {++rows;} else {if(rowstart == 0) rowstart = 1;}
+			if(row1) {++rows;} else {if(rowstart == 1) rowstart = 2;}
+			
+			if(col0) {++cols;} else {if(colstart == 0) colstart = 1;}
+			if(col1) {++cols;} else {if(colstart == 1) colstart = 2;}
+			
+			NonNullList<ItemStack> newList = NonNullList.withSize(rows * cols, ItemStack.EMPTY);
+			
+			for(int i = rowstart; i < rowstart + rows; ++i) { //Gets all grids with an item in it.
+				for(int j = colstart; j < colstart + cols; ++j) {
+					newList.set((i - rowstart) * cols + (j - colstart), nonnulllist.get(i * 2 + j));
+				}
+			}
+			
+			for(int i = 0; i < newList.size(); ++i) {
+				ItemStack item = inv.getStackInSlot(2 * (i / cols + rowstart) + i % cols + colstart); //Gets the corresponding item.
+				if (item.hasContainerItem()) {
+					newList.set(i, item.getContainerItem());
+				} else {
+					item.shrink(this.recipeItems.get(i).getCount() - 1);
+				}
 			}
 		}
 

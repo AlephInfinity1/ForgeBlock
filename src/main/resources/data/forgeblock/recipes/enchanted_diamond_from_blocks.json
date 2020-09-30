@@ -1,0 +1,18 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		" x ",
+		"xxx",
+		" x "
+	],
+	"key": {
+		"x": {
+			"item": "minecraft:diamond_block",
+			"count": 32
+		}
+	},
+	"result": {
+		"item": "forgeblock:enchanted_diamond",
+		"count": 9
+	}
+}

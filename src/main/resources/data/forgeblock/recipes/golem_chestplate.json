@@ -1,0 +1,17 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		"x x",
+		"xxx",
+		"xxx"
+	],
+	"key": {
+		"x": {
+			"item": "forgeblock:enchanted_iron",
+			"count": 10
+		}
+	},
+	"result": {
+		"item": "forgeblock:golem_chestplate"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		" x ",
+		"xxx",
+		" x "
+	],
+	"key": {
+		"x": {
+			"item": "minecraft:slime_ball",
+			"count": 32
+		}
+	},
+	"result": {
+		"item": "forgeblock:enchanted_slime_ball"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		" x ",
+		"xxx",
+		" x "
+	],
+	"key": {
+		"x": {
+			"item": "minecraft:ghast_tear",
+			"count": 32
+		}
+	},
+	"result": {
+		"item": "forgeblock:enchanted_ghast_tear"
+	}
+}
