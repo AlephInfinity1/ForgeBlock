@@ -28,7 +28,6 @@ import alephinfinity1.forgeblock.item.YoungDragonArmorItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.Properties;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -75,7 +74,7 @@ public class ModItems {
 	public static final RegistryObject<Item> ENCHANTED_STRING = ITEMS.register("enchanted_string", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_SPIDER_EYE = ITEMS.register("enchanted_spider_eye", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_GUNPOWDER = ITEMS.register("enchanted_gunpowder", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
-	public static final RegistryObject<Item> ENCHANTED_ENDER_PEARL = ITEMS.register("enchanted_ender_pearl", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_ENDER_PEARL = ITEMS.register("enchanted_ender_pearl", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS).maxStackSize(16), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_GHAST_TEAR = ITEMS.register("enchanted_ghast_tear", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_SLIME_BALL = ITEMS.register("enchanted_slime_ball", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_BLAZE_POWDER = ITEMS.register("enchanted_blaze_powder", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
@@ -83,6 +82,7 @@ public class ModItems {
 	
 	public static final RegistryObject<Item> ENCHANTED_SLIME_BLOCK = ITEMS.register("enchanted_slime_block", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_BLAZE_ROD = ITEMS.register("enchanted_blaze_rod", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_ENDER_EYE = ITEMS.register("enchanted_ender_eye", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON)); 
 
 
 	/*
@@ -113,7 +113,7 @@ public class ModItems {
 	public static final RegistryObject<Item> IRON_PICKAXE = OVERRIDE.register("iron_pickaxe", () -> new FBPickaxeItem(new Item.Properties().group(ModItemGroups.FB_HARVESTING_TOOLS), FBTier.COMMON, 25, 3, 3f, 1));
 	public static final RegistryObject<Item> DIAMOND_PICKAXE = OVERRIDE.register("diamond_pickaxe", () -> new FBPickaxeItem(new Item.Properties().group(ModItemGroups.FB_HARVESTING_TOOLS), FBTier.UNCOMMON, 30, 4, 4.5f, 1));
 	
-	public static final RegistryObject<Item> STONK = ITEMS.register("stonk", () -> new StonkItem(new Item.Properties(), FBTier.EPIC, 15, 1, 12, 1));
+	public static final RegistryObject<Item> STONK = ITEMS.register("stonk", () -> new StonkItem(new Item.Properties().group(ModItemGroups.FB_HARVESTING_TOOLS), FBTier.EPIC, 15, 1, 12, 1));
 	
 	/*
 	 * Armor

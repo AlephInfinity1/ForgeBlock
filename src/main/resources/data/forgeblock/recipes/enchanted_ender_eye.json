@@ -1,0 +1,21 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		" x ",
+		"xex",
+		" x "
+	],
+	"key": {
+		"x": {
+			"item": "minecraft:blaze_powder",
+			"count": 16
+		},
+		"e": {
+			"item": "forgeblock:enchanted_ender_pearl",
+			"count": 16
+		}
+	},
+	"result": {
+		"item": "forgeblock:enchanted_ender_eye"
+	}
+}

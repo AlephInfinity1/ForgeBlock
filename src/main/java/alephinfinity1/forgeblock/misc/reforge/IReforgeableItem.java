@@ -10,9 +10,16 @@ import net.minecraft.item.ItemStack;
  * Dummy interface
  */
 public interface IReforgeableItem extends IFBTieredItem {
-	public Reforge getReforge(ItemStack stack);
+	default Reforge getReforge(ItemStack stack) {
+		if(stack.getTag() == null) return null;
+		String reforgeName = stack.getTag().getString("Reforge");
+		if(reforgeName.isEmpty()) return null;
+		else return Reforge.findReforgeByID(reforgeName);
+	}
 	
-	public void setReforge(Reforge reforge, ItemStack stack);
+	default void setReforge(Reforge reforge, ItemStack stack) {
+		stack.getTag().putString("Reforge", reforge.getID());
+	}
 
 	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack);
 }

@@ -23,7 +23,7 @@ public class RecipeUnlockHandler {
 			Collection<IRecipe<?>> recipes = event.getPlayer().getEntityWorld().getRecipeManager().getRecipes();
 			PlayerEntity player = event.getPlayer();
 			for(IRecipe<?> recipe : recipes) {
-				if(recipe.getId().getNamespace().equals(ForgeBlock.MINECRAFT_ID)) {
+				if(!recipe.getId().getNamespace().equals(ForgeBlock.MOD_ID)) {
 					player.unlockRecipes(List.of(recipe));
 				}
 			}

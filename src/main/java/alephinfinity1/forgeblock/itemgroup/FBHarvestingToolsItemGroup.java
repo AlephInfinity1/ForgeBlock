@@ -27,17 +27,5 @@ public class FBHarvestingToolsItemGroup extends ItemGroup {
 	public ItemStack createIcon() {
 		return new ItemStack(ModItems.STONK.get());
 	}
-	
-	@OnlyIn(Dist.CLIENT)
-	@Override
-	public void fill(NonNullList<ItemStack> items) {
-		ItemStack stonks = new ItemStack(ModItems.STONK.get());
-		stonks.addEnchantment(Enchantments.EFFICIENCY, 6);
-		
-		items.add(stonks);
-		for(Item item : Registry.ITEM) {
-			item.fillItemGroup(this, items);
-		}
-	}
 
 }

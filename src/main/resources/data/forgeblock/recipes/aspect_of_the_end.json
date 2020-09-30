@@ -1,0 +1,21 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		"x",
+		"x",
+		"d"
+	],
+	"key": {
+		"x": {
+			"item": "forgeblock:enchanted_ender_eye",
+			"count": 16
+		},
+		"d": {
+			"item": "forgeblock:enchanted_diamond",
+			"count": 1
+		}
+	},
+	"result": {
+		"item": "forgeblock:aspect_of_the_end"
+	}
+}
