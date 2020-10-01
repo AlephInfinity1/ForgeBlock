@@ -32,7 +32,9 @@ public class CollectionRewards {
 	}
 	
 	public CollectionRewards(ResourceLocation recipeReward) {
-		this.recipeRewards = List.of(recipeReward);
+		List<ResourceLocation> list = new ArrayList<>();
+		list.add(recipeReward);
+		this.recipeRewards = list;
 		this.skillXPRewards = null;
 		this.itemRewards = null;
 	}
