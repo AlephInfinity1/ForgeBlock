@@ -1,8 +1,7 @@
 package alephinfinity1.forgeblock.item;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -14,15 +13,13 @@ import com.google.common.collect.Multimap;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.init.ModEnchantments;
-import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.FBItemType;
+import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
@@ -261,7 +258,7 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 	 * Any additional information to appear on the tooltip, to be overridden.
 	 */
 	public List<ITextComponent> additionalInformation() {
-		return List.of();
+		return new ArrayList<ITextComponent>();
 	}
 	
 	@Override

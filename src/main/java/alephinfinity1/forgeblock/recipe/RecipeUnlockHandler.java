@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.recipe;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,7 +25,9 @@ public class RecipeUnlockHandler {
 			PlayerEntity player = event.getPlayer();
 			for(IRecipe<?> recipe : recipes) {
 				if(!recipe.getId().getNamespace().equals(ForgeBlock.MOD_ID)) {
-					player.unlockRecipes(List.of(recipe));
+					List<IRecipe<?>> list = new ArrayList<>();
+					list.add(recipe);
+					player.unlockRecipes(list);
 				}
 			}
 			event.getPlayer().getEntityWorld().getGameRules().get(GameRules.DO_LIMITED_CRAFTING).set(true, event.getPlayer().getServer());

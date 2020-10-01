@@ -60,7 +60,7 @@ public class MultiShapedRecipe implements ICraftingRecipe, net.minecraftforge.co
 	}
 
 	public IRecipeSerializer<?> getSerializer() {
-		return IRecipeSerializer.CRAFTING_SHAPED;
+		return new Serializer();
 	}
 
 	/**
@@ -95,9 +95,6 @@ public class MultiShapedRecipe implements ICraftingRecipe, net.minecraftforge.co
 	public boolean matches(CraftingInventory inv, World worldIn) {
 		for(int i = 0; i <= inv.getWidth() - this.recipeWidth; ++i) {
 			for(int j = 0; j <= inv.getHeight() - this.recipeHeight; ++j) {
-				if (this.checkMatch(inv, i, j, true)) {
-					return true;
-				}
 
 				if (this.checkMatch(inv, i, j, false)) {
 					return true;

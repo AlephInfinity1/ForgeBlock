@@ -19,7 +19,7 @@ public class SkillsProvider implements ICapabilitySerializable<INBT> {
 		if(cap == SKILLS_CAPABILITY) {
 			return defaultInstance.cast();
 		}
-		return null;
+		return LazyOptional.empty();
 	}
 
 	@Override

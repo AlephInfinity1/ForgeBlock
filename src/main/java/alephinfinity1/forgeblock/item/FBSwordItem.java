@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.item;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -113,15 +114,15 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	}
 	
 	public List<ITextComponent> additionalInformation() {
-		return List.of();
+		return new ArrayList<ITextComponent>();
 	}
 	
 	public List<ITextComponent> additionalInformation(ItemStack stack) {
-		return List.of();
+		return new ArrayList<ITextComponent>();
 	}
 	
 	public List<ITextComponent> additionalInformation(ItemStack stack, PlayerEntity player) {
-		return List.of();
+		return new ArrayList<ITextComponent>();
 	}
 	
 	@Override
