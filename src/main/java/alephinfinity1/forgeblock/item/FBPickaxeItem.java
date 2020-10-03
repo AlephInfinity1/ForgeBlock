@@ -1,8 +1,6 @@
 package alephinfinity1.forgeblock.item;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -11,18 +9,15 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
-import alephinfinity1.forgeblock.attribute.FBAttributes;
-import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.FBItemType;
+import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -74,7 +69,6 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 	
 	@Override
 	public boolean canHarvestBlock(BlockState blockIn) {
-		Block block = blockIn.getBlock();
 		int i = this.getTier().getHarvestLevel();
 		if (blockIn.getHarvestTool() == net.minecraftforge.common.ToolType.PICKAXE) {
 			return i >= blockIn.getHarvestLevel();
@@ -155,6 +149,7 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 			return new StringTextComponent(color + recombobulateBold + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 	}
 	
+	@SuppressWarnings("unused")
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		FBTier tier = this.getStackTier(stack);

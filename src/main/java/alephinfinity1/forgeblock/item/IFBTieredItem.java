@@ -2,7 +2,6 @@ package alephinfinity1.forgeblock.item;
 
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
 
 public interface IFBTieredItem extends IFBItem {
 	/*

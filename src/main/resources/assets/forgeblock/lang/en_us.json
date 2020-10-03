@@ -128,6 +128,7 @@
     "misc.forgeblock.itemtype.accessory": "ACCESSORY",
     "misc.forgeblock.itemtype.ring": "RING",
     "misc.forgeblock.itemtype.potion": "POTION",
+    "misc.forgeblock.itemtype.enchanted_book": "ENCHANTED BOOK",
     
     "misc.forgeblock.fakeattribute.destroySpeed": "Mining Speed",
     "misc.forgeblock.fakeattribute.harvestLevel": "Harvest Level",
@@ -221,9 +222,17 @@
     "enchantment.forgeblock.life_steal": "Life Steal",
     "enchantment.forgeblock.ultimate_wise": "Ultimate Wise",
     "enchantment.forgeblock.critical": "Critical",
+    "enchantment.forgeblock.cubism": "Cubism",
+    "enchantment.forgeblock.ender_slayer": "Ender Slayer",
+    "enchantment.forgeblock.execute": "Execute",
+    "enchantment.forgeblock.first_strike": "First Strike",
+    "enchantment.forgeblock.venomous": "Venomous",
+    "enchantment.forgeblock.giant_killer": "Giant Killer",
+    "enchantment.forgeblock.luck": "Luck",
 
     "effect.forgeblock.ender_warp": "Ender Warp",
     "effect.forgeblock.rogue_speed_boost": "Rogue Speed Boost",
+    "effect.forgeblock.venomous": "Venomous",
     
     "potion.potency.6": "VII",
     "potion.potency.7": "VIII",
@@ -291,6 +300,9 @@
     "misc.forgeblock.reforge.necrotic": "Necrotic",
     
     "text.forgeblock.reforgeable": "\u00A78This item can be reforged!",
+    
+    "misc.forgeblock.rareDrop": "\u00A76\u00A7lRARE DROP!",
+    "misc.forgeblock.magicFindBonus": "\u00A7b(+%s% Magic Find!)",
     
     "text.forgeblock.sword_desc.aote_0": "\u00A76Item Ability: Instant Transmission \u00A7e\u00A7lRIGHT CLICK",
     "text.forgeblock.sword_desc.aote_1": "\u00A77Teleport \u00A7a8 blocks\u00A77 ahead of",

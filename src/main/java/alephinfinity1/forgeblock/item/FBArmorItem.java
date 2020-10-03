@@ -214,6 +214,8 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 				return reforge.getModifierMapByTier(getStackTier(stack), LEGGINGS_REFORGE_MODIFIER);
 			case FEET:
 				return reforge.getModifierMapByTier(getStackTier(stack), BOOTS_REFORGE_MODIFIER);
+			default:
+				break;
 			}
 			
 			return Reforge.emptyModifier();

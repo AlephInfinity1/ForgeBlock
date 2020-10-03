@@ -32,6 +32,7 @@ public class SwordOfTheStarsItem extends FBSwordItem {
 		return list;
 	}
 	
+	/*
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if(worldIn.isRemote) {
@@ -40,5 +41,6 @@ public class SwordOfTheStarsItem extends FBSwordItem {
 		
 		return ActionResult.resultSuccess(playerIn.getHeldItemMainhand());
 	}
+	*/
 
 }

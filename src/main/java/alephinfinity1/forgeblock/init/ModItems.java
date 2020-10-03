@@ -8,6 +8,7 @@ import alephinfinity1.forgeblock.item.AspectOfTheEnderItem;
 import alephinfinity1.forgeblock.item.CustomSwordItem;
 import alephinfinity1.forgeblock.item.FBArmorItem;
 import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
+import alephinfinity1.forgeblock.item.FBEnchantedBookItem;
 import alephinfinity1.forgeblock.item.FBGlintedItem;
 import alephinfinity1.forgeblock.item.FBPickaxeItem;
 import alephinfinity1.forgeblock.item.FBPotionItem;
@@ -202,6 +203,11 @@ public class ModItems {
 	 * Potion
 	 */
 	public static final RegistryObject<Item> FB_POTION = OVERRIDE.register("potion", () -> new FBPotionItem(new Item.Properties().group(ModItemGroups.FB_POTIONS)));
+	
+	/*
+	 * Misc
+	 */
+	public static final RegistryObject<Item> ENCHANTED_BOOK = OVERRIDE.register("enchanted_book", () -> new FBEnchantedBookItem(new Item.Properties()));
 	
 	/*
 	 * Custom items/ideas/debug

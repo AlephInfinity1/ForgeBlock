@@ -25,10 +25,15 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class TextFormatHelper {
 	
@@ -519,6 +524,30 @@ public class TextFormatHelper {
 		List<ITextComponent> list = new ArrayList<>();
 		
 		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
+		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
+		for(Map.Entry<Enchantment, Integer> entry : set) {
+			if(entry.getKey() instanceof UltimateEnchantment) {
+				list.add(new StringTextComponent(TextFormatting.LIGHT_PURPLE.toString() + TextFormatting.BOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+			} else {
+				if(entry.getValue() > entry.getKey().getMaxLevel()) list.add(new StringTextComponent(TextFormatting.GOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+				else list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+			}
+		}
+		
+		if(!set.isEmpty()) list.add(new StringTextComponent(""));
+		
+		return list;
+	}
+	
+	public static List<ITextComponent> formatEnchantments(ItemStack stack, ListNBT enchants) {
+		List<ITextComponent> list = new ArrayList<>();
+		
+		Map<Enchantment, Integer> enchantments = new HashMap<>();
+		for(INBT nbt : enchants) {
+			CompoundNBT compound = (CompoundNBT) nbt;
+			Enchantment ench = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryCreate(compound.getString("id")));
+			if(ench != null) enchantments.put(ench, compound.getInt("lvl"));
+		}
 		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
 		for(Map.Entry<Enchantment, Integer> entry : set) {
 			if(entry.getKey() instanceof UltimateEnchantment) {

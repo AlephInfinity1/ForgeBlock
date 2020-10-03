@@ -7,6 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 
 public class Collections {
+	/*
 	public static final Collection COBBLESTONE = new Collection(
 			CollectionType.MINING,
 			Map.of(
@@ -19,5 +20,6 @@ public class Collections {
 					),
 			"cobblestone"
 			);
+			*/
 
 }

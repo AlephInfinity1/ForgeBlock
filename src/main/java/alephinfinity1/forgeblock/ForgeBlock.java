@@ -8,6 +8,7 @@ import alephinfinity1.forgeblock.init.ModEntities;
 import alephinfinity1.forgeblock.init.ModItems;
 import alephinfinity1.forgeblock.init.ModPotions;
 import alephinfinity1.forgeblock.init.ModRecipes;
+import alephinfinity1.forgeblock.misc.drops.LapisZombieDrops;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.Mana;
 import alephinfinity1.forgeblock.misc.mana.ManaStorage;
@@ -57,6 +58,7 @@ public class ForgeBlock {
 		AttributeHelper.removeLimits();
 		CapabilityManager.INSTANCE.register(IMana.class, new ManaStorage(), Mana::new);
 		CapabilityManager.INSTANCE.register(ISkills.class, new SkillsStorage(), new SkillsFactory());
+		LapisZombieDrops.initialize();
 	}
 	
 }

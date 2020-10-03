@@ -14,6 +14,7 @@ import net.minecraft.item.BowItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolItem;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -28,7 +29,7 @@ public class TelekinesisEnchantment extends Enchantment {
 		super(Rarity.COMMON, EnchantmentType.create("TOOLS_AND_WEAPON", (item) -> (item instanceof SwordItem || item instanceof ToolItem || item instanceof BowItem)), new EquipmentSlotType[] {EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET, EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND});
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onPlayerKillEntity(LivingDropsEvent event) {
 		if(event.getSource().getTrueSource() == null) return;
 		if(!(event.getSource().getTrueSource() instanceof PlayerEntity)) return;
