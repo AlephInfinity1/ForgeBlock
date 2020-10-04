@@ -58,6 +58,10 @@ public class DamageHandler {
 			//Prevents crashes
 			if(damager == null) return;
 			if(damager.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) == null) return;
+			if(result == 1.0D) { //Sweep attack; normal attacks can never deal 1 damage.
+				event.setCanceled(true);
+				return;
+			}
 			
 			//Step 1: calculate base damage from attackDamage, strength, critChance, and critDamage.
 			double damage = damager.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
@@ -97,7 +101,7 @@ public class DamageHandler {
 			if(damager instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) damager;
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
-				skillMultiplier = 1.0D + 0.04D * skills.getLevel(SkillType.COMBAT);
+				skillMultiplier = 0.04D * skills.getLevel(SkillType.COMBAT);
 			}
 			
 			result *= (1.0D + enchMultiplier + skillMultiplier);

@@ -144,7 +144,7 @@ public class TextFormatHelper {
 		if(amount > 0.0D) {
 			str.insert(0, '+');
 		}
-		return str.toString();
+		return str.toString().replaceAll("\u00A0", ",");
 	}
 	
 	public static String formatLargeNumberWithSuffix(SuffixType suffix, double number) {
