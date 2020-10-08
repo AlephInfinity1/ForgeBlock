@@ -24,13 +24,13 @@ public class AnvilMechanicsHandler {
 				result.addEnchantment(data.enchantment, data.enchantmentLevel);
 				++i;
 			}
-			event.setCost(i * 5);
+			event.setCost(i * 40);
 			event.setOutput(result);
 		}
 	}
 	
 	@SubscribeEvent
 	public static void onAnvilUse(AnvilRepairEvent event) {
-		event.setBreakChance(1.0f);
+		event.setBreakChance(0.0f);
 	}
 }

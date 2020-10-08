@@ -1,6 +1,10 @@
 package alephinfinity1.forgeblock;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import alephinfinity1.forgeblock.attribute.AttributeHelper;
+import alephinfinity1.forgeblock.client.ClientEventBusSubscriber;
 import alephinfinity1.forgeblock.config.CustomModConfig;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
@@ -31,6 +35,8 @@ public class ForgeBlock {
 	public static final String MOD_ID = "forgeblock";
 	public static final String MINECRAFT_ID = "minecraft";
 	
+	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+	
 	public static final Minecraft MINECRAFT = Minecraft.getInstance();
 	
 	public ForgeBlock() {
@@ -46,6 +52,7 @@ public class ForgeBlock {
 		ModEntities.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModRecipes.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventBusSubscriber::onClientSetup);
 		
 		FBPacketHandler.register();
 		

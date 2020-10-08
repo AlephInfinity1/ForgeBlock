@@ -34,19 +34,30 @@ public class DamageHandler {
 		
 		if(!(event.getSource().getTrueSource() instanceof LivingEntity)) { //If attack is environmental then only apply defense bonus
 			double damageMultiplier = 1.0D;
-			//If the damage is affected by armor, also apply normal defense bonus
-			if(!(event.getSource().isUnblockable()) || event.getSource().isMagicDamage()) { //Magic damage should be affected by defense
-				double defense = event.getEntityLiving().getAttribute(FBAttributes.DEFENSE).getValue();
-				damageMultiplier = 100.0D / (defense + 100.0D);
-			} else if (event.getSource().equals(DamageSource.OUT_OF_WORLD)){
+			if(event.getSource().equals(DamageSource.OUT_OF_WORLD)){
 				event.setAmount(Float.MAX_VALUE);
 				return;
+			} else if(event.getSource().equals(DamageSource.IN_FIRE) || event.getSource().equals(DamageSource.ON_FIRE)) {
+				event.setAmount(5);
+			} else if(event.getSource().equals(DamageSource.LAVA)) {
+				event.setAmount(20);
+			} else if(event.getSource().equals(DamageSource.STARVE)) { //Disable all starve damage
+				event.setAmount(0);
+			} else if(event.getSource().equals(DamageSource.MAGIC)) { //If magic, do not multiply by 5
+			} else {
+				event.setAmount(event.getAmount() * 5);
+			}
+			
+			//If the damage is affected by armor, also apply normal defense bonus
+			if((!event.getSource().isUnblockable() && !event.getSource().isDamageAbsolute()) || event.getSource().isMagicDamage()) { //Magic damage should be affected by defense
+				double defense = event.getEntityLiving().getAttribute(FBAttributes.DEFENSE).getValue();
+				damageMultiplier = 100.0D / (defense + 100.0D);
 			}
 			
 			double trueDefense = event.getEntityLiving().getAttribute(FBAttributes.TRUE_DEFENSE).getValue();
 			damageMultiplier *= 100.0D / (trueDefense + 100.0D);
 			event.setAmount((float) (event.getAmount() * damageMultiplier));
-			victim.hurtResistantTime = 0; //If environmental damage, no damage tick should be consumed.
+			//victim.hurtResistantTime = 0; //If environmental damage, no damage tick should be consumed.
 			return;
 		}
 		
@@ -67,7 +78,7 @@ public class DamageHandler {
 			double damage = damager.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
 			//if(damager instanceof PlayerEntity) damage += 4; //A wonky workaround to setting the player's attack damage to 5. Might be replaced in the future.
 			double strength = damager.getAttribute(FBAttributes.STRENGTH).getValue();
-			result = (damage + Math.floor(strength / 5.0D)) * (1.0D + strength / 100.0D);
+			result = (damage + Math.floor(strength / 5.0D)) * Math.max(1.0D + strength / 100.0D, 0.0D); //Do not allow negative multiplier
 			
 			//Step 2: calculate enchantment multipliers TODO
 			ItemStack weapon = damager.getHeldItemMainhand();

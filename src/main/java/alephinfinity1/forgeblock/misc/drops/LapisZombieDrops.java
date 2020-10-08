@@ -47,15 +47,18 @@ public class LapisZombieDrops {
 			if(event.getSource().getTrueSource() != null) {
 				if(event.getSource().getTrueSource() instanceof PlayerEntity) {
 					PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
-					World world = event.getDrops().iterator().next().getEntityWorld();
-					double x = event.getDrops().iterator().next().getPosX();
-					double y = event.getDrops().iterator().next().getPosY();
-					double z = event.getDrops().iterator().next().getPosZ();
-					
-					List<ItemStack> droppedItems = drop(player);
-					event.getDrops().clear();
-					for(ItemStack stack : droppedItems) {
-						event.getDrops().add(new ItemEntity(world, x, y, z, stack));
+					try {
+						World world = event.getDrops().iterator().next().getEntityWorld();
+						double x = event.getDrops().iterator().next().getPosX();
+						double y = event.getDrops().iterator().next().getPosY();
+						double z = event.getDrops().iterator().next().getPosZ();
+						
+						List<ItemStack> droppedItems = drop(player);
+						event.getDrops().clear();
+						for(ItemStack stack : droppedItems) {
+							event.getDrops().add(new ItemEntity(world, x, y, z, stack));
+						}
+					} catch(Exception e) {
 					}
 				}
 			}
