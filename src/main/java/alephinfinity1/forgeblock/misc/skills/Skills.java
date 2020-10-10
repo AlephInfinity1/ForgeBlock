@@ -54,6 +54,20 @@ public class Skills implements ISkills {
 		data.put(RUNECRAFTING, new SkillData(RUNECRAFTING));
 	}
 	
+	public Skills(ISkills other) {
+		data.put(FARMING, other.getSkillDataForSkill(FARMING).copy());
+		data.put(MINING, other.getSkillDataForSkill(MINING).copy());
+		data.put(COMBAT, other.getSkillDataForSkill(COMBAT).copy());
+		data.put(FORAGING, other.getSkillDataForSkill(FORAGING).copy());
+		data.put(FISHING, other.getSkillDataForSkill(FISHING).copy());
+		data.put(ENCHANTING, other.getSkillDataForSkill(ENCHANTING).copy());
+		data.put(ALCHEMY, other.getSkillDataForSkill(ALCHEMY).copy());
+		data.put(TAMING, other.getSkillDataForSkill(TAMING).copy());
+		
+		data.put(CARPENTRY, other.getSkillDataForSkill(CARPENTRY).copy());
+		data.put(RUNECRAFTING, other.getSkillDataForSkill(RUNECRAFTING).copy());
+	}
+	
 	@Override
 	public Map<SkillType, SkillData> getData() {
 		return data;
@@ -159,6 +173,11 @@ public class Skills implements ISkills {
 		}
 		
 		return builder.build();
+	}
+
+	@Override
+	public ISkills copy() {
+		return new Skills(this);
 	}
 
 }

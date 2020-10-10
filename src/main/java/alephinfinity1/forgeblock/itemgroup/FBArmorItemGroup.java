@@ -3,7 +3,6 @@ package alephinfinity1.forgeblock.itemgroup;
 import alephinfinity1.forgeblock.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 
 public class FBArmorItemGroup extends ItemGroup {
 

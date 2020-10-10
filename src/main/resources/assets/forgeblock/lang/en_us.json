@@ -102,6 +102,11 @@
     "itemGroup.forgeblock_potions": "ForgeBlock Potions",
     "itemGroup.forgeblock_custom": "ForgeBlock Custom Items",
     
+    "entity.forgeblock.lv1_zombie": "Zombie",
+    "entity.forgeblock.lapis_zombie": "Lapis Zombie",
+    "entity.forgeblock.zealot": "Zealot",
+    "entity.forgeblock.special_zealot": "Zealot",
+    
     "misc.forgeblock.tier.common": "COMMON",
     "misc.forgeblock.tier.uncommon": "UNCOMMON",
     "misc.forgeblock.tier.rare": "RARE",
@@ -259,6 +264,10 @@
     "skills.forgeblock.taming.name": "Taming",
     "skills.forgeblock.carpentry.name": "Carpentry",
     "skills.forgeblock.runecrafting.name": "Runecrafting",
+    
+    "skills.forgeblock.levelUpMessage_1": "  \u00A7b\u00A7lSKILL LEVEL UP \u00A73%1$s \u00A78%2$s\u279c\u00A73%3$s",
+    "skills.forgeblock.levelUpMessage_2": "  \u00A7a\u00A7lREWARDS",
+    "skills.forgeblock.levelUpMessage_3": "    \u00A77\u00af\u005c\u005f\u0028\u30c4\u0029\u005f\u002f\u00af (for now)",
     
     "commands.forgeblock.skill.add.levels.single": "Increased the amount of %3$s levels %1$s has by %2$s",
     "commands.forgeblock.skill.add.points.single": "Increased the amount of %3$s points %1$s has by %2$s",

@@ -1,11 +1,11 @@
 package alephinfinity1.forgeblock.misc;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
-import alephinfinity1.forgeblock.misc.TextFormatHelper.SuffixType;
 import alephinfinity1.forgeblock.misc.skills.ISkills;
 import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
@@ -13,11 +13,15 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -58,6 +62,7 @@ public class DamageHandler {
 			damageMultiplier *= 100.0D / (trueDefense + 100.0D);
 			event.setAmount((float) (event.getAmount() * damageMultiplier));
 			//victim.hurtResistantTime = 0; //If environmental damage, no damage tick should be consumed.
+			addDamageDisplay(victim.world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), event.getAmount() * damageMultiplier, event.getSource());
 			return;
 		}
 		
@@ -140,26 +145,18 @@ public class DamageHandler {
 			
 			//Step 7: debug only. Temporary
 			if(damager instanceof PlayerEntity) {
-				PlayerEntity player = (PlayerEntity) damager;
+				//PlayerEntity player = (PlayerEntity) damager;
 				//For debug purposes only
-				if(!isCrit) {
-					player.sendMessage(new StringTextComponent("Dealt " + TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage!"));
-				} else {
-					player.sendMessage(new StringTextComponent("Dealt " + TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage! (Crit!)"));
-				}
+				addDamageDisplay(victim.world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), result, isCrit);
 			}
 			
 			if(victim instanceof PlayerEntity) {
-				PlayerEntity player = (PlayerEntity) victim;
+				//PlayerEntity player = (PlayerEntity) victim;
 				//For debug purposes only
-				if(!isCrit) {
-					player.sendMessage(new StringTextComponent("Taken " + TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage!"));
-					player.sendMessage(new StringTextComponent("Defense: " + Double.toString(defense)));
-				} else {
-					player.sendMessage(new StringTextComponent("Taken " + TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, result) + " damage! (Crit!)"));
-					player.sendMessage(new StringTextComponent("Defense: " + Double.toString(defense)));
-				}
+				addDamageDisplay(victim.world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), result, isCrit);
 			}
+		} else {
+			addDamageDisplay(victim.world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), event.getAmount(), event.getSource());
 		}
 		
 		//Regardless of the type of damage:
@@ -172,7 +169,55 @@ public class DamageHandler {
 		
 		//Post: sets damage.
 		event.setAmount((float) result);
-		victim.hurtResistantTime = (int) (20 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue()));
+		
+		/**
+		 * Sets the victim's hurt resistance time based on the damager's attack speed attribute.
+		 * See line 927 of LivingEntity
+		 * @see LivingEntity#attackEntityFrom(DamageSource source, float amount)
+		 */
+		victim.hurtResistantTime = (int) (10.0 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue())) + 10;
+	}
+	
+	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, boolean isCrit) {
+		ArmorStandEntity display = new ArmorStandEntity(world, posX, posY - 1.0D, posZ);
+		display.setInvisible(true);
+		String num = new DecimalFormat(",###").format(amount).replaceAll("\u00A0", ",");
+		ITextComponent comp;
+		if(isCrit) {
+			comp = new StringTextComponent(TextFormatting.RED.toString() + num);
+		} else {
+			comp = new StringTextComponent(TextFormatting.GRAY.toString() + num);
+		}
+		display.setCustomName(comp);
+		display.setCustomNameVisible(true);
+		display.setNoGravity(true);
+		world.addEntity(display);
+		TickHandler.damageDisplay.put(display, TickHandler.tickElapsed);
+	}
+	
+	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, DamageSource source) {
+		ArmorStandEntity display = new ArmorStandEntity(world, posX, posY - 1.0D, posZ);
+		display.setInvisible(true);
+		String num = new DecimalFormat(",###").format(amount).replaceAll("\u00A0", ",");
+		ITextComponent comp;
+		if(source.equals(DamageSource.MAGIC)) {
+			comp = new StringTextComponent(TextFormatting.AQUA.toString() + num);
+		} else if(source.equals(DamageSource.LAVA)) {
+			comp = new StringTextComponent(TextFormatting.RED.toString() + num);
+		} else if(source.equals(DamageSource.ON_FIRE) || source.equals(DamageSource.IN_FIRE)) {
+			comp = new StringTextComponent(TextFormatting.GOLD.toString() + num);
+		} else if(source.equals(DamageSource.OUT_OF_WORLD)) {
+			comp = new StringTextComponent(TextFormatting.DARK_PURPLE.toString() + num);
+		} else if(source.equals(DamageSource.DROWN)){
+			comp = new StringTextComponent(TextFormatting.DARK_AQUA.toString() + num);
+		} else {
+			comp = new StringTextComponent(TextFormatting.GRAY.toString() + num);
+		}
+		display.setCustomName(comp);
+		display.setCustomNameVisible(true);
+		display.setNoGravity(true);
+		world.addEntity(display);
+		TickHandler.damageDisplay.put(display, TickHandler.tickElapsed);
 	}
 
 }

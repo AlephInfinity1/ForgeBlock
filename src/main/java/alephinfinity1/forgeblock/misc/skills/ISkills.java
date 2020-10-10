@@ -19,4 +19,5 @@ public interface ISkills {
 	public void setProgress(SkillType skill, double progress);
 	public CompoundNBT getCompoundNBTFor(SkillType skill);
 	public Multimap<String, AttributeModifier> getAttributeModifiers();
+	public ISkills copy();
 }

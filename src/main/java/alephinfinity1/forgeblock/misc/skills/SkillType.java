@@ -326,4 +326,15 @@ public enum SkillType {
 	public ITextComponent getDisplayName() {
 		return new TranslationTextComponent("skills.forgeblock." + id + ".name");
 	}
+	
+	public static final SkillType[] NON_COSMETIC_TYPES = new SkillType[] {
+			FARMING,
+			MINING,
+			COMBAT,
+			FORAGING,
+			FISHING,
+			ENCHANTING,
+			ALCHEMY,
+			TAMING
+	};
 }

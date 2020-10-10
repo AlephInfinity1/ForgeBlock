@@ -3,17 +3,10 @@ package alephinfinity1.forgeblock.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import alephinfinity1.forgeblock.client.GuiMenu;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
 
 public class SwordOfTheStarsItem extends FBSwordItem {
 

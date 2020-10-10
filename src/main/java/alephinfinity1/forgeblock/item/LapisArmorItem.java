@@ -50,7 +50,7 @@ public class LapisArmorItem extends FBArmorItem {
 		LivingEntity living = event.getEntityLiving();
 		Iterable<ItemStack> armor = living.getArmorInventoryList();
 		for(ItemStack stack : armor) {
-			if(!(stack.getItem() instanceof LapisArmorItem)) {
+			if(!(stack.getItem() instanceof LapisArmorItem) || stack.getAttributeModifiers(stack.getEquipmentSlot()).isEmpty()) { //If display item, do not buff stats
 				if(living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getModifier(LAPIS_HEALTH_BOOST) != null) {
 					living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(LAPIS_HEALTH_BOOST);
 				}

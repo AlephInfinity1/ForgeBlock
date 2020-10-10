@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Pose;
+import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.event.TickEvent;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 public class TickHandler {
 	public static long tickElapsed = 0;
 	public static Map<PlayerEntity, Long> healthDirty = new HashMap<>();
+	public static Map<ArmorStandEntity, Long> damageDisplay = new HashMap<>();
 	public static final Minecraft minecraft = Minecraft.getInstance();
 
 	@SubscribeEvent
@@ -34,6 +36,13 @@ public class TickHandler {
 				if(healthDirty.get(player) - tickElapsed < -5) {
 					player.heal(Float.MAX_VALUE);
 					healthDirty.remove(player);
+				}
+			}
+			if(!damageDisplay.isEmpty()) {
+				for(Map.Entry<ArmorStandEntity, Long> entry : damageDisplay.entrySet()) {
+					if(tickElapsed - entry.getValue() > 20) {
+						entry.getKey().remove();
+					}
 				}
 			}
 		}

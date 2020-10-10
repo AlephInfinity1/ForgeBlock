@@ -207,7 +207,7 @@ public class CustomSwordItem extends FBSwordItem {
 			list.add(StringNBT.valueOf("&bFor now, have some AotE stats :p"));
 			list.add(StringNBT.valueOf(""));
 			item.getOrCreateTag().put("Lore", list);
-			item.getOrCreateTag().put("Rarity", ByteNBT.valueOf((byte) 6));
+			item.getOrCreateTag().put("Rarity", ByteNBT.valueOf((byte) 7));
 			item.getOrCreateTag().putInt("Damage", 100);
 			item.getOrCreateTag().putInt("Strength", 100);
 			items.add(item);

@@ -2,10 +2,11 @@ package alephinfinity1.forgeblock.network;
 
 import java.util.function.Supplier;
 
+import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.misc.skills.ISkills;
 import alephinfinity1.forgeblock.misc.skills.SkillType;
+import alephinfinity1.forgeblock.misc.skills.SkillsEventHandler;
 import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -31,11 +32,13 @@ public class SkillUpdatePacket {
 	public static void handle(SkillUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
 		if(ctx.get().getDirection().getReceptionSide().isClient()) {
 			ctx.get().enqueueWork(() -> {
-				ClientPlayerEntity player = Minecraft.getInstance().player;
+				ClientPlayerEntity player = ForgeBlock.MINECRAFT.player;
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				ISkills old = skills.copy();
 				SkillType type = SkillType.getSkillTypeByID(msg.nbt.getString("SkillType"));
 				skills.setLevel(type, msg.nbt.getInt("Level"));
 				skills.setProgress(type, msg.nbt.getDouble("Progress"));
+				SkillsEventHandler.notifyPlayer(player, type, old, skills);
 			});
 		}
 		

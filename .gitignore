@@ -27,6 +27,7 @@ usernamecache.json
 logs
 fml.toml
 Forge-client.toml
+/custom-client-config.toml
 
 # Files from Forge MDK
 forge*changelog.txt

@@ -157,6 +157,30 @@ public class TextFormatHelper {
 		return (new DecimalFormat("0.#")).format(c) + suffixStr;
 	}
 	
+	public static String formatLargeNumberWithSuffix(SuffixType suffix, double number, int dp) {
+		if(suffix == SuffixType.OFF) return Double.toString(number);
+		int power = (int) Math.floor(Math.log10(number));
+		if(power > suffix.maxMagnitude * 3 + 2) return (new DecimalFormat("0.#E0")).format(number);
+		int magnitude = power / 3;
+		double c = number / Math.pow(10.0, magnitude * 3); 
+		String suffixStr = suffix.dictionary.get(magnitude);
+		switch(dp) {
+		case 0:
+			return (new DecimalFormat("#")).format(c) + suffixStr;
+		case 1:
+			return (new DecimalFormat("#.#")).format(c) + suffixStr;
+		case 2:
+			return (new DecimalFormat("#.##")).format(c) + suffixStr;
+		case 3:
+			return (new DecimalFormat("#.###")).format(c) + suffixStr;
+		case 4:
+			return (new DecimalFormat("#.####")).format(c) + suffixStr;
+		default:
+			return (new DecimalFormat("#.#")).format(c) + suffixStr;
+		}
+		
+	}
+	
 	public static String getRomanNumeral(int value) {
 		if(value == 5000) return "TOO_HIGH_NUMBER";
 		if(value > 3999 || value < 1) {

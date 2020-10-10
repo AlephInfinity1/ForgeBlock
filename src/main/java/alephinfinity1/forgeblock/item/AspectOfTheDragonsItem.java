@@ -89,7 +89,7 @@ public class AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem 
 			if(entity instanceof LivingEntity) {
 				LivingEntity living = (LivingEntity) entity;
 				living.attackEntityFrom(DamageSource.causeIndirectMagicDamage(player, player), this.getAbilityDamage(stack, player));
-				living.setVelocity(player.getLookVec().getX() * 7.5, player.getLookVec().getY() * 7.5, player.getLookVec().getZ() * 7.5);
+				living.setVelocity(player.getLookVec().getX() * 4.0, player.getLookVec().getY() * 1.5, player.getLookVec().getZ() * 4.0);
 			}
 		}
 				

@@ -1,6 +1,8 @@
 package alephinfinity1.forgeblock.entity;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.init.ModItems;
+import alephinfinity1.forgeblock.item.FBArmorItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -12,6 +14,7 @@ import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -19,11 +22,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class Lv1ZombieEntity extends ZombieEntity implements IFBEntity {
-	
-	public final int level = 1;
+public class LapisZombieEntity extends ZombieEntity implements IFBEntity {
 
-	public Lv1ZombieEntity(EntityType<? extends ZombieEntity> type, World worldIn) {
+	public LapisZombieEntity(EntityType<? extends ZombieEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
 	
@@ -72,30 +73,33 @@ public class Lv1ZombieEntity extends ZombieEntity implements IFBEntity {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(50.0D);
 		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.0D);
 	}
 	
 	@Override
 	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
-		//Nothing. This mob always have no equipment.
+		this.setItemStackToSlot(EquipmentSlotType.HEAD, ((FBArmorItem) (ModItems.LAPIS_HELMET.get())).getDisplayStack());
+		this.setItemStackToSlot(EquipmentSlotType.CHEST, ((FBArmorItem) (ModItems.LAPIS_CHESTPLATE.get())).getDisplayStack());
+		this.setItemStackToSlot(EquipmentSlotType.LEGS, ((FBArmorItem) (ModItems.LAPIS_LEGGINGS.get())).getDisplayStack());
+		this.setItemStackToSlot(EquipmentSlotType.FEET, ((FBArmorItem) (ModItems.LAPIS_BOOTS.get())).getDisplayStack());
 	}
 
 	@Override
 	public int getLevel() {
-		return 1;
+		return 7;
 	}
 
 	@Override
 	public double getCoins() {
-		return 1.0D;
+		return 5.0D;
 	}
 
 	@Override
 	public double getCombatXP() {
-		return 6.0D;
+		return 12.0D;
 	}
 
 }

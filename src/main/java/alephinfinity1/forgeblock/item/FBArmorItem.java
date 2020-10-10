@@ -28,6 +28,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -298,6 +299,16 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 	@Override
 	public Rarity getRarity(ItemStack stack) {
 		return getStackTier(stack).getVanillaRarity();
+	}
+	
+	/*
+	 * Returns an ItemStack of this item, without any attribute modifiers.
+	 * Used for custom entities.
+	 */
+	public ItemStack getDisplayStack() {
+		ItemStack stack = new ItemStack(this);
+		stack.getOrCreateTag().put("AttributeModifiers", new ListNBT());
+		return stack;
 	}
 
 }

@@ -22,6 +22,13 @@ public class SkillData {
 		this.progress = 0.0d;
 	}
 	
+	//For copying only
+	private SkillData(SkillData other) {
+		this.skill = other.skill;
+		this.level = other.level;
+		this.progress = other.progress;
+	}
+	
 	public int getLevel() {
 		return level;
 	}
@@ -70,5 +77,9 @@ public class SkillData {
 	public void setProgress(double progress) {
 		this.progress = progress;
 		update();
+	}
+	
+	public SkillData copy() {
+		return new SkillData(this);
 	}
 }
