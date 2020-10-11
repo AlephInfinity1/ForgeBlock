@@ -369,7 +369,9 @@ public class TextFormatHelper {
 					defensive = true;
 				}
 					
-				if(attribute.equals(SharedMonsterAttributes.MOVEMENT_SPEED)) {
+				if(attribute.equals(SharedMonsterAttributes.MAX_HEALTH)) {
+					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.DEFENSIVE, 1, " HP", displayType));
+				} else if(attribute.equals(SharedMonsterAttributes.MOVEMENT_SPEED)) {
 					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.DEFENSIVE, 1000, "", displayType));
 				} else {
 					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.DEFENSIVE, 1, "", displayType));

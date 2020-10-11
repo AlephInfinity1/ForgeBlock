@@ -16,17 +16,26 @@ import net.minecraftforge.fml.network.NetworkEvent;
 public class SkillUpdatePacket {
 	
 	private CompoundNBT nbt;
+	private boolean notifyPlayer;
 	
 	SkillUpdatePacket(final PacketBuffer buf) {
 		nbt = buf.readCompoundTag();
+		notifyPlayer = buf.readBoolean();
 	}
 	
 	public SkillUpdatePacket(CompoundNBT nbt) {
 		this.nbt = nbt;
+		this.notifyPlayer = true;
+	}
+	
+	public SkillUpdatePacket(CompoundNBT nbt, boolean notifyPlayer) {
+		this.nbt = nbt;
+		this.notifyPlayer = notifyPlayer;
 	}
 	
 	void encode(final PacketBuffer buf) {
 		buf.writeCompoundTag(nbt);
+		buf.writeBoolean(notifyPlayer);
 	}
 	
 	public static void handle(SkillUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
@@ -38,7 +47,8 @@ public class SkillUpdatePacket {
 				SkillType type = SkillType.getSkillTypeByID(msg.nbt.getString("SkillType"));
 				skills.setLevel(type, msg.nbt.getInt("Level"));
 				skills.setProgress(type, msg.nbt.getDouble("Progress"));
-				SkillsEventHandler.notifyPlayer(player, type, old, skills);
+				if(msg.notifyPlayer)
+					SkillsEventHandler.notifyPlayer(player, type, old, skills);
 			});
 		}
 		

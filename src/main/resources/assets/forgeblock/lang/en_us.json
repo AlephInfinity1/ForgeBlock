@@ -95,12 +95,17 @@
     "item.forgeblock.protector_dragon_boots": "Protector Dragon Boots",
     "item.forgeblock.dimensius": "Dimensius",
     
+    "item.forgeblock.lv1_zombie_spawn_egg": "Zombie (Lv1) Spawn Egg",
+    "item.forgeblock.lapis_zombie_spawn_egg": "Lapis Zombie Spawn Egg",
+    "item.forgeblock.zealot_spawn_egg": "Zealot Spawn Egg",
+    
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
     "itemGroup.forgeblock_harvesting_tools": "ForgeBlock Tools",
     "itemGroup.forgeblock_armor": "ForgeBlock Armor",
     "itemGroup.forgeblock_potions": "ForgeBlock Potions",
     "itemGroup.forgeblock_custom": "ForgeBlock Custom Items",
+    "itemGroup.forgeblock_mobs": "ForgeBlock Mobs",
     
     "entity.forgeblock.lv1_zombie": "Zombie",
     "entity.forgeblock.lapis_zombie": "Lapis Zombie",

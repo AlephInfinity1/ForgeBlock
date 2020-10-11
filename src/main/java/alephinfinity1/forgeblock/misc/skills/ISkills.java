@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.nbt.CompoundNBT;
 
 public interface ISkills {
+	public void set(ISkills other);
 	public Map<SkillType, SkillData> getData();
 	public SkillData getSkillDataForSkill(SkillType skill);
 	public int getLevel(SkillType skill);

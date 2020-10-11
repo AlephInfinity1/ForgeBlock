@@ -29,6 +29,7 @@ import alephinfinity1.forgeblock.item.YoungDragonArmorItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -203,6 +204,13 @@ public class ModItems {
 	 * Potion
 	 */
 	public static final RegistryObject<Item> FB_POTION = OVERRIDE.register("potion", () -> new FBPotionItem(new Item.Properties().group(ModItemGroups.FB_POTIONS)));
+	
+	/*
+	 * Spawn Eggs
+	 */
+	public static final RegistryObject<Item> LV1_ZOMBIE_SPAWN_EGG = ITEMS.register("lv1_zombie_spawn_egg", () -> new SpawnEggItem(ModEntities.LV1_ZOMBIE_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> LAPIS_ZOMBIE_SPAWN_EGG = ITEMS.register("lapis_zombie_spawn_egg", () -> new SpawnEggItem(ModEntities.LAPIS_ZOMBIE_TYPE, 1269462, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> ZEALOT_SPAWN_EGG = ITEMS.register("zealot_spawn_egg", () -> new SpawnEggItem(ModEntities.ZEALOT_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	
 	/*
 	 * Misc
