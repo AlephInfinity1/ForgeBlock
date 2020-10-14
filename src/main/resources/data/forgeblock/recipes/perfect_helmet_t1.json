@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"xxx",
+		"x x"
+	],
+	"key": {
+		"x": {
+			"item": "forgeblock:enchanted_diamond_block"
+		}
+	},
+	"result": {
+		"item": "forgeblock:perfect_helmet_t1"
+	}
+}
