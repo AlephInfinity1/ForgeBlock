@@ -25,5 +25,6 @@ public class FBPacketHandler {
 		
 		INSTANCE.registerMessage(id(), ManaUpdatePacket.class, ManaUpdatePacket::encode, ManaUpdatePacket::new, ManaUpdatePacket::handle);
 		INSTANCE.registerMessage(id(), SkillUpdatePacket.class, SkillUpdatePacket::encode, SkillUpdatePacket::new, SkillUpdatePacket::handle);
+		INSTANCE.registerMessage(id(), DamageParticlePacket.class, DamageParticlePacket::encode, DamageParticlePacket::new, DamageParticlePacket::handle);
 	}
 }
