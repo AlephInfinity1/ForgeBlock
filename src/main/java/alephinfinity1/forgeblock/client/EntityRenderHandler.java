@@ -6,6 +6,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.entity.IFBEntity;
+import alephinfinity1.forgeblock.misc.TextFormatHelper;
+import alephinfinity1.forgeblock.misc.TextFormatHelper.SuffixType;
 import alephinfinity1.forgeblock.misc.skills.ISkills;
 import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
@@ -104,9 +106,18 @@ public class EntityRenderHandler {
 		}
 		
 		//Health display
-		str.append(new DecimalFormat("#").format(((LivingEntity) entity).getHealth()));
+		//If above 100k, use big number formatting, otherwise use normal formatting
+		if(((LivingEntity) entity).getHealth() < 100000.0f) {
+			str.append(new DecimalFormat("#").format(((LivingEntity) entity).getHealth()));
+		} else {
+			str.append(TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, ((LivingEntity) entity).getHealth(), 1));
+		}
 		str.append("\u00A77/\u00A7a"); //Slash
-		str.append(new DecimalFormat("#").format(((LivingEntity) entity).getMaxHealth()));
+		if(((LivingEntity) entity).getMaxHealth() < 100000.0f) {
+			str.append(new DecimalFormat("#").format(((LivingEntity) entity).getMaxHealth()));
+		} else {
+			str.append(TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, ((LivingEntity) entity).getMaxHealth(), 1));
+		}
 		str.append("\u00A7c\u2764"); //Heart icon
 		return str.toString();
 	}

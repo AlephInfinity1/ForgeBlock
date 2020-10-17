@@ -18,6 +18,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -28,6 +29,11 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
 public class DamageHandler {
+	
+	//Mod-defined DamageSource s
+	public static DamageSource getBlazeArmorDamageSource(LivingEntity source) {
+		return new EntityDamageSource("blaze_armor", source);
+	}
 
 	@SubscribeEvent
 	public static void onLivingAttack(LivingHurtEvent event) {
@@ -163,9 +169,6 @@ public class DamageHandler {
 		double trueDefense = victim.getAttribute(FBAttributes.TRUE_DEFENSE).getValue();
 		double damageMultiplier = 100.0D / (trueDefense + 100.0D);
 		result *= damageMultiplier;
-		
-		//Rounding
-		result = Math.round(result);
 		
 		//Post: sets damage.
 		event.setAmount((float) result);

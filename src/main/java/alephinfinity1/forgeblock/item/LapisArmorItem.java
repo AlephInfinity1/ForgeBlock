@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import alephinfinity1.forgeblock.entity.LapisZombieEntity;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -50,7 +51,7 @@ public class LapisArmorItem extends FBArmorItem {
 		LivingEntity living = event.getEntityLiving();
 		Iterable<ItemStack> armor = living.getArmorInventoryList();
 		for(ItemStack stack : armor) {
-			if(!(stack.getItem() instanceof LapisArmorItem) || stack.getAttributeModifiers(stack.getEquipmentSlot()).isEmpty()) { //If display item, do not buff stats
+			if(!(stack.getItem() instanceof LapisArmorItem) || living instanceof LapisZombieEntity) { //If lapis zombie, do not give health boost
 				if(living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getModifier(LAPIS_HEALTH_BOOST) != null) {
 					living.getAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(LAPIS_HEALTH_BOOST);
 				}

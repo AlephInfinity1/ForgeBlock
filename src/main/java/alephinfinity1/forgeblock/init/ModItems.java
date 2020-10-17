@@ -5,6 +5,7 @@ import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.item.AspectOfTheDragonsItem;
 import alephinfinity1.forgeblock.item.AspectOfTheEndItem;
 import alephinfinity1.forgeblock.item.AspectOfTheEnderItem;
+import alephinfinity1.forgeblock.item.BlazeArmorItem;
 import alephinfinity1.forgeblock.item.CustomSwordItem;
 import alephinfinity1.forgeblock.item.FBArmorItem;
 import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
@@ -13,6 +14,7 @@ import alephinfinity1.forgeblock.item.FBGlintedItem;
 import alephinfinity1.forgeblock.item.FBPickaxeItem;
 import alephinfinity1.forgeblock.item.FBPotionItem;
 import alephinfinity1.forgeblock.item.FBSwordItem;
+import alephinfinity1.forgeblock.item.FrozenBlazeArmorItem;
 import alephinfinity1.forgeblock.item.GolemArmorItem;
 import alephinfinity1.forgeblock.item.LapisArmorItem;
 import alephinfinity1.forgeblock.item.MinerOutfitArmorItem;
@@ -259,6 +261,16 @@ public class ModItems {
 	public static final RegistryObject<Item> PERFECT_CHESTPLATE_T12 = ITEMS.register("perfect_chestplate_t12", () -> new FBArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 0, 380, 0, 0, 0, 0, 0)));
 	public static final RegistryObject<Item> PERFECT_LEGGINGS_T12 = ITEMS.register("perfect_leggings_t12", () -> new FBArmorItem(EquipmentSlotType.LEGS, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 0, 360, 0, 0, 0, 0, 0)));
 	public static final RegistryObject<Item> PERFECT_BOOTS_T12 = ITEMS.register("perfect_boots_t12", () -> new FBArmorItem(EquipmentSlotType.FEET, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 0, 310, 0, 0, 0, 0, 0)));
+	
+	public static final RegistryObject<Item> BLAZE_HELMET = ITEMS.register("blaze_helmet", () -> new BlazeArmorItem(EquipmentSlotType.HEAD, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 10, 0, 0, 0, 0, 0, 80, 2, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> BLAZE_CHESTPLATE = ITEMS.register("blaze_chestplate", () -> new BlazeArmorItem(EquipmentSlotType.CHEST, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 10, 0, 0, 0, 0, 0, 150, 2, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> BLAZE_LEGGINGS = ITEMS.register("blaze_leggings", () -> new BlazeArmorItem(EquipmentSlotType.LEGS, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 10, 0, 0, 0, 0, 0, 110, 2, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> BLAZE_BOOTS = ITEMS.register("blaze_boots", () -> new BlazeArmorItem(EquipmentSlotType.FEET, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 10, 0, 0, 0, 0, 0, 70, 2, 0, 0, 0, 0)));
+	
+	public static final RegistryObject<Item> FROZEN_BLAZE_HELMET = ITEMS.register("frozen_blaze_helmet", () -> new FrozenBlazeArmorItem(EquipmentSlotType.HEAD, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 40, 0, 0, 0, 0, 0, 110, 2, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> FROZEN_BLAZE_CHESTPLATE = ITEMS.register("frozen_blaze_chestplate", () -> new FrozenBlazeArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 40, 0, 0, 0, 0, 0, 180, 2, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> FROZEN_BLAZE_LEGGINGS = ITEMS.register("frozen_blaze_leggings", () -> new FrozenBlazeArmorItem(EquipmentSlotType.LEGS, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 40, 0, 0, 0, 0, 0, 140, 2, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> FROZEN_BLAZE_BOOTS = ITEMS.register("frozen_blaze_boots", () -> new FrozenBlazeArmorItem(EquipmentSlotType.FEET, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 40, 0, 0, 0, 0, 0, 100, 2, 0, 0, 0, 0)));
 
 	/*
 	 * Potion
