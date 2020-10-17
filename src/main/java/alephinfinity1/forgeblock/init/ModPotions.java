@@ -13,31 +13,34 @@ public class ModPotions {
 	public static final DeferredRegister<Potion> POTION_TYPES = DeferredRegister.create(ForgeRegistries.POTION_TYPES, ForgeBlock.MOD_ID);
 	public static final DeferredRegister<Potion> OVERRIDE = DeferredRegister.create(ForgeRegistries.POTION_TYPES, ForgeBlock.MINECRAFT_ID);
 	 
-	public static final Potion STRENGTH_1_0_0 = new Potion("strength_1_0_0", new EffectInstance(Effects.STRENGTH, 3600, 0));
-	public static final Potion STRENGTH_2_0_0 = new Potion("strength_2_0_0", new EffectInstance(Effects.STRENGTH, 3600, 1));
-	public static final Potion STRENGTH_3_0_0 = new Potion("strength_3_0_0", new EffectInstance(Effects.STRENGTH, 3600, 2));
-	public static final Potion STRENGTH_4_0_0 = new Potion("strength_4_0_0", new EffectInstance(Effects.STRENGTH, 3600, 3));
-	public static final Potion STRENGTH_5_0_0 = new Potion("strength_5_0_0", new EffectInstance(Effects.STRENGTH, 3600, 4));
-	public static final Potion STRENGTH_6_0_0 = new Potion("strength_6_0_0", new EffectInstance(Effects.STRENGTH, 3600, 5));
-	public static final Potion STRENGTH_7_0_0 = new Potion("strength_7_0_0", new EffectInstance(Effects.STRENGTH, 3600, 6));
-	public static final Potion STRENGTH_8_0_0 = new Potion("strength_8_0_0", new EffectInstance(Effects.STRENGTH, 3600, 7));
+	public static final Potion STRENGTH_1 = new Potion("strength_1", new EffectInstance(Effects.STRENGTH, 3600, 0));
+	public static final Potion STRENGTH_3 = new Potion("strength_3", new EffectInstance(Effects.STRENGTH, 3600, 2));
+	public static final Potion STRENGTH_5 = new Potion("strength_5", new EffectInstance(Effects.STRENGTH, 3600, 4));
+	public static final Potion ABSORPTION_1 = new Potion("absorption_1", new EffectInstance(Effects.ABSORPTION, 3600, 0));
+	public static final Potion ABSORPTION_3 = new Potion("absorption_3", new EffectInstance(Effects.ABSORPTION, 3600, 2));
+	public static final Potion ABSORPTION_5 = new Potion("absorption_5", new EffectInstance(Effects.ABSORPTION, 3600, 4));
+	public static final Potion REGENERATION_1 = new Potion("regeneration_1", new EffectInstance(Effects.REGENERATION, 900, 0));
+	public static final Potion REGENERATION_5 = new Potion("regeneration_5", new EffectInstance(Effects.REGENERATION, 900, 4));
+	public static final Potion SPEED_1 = new Potion("speed_1", new EffectInstance(Effects.SPEED, 3600, 0));
+	public static final Potion SPEED_3 = new Potion("speed_3", new EffectInstance(Effects.SPEED, 3600, 2));
+	public static final Potion SPEED_5 = new Potion("speed_5", new EffectInstance(Effects.SPEED, 3600, 4));
+	public static final Potion SLOWNESS_1 = new Potion("slowness_1", new EffectInstance(Effects.SLOWNESS, 1800, 0));
+	public static final Potion SLOWNESS_3 = new Potion("slowness_3", new EffectInstance(Effects.SLOWNESS, 1800, 2));
+	public static final Potion SLOWNESS_5 = new Potion("slowness_5", new EffectInstance(Effects.SLOWNESS, 1800, 4));
 
-	public static final Potion STRENGTH_1_0_1 = new Potion("strength_1_0_1", new EffectInstance(Effects.STRENGTH, 9600, 0));
-	public static final Potion STRENGTH_2_0_1 = new Potion("strength_2_0_1", new EffectInstance(Effects.STRENGTH, 9600, 1));
-	public static final Potion STRENGTH_3_0_1 = new Potion("strength_3_0_1", new EffectInstance(Effects.STRENGTH, 9600, 2));
-	public static final Potion STRENGTH_4_0_1 = new Potion("strength_4_0_1", new EffectInstance(Effects.STRENGTH, 9600, 3));
-	public static final Potion STRENGTH_5_0_1 = new Potion("strength_5_0_1", new EffectInstance(Effects.STRENGTH, 9600, 4));
-	public static final Potion STRENGTH_6_0_1 = new Potion("strength_6_0_1", new EffectInstance(Effects.STRENGTH, 9600, 5));
-	public static final Potion STRENGTH_7_0_1 = new Potion("strength_7_0_1", new EffectInstance(Effects.STRENGTH, 9600, 6));
-	public static final Potion STRENGTH_8_0_1 = new Potion("strength_8_0_1", new EffectInstance(Effects.STRENGTH, 9600, 7));
-
-	public static final RegistryObject<Potion> STRENGTH_1_0_0_OBJECT = POTION_TYPES.register("strength_1_0_0", () -> STRENGTH_1_0_0);
-	public static final RegistryObject<Potion> STRENGTH_2_0_0_OBJECT = POTION_TYPES.register("strength_2_0_0", () -> STRENGTH_2_0_0);
-	public static final RegistryObject<Potion> STRENGTH_3_0_0_OBJECT = POTION_TYPES.register("strength_3_0_0", () -> STRENGTH_3_0_0);
-	public static final RegistryObject<Potion> STRENGTH_4_0_0_OBJECT = POTION_TYPES.register("strength_4_0_0", () -> STRENGTH_4_0_0);
-	public static final RegistryObject<Potion> STRENGTH_5_0_0_OBJECT = POTION_TYPES.register("strength_5_0_0", () -> STRENGTH_5_0_0);
-	public static final RegistryObject<Potion> STRENGTH_6_0_0_OBJECT = POTION_TYPES.register("strength_6_0_0", () -> STRENGTH_6_0_0);
-	public static final RegistryObject<Potion> STRENGTH_7_0_0_OBJECT = POTION_TYPES.register("strength_7_0_0", () -> STRENGTH_7_0_0);
-	public static final RegistryObject<Potion> STRENGTH_8_0_0_OBJECT = POTION_TYPES.register("strength_8_0_0", () -> STRENGTH_8_0_0);
+	public static final RegistryObject<Potion> STRENGTH_1_OBJECT = POTION_TYPES.register("strength_1", () -> STRENGTH_1);
+	public static final RegistryObject<Potion> STRENGTH_3_OBJECT = POTION_TYPES.register("strength_3", () -> STRENGTH_3);
+	public static final RegistryObject<Potion> STRENGTH_5_OBJECT = POTION_TYPES.register("strength_5", () -> STRENGTH_5);
+	public static final RegistryObject<Potion> ABSORPTION_1_OBJECT = POTION_TYPES.register("absorption_1", () -> ABSORPTION_1);
+	public static final RegistryObject<Potion> ABSORPTION_3_OBJECT = POTION_TYPES.register("absorption_3", () -> ABSORPTION_3);
+	public static final RegistryObject<Potion> ABSORPTION_5_OBJECT = POTION_TYPES.register("absorption_5", () -> ABSORPTION_5);
+	public static final RegistryObject<Potion> REGENERATION_1_OBJECT = POTION_TYPES.register("regeneration_1", () -> REGENERATION_1);
+	public static final RegistryObject<Potion> REGENERATION_5_OBJECT = POTION_TYPES.register("regeneration_5", () -> REGENERATION_5);
+	public static final RegistryObject<Potion> SPEED_1_OBJECT = POTION_TYPES.register("speed_1", () -> SPEED_1);
+	public static final RegistryObject<Potion> SPEED_3_OBJECT = POTION_TYPES.register("speed_3", () -> SPEED_3);
+	public static final RegistryObject<Potion> SPEED_5_OBJECT = POTION_TYPES.register("speed_5", () -> SPEED_5);
+	public static final RegistryObject<Potion> SLOWNESS_1_OBJECT = POTION_TYPES.register("slowness_1", () -> SLOWNESS_1);
+	public static final RegistryObject<Potion> SLOWNESS_3_OBJECT = POTION_TYPES.register("slowness_3", () -> SLOWNESS_3);
+	public static final RegistryObject<Potion> SLOWNESS_5_OBJECT = POTION_TYPES.register("slowness_5", () -> SLOWNESS_5);
 
 }

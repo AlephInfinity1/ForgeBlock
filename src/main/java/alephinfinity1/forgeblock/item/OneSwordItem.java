@@ -22,7 +22,7 @@ public class OneSwordItem extends FBSwordItem {
 	
 	static {
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
-		
+		/*
 		for(IAttribute attribute : FBAttributes.PRIMARY_ATTRIBUTES) {
 			builder.put(attribute.getName(), new AttributeModifier(MODIFIER_UUID, "Debug", 1, Operation.ADDITION));
 		}
@@ -35,6 +35,8 @@ public class OneSwordItem extends FBSwordItem {
 		for(IAttribute attribute : FBAttributes.SLAYER_LUCKS) {
 			builder.put(attribute.getName(), new AttributeModifier(MODIFIER_UUID, "Debug", 1, Operation.ADDITION));
 		}
+		*/
+		builder.put(FBAttributes.DODGE.getName(), new AttributeModifier(MODIFIER_UUID, "Debug", 80, Operation.ADDITION));
 		
 		MODIFIER_MAP = builder.build();
 	}

@@ -105,8 +105,8 @@ public class TickHandler {
 			}
 			
 			//NaN fix
-			if(player.getHealth() == Float.NaN) {
-				player.setHealth(10000000.0f);
+			if(Float.isNaN(player.getHealth())) {
+				player.setHealth(100.0f);
 			}
 		}
 	}

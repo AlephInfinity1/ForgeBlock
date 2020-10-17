@@ -35,7 +35,9 @@ public class PoisonEffect extends Effect {
 			break;
 		}
 		
-		entityLivingBaseIn.attackEntityFrom(DamageSource.MAGIC, damageAmount);
+		if(entityLivingBaseIn.getHealth() > 1.0D)
+			entityLivingBaseIn.attackEntityFrom(DamageSource.MAGIC, 
+					entityLivingBaseIn.getHealth() > damageAmount ? damageAmount : entityLivingBaseIn.getHealth() - 1); //Cannot damage below 1 health
 	}
 	
 	@Override

@@ -11,6 +11,7 @@ import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.ArmorStandEntity;
@@ -22,6 +23,7 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -42,6 +44,8 @@ public class DamageHandler {
 		LivingEntity damager = (LivingEntity) event.getSource().getTrueSource();
 		LivingEntity victim = event.getEntityLiving();
 		
+		Random rng = new Random();
+		
 		if(!(event.getSource().getTrueSource() instanceof LivingEntity)) { //If attack is environmental then only apply defense bonus
 			double damageMultiplier = 1.0D;
 			if(event.getSource().equals(DamageSource.OUT_OF_WORLD)){
@@ -60,8 +64,22 @@ public class DamageHandler {
 			
 			//If the damage is affected by armor, also apply normal defense bonus
 			if((!event.getSource().isUnblockable() && !event.getSource().isDamageAbsolute()) || event.getSource().isMagicDamage()) { //Magic damage should be affected by defense
+				//Check for dodge
+				double dodge = 0.0D;
+				if(victim.getAttribute(FBAttributes.DODGE) != null) {
+					dodge = victim.getAttribute(FBAttributes.DODGE).getValue();
+				}
+				if(rng.nextDouble() * 100 < dodge) {
+					if(victim instanceof PlayerEntity) {
+						notifyDodge((PlayerEntity) victim, null, true, event.getAmount());
+					}
+					event.setCanceled(true);
+				}
+				
 				double defense = event.getEntityLiving().getAttribute(FBAttributes.DEFENSE).getValue();
 				damageMultiplier = 100.0D / (defense + 100.0D);
+				
+				
 			}
 			
 			double trueDefense = event.getEntityLiving().getAttribute(FBAttributes.TRUE_DEFENSE).getValue();
@@ -83,6 +101,20 @@ public class DamageHandler {
 			if(result == 1.0D) { //Sweep attack; normal attacks can never deal 1 damage.
 				event.setCanceled(true);
 				return;
+			}
+			
+			//Step 0: check for dodging effect
+			double dodge = 0.0D;
+			if(victim.getAttribute(FBAttributes.DODGE) != null) {
+				dodge = victim.getAttribute(FBAttributes.DODGE).getValue();
+			}
+			if(rng.nextDouble() * 100 < dodge) {
+				if(victim instanceof PlayerEntity) {
+					notifyDodge((PlayerEntity) victim, damager, true, event.getAmount());
+				} else if(damager instanceof PlayerEntity) {
+					notifyDodge((PlayerEntity) damager, victim, false, event.getAmount());
+				}
+				event.setCanceled(true);
 			}
 			
 			//Step 1: calculate base damage from attackDamage, strength, critChance, and critDamage.
@@ -149,7 +181,7 @@ public class DamageHandler {
 				victim.addPotionEffect(instance);
 			}
 			
-			//Step 7: debug only. Temporary
+			//Step 7: display damage
 			if(damager instanceof PlayerEntity) {
 				//PlayerEntity player = (PlayerEntity) damager;
 				//For debug purposes only
@@ -221,6 +253,18 @@ public class DamageHandler {
 		display.setNoGravity(true);
 		world.addEntity(display);
 		TickHandler.damageDisplay.put(display, TickHandler.tickElapsed);
+	}
+	
+	public static void notifyDodge(PlayerEntity player, Entity other, boolean isVictim, double amount) {
+		if(other == null) {
+			player.sendMessage(new TranslationTextComponent("text.forgeblock.dodge.environmental", new DecimalFormat(",###.#").format(amount).replaceAll("\u00A0", ",")));
+		} else {
+			if(isVictim) {
+				player.sendMessage(new TranslationTextComponent("text.forgeblock.dodge.victim", new DecimalFormat(",###.#").format(amount).replaceAll("\u00A0", ","), other.getDisplayName().getString()));
+			} else {
+				player.sendMessage(new TranslationTextComponent("text.forgeblock.dodge.attackMiss", new DecimalFormat(",###.#").format(amount).replaceAll("\u00A0", ","), other.getDisplayName().getString()));
+			}
+		}
 	}
 
 }

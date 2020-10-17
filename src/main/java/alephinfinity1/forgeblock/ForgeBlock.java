@@ -20,6 +20,7 @@ import alephinfinity1.forgeblock.misc.skills.ISkills;
 import alephinfinity1.forgeblock.misc.skills.SkillsFactory;
 import alephinfinity1.forgeblock.misc.skills.SkillsStorage;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
+import alephinfinity1.forgeblock.recipe.brewing.BrewingRecipeRegistrar;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -66,6 +67,7 @@ public class ForgeBlock {
 		CapabilityManager.INSTANCE.register(IMana.class, new ManaStorage(), Mana::new);
 		CapabilityManager.INSTANCE.register(ISkills.class, new SkillsStorage(), new SkillsFactory());
 		LapisZombieDrops.initialize();
+		BrewingRecipeRegistrar.registerRecipes();
 	}
 	
 }

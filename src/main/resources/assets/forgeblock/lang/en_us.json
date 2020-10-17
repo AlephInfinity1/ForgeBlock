@@ -283,6 +283,10 @@
     "text.forgeblock.cooldown": "\u00A78Cooldown: \u00A73%s s",
     "misc.forgeblock.woodSingularity": "Thick",
     
+    "text.forgeblock.dodge.environmental": "\u00A7f\u00A7lDODGE! \u00A77Dodged \u00A7c%1$s\u00A77 damage from environmental sources.",
+    "text.forgeblock.dodge.victim": "\u00A7f\u00A7lDODGE! \u00A77Dodged \u00A7c%1$s\u00A77 damage from \u00A7c%2$s.",
+    "text.forgeblock.dodge.attackMiss": "\u00A7c\u00A7lMISS! \u00A7c%2$s \u00A77dodged \u00A7c%1$s\u00A77 damage from you.",
+    
     "enchantment.forgeblock.growth": "Growth",
     "enchantment.forgeblock.telekinesis": "Telekinesis",
     "enchantment.forgeblock.life_steal": "Life Steal",
