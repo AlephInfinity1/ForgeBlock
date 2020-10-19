@@ -287,6 +287,9 @@
     "text.forgeblock.dodge.victim": "\u00A7f\u00A7lDODGE! \u00A77Dodged \u00A7c%1$s\u00A77 damage from \u00A7c%2$s.",
     "text.forgeblock.dodge.attackMiss": "\u00A7c\u00A7lMISS! \u00A7c%2$s \u00A77dodged \u00A7c%1$s\u00A77 damage from you.",
     
+    "misc.forgeblock.potionSuffix": " Potion",
+    "misc.forgeblock.noEffectPotion": "Awkward Potion",
+    
     "enchantment.forgeblock.growth": "Growth",
     "enchantment.forgeblock.telekinesis": "Telekinesis",
     "enchantment.forgeblock.life_steal": "Life Steal",
@@ -333,6 +336,11 @@
     "skills.forgeblock.levelUpMessage_1": "  \u00A7b\u00A7lSKILL LEVEL UP \u00A73%1$s \u00A78%2$s\u279c\u00A73%3$s",
     "skills.forgeblock.levelUpMessage_2": "  \u00A7a\u00A7lREWARDS",
     "skills.forgeblock.levelUpMessage_3": "    \u00A77\u00af\u005c\u005f\u0028\u30c4\u0029\u005f\u002f\u00af (for now)",
+    
+    "commands.forgeblock.reforge.success": "Successfully reforged %1$s's %2$s to %3$s.",
+    "commands.forgeblock.reforge.randomSuccess": "Successfully reforged %1$s's %2$s randomly.",
+    "commands.forgeblock.reforge.invalidReforge": "That reforge does not exist!",
+    "commands.forgeblock.reforge.nonreforgeable": "%1$s cannot be reforged!",
     
     "commands.forgeblock.skill.add.levels.single": "Increased the amount of %3$s levels %1$s has by %2$s",
     "commands.forgeblock.skill.add.points.single": "Increased the amount of %3$s points %1$s has by %2$s",

@@ -214,8 +214,6 @@ public class DamageHandler {
 	}
 	
 	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, boolean isCrit) {
-		ArmorStandEntity display = new ArmorStandEntity(world, posX, posY - 1.0D, posZ);
-		display.setInvisible(true);
 		String num = new DecimalFormat(",###").format(amount).replaceAll("\u00A0", ",");
 		ITextComponent comp;
 		if(isCrit) {
@@ -223,16 +221,10 @@ public class DamageHandler {
 		} else {
 			comp = new StringTextComponent(TextFormatting.GRAY.toString() + num);
 		}
-		display.setCustomName(comp);
-		display.setCustomNameVisible(true);
-		display.setNoGravity(true);
-		world.addEntity(display);
-		TickHandler.damageDisplay.put(display, TickHandler.tickElapsed);
+		
 	}
 	
 	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, DamageSource source) {
-		ArmorStandEntity display = new ArmorStandEntity(world, posX, posY - 1.0D, posZ);
-		display.setInvisible(true);
 		String num = new DecimalFormat(",###").format(amount).replaceAll("\u00A0", ",");
 		ITextComponent comp;
 		if(source.equals(DamageSource.MAGIC)) {
@@ -248,11 +240,7 @@ public class DamageHandler {
 		} else {
 			comp = new StringTextComponent(TextFormatting.GRAY.toString() + num);
 		}
-		display.setCustomName(comp);
-		display.setCustomNameVisible(true);
-		display.setNoGravity(true);
-		world.addEntity(display);
-		TickHandler.damageDisplay.put(display, TickHandler.tickElapsed);
+		
 	}
 	
 	public static void notifyDodge(PlayerEntity player, Entity other, boolean isVictim, double amount) {

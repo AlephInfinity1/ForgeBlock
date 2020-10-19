@@ -70,24 +70,25 @@ public class SkillsEventHandler {
 		}
 	}
 	
-	public static void notifyPlayer(ClientPlayerEntity player, SkillType type, ISkills old, ISkills neu) {
-		double xpDiff = calculateXPDiff(type, old, neu);
+	public static void notifyPlayer(ClientPlayerEntity player, SkillType type, ISkills old, ISkills _new) {
+		double xpDiff = calculateXPDiff(type, old, _new);
 		if(MathHelper.epsilonEquals(xpDiff, 0.0D)) return;
 		StringBuffer buf = new StringBuffer();
 		buf.append(TextFormatting.DARK_AQUA.toString());
-		buf.append("+");
+		if(Math.signum(xpDiff) > 0)
+			buf.append("+");
 		buf.append(new DecimalFormat(",###.#").format(xpDiff));
 		buf.append(" ");
 		buf.append(type.getDisplayName().getString());
 		buf.append(" (");
-		buf.append(new DecimalFormat(",###.#").format(neu.getAbsoluteProgress(type)));
+		buf.append(new DecimalFormat(",###.#").format(_new.getAbsoluteProgress(type)));
 		buf.append("/");
-		buf.append(new DecimalFormat(",###.#").format(neu.getXPNeededToLevelUp(type)));
+		buf.append(new DecimalFormat(",###.#").format(_new.getXPNeededToLevelUp(type)));
 		buf.append(")");
 		ITextComponent comp = new StringTextComponent(buf.toString().replaceAll("\u00A0", ","));
 		player.sendStatusMessage(comp, true);
-		if(old.getLevel(type) < neu.getLevel(type)) {
-			notifyPlayerLevelUp(player, type, old.getLevel(type), neu.getLevel(type));
+		if(old.getLevel(type) < _new.getLevel(type)) {
+			notifyPlayerLevelUp(player, type, old.getLevel(type), _new.getLevel(type));
 		}
 	}
 	

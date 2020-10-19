@@ -24,13 +24,13 @@ public class RecipeUnlockHandler {
 			Collection<IRecipe<?>> recipes = event.getPlayer().getEntityWorld().getRecipeManager().getRecipes();
 			PlayerEntity player = event.getPlayer();
 			for(IRecipe<?> recipe : recipes) {
-				if(!recipe.getId().getNamespace().equals(ForgeBlock.MOD_ID)) {
+				//if(!recipe.getId().getNamespace().equals(ForgeBlock.MOD_ID)) {
 					List<IRecipe<?>> list = new ArrayList<>();
 					list.add(recipe);
 					player.unlockRecipes(list);
-				}
+				//}
 			}
-			event.getPlayer().getEntityWorld().getGameRules().get(GameRules.DO_LIMITED_CRAFTING).set(true, event.getPlayer().getServer());
+			event.getPlayer().getEntityWorld().getGameRules().get(GameRules.DO_LIMITED_CRAFTING).set(false, event.getPlayer().getServer());
 		}
 	}
 }

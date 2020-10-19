@@ -30,6 +30,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.PotionItem;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.EffectType;
 import net.minecraft.potion.EffectUtils;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
@@ -136,6 +137,25 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 	}
 	
 	@Override
+	public ITextComponent getDisplayName(ItemStack stack) {
+		TextFormatting color = getStackTier(stack).color;
+		String key = this.getTranslationKey(stack);
+		if(key.equals(new TranslationTextComponent(key).getString())) { //Check if there is an available translation for the potion
+			List<EffectInstance> list = getEffectsFromStack(stack);
+			if(list.size() >= 1) {
+				ITextComponent tc = new TranslationTextComponent(list.get(0).getEffectName())
+						.appendText(" ")
+						.appendText(TextFormatHelper.getRomanNumeral(list.get(0).getAmplifier() + 1))
+						.appendSibling(new TranslationTextComponent("misc.forgeblock.potionSuffix"));
+				tc.applyTextStyle(color);
+				return tc;
+			} else {
+				return new TranslationTextComponent("misc.forgeblock.noEffectPotion").applyTextStyle(color);
+			}
+		} else return new TranslationTextComponent(key).applyTextStyle(color);
+	}
+	
+	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		FBTier tier = getStackTier(stack);
 		tooltip.add(new StringTextComponent(tier.color.toString() + tooltip.get(0).getString()));
@@ -151,13 +171,6 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 		String reset = TextFormatting.RESET.toString();
 		if(!recombobulated) tooltip.add(new StringTextComponent(color + bold + tier.name.getString() + " " + this.getFBItemType().getDisplayName()));
 		else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + " " + this.getFBItemType().getDisplayName() + obfuscated + " n"));
-	}
-	
-	@Override
-	public ITextComponent getDisplayName(ItemStack stack) {
-		FBTier tier = getStackTier(stack);
-		String color = tier.color.toString();
-		return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
 	}
 	
 	@Override
@@ -251,6 +264,7 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 	public static void addPotionTooltip(ItemStack itemIn, List<ITextComponent> lores, float durationFactor) {
 		List<EffectInstance> list = getEffectsFromStack(itemIn);
 		List<Tuple<String, AttributeModifier>> list1 = Lists.newArrayList();
+		lores.add(new StringTextComponent(""));
 		if (list.isEmpty()) {
 			lores.add((new TranslationTextComponent("effect.none")).applyTextStyle(TextFormatting.GRAY));
 		} else {
@@ -274,7 +288,12 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 					itextcomponent.appendText(" (").appendText(EffectUtils.getPotionDurationString(effectinstance, durationFactor)).appendText(")");
 				}
 
-				lores.add(itextcomponent.applyTextStyle(effect.getEffectType().getColor()));
+				if(effect.getEffectType().equals(EffectType.BENEFICIAL))
+					lores.add(itextcomponent.applyTextStyle(TextFormatting.GREEN));
+				else if(effect.getEffectType().equals(EffectType.NEUTRAL))
+					lores.add(itextcomponent.applyTextStyle(TextFormatting.YELLOW));
+				else
+					lores.add(itextcomponent.applyTextStyle(TextFormatting.RED));
 			}
 		}
 
