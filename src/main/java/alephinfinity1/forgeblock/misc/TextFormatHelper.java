@@ -29,6 +29,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -140,7 +141,7 @@ public class TextFormatHelper {
 	}
 
 	public static String formatModifier(double amount) {
-		StringBuffer str = new StringBuffer(new DecimalFormat(",###").format(amount));
+		StringBuffer str = new StringBuffer(new DecimalFormat(",###.#").format(amount));
 		if(amount > 0.0D) {
 			str.insert(0, '+');
 		}
@@ -338,7 +339,7 @@ public class TextFormatHelper {
 				}
 			}
 			
-			if(value != 0.0D || reforgeValue != 0.0D) {
+			if(!MathHelper.epsilonEquals(value, 0.0D) || !MathHelper.epsilonEquals(reforgeValue, 0.0D)) {
 				offensive = true;
 				if(attribute.equals(FBAttributes.CRIT_CHANCE) || attribute.equals(FBAttributes.CRIT_DAMAGE)) {
 					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.OFFENSIVE, 1, "%", displayType));
@@ -363,7 +364,7 @@ public class TextFormatHelper {
 				}
 			}
 			
-			if(value != 0.0D || reforgeValue != 0.0D) {
+			if(!MathHelper.epsilonEquals(value, 0.0D) || !MathHelper.epsilonEquals(reforgeValue, 0.0D)) {
 				if(defensive == false) {
 					if(offensive == true) tooltip.add(new StringTextComponent(""));
 					defensive = true;
@@ -396,7 +397,7 @@ public class TextFormatHelper {
 				}
 			}
 			
-			if(value != 0.0D || reforgeValue != 0.0D) {
+			if(!MathHelper.epsilonEquals(value, 0.0D) || !MathHelper.epsilonEquals(reforgeValue, 0.0D)) {
 				if(extras == false) {
 					if(offensive == true || defensive == true) tooltip.add(new StringTextComponent(""));
 					extras = true;
@@ -427,7 +428,7 @@ public class TextFormatHelper {
 				}
 			}
 			
-			if(value != 0.0D || reforgeValue != 0.0D) {
+			if(!MathHelper.epsilonEquals(value, 0.0D) || !MathHelper.epsilonEquals(reforgeValue, 0.0D)) {
 				if(xp == false) {
 					if(offensive == true || defensive == true || extras == true) tooltip.add(new StringTextComponent(""));
 					xp = true;
@@ -451,7 +452,7 @@ public class TextFormatHelper {
 				}
 			}
 			
-			if(value != 0.0D || reforgeValue != 0.0D) {
+			if(!MathHelper.epsilonEquals(value, 0.0D) || !MathHelper.epsilonEquals(reforgeValue, 0.0D)) {
 				if(slayerLuck == false) {
 					if(offensive == true || defensive == true || extras == true || xp == true) tooltip.add(new StringTextComponent(""));
 					slayerLuck = true;

@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.client;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Queue;
 
@@ -11,7 +12,6 @@ import net.minecraft.client.particle.EmitterParticle;
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,9 +29,11 @@ public class ParticleRenderHandler {
 			Queue<EmitterParticle> emitters = ForgeBlock.MINECRAFT.particles.particleEmitters;
 			for(Map.Entry<IParticleRenderType, Queue<Particle>> entry : particles.entrySet()) {
 				Queue<Particle> particlesList = entry.getValue();
-				for(Particle particle : particlesList) {
+				Iterator<Particle> iter = particlesList.iterator();
+				while(iter.hasNext()) {
+					Particle particle = iter.next();
 					if(particle instanceof CritParticle && particle.getMaxAge() == 20) { //If the particle is a damage indicator particle. getMaxAge() == 20 to prevent crit and magic particles from being accidentally targetted.
-						particle.setExpired();
+						iter.remove();
 					}
 				}
 			}

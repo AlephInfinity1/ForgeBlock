@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"x x",
+		"xxx",
+		"xxx"
+	],
+	"key": {
+		"x": {
+			"item": "forgeblock:enchanted_diamond_block"
+		}
+	},
+	"result": {
+		"item": "forgeblock:perfect_chestplate_t1"
+	}
+}

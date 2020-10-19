@@ -38,10 +38,10 @@ public enum FBTier {
 	/*
 	 * Changes rarity by a number of tiers.
 	 */
-	public static FBTier changeTier(FBTier tier, int num) {
-		switch(num) {
+	public static FBTier changeTier(FBTier original, int amount) {
+		switch(amount) {
 		case -5:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 			case UNCOMMON:
 			case RARE:
@@ -57,7 +57,7 @@ public enum FBTier {
 			}
 			break;
 		case -4:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 			case UNCOMMON:
 			case RARE:
@@ -74,7 +74,7 @@ public enum FBTier {
 			}
 			break;
 		case -3:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 			case UNCOMMON:
 			case RARE:
@@ -92,7 +92,7 @@ public enum FBTier {
 			}
 			break;
 		case -2:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 			case UNCOMMON:
 			case RARE:
@@ -111,7 +111,7 @@ public enum FBTier {
 			}
 			break;
 		case -1:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 			case UNCOMMON:
 				return COMMON;
@@ -131,9 +131,9 @@ public enum FBTier {
 			}
 			break;
 		case 0:
-			return tier;
+			return original;
 		case 1:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 				return UNCOMMON;
 			case UNCOMMON:
@@ -153,7 +153,7 @@ public enum FBTier {
 			}
 			break;
 		case 2:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 				return RARE;
 			case UNCOMMON:
@@ -172,7 +172,7 @@ public enum FBTier {
 			}
 			break;
 		case 3:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 				return EPIC;
 			case UNCOMMON:
@@ -190,7 +190,7 @@ public enum FBTier {
 			}
 			break;
 		case 4:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 				return LEGENDARY;
 			case UNCOMMON:
@@ -207,7 +207,7 @@ public enum FBTier {
 			}
 			break;
 		case 5:
-			switch(tier) {
+			switch(original) {
 			case COMMON:
 				return MYTHIC;
 			case UNCOMMON:
@@ -223,14 +223,14 @@ public enum FBTier {
 			}
 			break;
 		default:
-			if(num < -5) {
-				if(tier.isSpecial()) {
+			if(amount < -5) {
+				if(original.isSpecial()) {
 					return SPECIAL;
 				} else {
 					return COMMON;
 				}
-			} else if (num > 5) {
-				if(tier.isSpecial()) {
+			} else if (amount > 5) {
+				if(original.isSpecial()) {
 					return VERY_SPECIAL;
 				} else {
 					return SUPREME;

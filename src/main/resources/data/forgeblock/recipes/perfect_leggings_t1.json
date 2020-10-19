@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"xxx",
+		"x x",
+		"x x"
+	],
+	"key": {
+		"x": {
+			"item": "forgeblock:enchanted_diamond_block"
+		}
+	},
+	"result": {
+		"item": "forgeblock:perfect_leggings_t1"
+	}
+}

@@ -13,8 +13,10 @@ import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Matrix4f;
+import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.entity.Entity;
@@ -26,6 +28,9 @@ import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -38,7 +43,40 @@ public class EntityRenderHandler {
 		//Some code copied and modified from EntityRenderer$renderName
 		Entity entityIn = event.getEntity();
 		if(entityIn instanceof ArmorStandEntity) return;
-		MatrixStack matrixStackIn = event.getMatrixStack();
+		MatrixStack matrixStackIn = new MatrixStack();
+		
+		float partialTicks = event.getPartialRenderTick();
+		
+		matrixStackIn.push();
+		ActiveRenderInfo activerenderinfo = ForgeBlock.MINECRAFT.gameRenderer.getActiveRenderInfo();
+		CameraSetup cam = ForgeHooksClient.onCameraSetup(ForgeBlock.MINECRAFT.gameRenderer, activerenderinfo, partialTicks);
+		
+		activerenderinfo.setAnglesInternal(cam.getYaw(), cam.getPitch());
+		
+		//matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(cam.getRoll()));
+		
+		matrixStackIn.rotate(Vector3f.XP.rotationDegrees(activerenderinfo.getPitch()));
+		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(activerenderinfo.getYaw() + 180.0F));
+		
+		matrixStackIn.push();
+		
+		double x = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosX, entityIn.getPosX());
+		double y = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosY, entityIn.getPosY());
+		double z = MathHelper.lerp((double)partialTicks, entityIn.lastTickPosZ, entityIn.getPosZ());
+
+		matrixStackIn.translate(x - ForgeBlock.MINECRAFT.gameRenderer.getActiveRenderInfo().getProjectedView().getX(), 
+        		y - ForgeBlock.MINECRAFT.gameRenderer.getActiveRenderInfo().getProjectedView().getY(), 
+        		z - ForgeBlock.MINECRAFT.gameRenderer.getActiveRenderInfo().getProjectedView().getZ());
+		
+		/*/Debug start (place * between the two slashes to disable
+		ForgeBlock.LOGGER.log(Level.INFO, "Event MatrixStack: ");
+		ForgeBlock.LOGGER.log(Level.INFO, event.getMatrixStack().getLast().getMatrix().toString());
+		ForgeBlock.LOGGER.log(Level.INFO, event.getMatrixStack().getLast().getNormal().toString());
+		ForgeBlock.LOGGER.log(Level.INFO, "Manual MatrixStack: ");
+		ForgeBlock.LOGGER.log(Level.INFO, matrixStackIn.getLast().getMatrix().toString());
+		ForgeBlock.LOGGER.log(Level.INFO, matrixStackIn.getLast().getNormal().toString());
+		//Debug end */
+		
 		IRenderTypeBuffer bufferIn = event.getBuffers();
 		String displayNameIn = getEntityString(entityIn);
 		int packedLightIn = event.getLight();
@@ -61,6 +99,7 @@ public class EntityRenderHandler {
         }
 
         matrixStackIn.pop();
+        //matrixStackIn.pop();
 	}
 	
 	public static String getEntityString(Entity entity) {
@@ -111,14 +150,15 @@ public class EntityRenderHandler {
 		}
 		
 		//Health display
-		//If above 10k, use big number formatting, otherwise use normal formatting
-		if(((LivingEntity) entity).getHealth() < 10000.0f) {
+		//If above 100k, use big number formatting, otherwise use normal formatting
+		if(((LivingEntity) entity).getHealth() < 100000.0f) {
 			str.append(new DecimalFormat("#").format(((LivingEntity) entity).getHealth()));
 		} else {
 			str.append(TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, ((LivingEntity) entity).getHealth(), 1));
 		}
 		str.append("\u00A77/\u00A7a"); //Slash
-		if(((LivingEntity) entity).getMaxHealth() < 10000.0f) {
+
+		if(((LivingEntity) entity).getMaxHealth() < 100000.0f) {
 			str.append(new DecimalFormat("#").format(((LivingEntity) entity).getMaxHealth()));
 		} else {
 			str.append(TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, ((LivingEntity) entity).getMaxHealth(), 1));

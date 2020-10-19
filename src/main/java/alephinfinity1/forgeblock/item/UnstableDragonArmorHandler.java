@@ -41,7 +41,7 @@ public class UnstableDragonArmorHandler {
 				List<Entity> entities = world.getEntitiesInAABBexcluding(player, bound, EntityPredicates.NOT_SPECTATING);
 				for(Entity entity : entities) {
 					if(!(entity instanceof LivingEntity)) return;
-					if(entity.getDistance(player) > 7.0f) return;
+					if(entity.getDistanceSq(player) > 49.0f) return;
 					LightningBoltEntity thunder = new LightningBoltEntity(world, entity.getPosX(), entity.getPosY(), entity.getPosZ(), true);
 					if(world instanceof ServerWorld) {
 						((ServerWorld) world).addLightningBolt(thunder);
