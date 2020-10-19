@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.misc;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -7,8 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang3.tuple.Triple;
 import org.apache.logging.log4j.Level;
-
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.item.BlazeArmorItem;
@@ -37,6 +38,7 @@ public class TickHandler {
 	public static long tickElapsed = 0;
 	public static Map<PlayerEntity, Long> healthDirty = new HashMap<>();
 	public static Map<ArmorStandEntity, Long> damageDisplay = new HashMap<>();
+	public static List<Triple<LivingEntity, Double, Long>> damageIndicatorFix = new ArrayList<>();
 	public static Map<LivingEntity, Boolean> isWearingBlazeArmor = new ConcurrentHashMap<>();
 	public static Map<LivingEntity, Boolean> isWearingFrozenBlazeArmor = new ConcurrentHashMap<>();
 	public static final Minecraft minecraft = Minecraft.getInstance();
@@ -63,6 +65,17 @@ public class TickHandler {
 					}
 				}
 			}
+			if(!damageIndicatorFix.isEmpty()) {
+				Iterator<Triple<LivingEntity, Double, Long>> itr = damageIndicatorFix.iterator();
+				while(itr.hasNext()) {
+					Triple<LivingEntity, Double, Long> entry = itr.next(); //Using iterators to fix java.util.ConcurrentModificationException. See https://www.cnblogs.com/dolphin0520/p/3933551.html
+					if(tickElapsed - entry.getRight() > 0) {
+						entry.getLeft().setHealth((float) (entry.getLeft().getHealth() - entry.getMiddle()));
+						itr.remove();
+					}
+				}
+			}
+
 			if(tickElapsed % 20 == 0) {
 				Set<LivingEntity> entities = isWearingBlazeArmor.keySet();
 				Iterator<LivingEntity> itr = entities.iterator();

@@ -10,6 +10,7 @@ import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModEntities;
 import alephinfinity1.forgeblock.init.ModItems;
+import alephinfinity1.forgeblock.init.ModParticles;
 import alephinfinity1.forgeblock.init.ModPotions;
 import alephinfinity1.forgeblock.init.ModRecipes;
 import alephinfinity1.forgeblock.misc.drops.LapisZombieDrops;
@@ -52,6 +53,7 @@ public class ForgeBlock {
 		ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModEntities.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModRecipes.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModParticles.PARTICLE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventBusSubscriber::onClientSetup);
 		

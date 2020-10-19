@@ -3,12 +3,19 @@ package alephinfinity1.forgeblock.misc;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+//import org.apache.commons.lang3.tuple.Triple;
+
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.client.particles.StringParticleData;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
+import alephinfinity1.forgeblock.init.ModParticles;
 import alephinfinity1.forgeblock.misc.skills.ISkills;
 import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
+import alephinfinity1.forgeblock.network.DamageParticlePacket;
+import alephinfinity1.forgeblock.network.FBPacketHandler;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -16,6 +23,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
@@ -28,6 +36,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 @Mod.EventBusSubscriber
 public class DamageHandler {
@@ -185,13 +194,13 @@ public class DamageHandler {
 			if(damager instanceof PlayerEntity) {
 				//PlayerEntity player = (PlayerEntity) damager;
 				//For debug purposes only
-				addDamageDisplay(victim.world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), result, isCrit);
+				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) damager), new DamageParticlePacket(result, "", victim.getPositionVec()));
 			}
 			
 			if(victim instanceof PlayerEntity) {
 				//PlayerEntity player = (PlayerEntity) victim;
 				//For debug purposes only
-				addDamageDisplay(victim.world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), result, isCrit);
+				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) victim), new DamageParticlePacket(result, "", victim.getPositionVec()));
 			}
 		} else {
 			addDamageDisplay(victim.world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), event.getAmount(), event.getSource());
@@ -203,7 +212,12 @@ public class DamageHandler {
 		result *= damageMultiplier;
 		
 		//Post: sets damage.
-		event.setAmount((float) result);
+		//if(result <= DAMAGE_INDICATOR_FIX_THRESHOLD) {
+			event.setAmount((float) result);
+		/*} else {
+			event.setAmount(0);
+			TickHandler.damageIndicatorFix.add(Triple.of(victim, result, TickHandler.tickElapsed));
+		}*/
 		
 		/**
 		 * Sets the victim's hurt resistance time based on the damager's attack speed attribute.
@@ -213,15 +227,12 @@ public class DamageHandler {
 		victim.hurtResistantTime = Long.valueOf(Math.round((10.0 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue())) + 10)).intValue();
 	}
 	
-	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, boolean isCrit) {
-		String num = new DecimalFormat(",###").format(amount).replaceAll("\u00A0", ",");
-		ITextComponent comp;
-		if(isCrit) {
-			comp = new StringTextComponent(TextFormatting.RED.toString() + num);
-		} else {
-			comp = new StringTextComponent(TextFormatting.GRAY.toString() + num);
+	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, String style) {
+		if(world.isRemote) {
+			ClientWorld cw = ((ClientWorld) world);
+			StringParticleData particle = new StringParticleData(ModParticles.NUMERIC_DAMAGE.get(), new DecimalFormat(",###").format(amount).replaceAll("\u00A0", ","));
+			cw.addParticle(particle, posX, posY, posZ, 0, 1, 0);
 		}
-		
 	}
 	
 	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, DamageSource source) {

@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FlyingEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.monster.MonsterEntity;
@@ -114,8 +115,12 @@ public class EntityRenderHandler {
 				playerLvl += skills.getLevel(type);
 			}
 			str.append(playerLvl);
-		} else { //If not a ForgeBlock mob, default to 0.
-			str.append(0);
+		} else { //If not a ForgeBlock mob, default to default formula if hostile, or 0 if passive.
+			LivingEntity living = (LivingEntity) entity;
+			if(living.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) != null)
+				str.append(Double.valueOf(Math.floor(Math.pow(Math.sqrt((living.getMaxHealth() + living.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue()) * 3.0), 0.95))).intValue());
+			else
+				str.append(0);
 		}
 		
 		/*
@@ -152,6 +157,7 @@ public class EntityRenderHandler {
 			str.append(TextFormatHelper.formatLargeNumberWithSuffix(SuffixType.SINGLE_LETTER, ((LivingEntity) entity).getHealth(), 1));
 		}
 		str.append("\u00A77/\u00A7a"); //Slash
+
 		if(((LivingEntity) entity).getMaxHealth() < 100000.0f) {
 			str.append(new DecimalFormat("#").format(((LivingEntity) entity).getMaxHealth()));
 		} else {
