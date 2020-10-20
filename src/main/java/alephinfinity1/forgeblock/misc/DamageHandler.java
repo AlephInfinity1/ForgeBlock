@@ -7,6 +7,7 @@ import java.util.Random;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.client.particles.StringParticleData;
+import alephinfinity1.forgeblock.client.particles.StringParticleData.Style;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModParticles;
@@ -28,6 +29,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -37,6 +39,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 
 @Mod.EventBusSubscriber
 public class DamageHandler {
@@ -50,7 +53,8 @@ public class DamageHandler {
 	public static void onLivingAttack(LivingHurtEvent event) {
 		//Pre: get damager and victim.
 		
-		LivingEntity damager = (LivingEntity) event.getSource().getTrueSource();
+		Entity trueSource = event.getSource().getTrueSource();
+		LivingEntity damager = trueSource instanceof LivingEntity ? (LivingEntity) trueSource : null;
 		LivingEntity victim = event.getEntityLiving();
 		
 		Random rng = new Random();
@@ -95,7 +99,10 @@ public class DamageHandler {
 			damageMultiplier *= 100.0D / (trueDefense + 100.0D);
 			event.setAmount((float) (event.getAmount() * damageMultiplier));
 			//victim.hurtResistantTime = 0; //If environmental damage, no damage tick should be consumed.
-			addDamageDisplay(victim.world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), event.getAmount() * damageMultiplier, event.getSource());
+			FBPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(TargetPoint.p(victim.getPosX(), victim.getPosY(), victim.getPosZ(), 64.0D, victim.dimension)), new DamageParticlePacket(event.getAmount(), event.getSource().damageType, victim.getPositionVec().add(0, victim.getHeight() / 2.0, 0)));
+			if(Float.isNaN(event.getAmount())) {
+				event.setAmount(0);
+			}
 			return;
 		}
 		
@@ -194,16 +201,22 @@ public class DamageHandler {
 			if(damager instanceof PlayerEntity) {
 				//PlayerEntity player = (PlayerEntity) damager;
 				//For debug purposes only
-				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) damager), new DamageParticlePacket(result, "", victim.getPositionVec()));
+				if(isCrit)
+					FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) damager), new DamageParticlePacket(result, "crit", victim.getPositionVec().add(0, victim.getHeight() / 2.0, 0)));
+				else
+					FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) damager), new DamageParticlePacket(result, "normal", victim.getPositionVec().add(0, victim.getHeight() / 2.0, 0)));
 			}
 			
 			if(victim instanceof PlayerEntity) {
 				//PlayerEntity player = (PlayerEntity) victim;
 				//For debug purposes only
-				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) victim), new DamageParticlePacket(result, "", victim.getPositionVec()));
+				if(isCrit)
+					FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) victim), new DamageParticlePacket(result, "crit", victim.getPositionVec().add(0, victim.getHeight() / 2.0, 0)));
+				else
+					FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) victim), new DamageParticlePacket(result, "normal", victim.getPositionVec().add(0, victim.getHeight() / 2.0, 0)));
 			}
 		} else {
-			addDamageDisplay(victim.world, victim.getPosX(), victim.getPosY(), victim.getPosZ(), event.getAmount(), event.getSource());
+			FBPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(TargetPoint.p(victim.getPosX(), victim.getPosY(), victim.getPosZ(), 64.0D, victim.dimension)), new DamageParticlePacket(result, event.getSource().damageType, victim.getPositionVec().add(0, victim.getHeight() / 2.0, 0)));
 		}
 		
 		//Regardless of the type of damage:
@@ -214,6 +227,9 @@ public class DamageHandler {
 		//Post: sets damage.
 		//if(result <= DAMAGE_INDICATOR_FIX_THRESHOLD) {
 			event.setAmount((float) result);
+			if(Float.isNaN(event.getAmount())) {
+				event.setAmount(0);
+			}
 		/*} else {
 			event.setAmount(0);
 			TickHandler.damageIndicatorFix.add(Triple.of(victim, result, TickHandler.tickElapsed));
@@ -227,11 +243,14 @@ public class DamageHandler {
 		victim.hurtResistantTime = Long.valueOf(Math.round((10.0 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue())) + 10)).intValue();
 	}
 	
-	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, String style) {
+	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, Style style) {
 		if(world.isRemote) {
 			ClientWorld cw = ((ClientWorld) world);
-			StringParticleData particle = new StringParticleData(ModParticles.NUMERIC_DAMAGE.get(), new DecimalFormat(",###").format(amount).replaceAll("\u00A0", ","));
-			cw.addParticle(particle, posX, posY, posZ, 0, 1, 0);
+			StringParticleData particle = new StringParticleData(ModParticles.NUMERIC_DAMAGE.get(), new DecimalFormat(",###").format(amount).replaceAll("\u00A0", ","), style);
+			cw.addParticle(particle, posX, posY + MathHelper.nextDouble(new Random(), -0.25, 0.25), posZ, 
+					MathHelper.nextDouble(new Random(), -1, 1), 
+					MathHelper.nextDouble(new Random(), 0.5, 1.25), 
+					MathHelper.nextDouble(new Random(), -1, 1));
 		}
 	}
 	

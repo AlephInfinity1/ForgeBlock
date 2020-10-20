@@ -119,7 +119,7 @@ public class TickHandler {
 			
 			//NaN fix
 			if(Float.isNaN(player.getHealth())) {
-				player.setHealth(100.0f);
+				player.setHealth(0.0f);
 			}
 		}
 	}

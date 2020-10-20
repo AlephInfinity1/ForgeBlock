@@ -2,6 +2,7 @@ package alephinfinity1.forgeblock.network;
 
 import java.util.function.Supplier;
 
+import alephinfinity1.forgeblock.client.particles.StringParticleData.Style;
 import alephinfinity1.forgeblock.misc.DamageHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -53,7 +54,7 @@ public class DamageParticlePacket {
 			ctx.get().enqueueWork(() -> {
 				ClientPlayerEntity player = Minecraft.getInstance().player;
 				World world = player.getEntityWorld();
-				DamageHandler.addDamageDisplay(world, msg.posX, msg.posY, msg.posZ, msg.amount, msg.style);
+				DamageHandler.addDamageDisplay(world, msg.posX, msg.posY, msg.posZ, msg.amount, Style.parse(msg.style));
 			});
 		}
 		

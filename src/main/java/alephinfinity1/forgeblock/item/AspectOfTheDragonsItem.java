@@ -68,7 +68,7 @@ public class AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem 
 		List<ITextComponent> list = new ArrayList<>();
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aotd_0").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aotd_1").getString()));
-		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aotd_2", new DecimalFormat(",###").format(this.getAbilityDamage(stack, MINECRAFT.player))).getString()));
+		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aotd_2", new DecimalFormat(",###").format(this.getAbilityDamage(stack, MINECRAFT.player)).replaceAll("\u00A0", ",")).getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.aotd_3").getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.mana_cost", new DecimalFormat("#").format(this.getAbilityCost(stack, MINECRAFT.player))).getString()));
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.cooldown", new DecimalFormat("#.##").format(this.getCooldown(stack, MINECRAFT.player) / 20.0d)).getString()));

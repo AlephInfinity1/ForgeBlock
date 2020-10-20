@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "x x",
+        "xxx",
+        "xxx"
+    ],
+    "key": {
+        "x": {
+            "item": "forgeblock:enchanted_blaze_rod"
+        }
+    },
+    "result": {
+        "item": "forgeblock:blaze_chestplate"
+    }
+}

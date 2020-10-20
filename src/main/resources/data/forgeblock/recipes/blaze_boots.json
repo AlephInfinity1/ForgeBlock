@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "x x",
+        "x x"
+    ],
+    "key": {
+        "x": {
+            "item": "forgeblock:enchanted_blaze_rod"
+        }
+    },
+    "result": {
+        "item": "forgeblock:blaze_boots"
+    }
+}

@@ -1,0 +1,21 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		"xxx",
+		"xax",
+		"xxx"
+	],
+	"key": {
+		"x": {
+			"item": "forgeblock:enchanted_packed_ice",
+			"count": 8
+		},
+		"a": {
+			"item": "forgeblock:blaze_leggings",
+			"count": 1
+		}
+	},
+	"result": {
+		"item": "forgeblock:frozen_blaze_leggings"
+	}
+}
