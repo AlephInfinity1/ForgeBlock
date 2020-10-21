@@ -5,11 +5,13 @@ import org.apache.logging.log4j.MarkerManager.Log4jMarker;
 
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.client.particles.NumericDamageIndicatorParticle;
+import alephinfinity1.forgeblock.entity.FBExperienceBottleEntity;
 import alephinfinity1.forgeblock.init.ModEntities;
 import alephinfinity1.forgeblock.init.ModParticles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.renderer.entity.EndermanRenderer;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
@@ -28,12 +30,11 @@ public class ClientEventBusSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.LAPIS_ZOMBIE.get(), ZombieRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZEALOT.get(), EndermanRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPECIAL_ZEALOT.get(), EndermanRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntities.FB_EXPERIENCE_BOTTLE.get(), (em) -> new SpriteRenderer<FBExperienceBottleEntity>(em, mc.getItemRenderer()));
 
-
-		ForgeBlock.LOGGER.log(Level.INFO, new Log4jMarker("Test"), "Client stuff fired!");
+		ForgeBlock.LOGGER.log(Level.TRACE, new Log4jMarker("Test"), "Client stuff fired!");
 	}
 
-	//Some code referenced from https://github.com/JibayMcs/Ama-s-Damage-Indicator
 	@SubscribeEvent
 	public static void onParticleFactoryRegister(ParticleFactoryRegisterEvent event) {
 		ParticleManager pm = ForgeBlock.MINECRAFT.particles;

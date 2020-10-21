@@ -10,6 +10,7 @@ import alephinfinity1.forgeblock.item.CustomSwordItem;
 import alephinfinity1.forgeblock.item.FBArmorItem;
 import alephinfinity1.forgeblock.item.FBDyeableArmorItem;
 import alephinfinity1.forgeblock.item.FBEnchantedBookItem;
+import alephinfinity1.forgeblock.item.FBExperienceBottleItem;
 import alephinfinity1.forgeblock.item.FBGlintedItem;
 import alephinfinity1.forgeblock.item.FBPickaxeItem;
 import alephinfinity1.forgeblock.item.FBPotionItem;
@@ -288,6 +289,8 @@ public class ModItems {
 	 * Misc
 	 */
 	public static final RegistryObject<Item> ENCHANTED_BOOK = OVERRIDE.register("enchanted_book", () -> new FBEnchantedBookItem(new Item.Properties()));
+	public static final RegistryObject<Item> GRAND_EXPERIENCE_BOTTLE = ITEMS.register("grand_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.UNCOMMON, 1500 - 307, 1500 + 307));
+	public static final RegistryObject<Item> TITANIC_EXPERIENCE_BOTTLE = ITEMS.register("titanic_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.RARE, 139770 - 2477, 139770 + 2477));
 	
 	/*
 	 * Custom items/ideas/debug

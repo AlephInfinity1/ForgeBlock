@@ -1,6 +1,7 @@
 package alephinfinity1.forgeblock.init;
 
 import alephinfinity1.forgeblock.ForgeBlock;
+import alephinfinity1.forgeblock.entity.FBExperienceBottleEntity;
 import alephinfinity1.forgeblock.entity.LapisZombieEntity;
 import alephinfinity1.forgeblock.entity.Lv1ZombieEntity;
 import alephinfinity1.forgeblock.entity.SpecialZealotEntity;
@@ -32,11 +33,16 @@ public class ModEntities {
 	public static final EntityType<SpecialZealotEntity> SPECIAL_ZEALOT_TYPE = EntityType.Builder.create(
 			SpecialZealotEntity::new,
 			EntityClassification.MONSTER).size(0.6f, 2.9f).build(new ResourceLocation(ForgeBlock.MOD_ID, "special_zealot").toString());
+	
+	public static final EntityType<FBExperienceBottleEntity> FB_EXPERIENCE_BOTTLE_TYPE = EntityType.Builder.<FBExperienceBottleEntity>create(
+			FBExperienceBottleEntity::new,
+			EntityClassification.MISC).size(0.25f, 0.25f).build(new ResourceLocation(ForgeBlock.MOD_ID, "fb_experience_bottle").toString());
 			
 	
 	public static final RegistryObject<EntityType<Lv1ZombieEntity>> LV1_ZOMBIE = ENTITIES.register("lv1_zombie", () -> LV1_ZOMBIE_TYPE);
 	public static final RegistryObject<EntityType<LapisZombieEntity>> LAPIS_ZOMBIE = ENTITIES.register("lapis_zombie", () -> LAPIS_ZOMBIE_TYPE);
 	public static final RegistryObject<EntityType<ZealotEntity>> ZEALOT = ENTITIES.register("zealot", () -> ZEALOT_TYPE);
 	public static final RegistryObject<EntityType<SpecialZealotEntity>> SPECIAL_ZEALOT = ENTITIES.register("special_zealot", () -> SPECIAL_ZEALOT_TYPE);
+	public static final RegistryObject<EntityType<FBExperienceBottleEntity>> FB_EXPERIENCE_BOTTLE = ENTITIES.register("fb_experience_bottle", () -> FB_EXPERIENCE_BOTTLE_TYPE);
 	
 }
