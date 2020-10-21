@@ -19,9 +19,7 @@ public class HealthBarRenderer {
 
 	@SubscribeEvent
 	public static void onHealthBarRender(RenderGameOverlayEvent.Pre event) {
-		if(event.getType().equals(ElementType.FOOD)) {
-			event.setCanceled(true);
-		} else if(!event.getType().equals(ElementType.HEALTH) || event.isCanceled()) return;
+		if(!event.getType().equals(ElementType.HEALTH) || event.isCanceled()) return;
 		event.setCanceled(true);
 		PlayerEntity player = (PlayerEntity) MINECRAFT.getRenderViewEntity();
 		float health = player.getHealth();

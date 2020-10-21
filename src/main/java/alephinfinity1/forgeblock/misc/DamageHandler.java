@@ -19,10 +19,15 @@ import alephinfinity1.forgeblock.network.FBPacketHandler;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.item.ArmorStandEntity;
+import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.EndermanEntity;
+import net.minecraft.entity.monster.EndermiteEntity;
+import net.minecraft.entity.monster.MagmaCubeEntity;
+import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -143,8 +148,17 @@ public class DamageHandler {
 			ItemStack weapon = damager.getHeldItemMainhand();
 			double enchMultiplier = 0.0D;
 			
-			//a: sharpness
+			//a: sharpness & variants
 			enchMultiplier += 0.05 * EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, weapon);
+			if(victim.getCreatureAttribute().equals(CreatureAttribute.ARTHROPOD)) {
+				enchMultiplier += 0.08 * EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, weapon);
+			} else if(victim.getCreatureAttribute().equals(CreatureAttribute.UNDEAD)) {
+				enchMultiplier += 0.08 * EnchantmentHelper.getEnchantmentLevel(Enchantments.SMITE, weapon);
+			} else if(victim.getCreatureAttribute().equals(FBCreatureAttributes.CUBE) || victim instanceof CreeperEntity || victim instanceof SlimeEntity || victim instanceof MagmaCubeEntity) {
+				enchMultiplier += 0.1 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.CUBISM.get(), weapon);
+			} else if(victim.getCreatureAttribute().equals(FBCreatureAttributes.ENDER) || victim instanceof EndermanEntity || victim instanceof EndermiteEntity) {
+				enchMultiplier += 0.12 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ENDER_SLAYER.get(), weapon);
+			}
 			
 			//b: execute
 			int executeLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.EXECUTE.get(), weapon);
@@ -153,7 +167,8 @@ public class DamageHandler {
 			enchMultiplier += 0.2 * executeLevel * (1 - victimHealth / victimMaxHealth);
 			
 			//c: first strike
-			if(victimHealth == victimMaxHealth) enchMultiplier += 0.2 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.FIRST_STRIKE.get(), weapon);
+			if(victim.getCombatTracker().getBestAttacker() == null)
+				enchMultiplier += 0.2 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.FIRST_STRIKE.get(), weapon);
 			
 			//d: giant killer
 			float damagerHealth = damager.getHealth();

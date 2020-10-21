@@ -1,6 +1,8 @@
 package alephinfinity1.forgeblock.entity;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.misc.FBCreatureAttributes;
+import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -91,6 +93,11 @@ public class ZealotEntity extends EndermanEntity implements IFBEntity {
 	@Override
 	public double getCombatXP() {
 		return 40.0D;
+	}
+	
+	@Override
+	public CreatureAttribute getCreatureAttribute() {
+		return FBCreatureAttributes.ENDER;
 	}
 
 }
