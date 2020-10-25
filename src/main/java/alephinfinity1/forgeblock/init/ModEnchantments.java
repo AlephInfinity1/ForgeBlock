@@ -5,6 +5,7 @@ import alephinfinity1.forgeblock.enchantment.CriticalEnchantment;
 import alephinfinity1.forgeblock.enchantment.CubismEnchantment;
 import alephinfinity1.forgeblock.enchantment.EnderSlayerEnchantment;
 import alephinfinity1.forgeblock.enchantment.ExecuteEnchantment;
+import alephinfinity1.forgeblock.enchantment.ExperienceEnchantment;
 import alephinfinity1.forgeblock.enchantment.FirstStrikeEnchantment;
 import alephinfinity1.forgeblock.enchantment.GiantKillerEnchantment;
 import alephinfinity1.forgeblock.enchantment.GrowthEnchantment;
@@ -38,6 +39,7 @@ public class ModEnchantments {
 	public static final RegistryObject<Enchantment> LUCK = ENCHANTMENTS.register("luck", () -> new LuckEnchantment());
 	public static final RegistryObject<Enchantment> PROTECTION = OVERRIDE.register("protection", () -> new ProtectionEnchantment());
 	public static final RegistryObject<Enchantment> SMELTING_TOUCH = ENCHANTMENTS.register("smelting_touch", () -> new SmeltingTouchEnchantment());
+	public static final RegistryObject<Enchantment> EXPERIENCE = ENCHANTMENTS.register("experience", () -> new ExperienceEnchantment());
 	
 	public static final RegistryObject<Enchantment> ULTIMATE_WISE = ENCHANTMENTS.register("ultimate_wise", () -> new UltimateWiseEnchantment());
 

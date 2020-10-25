@@ -309,11 +309,12 @@ public class CustomSwordItem extends FBSwordItem {
 		
 		/*
 		 * Reforge randomization
-		 */
+		 *
 		if(rng.nextDouble() < 0.75) {
 			Reforge reforge = Reforge.getRandomReforge(sword);
 			nbt.putString("Reforge", reforge.getID());
 		}
+		*/
 		
 		return sword;
 		
@@ -414,11 +415,12 @@ public class CustomSwordItem extends FBSwordItem {
 		
 		/*
 		 * Reforge randomization
-		 */
+		 *
 		if(rng.nextDouble() < 0.75 + quality * 0.01) {
 			Reforge reforge = Reforge.getRandomReforge(sword);
 			nbt.putString("Reforge", reforge.getID());
 		}
+		*/
 		
 		return sword;
 		
