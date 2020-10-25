@@ -39,206 +39,11 @@ public enum FBTier {
 	 * Changes rarity by a number of tiers.
 	 */
 	public static FBTier changeTier(FBTier original, int amount) {
-		switch(amount) {
-		case -5:
-			switch(original) {
-			case COMMON:
-			case UNCOMMON:
-			case RARE:
-			case EPIC:
-			case LEGENDARY:
-			case MYTHIC:
-				return COMMON;
-			case SUPREME:
-				return UNCOMMON;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return SPECIAL;
-			}
-			break;
-		case -4:
-			switch(original) {
-			case COMMON:
-			case UNCOMMON:
-			case RARE:
-			case EPIC:
-			case LEGENDARY:
-				return COMMON;
-			case MYTHIC:
-				return UNCOMMON;
-			case SUPREME:
-				return RARE;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return SPECIAL;
-			}
-			break;
-		case -3:
-			switch(original) {
-			case COMMON:
-			case UNCOMMON:
-			case RARE:
-			case EPIC:
-				return COMMON;
-			case LEGENDARY:
-				return UNCOMMON;
-			case MYTHIC:
-				return RARE;
-			case SUPREME:
-				return EPIC;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return SPECIAL;
-			}
-			break;
-		case -2:
-			switch(original) {
-			case COMMON:
-			case UNCOMMON:
-			case RARE:
-				return COMMON;
-			case EPIC:
-				return UNCOMMON;
-			case LEGENDARY:
-				return RARE;
-			case MYTHIC:
-				return EPIC;
-			case SUPREME:
-				return LEGENDARY;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return SPECIAL;
-			}
-			break;
-		case -1:
-			switch(original) {
-			case COMMON:
-			case UNCOMMON:
-				return COMMON;
-			case RARE:
-				return UNCOMMON;
-			case EPIC:
-				return RARE;
-			case LEGENDARY:
-				return EPIC;
-			case MYTHIC:
-				return LEGENDARY;
-			case SUPREME:
-				return MYTHIC;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return SPECIAL;
-			}
-			break;
-		case 0:
-			return original;
-		case 1:
-			switch(original) {
-			case COMMON:
-				return UNCOMMON;
-			case UNCOMMON:
-				return RARE;
-			case RARE:
-				return EPIC;
-			case EPIC:
-				return LEGENDARY;
-			case LEGENDARY:
-				return MYTHIC;
-			case MYTHIC:
-			case SUPREME:
-				return SUPREME;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return VERY_SPECIAL;
-			}
-			break;
-		case 2:
-			switch(original) {
-			case COMMON:
-				return RARE;
-			case UNCOMMON:
-				return EPIC;
-			case RARE:
-				return LEGENDARY;
-			case EPIC:
-				return MYTHIC;
-			case LEGENDARY:
-			case MYTHIC:
-			case SUPREME:
-				return SUPREME;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return VERY_SPECIAL;
-			}
-			break;
-		case 3:
-			switch(original) {
-			case COMMON:
-				return EPIC;
-			case UNCOMMON:
-				return LEGENDARY;
-			case RARE:
-				return MYTHIC;
-			case EPIC:
-			case LEGENDARY:
-			case MYTHIC:
-			case SUPREME:
-				return SUPREME;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return VERY_SPECIAL;
-			}
-			break;
-		case 4:
-			switch(original) {
-			case COMMON:
-				return LEGENDARY;
-			case UNCOMMON:
-				return MYTHIC;
-			case RARE:
-			case EPIC:
-			case LEGENDARY:
-			case MYTHIC:
-			case SUPREME:
-				return SUPREME;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return VERY_SPECIAL;
-			}
-			break;
-		case 5:
-			switch(original) {
-			case COMMON:
-				return MYTHIC;
-			case UNCOMMON:
-			case RARE:
-			case EPIC:
-			case LEGENDARY:
-			case MYTHIC:
-			case SUPREME:
-				return SUPREME;
-			case SPECIAL:
-			case VERY_SPECIAL:
-				return VERY_SPECIAL;
-			}
-			break;
-		default:
-			if(amount < -5) {
-				if(original.isSpecial()) {
-					return SPECIAL;
-				} else {
-					return COMMON;
-				}
-			} else if (amount > 5) {
-				if(original.isSpecial()) {
-					return VERY_SPECIAL;
-				} else {
-					return SUPREME;
-				}
-			}
-			break;
+		if(original.isSpecial()) {
+			return FBTier.valueOf(original.getInt() + amount, true);
+		} else {
+			return FBTier.valueOf(original.getInt() + amount, false);
 		}
-		return null;
 	}
 	
 	public int getInt() {
@@ -258,9 +63,9 @@ public enum FBTier {
 		case SUPREME:
 			return 6;
 		case SPECIAL:
-			return 32000;
+			return 7;
 		case VERY_SPECIAL:
-			return 32001;
+			return 8;
 		default:
 			return -1;
 		}
@@ -289,5 +94,43 @@ public enum FBTier {
 		default:
 			return Rarity.COMMON;
 		}
+	}
+	
+	public static FBTier valueOf(int i) {
+		return valueOf(i, true);
+	}
+	
+	public static FBTier valueOf(int i, boolean allowSpecial) {
+		switch(i) {
+		case 0:
+			return COMMON;
+		case 1:
+			return UNCOMMON;
+		case 2:
+			return RARE;
+		case 3:
+			return EPIC;
+		case 4:
+			return LEGENDARY;
+		case 5:
+			return MYTHIC;
+		case 6:
+			return SUPREME;
+		case 7:
+			return allowSpecial ? SPECIAL : SUPREME;
+		case 8:
+			return allowSpecial ? VERY_SPECIAL : SUPREME;
+		default:
+			if(i < 0) return COMMON;
+			else return allowSpecial ? VERY_SPECIAL: SUPREME;
+		}
+	}
+	
+	public static FBTier valueOf(double d) {
+		return valueOf(d, true);
+	}
+	
+	public static FBTier valueOf(double d, boolean allowSpecial) {
+		return valueOf((int) Math.round(d), allowSpecial);
 	}
 }

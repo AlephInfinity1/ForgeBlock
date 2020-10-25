@@ -289,12 +289,14 @@ public class ModItems {
 	 * Misc
 	 */
 	public static final RegistryObject<Item> ENCHANTED_BOOK = OVERRIDE.register("enchanted_book", () -> new FBEnchantedBookItem(new Item.Properties()));
+	public static final RegistryObject<Item> EXPERIENCE_BOTTLE = OVERRIDE.register("experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.COMMON, 3, 11));
 	public static final RegistryObject<Item> GRAND_EXPERIENCE_BOTTLE = ITEMS.register("grand_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.UNCOMMON, 1500 - 307, 1500 + 307));
 	public static final RegistryObject<Item> TITANIC_EXPERIENCE_BOTTLE = ITEMS.register("titanic_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.RARE, 139770 - 2477, 139770 + 2477));
+	public static final RegistryObject<Item> COLOSSAL_EXPERIENCE_BOTTLE = ITEMS.register("colossal_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.EPIC, 279540 - 4977, 279540 + 4977));
 	
 	/*
 	 * Custom items/ideas/debug
 	 */
-	public static final RegistryObject<Item> DIMENSIUS = ITEMS.register("dimensius", () -> new FBArmorItem(EquipmentSlotType.HEAD, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.MYTHIC, ModifierHelper.modifierMapFromDoubles(0, -1000, 0, 0, 0, 0, -1000, 0, 0, 3000, 0, 0, 0)));
+	public static final RegistryObject<Item> DIMENSIUS = ITEMS.register("dimensius", () -> new FBArmorItem(EquipmentSlotType.HEAD, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.MYTHIC, ModifierHelper.modifierMapFromDoubles(0, -1000, 0, 0, 0, 0, -1000, 0, 0, 3000, 0, 0, 0, 50)));
 	public static final RegistryObject<Item> ONE = ITEMS.register("one", () -> new OneSwordItem(new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.SPECIAL));
 }

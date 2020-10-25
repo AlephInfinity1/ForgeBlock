@@ -1,0 +1,18 @@
+{
+	"type": "forgeblock:telekinesis",
+	"conditions": [
+		{
+			"condition": "minecraft:match_tool",
+			"predicate": {
+				"enchantments": [
+					{
+						"enchantment": "forgeblock:telekinesis",
+						"levels": {
+							"min": 1
+						}
+					}
+				]
+			}
+		}
+	]
+}

@@ -32,7 +32,7 @@ public class CountIngredient extends Ingredient {
 		if (input == null)
 			return false;
 		//As long as the input's stack size >= required, it works.
-		return this.stack.getItem() == input.getItem() && this.stack.getDamage() == input.getDamage() && this.stack.areShareTagsEqual(input) && this.stack.getCount() <= input.getCount();
+		return this.stack.getItem() == input.getItem() && this.stack.getCount() <= input.getCount();
 	}
 
 	@Override

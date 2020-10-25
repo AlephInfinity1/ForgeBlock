@@ -157,6 +157,7 @@
     
     "item.forgeblock.grand_experience_bottle": "Grand Experience Bottle",
     "item.forgeblock.titanic_experience_bottle": "Titanic Experience Bottle",
+    "item.forgeblock.colossal_experience_bottle": "Colossal Experience Bottle",
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
@@ -224,6 +225,7 @@
     "attribute.name.forgeblock.trueDefense": "True Defense",
     "attribute.name.forgeblock.magicFind": "Magic Find",
     "attribute.name.forgeblock.petLuck": "Pet Luck",
+    "attribute.name.forgeblock.ferocity": "Ferocity",
     
     "attribute.name.forgeblock.abilityDamage": "Ability Damage",
     "attribute.name.forgeblock.dodge": "Dodge Chance",
@@ -265,6 +267,7 @@
     "misc.forgeblock.attributeicon.trueDefense": "\u00A7f\u2742",
     "misc.forgeblock.attributeicon.magicFind": "\u00A7b\u20AA",
     "misc.forgeblock.attributeicon.petLuck": "\u00A7d\u2663",
+    "misc.forgeblock.attributeicon.ferocity": "\u00A7c\u2e17",
     
     "misc.forgeblock.attributeshort.damage": "\u00A7c\u2741 Dmg",
     "misc.forgeblock.attributeshort.strength": "\u00A7c\u2741 Str",
@@ -279,6 +282,7 @@
     "misc.forgeblock.attributeshort.trueDefense": "\u00A7f\u2742 Tr Def",
     "misc.forgeblock.attributeshort.magicFind": "\u00A7b\u20AA MF",
     "misc.forgeblock.attributeshort.petLuck": "\u00A7d\u2663 PL",
+    "misc.forgeblock.attributeshort.ferocity": "\u00A7c\u2e17 Fc",
     
     "misc.forgeblock.mana": "Mana",
     "text.forgeblock.mana_cost": "\u00A78Mana Cost: \u00A73%s",
@@ -305,6 +309,7 @@
     "enchantment.forgeblock.venomous": "Venomous",
     "enchantment.forgeblock.giant_killer": "Giant Killer",
     "enchantment.forgeblock.luck": "Luck",
+    "enchantment.forgeblock.smelting_touch": "Smelting Touch",
 
     "effect.forgeblock.ender_warp": "Ender Warp",
     "effect.forgeblock.rogue_speed_boost": "Rogue Speed Boost",
