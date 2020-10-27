@@ -4,10 +4,10 @@ import java.util.Collection;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 
+import alephinfinity1.forgeblock.command.argument.SkillArgument;
 import alephinfinity1.forgeblock.misc.skills.ISkills;
 import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
@@ -31,15 +31,15 @@ public class SkillCommand {
 			return commandSource.hasPermissionLevel(2);
 			}).then(Commands.literal("add")
 					.then(Commands.argument("targets", EntityArgument.players())
-							.then(Commands.argument("skillType", StringArgumentType.word())
+							.then(Commands.argument("skillType", SkillArgument.skill())
 									.then(Commands.argument("amount", IntegerArgumentType.integer(0))
 											.then(Commands.literal("levels")
 													.executes((commandSource) -> {
-														return addSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), StringArgumentType.getString(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), true);
+														return addSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), true);
 													}))
 											.then(Commands.literal("points")
 													.executes((commandSource) -> {
-														return addSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), StringArgumentType.getString(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), false);
+														return addSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), false);
 													}))
 											)
 									)
@@ -47,15 +47,15 @@ public class SkillCommand {
 					)
 				.then(Commands.literal("set")
 						.then(Commands.argument("targets", EntityArgument.players())
-								.then(Commands.argument("skillType", StringArgumentType.word())
+								.then(Commands.argument("skillType", SkillArgument.skill())
 										.then(Commands.argument("amount", IntegerArgumentType.integer(0))
 												.then(Commands.literal("levels")
 														.executes((commandSource) -> {
-															return setSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), StringArgumentType.getString(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), true);
+															return setSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), true);
 														}))
 												.then(Commands.literal("points")
 														.executes((commandSource) -> {
-															return setSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), StringArgumentType.getString(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), false);
+															return setSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), false);
 														}))
 												)
 										)
@@ -63,14 +63,14 @@ public class SkillCommand {
 						)
 				.then(Commands.literal("query")
 						.then(Commands.argument("targets", EntityArgument.player())
-								.then(Commands.argument("skillType", StringArgumentType.word())
+								.then(Commands.argument("skillType", SkillArgument.skill())
 										.then(Commands.literal("levels")
 												.executes((commandSource) -> {
-													return querySkillExperience(commandSource.getSource(), EntityArgument.getPlayer(commandSource, "targets"), StringArgumentType.getString(commandSource, "skillType"), true);
+													return querySkillExperience(commandSource.getSource(), EntityArgument.getPlayer(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), true);
 												}))
 										.then(Commands.literal("points")
 												.executes((commandSource) -> {
-													return querySkillExperience(commandSource.getSource(), EntityArgument.getPlayer(commandSource, "targets"), StringArgumentType.getString(commandSource, "skillType"), false);
+													return querySkillExperience(commandSource.getSource(), EntityArgument.getPlayer(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), false);
 												}))
 										)
 								)
@@ -78,14 +78,7 @@ public class SkillCommand {
 				);
 	}
 	
-	private static int addSkillExperience(CommandSource source, Collection<? extends ServerPlayerEntity> targets, String type, int amount, boolean levels) throws CommandSyntaxException {
-		SkillType skillType;
-		try {
-			skillType = SkillType.getSkillTypeByID(type);
-		} catch(IllegalArgumentException e) {
-			//If skill type is invalid
-			throw INVALID_SKILL.create();
-		}
+	private static int addSkillExperience(CommandSource source, Collection<? extends ServerPlayerEntity> targets, SkillType skillType, int amount, boolean levels) throws CommandSyntaxException {
 		
 		int i = 0; //Success count
 		if(levels) {
@@ -118,14 +111,7 @@ public class SkillCommand {
 		return i;
 	}
 	
-	private static int setSkillExperience(CommandSource source, Collection<? extends ServerPlayerEntity> targets, String type, int amount, boolean levels) throws CommandSyntaxException {
-		SkillType skillType;
-		try {
-			skillType = SkillType.getSkillTypeByID(type);
-		} catch(IllegalArgumentException e) {
-			//If skill type is invalid
-			throw INVALID_SKILL.create();
-		}
+	private static int setSkillExperience(CommandSource source, Collection<? extends ServerPlayerEntity> targets, SkillType skillType, int amount, boolean levels) throws CommandSyntaxException {
 		
 		int i = 0; //Success count
 		if(levels) {
@@ -160,14 +146,7 @@ public class SkillCommand {
 		return i;
 	}
 	
-	private static int querySkillExperience(CommandSource source, ServerPlayerEntity target, String type, boolean levels) throws CommandSyntaxException {
-		SkillType skillType;
-		try {
-			skillType = SkillType.getSkillTypeByID(type);
-		} catch(IllegalArgumentException e) {
-			//If skill type is invalid
-			throw INVALID_SKILL.create();
-		}
+	private static int querySkillExperience(CommandSource source, ServerPlayerEntity target, SkillType skillType, boolean levels) throws CommandSyntaxException {
 		
 		ISkills skills = target.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
 		

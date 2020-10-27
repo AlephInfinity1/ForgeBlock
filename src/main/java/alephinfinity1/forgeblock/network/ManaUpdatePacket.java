@@ -25,6 +25,7 @@ public class ManaUpdatePacket {
 		buf.writeDouble(amount);
 	}
 	
+	@SuppressWarnings("resource")
 	public static void handle(ManaUpdatePacket msg, Supplier<NetworkEvent.Context> ctx) {
 		if(ctx.get().getDirection().getReceptionSide().isClient()) {
 			ctx.get().enqueueWork(() -> {

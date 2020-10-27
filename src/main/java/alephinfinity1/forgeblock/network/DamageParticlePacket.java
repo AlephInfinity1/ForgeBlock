@@ -49,6 +49,7 @@ public class DamageParticlePacket {
 		buf.writeDouble(posZ);
 	}
 	
+	@SuppressWarnings("resource")
 	public static void handle(DamageParticlePacket msg, Supplier<NetworkEvent.Context> ctx) {
 		if(ctx.get().getDirection().getReceptionSide().isClient()) {
 			ctx.get().enqueueWork(() -> {

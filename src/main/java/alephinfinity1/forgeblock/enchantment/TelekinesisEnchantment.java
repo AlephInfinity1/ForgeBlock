@@ -58,6 +58,7 @@ public class TelekinesisEnchantment extends Enchantment {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onPlayerKillEntityExp(LivingExperienceDropEvent event) {
 		PlayerEntity player = event.getAttackingPlayer();
+		if(player == null) return;
 		player.giveExperiencePoints(event.getDroppedExperience());
 		event.setCanceled(true);
 	}
