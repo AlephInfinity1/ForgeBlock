@@ -31,6 +31,7 @@ public class ExperienceEnchantment extends Enchantment {
 	@SubscribeEvent
 	public static void onPlayerKillEntityExp(LivingExperienceDropEvent event) {
 		PlayerEntity player = event.getAttackingPlayer();
+		if(player == null) return;
 		double xpEnchBonus = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.EXPERIENCE.get(), player.getHeldItemMainhand()) * 0.125;
 		double exactXp = event.getDroppedExperience() * (1.0 + xpEnchBonus);
 		double partial = exactXp % 1.0D;

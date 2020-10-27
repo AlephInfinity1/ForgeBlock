@@ -392,8 +392,12 @@
     
     "text.forgeblock.reforgeable": "\u00A78This item can be reforged!",
     
-    "misc.forgeblock.rareDrop": "\u00A76\u00A7lRARE DROP!",
+    "misc.forgeblock.rareDrop": "\u00A76\u00A7lRARE DROP! \u00A7f%s ",
+    "misc.forgeblock.epicDrop": "\u00A76\u00A7lVERY RARE DROP! \u00A7f%s ",
+    "misc.forgeblock.legendaryDrop": "\u00A76\u00A7lCRAZY RARE DROP! \u00A7f%s ",
+    "misc.forgeblock.petDrop": "\u00A76\u00A7lPET DROP! \u00A7f%s ",
     "misc.forgeblock.magicFindBonus": "\u00A7b(+%s% Magic Find!)",
+    "misc.forgeblock.petLuckBonus": "\u00A7d(+%s% Pet Luck!)",
     
     "text.forgeblock.sword_desc.aote_0": "\u00A76Item Ability: Instant Transmission \u00A7e\u00A7lRIGHT CLICK",
     "text.forgeblock.sword_desc.aote_1": "\u00A77Teleport \u00A7a8 blocks\u00A77 ahead of",

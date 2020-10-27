@@ -10,12 +10,12 @@ import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModEntities;
 import alephinfinity1.forgeblock.init.ModItems;
+import alephinfinity1.forgeblock.init.ModLoot;
 import alephinfinity1.forgeblock.init.ModLootModifiers;
 import alephinfinity1.forgeblock.init.ModParticles;
 import alephinfinity1.forgeblock.init.ModPotions;
 import alephinfinity1.forgeblock.init.ModRecipes;
 import alephinfinity1.forgeblock.init.ModReforges;
-import alephinfinity1.forgeblock.misc.drops.LapisZombieDrops;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.Mana;
 import alephinfinity1.forgeblock.misc.mana.ManaStorage;
@@ -61,6 +61,8 @@ public class ForgeBlock {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEventBusSubscriber::onClientSetup);
 		
+		ModLoot.init();
+		
 		FBPacketHandler.register();
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CustomModConfig.CLIENT_CONFIG);
@@ -72,7 +74,6 @@ public class ForgeBlock {
 		AttributeHelper.removeLimits();
 		CapabilityManager.INSTANCE.register(IMana.class, new ManaStorage(), Mana::new);
 		CapabilityManager.INSTANCE.register(ISkills.class, new SkillsStorage(), new SkillsFactory());
-		LapisZombieDrops.initialize();
 		BrewingRecipeRegistrar.registerRecipes();
 	}
 	

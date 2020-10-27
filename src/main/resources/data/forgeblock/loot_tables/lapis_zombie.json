@@ -1,0 +1,81 @@
+{
+	"type": "entity",
+	"pools": [
+		{
+			"name": "rotten_flesh",
+			"rolls": 1,
+			
+			"functions": [
+				{
+					"function": "minecraft:set_count",
+					"count": {
+						"type": "uniform",
+						"min": 0,
+						"max": 2
+					}
+				},
+				{
+					"function": "minecraft:looting_enchant",
+					"count": {
+						"min": 0,
+						"max": 1
+					}
+				}
+			],
+			
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:rotten_flesh",
+					"weight": 1
+				}
+			]
+		},
+		{
+			"name": "lapis_armor_piece",
+			"rolls": 1,
+			
+			"conditions": [
+				{
+					"condition": "forgeblock:random_chance_with_modifiers",
+					"chance": 0.005,
+					"luck_multiplier": 0.05,
+					"mf_multiplier": 0.01,
+					"pl_multiplier": 0
+				}
+			],
+			
+			"functions": [
+				{
+					"function": "forgeblock:notify_killer",
+					"type": "rare",
+					"use_magic_find": true,
+					"use_pet_luck": false
+				}
+			],
+			
+			"entries": [
+				{
+					"type": "item",
+					"name": "forgeblock:lapis_helmet",
+					"weight": 1
+				},
+				{
+					"type": "item",
+					"name": "forgeblock:lapis_chestplate",
+					"weight": 1
+				},
+				{
+					"type": "item",
+					"name": "forgeblock:lapis_leggings",
+					"weight": 1
+				},
+				{
+					"type": "item",
+					"name": "forgeblock:lapis_boots",
+					"weight": 1
+				}
+			]
+		}
+	]
+}
