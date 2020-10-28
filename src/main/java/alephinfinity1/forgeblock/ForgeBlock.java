@@ -1,7 +1,4 @@
-package alephinfinity1.forgeblock;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+mport org.apache.logging.log4j.Logger;
 
 import alephinfinity1.forgeblock.attribute.AttributeHelper;
 import alephinfinity1.forgeblock.client.ClientEventBusSubscriber;

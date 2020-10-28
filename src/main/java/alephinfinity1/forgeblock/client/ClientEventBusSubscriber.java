@@ -1,5 +1,7 @@
 package alephinfinity1.forgeblock.client;
 
+import alephinfinity1.forgeblock.entity.minion.MinionEntity;
+import alephinfinity1.forgeblock.entity.minion.render.MinionRenderer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.MarkerManager.Log4jMarker;
 
@@ -32,6 +34,7 @@ public class ClientEventBusSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPECIAL_ZEALOT.get(), EndermanRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.FB_EXPERIENCE_BOTTLE.get(), (em) -> new SpriteRenderer<FBExperienceBottleEntity>(em, mc.getItemRenderer()));
 
+		RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINION.get(), MinionRenderer::new);
 		ForgeBlock.LOGGER.log(Level.TRACE, new Log4jMarker("Test"), "Client stuff fired!");
 	}
 
