@@ -14,7 +14,6 @@ import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModItemGroups;
 import alephinfinity1.forgeblock.init.ModItems;
-import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.ai.attributes.AttributeModifier;

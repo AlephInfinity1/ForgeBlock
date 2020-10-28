@@ -393,8 +393,8 @@
     "text.forgeblock.reforgeable": "\u00A78This item can be reforged!",
     
     "misc.forgeblock.rareDrop": "\u00A76\u00A7lRARE DROP! \u00A7f%s ",
-    "misc.forgeblock.epicDrop": "\u00A76\u00A7lVERY RARE DROP! \u00A7f%s ",
-    "misc.forgeblock.legendaryDrop": "\u00A76\u00A7lCRAZY RARE DROP! \u00A7f%s ",
+    "misc.forgeblock.epicDrop": "\u00A75\u00A7lVERY RARE DROP! \u00A7f%s ",
+    "misc.forgeblock.legendaryDrop": "\u00A7d\u00A7lCRAZY RARE DROP! \u00A7f%s ",
     "misc.forgeblock.petDrop": "\u00A76\u00A7lPET DROP! \u00A7f%s ",
     "misc.forgeblock.magicFindBonus": "\u00A7b(+%s% Magic Find!)",
     "misc.forgeblock.petLuckBonus": "\u00A7d(+%s% Pet Luck!)",
