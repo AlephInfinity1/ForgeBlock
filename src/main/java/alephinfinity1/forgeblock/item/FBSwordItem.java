@@ -11,7 +11,9 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.init.ModEnchantments;
+import alephinfinity1.forgeblock.init.ModRegistries;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
@@ -28,6 +30,7 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.SwordItem;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -170,12 +173,12 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		if(stack.getTag() == null) return null;
 		String reforgeName = stack.getTag().getString("Reforge");
 		if(reforgeName.isEmpty()) return null;
-		else return Reforge.findReforgeByID(reforgeName);
+		else return ModRegistries.REFORGE.getValue(new ResourceLocation(reforgeName));
 	}
 
 	@Override
 	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack) {
-		if(getReforge(stack) == null) return Reforge.emptyModifier();
+		if(getReforge(stack) == null) return ModifierHelper.emptyModifier();
 		else {
 			Reforge reforge = getReforge(stack);
 			return reforge.getModifierMapByTier(getStackTier(stack), SWORD_REFORGE_MODIFIER);
@@ -210,7 +213,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 
 	@Override
 	public void setReforge(Reforge reforge, ItemStack stack) {
-		stack.getTag().putString("Reforge", reforge.getID());
+		stack.getTag().putString("Reforge", ModRegistries.REFORGE.getKey(reforge).toString());
 	}
 
 	@Override

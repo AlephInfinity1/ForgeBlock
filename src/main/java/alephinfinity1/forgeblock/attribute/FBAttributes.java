@@ -29,6 +29,7 @@ public final class FBAttributes {
 	public static final IAttribute SEA_CREATURE_CHANCE = (new RangedAttribute((IAttribute) null, "forgeblock.seaCreatureChance", 0.0D, 0.0D, 1.0D)).setDescription("Sea Creature Chance").setShouldWatch(true);
 	public static final IAttribute MAGIC_FIND = (new RangedAttribute((IAttribute) null, "forgeblock.magicFind", 0.0D, -Double.MAX_VALUE, Double.MAX_VALUE)).setDescription("Magic Find").setShouldWatch(true);
 	public static final IAttribute PET_LUCK = (new RangedAttribute((IAttribute) null, "forgeblock.petLuck", 0.0D, -Double.MAX_VALUE, Double.MAX_VALUE)).setDescription("Pet Luck").setShouldWatch(true);
+	public static final IAttribute FEROCITY = (new RangedAttribute((IAttribute) null, "forgeblock.ferocity", 0.0D, 0.0D, Double.MAX_VALUE)).setDescription("Ferocity").setShouldWatch(true);
 	
 	//Supplementary attributes (not listed as attributes on the wiki page)
 	public static final IAttribute ABILITY_DAMAGE = (new RangedAttribute((IAttribute) null, "forgeblock.abilityDamage", 0.0D, -Double.MAX_VALUE, Double.MAX_VALUE)).setDescription("Ability Damage").setShouldWatch(true); //Ability damage. Increased by sheep pet and superior dragon armor (AotD).
@@ -65,10 +66,10 @@ public final class FBAttributes {
 	//List
 	public static final IAttribute[] PRIMARY_ATTRIBUTES = new IAttribute[] {SharedMonsterAttributes.ATTACK_DAMAGE, STRENGTH, CRIT_CHANCE,
 			CRIT_DAMAGE, BONUS_ATTACK_SPEED, SEA_CREATURE_CHANCE, SharedMonsterAttributes.MAX_HEALTH, DEFENSE, SharedMonsterAttributes.MOVEMENT_SPEED,
-			INTELLIGENCE, TRUE_DEFENSE, MAGIC_FIND, PET_LUCK};
+			INTELLIGENCE, TRUE_DEFENSE, MAGIC_FIND, PET_LUCK, FEROCITY};
 	
 	public static final IAttribute[] OFFENSIVE_ATTRIBUTES = new IAttribute[] {SharedMonsterAttributes.ATTACK_DAMAGE, STRENGTH, CRIT_CHANCE, CRIT_DAMAGE,
-			BONUS_ATTACK_SPEED, SEA_CREATURE_CHANCE};
+			BONUS_ATTACK_SPEED, SEA_CREATURE_CHANCE, FEROCITY};
 	
 	public static final IAttribute[] DEFENSIVE_ATTRIBUTES = new IAttribute[] {SharedMonsterAttributes.MAX_HEALTH, DEFENSE, SharedMonsterAttributes.MOVEMENT_SPEED, INTELLIGENCE, TRUE_DEFENSE, MAGIC_FIND, PET_LUCK};
 	

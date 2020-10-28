@@ -1,11 +1,16 @@
 package alephinfinity1.forgeblock.entity;
 
+import javax.annotation.Nullable;
+
+import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModItems;
 import alephinfinity1.forgeblock.item.FBArmorItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
@@ -15,11 +20,14 @@ import net.minecraft.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class LapisZombieEntity extends ZombieEntity implements IFBEntity {
@@ -85,6 +93,23 @@ public class LapisZombieEntity extends ZombieEntity implements IFBEntity {
 		this.setItemStackToSlot(EquipmentSlotType.CHEST, ((FBArmorItem) (ModItems.LAPIS_CHESTPLATE.get())).getDisplayStack());
 		this.setItemStackToSlot(EquipmentSlotType.LEGS, ((FBArmorItem) (ModItems.LAPIS_LEGGINGS.get())).getDisplayStack());
 		this.setItemStackToSlot(EquipmentSlotType.FEET, ((FBArmorItem) (ModItems.LAPIS_BOOTS.get())).getDisplayStack());
+	}
+	
+	@Override
+	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+		ILivingEntityData data = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		this.setChild(false); //Can never be child.
+		return data;
+	}
+	
+	@Override
+	public ResourceLocation getLootTable() {
+		return new ResourceLocation(ForgeBlock.MOD_ID, "lapis_zombie");
+	}
+	
+	@Override
+	public void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn) {
+		//Do nothing. Armour should not be dropped beside loot tables.
 	}
 
 	@Override

@@ -83,7 +83,11 @@ public class AttributeHelper {
 			living.getAttributes().registerAttribute(FBAttributes.CRIT_DAMAGE);
 			living.getAttributes().registerAttribute(FBAttributes.BONUS_ATTACK_SPEED);
 			living.getAttributes().registerAttribute(FBAttributes.INTELLIGENCE);
+			living.getAttributes().registerAttribute(FBAttributes.FEROCITY);
 			for(IAttribute attribute : FBAttributes.ADDITIONAL_ATTRIBUTES) {
+				living.getAttributes().registerAttribute(attribute);
+			}
+			for(IAttribute attribute : FBAttributes.RAW_ATTRIBUTES) {
 				living.getAttributes().registerAttribute(attribute);
 			}
 			
@@ -92,9 +96,6 @@ public class AttributeHelper {
 				living.getAttributes().registerAttribute(FBAttributes.SEA_CREATURE_CHANCE);
 				living.getAttributes().registerAttribute(FBAttributes.MAGIC_FIND);
 				living.getAttributes().registerAttribute(FBAttributes.PET_LUCK);
-				for(IAttribute attribute : FBAttributes.RAW_ATTRIBUTES) {
-					living.getAttributes().registerAttribute(attribute);
-				}
 				for(IAttribute attribute : FBAttributes.SKILL_XP_BOOSTS) {
 					living.getAttributes().registerAttribute(attribute);
 				}

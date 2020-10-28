@@ -13,6 +13,7 @@ import com.google.common.collect.Multimap;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.init.ModEnchantments;
+import alephinfinity1.forgeblock.init.ModRegistries;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
@@ -25,10 +26,10 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -68,16 +69,6 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 	protected static final UUID CHESTPLATE_REFORGE_MODIFIER = UUID.fromString("87cc5544-7e0c-489b-9150-afb9e862ae59");
 	protected static final UUID LEGGINGS_REFORGE_MODIFIER = UUID.fromString("c2d21770-30c0-4995-9353-13ea119d2208");
 	protected static final UUID BOOTS_REFORGE_MODIFIER = UUID.fromString("ee72082d-cdc5-4b51-9178-a049ad7b954e");
-
-	
-	//Super constructor, don't use
-	@Deprecated
-	public FBArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
-		super(materialIn, slot, builder);
-		tier = FBTier.COMMON;
-		attributes = Reforge.emptyModifier();
-		// TODO Auto-generated constructor stub
-	}
 	
 	public FBArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn, double healthIn) {
 		super(new FBArmorMaterial(name), slot, props);
@@ -193,17 +184,17 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		if(stack.getTag() == null) return null;
 		String reforgeName = stack.getTag().getString("Reforge");
 		if(reforgeName.isEmpty()) return null;
-		else return Reforge.findReforgeByID(reforgeName);
+		else return ModRegistries.REFORGE.getValue(new ResourceLocation(reforgeName));
 	}
 
 	@Override
 	public void setReforge(Reforge reforge, ItemStack stack) {
-		stack.getTag().putString("Reforge", reforge.getID());
+		stack.getTag().putString("Reforge", ModRegistries.REFORGE.getKey(reforge).toString());
 	}
 
 	@Override
 	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack) {
-		if(getReforge(stack) == null) return Reforge.emptyModifier();
+		if(getReforge(stack) == null) return ModifierHelper.emptyModifier();
 		else {
 			Reforge reforge = getReforge(stack);
 			switch(this.slot) {
@@ -219,7 +210,7 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 				break;
 			}
 			
-			return Reforge.emptyModifier();
+			return ModifierHelper.emptyModifier();
 		}
 	}
 

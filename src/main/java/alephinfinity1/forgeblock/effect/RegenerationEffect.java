@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.effect;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
@@ -33,6 +34,11 @@ public class RegenerationEffect extends Effect implements IForgeEffect {
 		default:
 			return 0.0;
 		}
+	}
+	
+	@Override
+	public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
+		//Do nothing. The health regen attribute would take care of the rest.
 	}
 
 }

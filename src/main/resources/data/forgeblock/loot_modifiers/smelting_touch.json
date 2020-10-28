@@ -1,0 +1,18 @@
+{
+	"type": "forgeblock:smelting_touch",
+	"conditions": [
+		{
+			"condition": "minecraft:match_tool",
+			"predicate": {
+				"enchantments": [
+					{
+						"enchantment": "forgeblock:smelting_touch",
+						"levels": {
+							"min": 1
+						}
+					}
+				]
+			}
+		}
+	]
+}
