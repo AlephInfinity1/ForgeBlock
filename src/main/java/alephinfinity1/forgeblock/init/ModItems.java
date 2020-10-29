@@ -286,6 +286,11 @@ public class ModItems {
 	public static final RegistryObject<Item> LAPIS_ZOMBIE_SPAWN_EGG = ITEMS.register("lapis_zombie_spawn_egg", () -> new SpawnEggItem(ModEntities.LAPIS_ZOMBIE_TYPE, 1269462, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> ZEALOT_SPAWN_EGG = ITEMS.register("zealot_spawn_egg", () -> new SpawnEggItem(ModEntities.ZEALOT_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 
+	/**
+	 * Not final
+	 */
+	public static final RegistryObject<Item> MINION_SPAWN_EGG = ITEMS.register("minion_spawn_egg", () -> new SpawnEggItem(ModEntities.MINION_TYPE, 1080802, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+
 	/*
 	 * Misc
 	 */

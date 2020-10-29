@@ -1,5 +1,4 @@
-mport org.apache.logging.log4j.Logger;
-
+package alephinfinity1.forgeblock;
 import alephinfinity1.forgeblock.attribute.AttributeHelper;
 import alephinfinity1.forgeblock.client.ClientEventBusSubscriber;
 import alephinfinity1.forgeblock.config.CustomModConfig;
@@ -29,6 +28,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(value = ForgeBlock.MOD_ID)
 public class ForgeBlock {
