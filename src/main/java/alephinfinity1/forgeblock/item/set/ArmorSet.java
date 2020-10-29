@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import net.minecraft.item.ItemStack;
 
+@SuppressWarnings("unused")
 public class ArmorSet {
 
 	private Predicate<ItemStack> helmet;

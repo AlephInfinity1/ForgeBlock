@@ -10,7 +10,6 @@ import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
-import net.minecraft.entity.ai.attributes.IAttribute;
 
 /*
  * Debug item. Used to test display.

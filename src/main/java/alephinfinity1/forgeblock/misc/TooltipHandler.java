@@ -1,9 +1,6 @@
 package alephinfinity1.forgeblock.misc;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -32,11 +29,13 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber
 public class TooltipHandler {
 
+	/*
 	private static DecimalFormat createAttributeModifierDecimalFormat() {
 		DecimalFormat decimalformat = new DecimalFormat("#.##");
 		decimalformat.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ROOT));
 		return decimalformat;
 	}
+	*/
 
 	
 	
@@ -48,7 +47,7 @@ public class TooltipHandler {
 			UUID ATTACK_DAMAGE_MODIFIER = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
 			UUID ATTACK_SPEED_MODIFIER = UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
 			ItemStack stack = event.getItemStack();
-			DecimalFormat DECIMALFORMAT = createAttributeModifierDecimalFormat();
+			//DecimalFormat DECIMALFORMAT = createAttributeModifierDecimalFormat();
 	
 			
 			if(event.getItemStack().getItem() instanceof IFBItem) {
