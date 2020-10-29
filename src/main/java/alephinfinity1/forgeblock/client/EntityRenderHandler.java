@@ -99,7 +99,6 @@ public class EntityRenderHandler {
         }
 
         matrixStackIn.pop();
-        //matrixStackIn.pop();
 	}
 	
 	public static String getEntityString(Entity entity) {
