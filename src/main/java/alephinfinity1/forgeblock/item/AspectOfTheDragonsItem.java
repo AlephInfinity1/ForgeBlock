@@ -33,7 +33,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem {
+public class  AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem {
 
 	public AspectOfTheDragonsItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn,
 			double critChanceIn, double critDamageIn) {
