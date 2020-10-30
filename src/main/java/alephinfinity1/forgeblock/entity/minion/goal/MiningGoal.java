@@ -1,11 +1,13 @@
 package alephinfinity1.forgeblock.entity.minion.goal;
 
 import alephinfinity1.forgeblock.entity.minion.MinionEntity;
+import alephinfinity1.forgeblock.entity.minion.inventory.MinionInv;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
@@ -19,14 +21,17 @@ public class MiningGoal extends Goal {
   private static final Minecraft mc = Minecraft.getInstance();
 
   private static MinionEntity minionEntity;
+  private final MinionInv minionInv;
 
   float tick = 0;
 
   int z = 2;
   int x = -2;
 
-  public MiningGoal(MinionEntity entity) {
+  public MiningGoal(MinionEntity entity,
+      MinionInv minionInv) {
     minionEntity = entity;
+    this.minionInv = minionInv;
   }
 
 
@@ -68,6 +73,8 @@ public class MiningGoal extends Goal {
         .getWorld(DimensionType.OVERWORLD) == null) {
       return;
     }
+
+    minionEntity.rotateTowards(blockPlace.getX(), blockPlace.getY());
     World world = Minecraft.getInstance().getIntegratedServer()
         .getWorld(DimensionType.OVERWORLD);
 
@@ -84,6 +91,12 @@ public class MiningGoal extends Goal {
   public static Block removeBlock(BlockPos blockRemove) {
     ServerWorld world = Objects.requireNonNull(Minecraft.getInstance().getIntegratedServer())
         .getWorld(DimensionType.OVERWORLD);
+
+
+
+    for(PlayerEntity playerEntity:world.getPlayers()){
+      minionEntity.minionInv.newMinionInv().openInventory(playerEntity);
+    }
 
     BlockState blockState = world.getBlockState(blockRemove);
     Block currentBlock = blockState.getBlock();

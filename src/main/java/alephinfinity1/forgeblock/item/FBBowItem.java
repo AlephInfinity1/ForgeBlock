@@ -12,43 +12,42 @@ import net.minecraft.item.ItemStack;
 
 public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredItem {
 
-	public FBBowItem(Properties builder) {
-		super(builder);
-		// TODO Auto-generated constructor stub
-	}
+  public FBBowItem(Properties builder) {
+    super(builder);
 
-	@Override
-	public FBItemType getFBItemType() {
-		return FBItemType.BOW;
-	}
+  }
 
-	@Override
-	public FBTier getFBTier() {
-		return null;
-	}
+  @Override
+  public FBItemType getFBItemType() {
+    return FBItemType.BOW;
+  }
 
-	@Override
-	public FBTier getStackTier(ItemStack stack) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  @Override
+  public FBTier getFBTier() {
+    return null;
+  }
 
-	@Override
-	public Reforge getReforge(ItemStack stack) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  @Override
+  public FBTier getStackTier(ItemStack stack) {
 
-	@Override
-	public void setReforge(Reforge reforge, ItemStack stack) {
-		// TODO Auto-generated method stub
+    return null;
+  }
 
-	}
+  @Override
+  public Reforge getReforge(ItemStack stack) {
 
-	@Override
-	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    return null;
+  }
+
+  @Override
+  public void setReforge(Reforge reforge, ItemStack stack) {
+
+  }
+
+  @Override
+  public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack) {
+
+    return null;
+  }
 
 }

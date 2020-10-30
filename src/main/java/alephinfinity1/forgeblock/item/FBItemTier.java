@@ -20,19 +20,18 @@ public class FBItemTier implements IItemTier {
 
 	@Override
 	public float getAttackDamage() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public float getEfficiency() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getEnchantability() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
@@ -43,13 +42,13 @@ public class FBItemTier implements IItemTier {
 
 	@Override
 	public int getMaxUses() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public Ingredient getRepairMaterial() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
