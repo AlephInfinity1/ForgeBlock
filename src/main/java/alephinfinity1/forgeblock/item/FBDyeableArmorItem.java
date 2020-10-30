@@ -9,7 +9,6 @@ public class FBDyeableArmorItem extends FBArmorItem implements IDyeableArmorItem
 	public FBDyeableArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn,
 			double healthIn) {
 		super(slot, name, props, tier, defenseIn, healthIn);
-		// TODO Auto-generated constructor stub
 	}
 
 }

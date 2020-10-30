@@ -49,7 +49,6 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 
 	public FBPotionItem(Properties builder) {
 		super(builder);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -183,8 +182,7 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 			}
 		}
 	}
-	
-	//TODO complete potion logic
+
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 		PlayerEntity playerentity = entityLiving instanceof PlayerEntity ? (PlayerEntity)entityLiving : null;

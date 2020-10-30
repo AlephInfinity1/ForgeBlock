@@ -8,12 +8,10 @@ public class FBSwordsItemGroup extends ItemGroup {
 
 	public FBSwordsItemGroup(String label) {
 		super(label);
-		// TODO Auto-generated constructor stub
 	}
 
 	public FBSwordsItemGroup(int index, String label) {
 		super(index, label);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -8,12 +8,10 @@ public class FBHarvestingToolsItemGroup extends ItemGroup {
 
 	public FBHarvestingToolsItemGroup(String label) {
 		super(label);
-		// TODO Auto-generated constructor stub
 	}
 
 	public FBHarvestingToolsItemGroup(int index, String label) {
 		super(index, label);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

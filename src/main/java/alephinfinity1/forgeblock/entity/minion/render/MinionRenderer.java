@@ -10,10 +10,10 @@ import net.minecraft.util.ResourceLocation;
 public class MinionRenderer extends MobRenderer<MinionEntity, MinionModel<MinionEntity>> {
 
   private static final ResourceLocation MINION_TEXTURES = new ResourceLocation(ForgeBlock.MOD_ID,
-      "textures/entity/enderman/enderman.png");
+     "textures/minion/minion.png");
 
   public MinionRenderer(EntityRendererManager renderManagerIn) {
-    super(renderManagerIn, new MinionModel<>(), 0.7F);
+    super(renderManagerIn, new MinionModel<>(), 0.1F);
   }
 
   @Override
