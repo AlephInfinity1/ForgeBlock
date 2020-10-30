@@ -41,7 +41,7 @@ public class ModEntities {
 
     public static final EntityType<MinionEntity> MINION_TYPE = EntityType.Builder.<MinionEntity>create(
             MinionEntity::new,
-            EntityClassification.MISC).size(0.50f, 0.50f).build(new ResourceLocation(ForgeBlock.MOD_ID, "fb_minion").toString());
+            EntityClassification.MISC).size(0.50f, 0.50f).build(new ResourceLocation(ForgeBlock.MOD_ID, "minion").toString());
 
     public static final RegistryObject<EntityType<Lv1ZombieEntity>> LV1_ZOMBIE = ENTITIES.register("lv1_zombie", () -> LV1_ZOMBIE_TYPE);
     public static final RegistryObject<EntityType<LapisZombieEntity>> LAPIS_ZOMBIE = ENTITIES.register("lapis_zombie", () -> LAPIS_ZOMBIE_TYPE);
