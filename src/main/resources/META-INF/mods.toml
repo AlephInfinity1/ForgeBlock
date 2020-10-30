@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 loaderVersion="[31,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
-# issueTrackerURL="http://my.issue.tracker/" #optional
+issueTrackerURL="https://github.com/AlephInfinity1/ForgeBlock/issues" #optional
 [[mods]] #mandatory
 modId="forgeblock" #mandatory
 version="${file.jarVersion}" #mandatory
@@ -12,9 +12,9 @@ displayName="ForgeBlock Mod" #mandatory
 
 # logoFile="examplemod.png" #optional Might come back, not really needed
 
-credits="AlephInfinity1" #optional
+credits="AlephInfinity1, Si1kn" #optional
 
-authors="AlephInfinity1" #optional
+authors="AlephInfinity1, Si1kn" #optional
 
 description='''
 This is a WIP recreation of Hypixel's popular gamemode, SkyBlock.

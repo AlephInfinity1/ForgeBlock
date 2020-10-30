@@ -5,8 +5,9 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
-/*
+/**
  * The rarity/tier of an item.
+ * Better known as 'Rarity' in-game, however the official terminology, as shown in the API doc, is 'Tier'.
  */
 public enum FBTier {
 	COMMON(CustomModConfig.COMMON_TIER_COLOR.get(), "misc.forgeblock.tier.common"),
@@ -26,8 +27,10 @@ public enum FBTier {
 		this.name = new TranslationTextComponent(key);
 	}
 	
-	/*
+	/**
 	 * Checks if this rarity is special.
+	 * 
+	 * @return whether this rarity is special.
 	 */
 	public boolean isSpecial() {
 		if(this == SPECIAL || this == VERY_SPECIAL) {
@@ -35,8 +38,12 @@ public enum FBTier {
 		} else return false;
 	}
 	
-	/*
+	/**
 	 * Changes rarity by a number of tiers.
+	 * 
+	 * @param original The original tier.
+	 * @param amount The number of tiers to change.
+	 * @return the new tier after the operation.
 	 */
 	public static FBTier changeTier(FBTier original, int amount) {
 		if(original.isSpecial()) {
@@ -46,6 +53,11 @@ public enum FBTier {
 		}
 	}
 	
+	/**
+	 * Get the int value of this
+	 * 
+	 * @return
+	 */
 	public int getInt() {
 		switch(this) {
 		case COMMON:
@@ -96,10 +108,25 @@ public enum FBTier {
 		}
 	}
 	
+	/**
+	 * Get the corresponding FBTier of an integer. Used for dungeon gear calculation only.
+	 * Not suitable for any other usage.
+	 * 
+	 * @param i The integer.
+	 * @return The corresponding tier.
+	 */
 	public static FBTier valueOf(int i) {
 		return valueOf(i, true);
 	}
 	
+	/**
+	 * Get the corresponding FBTier of an integer. Used for dungeon gear calculation only.
+	 * Not suitable for any other usage.
+	 * 
+	 * @param i The integer.
+	 * @param allowSpecial Whether 'special' tiers are allowed to be returned.
+	 * @return The corresponding tier.
+	 */
 	public static FBTier valueOf(int i, boolean allowSpecial) {
 		switch(i) {
 		case 0:
@@ -126,10 +153,22 @@ public enum FBTier {
 		}
 	}
 	
+	/**
+	 * Double version of valueOf(int).
+	 * 
+	 * @param d The number.
+	 * @return The corresponding tier.
+	 */
 	public static FBTier valueOf(double d) {
 		return valueOf(d, true);
 	}
 	
+	/**
+	 * Double version of valueOf(int, boolean).
+	 * 
+	 * @param d The number.
+	 * @return The corresponding tier.
+	 */
 	public static FBTier valueOf(double d, boolean allowSpecial) {
 		return valueOf((int) Math.round(d), allowSpecial);
 	}

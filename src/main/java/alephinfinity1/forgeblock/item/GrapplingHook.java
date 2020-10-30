@@ -12,29 +12,28 @@ import net.minecraft.world.World;
 
 public class GrapplingHook implements IFBTieredItem {
 
-  @Override
-  public FBTier getFBTier() {
-    return FBTier.UNCOMMON;
-  }
+	@Override
+	public FBTier getFBTier() {
+		return FBTier.UNCOMMON;
+	}
 
-  @Override
-  public FBTier getStackTier(ItemStack stack) {
-    return FBTier.valueOf(1);
-  }
+	@Override
+	public FBTier getStackTier(ItemStack stack) {
+		return FBTier.valueOf(1);
+	}
 
-  @Override
-  public Rarity getRarity(ItemStack stack) {
-    return Rarity.UNCOMMON;
-  }
+	@Override
+	public Rarity getRarity(ItemStack stack) {
+		return Rarity.UNCOMMON;
+	}
 
-  @Override
-  public void addInformation(ItemStack stack, @Nullable World worldIn,
-      List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn,
+			List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+	}
 
-  }
-
-  @Override
-  public FBItemType getFBItemType() {
-    return FBItemType.GENERAL;
-  }
+	@Override
+	public FBItemType getFBItemType() {
+		return FBItemType.GENERAL;
+	}
 }

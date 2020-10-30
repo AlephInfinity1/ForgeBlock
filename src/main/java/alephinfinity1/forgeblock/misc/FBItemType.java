@@ -3,7 +3,7 @@ package alephinfinity1.forgeblock.misc;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public enum FBItemType {
-	GENERAL("misc.forgeblock.itemtype.general"),
+	GENERAL("misc.forgeblock.itemtype.general"), //Any item that does not below in any categories belwo.
 	SWORD("misc.forgeblock.itemtype.sword"),
 	BOW("misc.forgeblock.itemtype.bow"),
 	PICKAXE("misc.forgeblock.itemtype.pickaxe"),
