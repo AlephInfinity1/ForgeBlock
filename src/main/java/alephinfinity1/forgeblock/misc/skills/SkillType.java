@@ -171,13 +171,13 @@ public enum SkillType {
 		
 		Function<Integer, Double> DEFAULT_XP = (level) -> {
 			if(level < 0) throw new IllegalArgumentException();
-			else if (level >= 50) return Double.POSITIVE_INFINITY;
+			else if (level >= 50) return Double.NaN;
 			else return DEFAULT_XP_TABLE.get(level);
 		};
 		
 		Function<Integer, Double> RUNECRAFTING_XP = (level) -> {
 			if(level < 0) throw new IllegalArgumentException();
-			else if (level >= 25) return Double.POSITIVE_INFINITY;
+			else if (level >= 25) return Double.NaN;
 			else return RUNECRAFTING_XP_TABLE.get(level);
 		};
 		

@@ -11,16 +11,21 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.loot.LootContext.Builder;
+import net.minecraft.world.storage.loot.LootParameters;
 
 public class MiningGoal extends Goal {
 
 	private MinionEntity minionEntity; //Should not be static, as only 1 minion would be active otherwise.
-	private final MinionInv minionInv;
-	private final Block block; //The type of block this minion mines.
-	private final int actionDelay; //The delay, in ticks, between two actions.
-	private final int radius; //The radius, in blocks, of the minion.
+	private MinionInv minionInv;
+	private Block block; //The type of block this minion mines.
+	private int actionDelay; //The delay, in ticks, between two actions.
+	private int radius; //The radius, in blocks, of the minion.
 
 	long tick = 0;
 
@@ -49,6 +54,15 @@ public class MiningGoal extends Goal {
 		this.block = block;
 		this.actionDelay = waitingTime;
 		this.radius = 2;
+	}
+	
+	public MiningGoal(MinionEntity entity,
+			MinionInv minionInv, Block block, int waitingTime, int radius) {
+		minionEntity = entity;
+		this.minionInv = minionInv;
+		this.block = block;
+		this.actionDelay = waitingTime;
+		this.radius = radius;
 	}
 
 
@@ -137,7 +151,7 @@ public class MiningGoal extends Goal {
 			World world = minionEntity.getEntityWorld();
 	
 			for(PlayerEntity playerEntity : world.getPlayers()){
-				minionEntity.minionInv.newMinionInv().openInventory(playerEntity);
+				minionEntity.minionInv.openInventory(playerEntity);
 			}
 	
 			for(BlockPos pos : positions) {
@@ -145,6 +159,11 @@ public class MiningGoal extends Goal {
 				Block currentBlock = blockState.getBlock();
 				if(currentBlock.equals(this.block)) {
 					world.destroyBlock(pos, false);
+					for(ItemStack drop : blockState.getDrops(new Builder((ServerWorld) world)
+							.withParameter(LootParameters.TOOL, new ItemStack(Items.DIAMOND_PICKAXE))
+							.withParameter(LootParameters.POSITION, blockRemove))) {
+						minionInv.addItem(drop);
+					}
 					return currentBlock;
 				}
 			}

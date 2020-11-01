@@ -11,9 +11,10 @@ import alephinfinity1.forgeblock.client.particles.StringParticleData.Style;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModParticles;
-import alephinfinity1.forgeblock.misc.skills.ISkills;
-import alephinfinity1.forgeblock.misc.skills.SkillType;
-import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
+import alephinfinity1.forgeblock.item.EndSwordItem;
+import alephinfinity1.forgeblock.item.SpiderSwordItem;
+import alephinfinity1.forgeblock.item.UndeadSwordItem;
+import alephinfinity1.forgeblock.misc.skills.SkillsHelper;
 import alephinfinity1.forgeblock.network.DamageParticlePacket;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import net.minecraft.client.world.ClientWorld;
@@ -23,6 +24,7 @@ import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPartEntity;
 import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.monster.CreeperEntity;
@@ -203,18 +205,22 @@ public class DamageHandler {
 			double skillMultiplier = 0.0D;
 			if(damager instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) damager;
-				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
-				skillMultiplier = 0.04D * skills.getLevel(SkillType.COMBAT);
+				skillMultiplier = 0.04D * SkillsHelper.getCombatLevel(player);
 			}
 			
 			result *= (1.0D + enchMultiplier + skillMultiplier);
 			
+			if(weapon.getItem() instanceof UndeadSwordItem && victim.getCreatureAttribute().equals(CreatureAttribute.UNDEAD)) result *= 2;
+			if(weapon.getItem() instanceof SpiderSwordItem && victim.getCreatureAttribute().equals(CreatureAttribute.ARTHROPOD)) result *= 2;
+			if(weapon.getItem() instanceof EndSwordItem && (victim instanceof EndermanEntity || victim instanceof EndermiteEntity
+					|| victim instanceof EnderDragonEntity || victim.getCreatureAttribute().equals(FBCreatureAttributes.ENDER))) result *= 2;
+			
 			//Step 4: check for critical hit
-			boolean isCrit = (new Random().nextDouble() * 100.0D) < damager.getAttribute(FBAttributes.CRIT_CHANCE).getValue();
+			boolean isCrit = RNGHelper.randomChance(damager.getAttribute(FBAttributes.CRIT_CHANCE).getValue() / 100.0D, new Random());
 			double critDamage = damager.getAttribute(FBAttributes.CRIT_DAMAGE).getValue();
 			if(isCrit) result *= (1.0D + critDamage / 100.0D);
 			
-			//Step 4b: activate life steal enchantment
+			//Step 4b: activate life steal enchantment (before defence calculation)
 			int lifeSteal = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.LIFE_STEAL.get(), damager.getHeldItemMainhand());
 			damager.heal((float) (result * lifeSteal * 0.001));
 			
@@ -228,6 +234,12 @@ public class DamageHandler {
 			if(venomousLevel != 0) {
 				EffectInstance instance = new EffectInstance(ModEffects.VENOMOUS, 85, venomousLevel - 1, false, false);
 				victim.addPotionEffect(instance);
+			}
+			
+			int vampirismLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.VAMPIRISM.get(), weapon);
+			if(vampirismLevel != 0) {
+				float missingHealth = damager.getMaxHealth() - damager.getHealth();
+				damager.heal(missingHealth * vampirismLevel * 0.01f);
 			}
 			
 			//Step 7: display damage

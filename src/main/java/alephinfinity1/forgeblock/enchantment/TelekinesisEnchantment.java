@@ -59,6 +59,7 @@ public class TelekinesisEnchantment extends Enchantment {
 	public static void onPlayerKillEntityExp(LivingExperienceDropEvent event) {
 		PlayerEntity player = event.getAttackingPlayer();
 		if(player == null) return;
+		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.TELEKINESIS.get(), player.getHeldItemMainhand()) == 0) return;
 		player.giveExperiencePoints(event.getDroppedExperience());
 		event.setCanceled(true);
 	}
@@ -70,6 +71,7 @@ public class TelekinesisEnchantment extends Enchantment {
 	public static void onPlayerBreakBlockExp(BlockEvent.BreakEvent event) {
 		PlayerEntity player = event.getPlayer();
 		if(player == null) return;
+		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.TELEKINESIS.get(), player.getHeldItemMainhand()) == 0) return;
 		player.giveExperiencePoints(event.getExpToDrop());
 		event.setExpToDrop(0);
 	}

@@ -154,6 +154,10 @@
     "item.forgeblock.frozen_blaze_chestplate": "Frozen Blaze Chestplate",
     "item.forgeblock.frozen_blaze_leggings": "Frozen Blaze Leggings",
     "item.forgeblock.frozen_blaze_boots": "Frozen Blaze Boots",
+    "item.forgeblock.undead_sword": "Undead Sword",
+    "item.forgeblock.spider_sword": "Spider Sword",
+    "item.forgeblock.end_sword": "End Sword",
+    "item.forgeblock.fancy_sword": "Fancy Sword",
     
     "item.forgeblock.lv1_zombie_spawn_egg": "Zombie (Lv1) Spawn Egg",
     "item.forgeblock.lapis_zombie_spawn_egg": "Lapis Zombie Spawn Egg",
@@ -177,6 +181,7 @@
     "entity.forgeblock.zealot": "Zealot",
     "entity.forgeblock.special_zealot": "Zealot",
     
+    "misc.forgeblock.tier.poor": "POOR",
     "misc.forgeblock.tier.common": "COMMON",
     "misc.forgeblock.tier.uncommon": "UNCOMMON",
     "misc.forgeblock.tier.rare": "RARE",
@@ -316,6 +321,8 @@
     "enchantment.forgeblock.luck": "Luck",
     "enchantment.forgeblock.smelting_touch": "Smelting Touch",
     "enchantment.forgeblock.experience": "Experience",
+    "enchantment.forgeblock.scavenger": "Scavenger",
+    "enchantment.forgeblock.vampirism": "Vampirism",
 
     "effect.forgeblock.ender_warp": "Ender Warp",
     "effect.forgeblock.rogue_speed_boost": "Rogue Speed Boost",
@@ -422,6 +429,18 @@
     "text.forgeblock.sword_desc.aotd_1": "\u00A77All monsters in front of you",
     "text.forgeblock.sword_desc.aotd_2": "\u00A77take \u00A7a%1$s\u00A77 damage.",
     "text.forgeblock.sword_desc.aotd_3": "\u00A77Hit monsters take large knockback.",
+    
+    "text.forgeblock.sword_desc.undead_0": "\u00A77Deal \u00A7a+100%\u00A77 damage to",
+    "text.forgeblock.sword_desc.undead_1": "\u00A77Skeletons, Withers,",
+    "text.forgeblock.sword_desc.undead_2": "\u00A77Zombies, and Pigmen.",
+    
+    "text.forgeblock.sword_desc.spider_0": "\u00A77Deal \u00A7a+100%\u00A77 damage to",
+    "text.forgeblock.sword_desc.spider_1": "\u00A77Spiders, Cave Spiders,",
+    "text.forgeblock.sword_desc.spider_2": "\u00A77and Silverfish.",
+    
+    "text.forgeblock.sword_desc.end_0": "\u00A77Deal \u00A7a+100%\u00A77 damage to",
+    "text.forgeblock.sword_desc.end_1": "\u00A77Endermen, Endermites,",
+    "text.forgeblock.sword_desc.end_2": "\u00A77and Ender Dragons.",
     
     "text.forgeblock.armor_desc.lapis_0": "\u00A77Each piece of this armor grants",
     "text.forgeblock.armor_desc.lapis_1": "\u00A7a50%\u00A77 bonus experience when",

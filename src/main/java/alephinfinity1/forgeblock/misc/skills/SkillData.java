@@ -41,7 +41,7 @@ public class SkillData {
 		if(level < 50) {
 			return progress / skill.getXPForLevel(level);
 		} else {
-			return 1.0 - Float.MIN_NORMAL;
+			return 0;
 		}
 	}
 	
@@ -71,6 +71,7 @@ public class SkillData {
 		double prog = MathHelper.clamp(this.getProgressPercentage(), 0.0d, 1.0d - Float.MIN_NORMAL);
 		this.level = level;
 		this.progress = skill.getXPForLevel(level) * prog;
+		if(Double.isNaN(progress)) progress = 0.0D;
 		update();
 	}
 	

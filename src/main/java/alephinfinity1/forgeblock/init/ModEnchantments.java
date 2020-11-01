@@ -12,9 +12,11 @@ import alephinfinity1.forgeblock.enchantment.GrowthEnchantment;
 import alephinfinity1.forgeblock.enchantment.LifeStealEnchantment;
 import alephinfinity1.forgeblock.enchantment.LuckEnchantment;
 import alephinfinity1.forgeblock.enchantment.ProtectionEnchantment;
+import alephinfinity1.forgeblock.enchantment.ScavengerEnchantment;
 import alephinfinity1.forgeblock.enchantment.SmeltingTouchEnchantment;
 import alephinfinity1.forgeblock.enchantment.TelekinesisEnchantment;
 import alephinfinity1.forgeblock.enchantment.UltimateWiseEnchantment;
+import alephinfinity1.forgeblock.enchantment.VampirismEnchantment;
 import alephinfinity1.forgeblock.enchantment.VenomousEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.fml.RegistryObject;
@@ -40,6 +42,8 @@ public class ModEnchantments {
 	public static final RegistryObject<Enchantment> PROTECTION = OVERRIDE.register("protection", () -> new ProtectionEnchantment());
 	public static final RegistryObject<Enchantment> SMELTING_TOUCH = ENCHANTMENTS.register("smelting_touch", () -> new SmeltingTouchEnchantment());
 	public static final RegistryObject<Enchantment> EXPERIENCE = ENCHANTMENTS.register("experience", () -> new ExperienceEnchantment());
+	public static final RegistryObject<Enchantment> SCAVENGER = ENCHANTMENTS.register("scavenger", () -> new ScavengerEnchantment());
+	public static final RegistryObject<Enchantment> VAMPIRISM = ENCHANTMENTS.register("vampirism", () -> new VampirismEnchantment());
 	
 	public static final RegistryObject<Enchantment> ULTIMATE_WISE = ENCHANTMENTS.register("ultimate_wise", () -> new UltimateWiseEnchantment());
 
