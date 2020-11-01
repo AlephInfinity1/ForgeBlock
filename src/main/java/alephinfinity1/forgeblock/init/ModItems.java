@@ -292,6 +292,11 @@ public class ModItems {
 	public static final RegistryObject<Item> LV1_ZOMBIE_SPAWN_EGG = ITEMS.register("lv1_zombie_spawn_egg", () -> new SpawnEggItem(ModEntities.LV1_ZOMBIE_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> LAPIS_ZOMBIE_SPAWN_EGG = ITEMS.register("lapis_zombie_spawn_egg", () -> new SpawnEggItem(ModEntities.LAPIS_ZOMBIE_TYPE, 1269462, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> ZEALOT_SPAWN_EGG = ITEMS.register("zealot_spawn_egg", () -> new SpawnEggItem(ModEntities.ZEALOT_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> LV15_WOLF_SPAWN_EGG = ITEMS.register("lv15_wolf_spawn_egg", () -> new SpawnEggItem(ModEntities.LV15_WOLF_TYPE, 14144467, 13545366, (new Item.Properties()).group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> OLD_WOLF_SPAWN_EGG = ITEMS.register("old_wolf_spawn_egg", () -> new SpawnEggItem(ModEntities.OLD_WOLF_TYPE, 14144467, 13545366, (new Item.Properties()).group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> LV1_ZOMBIE_VILLAGER_SPAWN_EGG = ITEMS.register("lv1_zombie_villager_spawn_egg", () -> new SpawnEggItem(ModEntities.LV1_ZOMBIE_VILLAGER_TYPE, 5651507, 7969893, (new Item.Properties()).group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> CRYPT_GHOUL_SPAWN_EGG = ITEMS.register("crypt_ghoul_spawn_egg", () -> new SpawnEggItem(ModEntities.CRYPT_GHOUL_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> GOLDEN_GHOUL_SPAWN_EGG = ITEMS.register("golden_ghoul_spawn_egg", () -> new SpawnEggItem(ModEntities.GOLDEN_GHOUL_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 
 	/**
 	 * Not final

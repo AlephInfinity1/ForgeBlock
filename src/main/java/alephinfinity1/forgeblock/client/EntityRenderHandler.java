@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.FlyingEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -128,7 +129,7 @@ public class EntityRenderHandler {
 		 * Player -> dark cyan
 		 * Passive -> dark green
 		 */
-		if(entity instanceof MonsterEntity || entity instanceof SlimeEntity || entity instanceof EnderDragonEntity || entity instanceof FlyingEntity) {
+		if(entity instanceof MonsterEntity || entity instanceof SlimeEntity || entity instanceof EnderDragonEntity || entity instanceof FlyingEntity || entity.getClassification(false).equals(EntityClassification.MONSTER)) {
 			str.append("\u00A78] \u00A7c");
 		} else if(entity instanceof PlayerEntity) {
 			str.append("\u00A78] \u00A73");

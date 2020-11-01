@@ -33,6 +33,7 @@ public class Lv1ZombieEntity extends ZombieEntity implements IFBEntity {
 
 	public Lv1ZombieEntity(EntityType<? extends ZombieEntity> type, World worldIn) {
 		super(type, worldIn);
+		this.setChild(false);
 	}
 	
 	@Override
@@ -101,6 +102,11 @@ public class Lv1ZombieEntity extends ZombieEntity implements IFBEntity {
 	@Override
 	public ResourceLocation getLootTable() {
 		return new ResourceLocation(ForgeBlock.MOD_ID, "lv1_zombie");
+	}
+	
+	@Override
+	protected void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn) {
+		//Don't drop any special items.
 	}
 
 	@Override

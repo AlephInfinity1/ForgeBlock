@@ -1,0 +1,65 @@
+{
+	"type": "entity",
+	"pools": [
+		{
+			"name": "rotten_flesh",
+			"rolls": 1,
+			
+			"functions": [
+				{
+					"function": "minecraft:set_count",
+					"count": {
+						"type": "uniform",
+						"min": 2,
+						"max": 4
+					}
+				},
+				{
+					"function": "minecraft:looting_enchant",
+					"count": {
+						"min": 0,
+						"max": 1
+					}
+				}
+			],
+			
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:rotten_flesh",
+					"weight": 1
+				}
+			]
+		},
+		{
+			"name": "gold_ingot",
+			"rolls": 1,
+			
+			"functions": [
+				{
+					"function": "minecraft:set_count",
+					"count": {
+						"type": "uniform",
+						"min": 2,
+						"max": 11
+					}
+				},
+				{
+					"function": "minecraft:looting_enchant",
+					"count": {
+						"min": 0,
+						"max": 1
+					}
+				}
+			],
+			
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:gold_ingot",
+					"weight": 1
+				}
+			]
+		}
+	]
+}

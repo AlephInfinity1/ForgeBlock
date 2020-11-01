@@ -30,6 +30,7 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.SwordItem;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -224,5 +225,15 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	@Override
 	public Rarity getRarity(ItemStack stack) {
 		return getStackTier(stack).getVanillaRarity();
+	}
+	
+	/*
+	 * Returns an ItemStack of this item, without any attribute modifiers.
+	 * Used for custom entities.
+	 */
+	public ItemStack getDisplayStack() {
+		ItemStack stack = new ItemStack(this);
+		stack.getOrCreateTag().put("AttributeModifiers", new ListNBT());
+		return stack;
 	}
 }
