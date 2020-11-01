@@ -41,7 +41,7 @@ public class MinerOutfitArmorItem extends FBArmorItem {
 		for(ItemStack stack : armor) {
 			if(!(stack.getItem() instanceof MinerOutfitArmorItem)) return;
 		}
-		EffectInstance haste = new EffectInstance(Effects.HASTE, 5, 1, true, true);
+		EffectInstance haste = new EffectInstance(Effects.HASTE, 100, 1, true, true);
 		living.addPotionEffect(haste);
 	}
 

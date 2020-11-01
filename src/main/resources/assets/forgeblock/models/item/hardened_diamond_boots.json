@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "minecraft:item/diamond_boots"
+		"layer0": "forgeblock:item/hardened_diamond_boots"
 	}
 }
