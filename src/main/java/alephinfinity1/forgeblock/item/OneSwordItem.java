@@ -35,7 +35,7 @@ public class OneSwordItem extends FBSwordItem {
 			builder.put(attribute.getName(), new AttributeModifier(MODIFIER_UUID, "Debug", 1, Operation.ADDITION));
 		}
 		*/
-		builder.put(FBAttributes.DODGE.getName(), new AttributeModifier(MODIFIER_UUID, "Debug", 80, Operation.ADDITION));
+		builder.put(FBAttributes.COMBAT_XP_BOOST.getName(), new AttributeModifier(MODIFIER_UUID, "Debug", 100, Operation.ADDITION));
 		
 		MODIFIER_MAP = builder.build();
 	}

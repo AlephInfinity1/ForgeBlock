@@ -6,18 +6,15 @@ import java.util.UUID;
 
 import com.google.common.collect.Multimap;
 
-import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.misc.event.PlayerCastSpellEvent;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -42,21 +39,13 @@ public class WiseDragonArmorItem extends FBArmorItem {
 	}
 	
 	@SubscribeEvent
-	public static void onLivingUpdate(LivingUpdateEvent event) {
-		LivingEntity living = event.getEntityLiving();
-		if(!(living instanceof PlayerEntity)) return;
-		Iterable<ItemStack> armor = living.getArmorInventoryList();
+	public static void onPlayerCastSpell(PlayerCastSpellEvent event) {
+		PlayerEntity player = event.getPlayer();
+		Iterable<ItemStack> armor = player.getArmorInventoryList();
 		for(ItemStack stack : armor) {
-			if(!(stack.getItem() instanceof WiseDragonArmorItem)) {
-				if(living.getAttribute(FBAttributes.MANA_EFFICIENCY).getModifier(WISE_MANA_EFFICIENCY_BOOST) != null) {
-					living.getAttribute(FBAttributes.MANA_EFFICIENCY).removeModifier(WISE_MANA_EFFICIENCY_BOOST);
-				}
-				return;
-			}
+			if(!(stack.getItem() instanceof WiseDragonArmorItem)) return;
 		}
-		if(living.getAttribute(FBAttributes.MANA_EFFICIENCY).getModifier(WISE_MANA_EFFICIENCY_BOOST) == null) {
-			living.getAttribute(FBAttributes.MANA_EFFICIENCY).applyModifier(new AttributeModifier(WISE_MANA_EFFICIENCY_BOOST, "Wise armor mana efficiency boost", 50.0D, Operation.ADDITION));
-		}
+		event.setManaConsumed(event.getManaConsumed() * 2.0D / 3.0D);
 	}
 
 }

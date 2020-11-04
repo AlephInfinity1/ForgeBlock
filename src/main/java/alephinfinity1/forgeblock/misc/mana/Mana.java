@@ -24,7 +24,7 @@ public class Mana implements IMana {
 		return this.mana;
 	}
 
-	/*
+	/**
 	 * Consumes a set amount of mana
 	 * 
 	 * @param amount - the amount of mana consumed

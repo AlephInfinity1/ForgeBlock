@@ -2,13 +2,17 @@ package alephinfinity1.forgeblock.misc.skills;
 
 import java.text.DecimalFormat;
 
+import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.entity.IFBEntity;
+import alephinfinity1.forgeblock.misc.event.ForgeBlockEventHooks;
+import alephinfinity1.forgeblock.misc.event.SkillXPGainEvent;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.SkillUpdatePacket;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
@@ -32,7 +36,7 @@ public class SkillsEventHandler {
 		PlayerEntity player = event.getPlayer();
 		ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
 		for(SkillType type : SkillType.values())
-			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SkillUpdatePacket(skills.getCompoundNBTFor(type)));
+			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SkillUpdatePacket(skills.getCompoundNBTFor(type), false));
 	}
 	
 	/*
@@ -43,21 +47,18 @@ public class SkillsEventHandler {
 		
 		//final DecimalFormat format = new DecimalFormat(",###.#");
 		
-		if(event.getSource().getDamageType().equals("player")) {
-			Entity e = event.getSource().getTrueSource();
-			if(!(e instanceof PlayerEntity)) return;
-			PlayerEntity player = (PlayerEntity) e;
-			ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
-			if(event.getEntity() instanceof IFBEntity)
-				skills.addXP(SkillType.COMBAT, ((IFBEntity) event.getEntity()).getCombatXP());
-			
-			/*
-			player.sendMessage(new StringTextComponent("Killed an entity!"));
-			player.sendMessage(new StringTextComponent("+1M Combat XP (" + format.format(skills.getAbsoluteProgress(SkillType.COMBAT)) + "/" + format.format(skills.getXPNeededToLevelUp(SkillType.COMBAT)) + ")"));
-			player.sendMessage(new StringTextComponent("Combat Level: " + Integer.toString(skills.getLevel(SkillType.COMBAT))));
-			*/
-			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SkillUpdatePacket(skills.getCompoundNBTFor(SkillType.COMBAT)));
-			//player.sendMessage(new StringTextComponent("Client data: " + Integer.toString(Minecraft.getInstance().player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new).getLevel(SkillType.COMBAT)) + " " + Double.toString(Minecraft.getInstance().player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new).getAbsoluteProgress(SkillType.COMBAT))));
+		if(event.getSource() instanceof EntityDamageSource && event.getSource() != null) {
+			if(((EntityDamageSource) event.getSource()).getTrueSource() instanceof PlayerEntity) {
+				Entity e = event.getSource().getTrueSource();
+				if(!(e instanceof PlayerEntity)) return;
+				PlayerEntity player = (PlayerEntity) e;
+				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				if(event.getEntity() instanceof IFBEntity)
+					skills.addXP(SkillType.COMBAT, 
+							ForgeBlockEventHooks.onPlayerSkillXPGain(player, SkillType.COMBAT, ((IFBEntity) event.getEntity()).getCombatXP()));
+				
+				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SkillUpdatePacket(skills.getCompoundNBTFor(SkillType.COMBAT)));
+			}
 		}
 	}
 	
@@ -131,5 +132,54 @@ public class SkillsEventHandler {
 	@SubscribeEvent
 	public static void onPlayerLogin(PlayerLoggedInEvent event) {
 		updateAllSkills(event.getPlayer(), event.getPlayer().getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new), false);
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerGainXP(SkillXPGainEvent event) {
+		PlayerEntity player = event.getPlayer();
+		double farmingBoost = player.getAttribute(FBAttributes.FARMING_XP_BOOST).getValue();
+		double miningBoost = player.getAttribute(FBAttributes.MINING_XP_BOOST).getValue();
+		double combatBoost = player.getAttribute(FBAttributes.COMBAT_XP_BOOST).getValue();
+		double foragingBoost = player.getAttribute(FBAttributes.FORAGING_XP_BOOST).getValue();
+		double fishingBoost = player.getAttribute(FBAttributes.FISHING_XP_BOOST).getValue();
+		double enchantingBoost = player.getAttribute(FBAttributes.ENCHANTING_XP_BOOST).getValue();
+		double alchemyBoost = player.getAttribute(FBAttributes.ALCHEMY_XP_BOOST).getValue();
+		double tamingBoost = player.getAttribute(FBAttributes.TAMING_XP_BOOST).getValue();
+		double allBoost = player.getAttribute(FBAttributes.ALL_SKILLS_XP_BOOST).getValue();
+		
+		double multiplier = 100.0D;
+		
+		switch(event.getType()) {
+		case FARMING:
+			multiplier += (farmingBoost + allBoost);
+			break;
+		case MINING:
+			multiplier += (miningBoost + allBoost);
+			break;
+		case COMBAT:
+			multiplier += (combatBoost + allBoost);
+			break;
+		case FORAGING:
+			multiplier += (foragingBoost + allBoost);
+			break;
+		case FISHING:
+			multiplier += (fishingBoost + allBoost);
+			break;
+		case ENCHANTING:
+			multiplier += (enchantingBoost + allBoost);
+			break;
+		case ALCHEMY:
+			multiplier += (alchemyBoost + allBoost);
+			break;
+		case TAMING:
+			multiplier += (tamingBoost + allBoost);
+			break;
+		default:
+			break;
+		}
+		
+		if(multiplier < 0.0D) multiplier = 0.0D;
+		
+		event.setAmount(event.getAmount() * multiplier / 100.0D);
 	}
 }

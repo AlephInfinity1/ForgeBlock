@@ -24,9 +24,9 @@ public final class FBAttributes {
 	public static final IAttribute TRUE_DEFENSE = (new RangedAttribute((IAttribute) null, "forgeblock.trueDefense", 0.0D, 0.0D, Double.MAX_VALUE)).setDescription("True Defense").setShouldWatch(true);
 	public static final IAttribute CRIT_CHANCE = (new RangedAttribute((IAttribute) null, "forgeblock.critChance", 30.0D, 0.0D, 100.0D)).setDescription("Crit Chance").setShouldWatch(true);
 	public static final IAttribute CRIT_DAMAGE = (new RangedAttribute((IAttribute) null, "forgeblock.critDamage", 50.0D, -Double.MAX_VALUE, Double.MAX_VALUE)).setDescription("Crit Damage").setShouldWatch(true);
-	public static final IAttribute BONUS_ATTACK_SPEED = (new RangedAttribute((IAttribute) null, "forgeblock.bonusAttackSpeed", 0.0D, 0.0D, 1.0D)).setDescription("Bonus Attack Speed").setShouldWatch(true);
+	public static final IAttribute BONUS_ATTACK_SPEED = (new RangedAttribute((IAttribute) null, "forgeblock.bonusAttackSpeed", 0.0D, -99.9D, Double.MAX_VALUE)).setDescription("Bonus Attack Speed").setShouldWatch(true);
 	public static final IAttribute INTELLIGENCE = (new RangedAttribute((IAttribute) null, "forgeblock.intelligence", 0.0D, -Double.MAX_VALUE, Double.MAX_VALUE)).setDescription("Intelligence").setShouldWatch(true);
-	public static final IAttribute SEA_CREATURE_CHANCE = (new RangedAttribute((IAttribute) null, "forgeblock.seaCreatureChance", 0.0D, 0.0D, 1.0D)).setDescription("Sea Creature Chance").setShouldWatch(true);
+	public static final IAttribute SEA_CREATURE_CHANCE = (new RangedAttribute((IAttribute) null, "forgeblock.seaCreatureChance", 0.0D, 0.0D, 100.0D)).setDescription("Sea Creature Chance").setShouldWatch(true);
 	public static final IAttribute MAGIC_FIND = (new RangedAttribute((IAttribute) null, "forgeblock.magicFind", 0.0D, -Double.MAX_VALUE, Double.MAX_VALUE)).setDescription("Magic Find").setShouldWatch(true);
 	public static final IAttribute PET_LUCK = (new RangedAttribute((IAttribute) null, "forgeblock.petLuck", 0.0D, -Double.MAX_VALUE, Double.MAX_VALUE)).setDescription("Pet Luck").setShouldWatch(true);
 	public static final IAttribute FEROCITY = (new RangedAttribute((IAttribute) null, "forgeblock.ferocity", 0.0D, 0.0D, Double.MAX_VALUE)).setDescription("Ferocity").setShouldWatch(true);
@@ -48,15 +48,15 @@ public final class FBAttributes {
 	public static final IAttribute RAW_COOLDOWN_REDUCTION = (new RangedAttribute((IAttribute) null, "forgeblock.rawCooldownReduction", 0.0D, -Double.MAX_VALUE, Double.MAX_VALUE)).setDescription("Raw Cooldown Reduction").setShouldWatch(true); //Raw cooldown reduction, in game ticks.
 	
 	//Skill XP bonuses
-	public static final IAttribute ALL_SKILLS_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.allSkillsXpBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("All Skills XP Boost").setShouldWatch(true);
-	public static final IAttribute FARMING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.farmingXpBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Farming XP Boost").setShouldWatch(true);
-	public static final IAttribute MINING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.miningXpBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Mining XP Boost").setShouldWatch(true);
-	public static final IAttribute COMBAT_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.combatXpBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Combat XP Boost").setShouldWatch(true);
-	public static final IAttribute FORAGING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.foragingXpBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Foraging XP Boost").setShouldWatch(true);
-	public static final IAttribute FISHING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.fishingXpBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Fishing XP Boost").setShouldWatch(true);
-	public static final IAttribute ENCHANTING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.enchantingXpBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Enchanting XP Boost").setShouldWatch(true);
-	public static final IAttribute ALCHEMY_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.alchemyXpBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Alchemy XP Boost").setShouldWatch(true);
-	public static final IAttribute TAMING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.tamingXpBoost", 0.0D, -1.0D, Double.MAX_VALUE)).setDescription("Taming XP Boost").setShouldWatch(true);
+	public static final IAttribute ALL_SKILLS_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.allSkillsXpBoost", 0.0D, -100.0D, Double.MAX_VALUE)).setDescription("All Skills XP Boost").setShouldWatch(true);
+	public static final IAttribute FARMING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.farmingXpBoost", 0.0D, -100.0D, Double.MAX_VALUE)).setDescription("Farming XP Boost").setShouldWatch(true);
+	public static final IAttribute MINING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.miningXpBoost", 0.0D, -100.0D, Double.MAX_VALUE)).setDescription("Mining XP Boost").setShouldWatch(true);
+	public static final IAttribute COMBAT_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.combatXpBoost", 0.0D, -100.0D, Double.MAX_VALUE)).setDescription("Combat XP Boost").setShouldWatch(true);
+	public static final IAttribute FORAGING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.foragingXpBoost", 0.0D, -100.0D, Double.MAX_VALUE)).setDescription("Foraging XP Boost").setShouldWatch(true);
+	public static final IAttribute FISHING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.fishingXpBoost", 0.0D, -100.0D, Double.MAX_VALUE)).setDescription("Fishing XP Boost").setShouldWatch(true);
+	public static final IAttribute ENCHANTING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.enchantingXpBoost", 0.0D, -100.0D, Double.MAX_VALUE)).setDescription("Enchanting XP Boost").setShouldWatch(true);
+	public static final IAttribute ALCHEMY_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.alchemyXpBoost", 0.0D, -100.0D, Double.MAX_VALUE)).setDescription("Alchemy XP Boost").setShouldWatch(true);
+	public static final IAttribute TAMING_XP_BOOST = (new RangedAttribute((IAttribute) null, "forgeblock.tamingXpBoost", 0.0D, -100.0D, Double.MAX_VALUE)).setDescription("Taming XP Boost").setShouldWatch(true);
 	
 	//Additional magic find for slayer drops.
 	public static final IAttribute ZOMBIE_SLAYER_LUCK = (new RangedAttribute((IAttribute) null, "forgeblock.zombieSlayerLuck", 0.0D, -Double.MAX_VALUE, Double.MAX_VALUE)).setDescription("Zombie Slayer Luck").setShouldWatch(true);

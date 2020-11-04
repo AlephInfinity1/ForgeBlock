@@ -8,6 +8,8 @@ import java.util.List;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModEnchantments;
+import alephinfinity1.forgeblock.misc.event.ForgeBlockEventHooks;
+import alephinfinity1.forgeblock.misc.event.PlayerCastSpellEvent;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.ManaProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
@@ -52,11 +54,12 @@ public class  AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if(worldIn.isRemote) return ActionResult.resultPass(playerIn.getHeldItem(handIn));
 		ItemStack stack = playerIn.getHeldItem(handIn);
-		if(playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(() -> new NullPointerException()).consume(this.getAbilityCost(stack, playerIn))) {
+		PlayerCastSpellEvent event = ForgeBlockEventHooks.onPlayerCastSpell(playerIn, stack, this.getAbilityCost(stack, playerIn));
+		if(playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(() -> new NullPointerException()).consume(event.getManaConsumed()) || !event.isCanceled()) {
 			activateAbility(worldIn, playerIn, stack);
 			IMana mana = playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
 			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn), new ManaUpdatePacket(mana.getMana()));
-			playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.useAbility.aotd").getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(this.getAbilityCost(stack, playerIn)) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"), true);
+			playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.useAbility.aotd").getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(event.getManaConsumed()) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"), true);
 			return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 		}
 		playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.notEnoughMana").getString()), true);

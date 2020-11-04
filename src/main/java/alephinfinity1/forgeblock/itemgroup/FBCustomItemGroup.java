@@ -10,6 +10,10 @@ public class FBCustomItemGroup extends ItemGroup {
 		super(label);
 	}
 
+	public FBCustomItemGroup(int i, String string) {
+		super(i, string);
+	}
+
 	@Override
 	public ItemStack createIcon() {
 		return new ItemStack(Items.PAINTING);

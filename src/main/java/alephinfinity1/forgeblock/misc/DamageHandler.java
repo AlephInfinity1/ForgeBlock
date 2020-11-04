@@ -287,7 +287,7 @@ public class DamageHandler {
 		 * See line 927 of LivingEntity
 		 * @see LivingEntity#attackEntityFrom(DamageSource source, float amount)
 		 */
-		victim.hurtResistantTime = Long.valueOf(Math.round((10.0 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue())) + 10)).intValue();
+		victim.hurtResistantTime = (int) (Math.round(10.0 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue())) + 10);
 		
 		//Adds to player stats.
 		if(damager instanceof PlayerEntity) {

@@ -10,6 +10,10 @@ public class FBPotionsItemGroup extends ItemGroup {
 		super(label);
 	}
 
+	public FBPotionsItemGroup(int i, String string) {
+		super(i, string);
+	}
+
 	@Override
 	public ItemStack createIcon() {
 		return new ItemStack(Items.POTION);

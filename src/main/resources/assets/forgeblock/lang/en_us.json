@@ -496,5 +496,7 @@
     "text.forgeblock.useAbility.aotd": "\u00A7aUsed \u00A76Dragon Rage\u00A7a!",
     
     "text.forgeblock.xp_bottle_0": "\u00A77Smash it open to receive",
-    "text.forgeblock.xp_bottle_1": "\u00A7a%1$s\u00A77–\u00A7a%2$s \u00A77experience!"
+    "text.forgeblock.xp_bottle_1": "\u00A7a%1$s\u00A77–\u00A7a%2$s \u00A77experience!",
+    
+    "text.forgeblock.lostCoins": "You died and lost %s coins!"
 }

@@ -12,7 +12,6 @@ import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.init.ModEnchantments;
-import alephinfinity1.forgeblock.init.ModItemGroups;
 import alephinfinity1.forgeblock.init.ModItems;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.enchantment.Enchantments;
@@ -43,7 +42,7 @@ public class CustomSwordItem extends FBSwordItem {
 	}
 	
 	public CustomSwordItem() {
-		super(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.SPECIAL, 0, 0, 0, 0);
+		super(new Item.Properties(), FBTier.SPECIAL, 0, 0, 0, 0);
 	}
 	
 	@Override

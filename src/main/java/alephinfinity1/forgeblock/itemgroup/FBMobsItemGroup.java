@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 
 public class FBMobsItemGroup extends ItemGroup {
 
-	public FBMobsItemGroup(String label) {
-		super(label);
+	public FBMobsItemGroup(int i, String label) {
+		super(i, label);
 	}
 
 	@Override

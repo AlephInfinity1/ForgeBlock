@@ -172,4 +172,5 @@ public enum FBTier {
 	public static FBTier valueOf(double d, boolean allowSpecial) {
 		return valueOf((int) Math.round(d), allowSpecial);
 	}
+	
 }
