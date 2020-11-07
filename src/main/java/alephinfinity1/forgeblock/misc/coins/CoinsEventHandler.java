@@ -1,5 +1,7 @@
 package alephinfinity1.forgeblock.misc.coins;
 
+import java.text.DecimalFormat;
+
 import alephinfinity1.forgeblock.entity.IFBEntity;
 import alephinfinity1.forgeblock.network.CoinsUpdatePacket;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
@@ -45,12 +47,21 @@ public class CoinsEventHandler {
 	}
 	
 	@SubscribeEvent
-	public static void onPlayerClone(PlayerEvent.Clone event) {
+	public static void onPlayerClone(PlayerEvent.Clone event) {	
 		ICoins oldCoins = event.getOriginal().getCapability(CoinsProvider.COINS_CAPABILITY).orElseThrow(NullPointerException::new);
 		ICoins newCoins = event.getPlayer().getCapability(CoinsProvider.COINS_CAPABILITY).orElseThrow(NullPointerException::new);
-		newCoins.set(oldCoins.getCoins() / 2.0D);
+		newCoins.set(event.isWasDeath() ? oldCoins.getCoins() / 2.0D : oldCoins.getCoins()); //If not death, do not reduce coins.
 		FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()), new CoinsUpdatePacket(newCoins.getCoins()));
-		if(oldCoins.getCoins() != 0)
-			event.getPlayer().sendMessage(new TranslationTextComponent("text.forgeblock.lostCoins", oldCoins.getCoins() / 2.0D).applyTextStyle(TextFormatting.RED));
+		if(oldCoins.getCoins() != 0 && event.isWasDeath())
+			event.getPlayer().sendMessage(new TranslationTextComponent("text.forgeblock.lostCoins", new DecimalFormat(",###.#").format(oldCoins.getCoins() / 2.0D).replaceAll("\u00A0", ",")).applyTextStyle(TextFormatting.RED));
+		FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()), new CoinsUpdatePacket(newCoins.getCoins()));
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+		if(event.getPlayer() instanceof ServerPlayerEntity) {
+			ICoins coins = event.getPlayer().getCapability(CoinsProvider.COINS_CAPABILITY).orElseThrow(NullPointerException::new);
+			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()), new CoinsUpdatePacket(coins.getCoins()));	
+		}
 	}
 }

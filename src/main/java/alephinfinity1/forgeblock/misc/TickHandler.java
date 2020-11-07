@@ -45,7 +45,7 @@ public class TickHandler {
 	private static List<LivingEntity> allLivingPre = new Vector<>();
 	public static List<Entity> allEntities = new Vector<>();
 	public static List<LivingEntity> allLiving = new Vector<>();
-	public static Map<PlayerEntity, Long> healthDirty = new HashMap<>();
+	public static Map<LivingEntity, Long> healthDirty = new HashMap<>();
 	public static Map<ArmorStandEntity, Long> damageDisplay = new HashMap<>();
 	public static List<Triple<LivingEntity, Double, Long>> damageIndicatorFix = new ArrayList<>();
 	public static Map<LivingEntity, Boolean> isWearingBlazeArmor = new ConcurrentHashMap<>();
@@ -199,6 +199,7 @@ public class TickHandler {
 	
 	/*
 	 * An extremely wonky attempt to fix MC-19690. Death screen still appears for a client tick.
+	 * XXX
 	 */
 	@SubscribeEvent
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
