@@ -109,7 +109,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		if(stack.getTag() != null) {
 			IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
 			if(itemMod != null) {
-				return FBTier.changeTier(tier, itemMod.getRarity());
+				return FBTier.changeTier(tier, itemMod.getRarity(stack));
 			}
 			return tier;
 		} else {

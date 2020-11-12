@@ -171,6 +171,7 @@
     
     "item.forgeblock.hot_potato_book": "Hot Potato Book",
     "item.forgeblock.fuming_potato_book": "Fuming Potato Book",
+    "item.forgeblock.wood_singularity": "Wood Singularity",
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
@@ -506,12 +507,18 @@
     
     "text.forgeblock.item_desc.hpb_0": "\u00A77Combine this Book in an Anvil",
     "text.forgeblock.item_desc.hpb_1": "\u00A77with a Weapon or an Armor piece",
-    "text.forgeblock.item_desc.hpb_2": "\u00A77to gain a \u00A7asmall\u00A77 but \u00A7apermanent\u00A77",
+    "text.forgeblock.item_desc.hpb_2": "\u00A77to gain a small but permanent",
     "text.forgeblock.item_desc.hpb_3": "\u00A77stats boost!",
     "text.forgeblock.item_desc.hpb_limit": "\u00A78Can be stacked up to 10 times.",
     
     "text.forgeblock.item_desc.fuming_0": "\u00A77This book bypasses the",
-    "text.forgeblock.item_desc.fuming_1": "\u00A7aHot Potato Book\u00A77 limit of 10, allow-",
+    "text.forgeblock.item_desc.fuming_1": "\u00A76Hot Potato Book\u00A77 limit of 10, allow-",
     "text.forgeblock.item_desc.fuming_2": "\u00A77ing you to upgrade an item up to",
-    "text.forgeblock.item_desc.fuming_3": "\u00A7a15 times\u00A77!"
+    "text.forgeblock.item_desc.fuming_3": "\u00A7a15 times\u00A77!",
+    
+    "text.forgeblock.item_desc.wood_0": "\u00A77Combine this seriously large",
+    "text.forgeblock.item_desc.wood_1": "\u00A77pile of wood in an Anvil with",
+    "text.forgeblock.item_desc.wood_2": "\u00A77any \u00A76wooden sword\u00A77 to add",
+    "text.forgeblock.item_desc.wood_3": "\u00A7c+100\u2741 Strength\u00A77 to it!",
+    "text.forgeblock.item_desc.wood_4": "\u00A78Can only be applied once."
 }

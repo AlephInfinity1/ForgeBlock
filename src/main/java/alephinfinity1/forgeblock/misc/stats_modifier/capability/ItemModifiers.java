@@ -66,11 +66,11 @@ public class ItemModifiers implements IItemModifiers {
 	}
 	
 	@Override
-	public int getRarity() {
+	public int getRarity(ItemStack stack) {
 		int changes = 0;
 		Set<Map.Entry<AbstractStatsModifier, CompoundNBT>> data = map.entrySet();
 		for(Map.Entry<AbstractStatsModifier, CompoundNBT> entry : data) {
-			changes += entry.getKey().getRarityChange();
+			changes += entry.getKey().getRarityChange(stack, entry.getValue());
 		}
 		return changes;
 	}

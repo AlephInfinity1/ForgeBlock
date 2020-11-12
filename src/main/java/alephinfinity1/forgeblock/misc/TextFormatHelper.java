@@ -598,10 +598,11 @@ public class TextFormatHelper {
 	}
 	
 	public static ITextComponent formatExtras(String attributeName, double scale, String suffix, @Nonnull IItemModifiers extraModifier, @Nonnull ItemStack stack) {
-		ITextComponent tc = new StringTextComponent(" "); //Initialise empty component first, append later.
+		ITextComponent tc = new StringTextComponent(""); //Initialise empty component first, append later.
 		Map<AbstractStatsModifier, CompoundNBT> modMap = extraModifier.getMap();
 		Set<Map.Entry<AbstractStatsModifier, CompoundNBT>> modSet = modMap.entrySet();
 		for(Map.Entry<AbstractStatsModifier, CompoundNBT> entry : modSet) { //Apply for every modifier in the map
+			tc.appendSibling(new StringTextComponent(" "));
 			TextFormatting color = entry.getKey().getColor();
 			Multimap<String, AttributeModifier> modifiers = entry.getKey().getModifiers(stack, entry.getValue());
 			double value = 0.0D;

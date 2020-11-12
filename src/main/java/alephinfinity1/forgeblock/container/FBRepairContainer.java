@@ -4,6 +4,7 @@ import java.util.Map;
 
 import alephinfinity1.forgeblock.init.ModStatsModifiers;
 import alephinfinity1.forgeblock.item.HotPotatoBookItem;
+import alephinfinity1.forgeblock.item.WoodSingularityItem;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
 import net.minecraft.enchantment.Enchantment;
@@ -94,6 +95,30 @@ public class FBRepairContainer extends RepairContainer {
 				}
 			}
 			this.outputSlot.setInventorySlotContents(0, itemstack1);
+			this.detectAndSendChanges();
+		} else if(itemstack2.getItem() instanceof WoodSingularityItem) { //Wood singularity handling.
+			//ForgeBlock.LOGGER.debug("WoodSingularity placed in anvil slot 2!");
+			ItemStack itemstack1 = itemstack.copy();
+			IItemModifiers im = itemstack1.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
+			if(im == null) { //If no IItemModifiers is present, the item is confirmed to be unapplicable.
+				//ForgeBlock.LOGGER.debug("IM is null, returning");
+				this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
+				this.maximumCost.set(0);
+				return;
+			} else {
+				if(ModStatsModifiers.WOOD_SINGULARITY.get().isApplicable(itemstack1)) { //Only apply if applicable, otherwise reset.
+					CompoundNBT nbt = new CompoundNBT();
+					nbt.putBoolean("Applied", true);
+					im.put(ModStatsModifiers.WOOD_SINGULARITY.get(), nbt);
+					//ForgeBlock.LOGGER.debug("Wood singularity applied successfully");
+				} else {
+					this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
+					this.maximumCost.set(0);
+					return;
+				}
+			}
+			this.outputSlot.setInventorySlotContents(0, itemstack1);
+			this.detectAndSendChanges();
 		} else { //If not mod-specific action, return to vanilla handling.
 			ItemStack itemstack1 = itemstack.copy();
 

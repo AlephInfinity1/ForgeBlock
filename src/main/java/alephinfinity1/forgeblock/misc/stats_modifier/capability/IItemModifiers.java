@@ -77,10 +77,11 @@ public interface IItemModifiers {
 	 * Get the number of rarity changes.
 	 * @return The number of rarity changes.
 	 */
-	public int getRarity();
+	public int getRarity(ItemStack stack);
 	
 	/**
 	 * Clear the modifier map.
 	 */
 	public void clear();
+
 }

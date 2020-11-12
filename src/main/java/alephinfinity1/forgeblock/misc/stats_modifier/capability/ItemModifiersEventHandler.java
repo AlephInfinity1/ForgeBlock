@@ -30,8 +30,8 @@ public class ItemModifiersEventHandler {
 				ForgeBlock.LOGGER.error("Error: IItemModifiers not attached to FBSwordItem");
 			} else {
 				CompoundNBT hpb = new CompoundNBT();
-				hpb.putShort("Amount", (short) 1);
-				modifiers.put(ModStatsModifiers.HOT_POTATO_BOOK.get(), hpb);
+				hpb.putBoolean("Applied", true);
+				modifiers.put(ModStatsModifiers.WOOD_SINGULARITY.get(), hpb);
 				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new ItemModifiersUpdatePacket(modifiers.getMap()));
 			}
 		}

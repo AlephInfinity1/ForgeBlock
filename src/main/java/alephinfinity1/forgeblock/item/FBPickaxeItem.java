@@ -134,12 +134,11 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 	@Override
 	public FBTier getStackTier(ItemStack stack) {
 		if(stack.getTag() != null) {
-			boolean recombobulated = (stack.getTag().getByte("Recombobulated") == 1);
-			boolean woodSingularity = (stack.getTag().getByte("WoodSingularity") == 1);
-			int tierBoost = 0;
-			if(recombobulated) tierBoost++;
-			if(woodSingularity) tierBoost++;
-			return FBTier.changeTier(tier, tierBoost);
+			IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
+			if(itemMod != null) {
+				return FBTier.changeTier(tier, itemMod.getRarity(stack));
+			}
+			return tier;
 		} else {
 			return tier;
 		}

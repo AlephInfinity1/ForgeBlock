@@ -1,17 +1,10 @@
 package alephinfinity1.forgeblock.misc.stats_modifier;
 
 import java.util.UUID;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
-
-import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.item.IFBItem;
 import alephinfinity1.forgeblock.misc.FBItemType;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TextFormatting;
 
 public class HotPotatoBookModifier extends AbstractStatsModifier {
@@ -20,17 +13,12 @@ public class HotPotatoBookModifier extends AbstractStatsModifier {
 	private static final UUID HELMET_UUID = UUID.fromString("4707e16f-97da-4973-9b08-ac2455ce707c");
 	private static final UUID CHESTPLATE_UUID = UUID.fromString("73cd7cfd-14d9-4e6c-95a2-8933356fd1b3");
 	private static final UUID LEGGINGS_UUID = UUID.fromString("d6741996-8a9f-442c-96bb-942a0cbc79d2");
-	private static final UUID BOOTS_UUID = UUID.fromString("c45a525d-4327-499e-b9c7-f807aec7f521");
-	
-	public HotPotatoBookModifier(BiFunction<ItemStack, CompoundNBT, Multimap<String, AttributeModifier>> attributeModifiers,
-			int rarityChange, TextFormatting color, Predicate<ItemStack> applicableOn) {
-		super(attributeModifiers, rarityChange, color, applicableOn);
-	}
+	private static final UUID BOOTS_UUID = UUID.fromString("c45a525d-4327-499e-b9c7-f807aec7f521");	
 	
 	public HotPotatoBookModifier() {
 		super(
 				null,
-				0,
+				(stack, nbt) -> 0,
 				TextFormatting.YELLOW,
 				(stack) -> {
 					if(!(stack.getItem() instanceof IFBItem)) return false;

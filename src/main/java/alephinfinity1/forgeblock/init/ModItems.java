@@ -33,6 +33,8 @@ import alephinfinity1.forgeblock.item.SwordOfTheStarsItem;
 import alephinfinity1.forgeblock.item.UndeadSwordItem;
 import alephinfinity1.forgeblock.item.UnstableDragonArmorItem;
 import alephinfinity1.forgeblock.item.WiseDragonArmorItem;
+import alephinfinity1.forgeblock.item.WoodSingularityApplicableSwordItem;
+import alephinfinity1.forgeblock.item.WoodSingularityItem;
 import alephinfinity1.forgeblock.item.YoungDragonArmorItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -98,7 +100,7 @@ public class ModItems {
 	/*
 	 * Swords
 	 */
-	public static final RegistryObject<Item> WOODEN_SWORD = OVERRIDE.register("wooden_sword", () -> new FBSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
+	public static final RegistryObject<Item> WOODEN_SWORD = OVERRIDE.register("wooden_sword", () -> new WoodSingularityApplicableSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
 	public static final RegistryObject<Item> GOLDEN_SWORD = OVERRIDE.register("golden_sword", () -> new FBSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
 	public static final RegistryObject<Item> STONE_SWORD = OVERRIDE.register("stone_sword", () -> new FBSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 25, 0, 0, 0));
 	public static final RegistryObject<Item> IRON_SWORD = OVERRIDE.register("iron_sword", () -> new FBSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 30, 0, 0, 0));
@@ -315,7 +317,8 @@ public class ModItems {
 	
 	public static final RegistryObject<Item> HOT_POTATO_BOOK = ITEMS.register("hot_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.EPIC));
 	public static final RegistryObject<Item> FUMING_POTATO_BOOK = ITEMS.register("fuming_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.EPIC, true));
-
+	public static final RegistryObject<Item> WOOD_SINGULARITY = ITEMS.register("wood_singularity", () -> new WoodSingularityItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.LEGENDARY));
+	
 	/*
 	 * Custom items/ideas/debug
 	 */

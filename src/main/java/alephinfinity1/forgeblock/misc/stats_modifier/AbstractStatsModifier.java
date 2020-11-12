@@ -13,6 +13,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
  * A class that stores a modifier to an item (e.g. Hot Potato Book, Recombobulator 3000, Wood Singularity etc.)
+ * Note: Reforges are not counted as a stats modifier. It has its own system. {@link alephinfinity1.forgeblock.misc.reforge.Reforge}
  */
 public abstract class AbstractStatsModifier extends ForgeRegistryEntry<AbstractStatsModifier> {
 	
@@ -26,7 +27,7 @@ public abstract class AbstractStatsModifier extends ForgeRegistryEntry<AbstractS
 	/*
 	 * The number of rarity changes. 1 for Wood Singularity and Recombobulator 3000, 0 for others.
 	 */
-	protected int rarityChange;
+	protected BiFunction<ItemStack, CompoundNBT, Integer> rarityChange;
 	
 	/*
 	 * The colour of the modifier when applied to an item. E.g. TextFormatting#YELLOW for HPB, GOLD for Wood Singularity.	
@@ -38,7 +39,8 @@ public abstract class AbstractStatsModifier extends ForgeRegistryEntry<AbstractS
 	 */
 	protected Predicate<ItemStack> applicableOn;
 	
-	public AbstractStatsModifier(BiFunction<ItemStack, CompoundNBT, Multimap<String, AttributeModifier>> attributeModifiers, int rarityChange, TextFormatting color, Predicate<ItemStack> applicableOn) {
+	public AbstractStatsModifier(BiFunction<ItemStack, CompoundNBT, Multimap<String, AttributeModifier>> attributeModifiers, 
+			BiFunction<ItemStack, CompoundNBT, Integer> rarityChange, TextFormatting color, Predicate<ItemStack> applicableOn) {
 		this.attributeModifiers = attributeModifiers;
 		this.rarityChange = rarityChange;
 		this.color = color;
@@ -49,8 +51,8 @@ public abstract class AbstractStatsModifier extends ForgeRegistryEntry<AbstractS
 		return this.attributeModifiers.apply(stack, nbt);
 	}
 		
-	public int getRarityChange() {
-		return this.rarityChange;
+	public int getRarityChange(ItemStack stack, CompoundNBT nbt) {
+		return this.rarityChange.apply(stack, nbt);
 	}
 	
 	public TextFormatting getColor() {
