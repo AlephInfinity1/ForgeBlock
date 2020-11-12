@@ -304,7 +304,7 @@ public class FBPotionItem extends PotionItem implements IFBTieredItem {
 				builder.put(tuple.getA(), tuple.getB());
 			}
 			Multimap<String, AttributeModifier> modifierMap = builder.build();
-			lores.addAll(TextFormatHelper.formatModifierMap(modifierMap, null, FBTier.COMMON));
+			lores.addAll(TextFormatHelper.formatModifierMap(modifierMap, null, FBTier.COMMON, null, new ItemStack(Items.POTION)));
 			lores.add(new StringTextComponent(""));
 		}
 

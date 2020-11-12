@@ -15,6 +15,7 @@ import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -195,7 +196,7 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent("misc.forgeblock.fakeattribute.yield").getString() + ": " + TextFormatting.GREEN.toString() + Double.toString(yield)));
 		tooltip.add(new StringTextComponent(""));
 
-		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
+		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 		
 		tooltip.add(new StringTextComponent(""));
 		

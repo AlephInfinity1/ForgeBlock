@@ -1,11 +1,13 @@
 package alephinfinity1.forgeblock.misc;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -16,11 +18,13 @@ import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.item.BlazeArmorItem;
 import alephinfinity1.forgeblock.item.FrozenBlazeArmorItem;
+import alephinfinity1.forgeblock.item.RogueSwordItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Pose;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -32,25 +36,89 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+/**
+ * A class dedicated to handle all tick-based events.
+ */
 @Mod.EventBusSubscriber
 public class TickHandler {
+	/**
+	 * The number of ticks elapsed.
+	 */
 	public static long tickElapsed = 0;
+	
+	/**
+	 * All entities that are newly spawned.
+	 */
 	private static List<Entity> allEntitiesPre = new Vector<>();
+	
+	/**
+	 * All living entities that are newly spawned.
+	 */
 	private static List<LivingEntity> allLivingPre = new Vector<>();
+	
+	/**
+	 * All entities in the world.
+	 */
 	public static List<Entity> allEntities = new Vector<>();
+	
+	/**
+	 * All living entities in the world.
+	 */
 	public static List<LivingEntity> allLiving = new Vector<>();
+	
+	/**
+	 * Marks all {@link LivingEntity} that have dirty health values (i.e. needs update).
+	 * All entities on this list will be healed to full health in 5 gt.
+	 */
 	public static Map<LivingEntity, Long> healthDirty = new HashMap<>();
+	
+	/**
+	 * Unused.
+	 */
+	@Deprecated(forRemoval = true)
 	public static Map<ArmorStandEntity, Long> damageDisplay = new HashMap<>();
+	
+	/**
+	 * Unused.
+	 */
+	@Deprecated(forRemoval = true)
 	public static List<Triple<LivingEntity, Double, Long>> damageIndicatorFix = new ArrayList<>();
+	
+	/**
+	 * All entities thar are wearing {@link BlazeArmorItem}.
+	 * Affects full set bonus actuation.
+	 */
 	public static Map<LivingEntity, Boolean> isWearingBlazeArmor = new ConcurrentHashMap<>();
+	
+	/**
+	 * All entities thar are wearing {@link FrozenBlazeArmorItem}.
+	 * Affects full set bonus actuation.
+	 */
 	public static Map<LivingEntity, Boolean> isWearingFrozenBlazeArmor = new ConcurrentHashMap<>();
+	
+	/**
+	 * Scheduled extra attacks from {@link FBAttributes#FEROCITY}.
+	 */
 	public static Map<Tuple<LivingEntity, DamageSource>, Long> ferocitySchedule = new ConcurrentHashMap<>();
+	
+	/**
+	 * The expiry times for all temporary attribute modifiers (e.g. Pigman Defense Boost, Rogue Speed Boost).
+	 */
+	public static Map<Tuple<LivingEntity, UUID>, Long> attModifierExpiry = new ConcurrentHashMap<>();
+	
+	/**
+	 * Whether {@link RogueSwordItem} effect is active.
+	 * If active, Rogue Sword item ability will give half the bonus speed instead.
+	 */
+	public static Map<LivingEntity, Long> rogueActive = new ConcurrentHashMap<>();
 	public static final Minecraft minecraft = Minecraft.getInstance();
 	
 	@SubscribeEvent
@@ -195,6 +263,34 @@ public class TickHandler {
 				}
 			}
 		}
+		
+		if(!attModifierExpiry.isEmpty()) {
+			Set<Tuple<LivingEntity, UUID>> entries = attModifierExpiry.keySet();
+			Iterator<Tuple<LivingEntity, UUID>> itr = entries.iterator();
+			while(itr.hasNext()) {
+				Tuple<LivingEntity, UUID> living = itr.next();
+				if(tickElapsed >= attModifierExpiry.get(living)) {
+					Collection<IAttributeInstance> attributes = living.getA().getAttributes().getAllAttributes();
+					for(IAttributeInstance attribute : attributes) {
+						attribute.removeModifier(living.getB());
+					}
+					itr.remove();
+					continue;
+				}
+			}
+		}
+		
+		if(!rogueActive.isEmpty()) {
+			Set<LivingEntity> entries = rogueActive.keySet();
+			Iterator<LivingEntity> itr = entries.iterator();
+			while(itr.hasNext()) {
+				LivingEntity living = itr.next();
+				if(tickElapsed >= rogueActive.get(living)) {
+					itr.remove();
+					continue;
+				}
+			}
+		}
 	}
 	
 	/*
@@ -202,6 +298,7 @@ public class TickHandler {
 	 * XXX
 	 */
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
 		if(minecraft.currentScreen != null) {
 			if(minecraft.currentScreen instanceof DeathScreen && minecraft.player.getHealth() > 0) {
@@ -260,6 +357,10 @@ public class TickHandler {
 			for(int i = 0; i < 5; i++)
 				living.world.addParticle(ParticleTypes.FLAME, living.getPosXRandom(5.0D), living.getPosY(), living.getPosZRandom(5.0D), 0, 0, 0);
 		}
+	}
+	
+	public static boolean isRogueActive(LivingEntity living) {
+		return rogueActive.get(living) != null;
 	}
 	
 }

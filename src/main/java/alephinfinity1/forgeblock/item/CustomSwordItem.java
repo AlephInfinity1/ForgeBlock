@@ -65,7 +65,8 @@ public class CustomSwordItem extends FBSwordItem {
 			double trueDefense = nbt.getDouble("TrueDefense");
 			double magicFind = nbt.getDouble("MagicFind");
 			double petLuck = nbt.getDouble("PetLuck");
-			builder.putAll(ModifierHelper.modifierMapFromDoubles(damage, strength, critChance, critDamage, bonusAttackSpeed, seaCreatureChance, health, defense, speed, intelligence, trueDefense, magicFind, petLuck, "Custom modifier", CUSTOM_MODIFIER));
+			double ferocity = nbt.getDouble("Ferocity");
+			builder.putAll(ModifierHelper.modifierMapFromDoubles(damage, strength, critChance, critDamage, bonusAttackSpeed, seaCreatureChance, health, defense, speed, intelligence, trueDefense, magicFind, petLuck, ferocity, "Custom modifier", CUSTOM_MODIFIER));
 		}
 		
 		return builder.build();

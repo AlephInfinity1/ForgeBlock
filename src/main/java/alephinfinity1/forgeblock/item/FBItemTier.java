@@ -20,7 +20,6 @@ public class FBItemTier implements IItemTier {
 
 	@Override
 	public float getAttackDamage() {
-		
 		return 0;
 	}
 
@@ -31,8 +30,7 @@ public class FBItemTier implements IItemTier {
 
 	@Override
 	public int getEnchantability() {
-		
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -42,14 +40,12 @@ public class FBItemTier implements IItemTier {
 
 	@Override
 	public int getMaxUses() {
-		
 		return 0;
 	}
 
 	@Override
-	public Ingredient getRepairMaterial() {
-		
-		return null;
+	public Ingredient getRepairMaterial() {	
+		return Ingredient.EMPTY;
 	}
 
 }

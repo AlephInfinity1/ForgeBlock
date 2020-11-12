@@ -2,6 +2,7 @@ package alephinfinity1.forgeblock.init;
 
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
+import alephinfinity1.forgeblock.misc.stats_modifier.AbstractStatsModifier;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 public class ModRegistries {
 	
 	public static IForgeRegistry<Reforge> REFORGE = null;
+	public static IForgeRegistry<AbstractStatsModifier> STATS_MODIFIER = null;
 	
 	@SubscribeEvent
 	public static void registerCustomRegistries(RegistryEvent.NewRegistry event) {
@@ -22,6 +24,12 @@ public class ModRegistries {
 				.setType(Reforge.class);
 		reforge.create();
 		REFORGE = GameRegistry.findRegistry(Reforge.class);
+		
+		RegistryBuilder<AbstractStatsModifier> statsModifier = new RegistryBuilder<AbstractStatsModifier>()
+				.setName(new ResourceLocation(ForgeBlock.MOD_ID, "stats_modifier"))
+				.setType(AbstractStatsModifier.class);
+		statsModifier.create();
+		STATS_MODIFIER = GameRegistry.findRegistry(AbstractStatsModifier.class);
 	}
 
 }

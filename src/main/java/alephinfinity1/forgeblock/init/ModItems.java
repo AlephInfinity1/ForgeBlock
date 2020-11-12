@@ -19,6 +19,7 @@ import alephinfinity1.forgeblock.item.FBSwordItem;
 import alephinfinity1.forgeblock.item.FancySwordItem;
 import alephinfinity1.forgeblock.item.FrozenBlazeArmorItem;
 import alephinfinity1.forgeblock.item.GolemArmorItem;
+import alephinfinity1.forgeblock.item.HotPotatoBookItem;
 import alephinfinity1.forgeblock.item.LapisArmorItem;
 import alephinfinity1.forgeblock.item.MinerOutfitArmorItem;
 import alephinfinity1.forgeblock.item.OneSwordItem;
@@ -311,6 +312,9 @@ public class ModItems {
 	public static final RegistryObject<Item> GRAND_EXPERIENCE_BOTTLE = ITEMS.register("grand_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.UNCOMMON, 1500 - 307, 1500 + 307));
 	public static final RegistryObject<Item> TITANIC_EXPERIENCE_BOTTLE = ITEMS.register("titanic_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.RARE, 139770 - 2477, 139770 + 2477));
 	public static final RegistryObject<Item> COLOSSAL_EXPERIENCE_BOTTLE = ITEMS.register("colossal_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.EPIC, 279540 - 4977, 279540 + 4977));
+	
+	public static final RegistryObject<Item> HOT_POTATO_BOOK = ITEMS.register("hot_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1), FBTier.EPIC));
+	public static final RegistryObject<Item> FUMING_POTATO_BOOK = ITEMS.register("fuming_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1), FBTier.EPIC, true));
 
 	/*
 	 * Custom items/ideas/debug

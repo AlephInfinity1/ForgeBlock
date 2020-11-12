@@ -18,6 +18,7 @@ import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -264,7 +265,7 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		Multimap<String, AttributeModifier> modifiers = this.getAttributeModifiers(this.slot, stack);
 		List<ITextComponent> additional = this.additionalInformation();
 		
-		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
+		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 		
 		tooltip.add(new StringTextComponent(""));
 		

@@ -36,6 +36,7 @@ public class HealthBarRenderer {
 		RenderSystem.color3f(1.0f, 0.5f, 0.5f);
 		MINECRAFT.ingameGUI.blit(width / 2 - 91, height - 40, 0, 64, 91, 5);
 		MINECRAFT.ingameGUI.blit(width / 2 - 91, height - 40, 0, 69, (int) (91 * progress), 5);
+		RenderSystem.clearCurrentColor();
 	}
 	
 	@SubscribeEvent(priority = EventPriority.LOW)

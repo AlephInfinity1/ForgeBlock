@@ -5,17 +5,21 @@ import org.apache.logging.log4j.MarkerManager.Log4jMarker;
 
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.client.particles.NumericDamageIndicatorParticle;
+import alephinfinity1.forgeblock.client.screen.FBAnvilScreen;
 import alephinfinity1.forgeblock.entity.FBExperienceBottleEntity;
 import alephinfinity1.forgeblock.entity.minion.render.MinionRenderer;
+import alephinfinity1.forgeblock.init.ModContainerTypes;
 import alephinfinity1.forgeblock.init.ModEntities;
 import alephinfinity1.forgeblock.init.ModParticles;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.renderer.entity.EndermanRenderer;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.client.renderer.entity.WolfRenderer;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraft.client.renderer.entity.ZombieVillagerRenderer;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,7 +32,12 @@ public class ClientEventBusSubscriber {
 
 	public static final Minecraft mc = Minecraft.getInstance();
 
+	/**
+	 * The anvil register part is wonky. XXX
+	 */
+	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
+		//Entities
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_ZOMBIE.get(), ZombieRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.LAPIS_ZOMBIE.get(), ZombieRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZEALOT.get(), EndermanRenderer::new);
@@ -41,7 +50,13 @@ public class ClientEventBusSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.GOLDEN_GHOUL.get(), ZombieRenderer::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINION.get(), MinionRenderer::new);
-		ForgeBlock.LOGGER.log(Level.TRACE, new Log4jMarker("Test"), "Client stuff fired!");
+		ForgeBlock.LOGGER.log(Level.TRACE, new Log4jMarker("Test"), "Client stuff fired!");	
+		
+		//Screens
+		ScreenManager.FACTORIES.remove(ModContainerTypes.FB_ANVIL.get());
+		ScreenManager.FACTORIES.remove(ContainerType.ANVIL); //XXX
+		ScreenManager.registerFactory(ModContainerTypes.FB_ANVIL.get(), FBAnvilScreen::new);
+		ScreenManager.registerFactory(ContainerType.ANVIL, FBAnvilScreen::new);	
 	}
 
 	@SubscribeEvent

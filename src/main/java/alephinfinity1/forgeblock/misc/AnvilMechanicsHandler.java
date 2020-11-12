@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber
 public class AnvilMechanicsHandler {
 
-	@SubscribeEvent
+	//@SubscribeEvent
 	public static void onAnvilUpdate(AnvilUpdateEvent event) {
 		if(event.getRight().getItem() instanceof FBEnchantedBookItem) {
 			ItemStack right = event.getRight();

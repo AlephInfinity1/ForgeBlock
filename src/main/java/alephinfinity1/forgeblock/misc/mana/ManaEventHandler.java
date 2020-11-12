@@ -76,7 +76,7 @@ public class ManaEventHandler {
 			RenderSystem.color3f(0.5f, 0.5f, 1.0f);
 			mc.ingameGUI.blit(width / 2, height - 40, 91, 64, 91, 5);
 			mc.ingameGUI.blit(width / 2 + 91 - (int) (91.0 * progress), height - 40, 182 - (int) (91.0 * progress), 69, (int) (91.0 * progress), 5);
-			RenderSystem.color3f(1.0f, 1.0f, 1.0f);
+			RenderSystem.clearCurrentColor();
 		}
 	}
 	

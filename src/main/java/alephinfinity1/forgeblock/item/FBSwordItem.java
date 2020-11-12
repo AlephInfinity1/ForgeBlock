@@ -18,6 +18,8 @@ import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -94,11 +96,10 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		int criticalLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.CRITICAL.get(), stack);
 		if(criticalLevel != 0) builder.put(FBAttributes.CRIT_DAMAGE.getName(), new AttributeModifier(CRITICAL_ENCHANTMENT_MODIFIER, "Crit enchant modifier", 10.0D * criticalLevel, Operation.ADDITION));
 		
-		boolean woodSingularity = false;
-		if(stack.getTag() != null) {
-			woodSingularity = (stack.getTag().getByte("WoodSingularity") == 1);
+		IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
+		if(itemMod != null) {
+			builder.putAll(itemMod.getModifiers(stack));
 		}
-		if(woodSingularity) builder.put(FBAttributes.STRENGTH.getName(), new AttributeModifier(WOOD_SINGULARITY_MODIFIER, "Wood singularity strength modifier", 100.0D, Operation.ADDITION));
 		
 		return builder.build();
 	}
@@ -106,12 +107,11 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	@Override
 	public FBTier getStackTier(ItemStack stack) {
 		if(stack.getTag() != null) {
-			boolean recombobulated = (stack.getTag().getByte("Recombobulated") == 1);
-			boolean woodSingularity = (stack.getTag().getByte("WoodSingularity") == 1);
-			int tierBoost = 0;
-			if(recombobulated) tierBoost++;
-			if(woodSingularity) tierBoost++;
-			return FBTier.changeTier(tier, tierBoost);
+			IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
+			if(itemMod != null) {
+				return FBTier.changeTier(tier, itemMod.getRarity());
+			}
+			return tier;
 		} else {
 			return tier;
 		}
@@ -139,7 +139,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		List<ITextComponent> additional = this.additionalInformation();
 		List<ITextComponent> additional1 = this.additionalInformation(stack);
 		
-		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier));
+		tooltip.addAll(TextFormatHelper.formatModifierMap(modifiers, this.getReforge(stack), tier, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 		
 		tooltip.add(new StringTextComponent(""));
 		
@@ -236,4 +236,5 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		stack.getOrCreateTag().put("AttributeModifiers", new ListNBT());
 		return stack;
 	}
+
 }

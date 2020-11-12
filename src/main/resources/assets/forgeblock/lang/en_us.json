@@ -169,6 +169,9 @@
     "item.forgeblock.titanic_experience_bottle": "Titanic Experience Bottle",
     "item.forgeblock.colossal_experience_bottle": "Colossal Experience Bottle",
     
+    "item.forgeblock.hot_potato_book": "Hot Potato Book",
+    "item.forgeblock.fuming_potato_book": "Fuming Potato Book",
+    
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
     "itemGroup.forgeblock_harvesting_tools": "ForgeBlock Tools",

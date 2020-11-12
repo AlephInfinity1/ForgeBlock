@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Multimap;
@@ -17,6 +18,9 @@ import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.config.CustomModConfig;
 import alephinfinity1.forgeblock.enchantment.UltimateEnchantment;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
+import alephinfinity1.forgeblock.misc.stats_modifier.AbstractStatsModifier;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -306,7 +310,7 @@ public class TextFormatHelper {
 		return thousands + hundreds + tens + ones;
 	}
 	
-	public static List<ITextComponent> formatModifierMap(Multimap<String, AttributeModifier> modifiers, @Nullable Reforge reforge, FBTier tier) {
+	public static List<ITextComponent> formatModifierMap(Multimap<String, AttributeModifier> modifiers, @Nullable Reforge reforge, FBTier tier, @Nullable IItemModifiers extraModifiers, @Nullable ItemStack stack) {
 		
 		List<ITextComponent> tooltip = new ArrayList<>();
 		boolean offensive = false, defensive = false, extras = false, xp = false, slayerLuck = false;
@@ -342,9 +346,9 @@ public class TextFormatHelper {
 			if(!MathHelper.epsilonEquals(value, 0.0D) || !MathHelper.epsilonEquals(reforgeValue, 0.0D)) {
 				offensive = true;
 				if(attribute.equals(FBAttributes.CRIT_CHANCE) || attribute.equals(FBAttributes.CRIT_DAMAGE)) {
-					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.OFFENSIVE, 1, "%", displayType));
+					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.OFFENSIVE, 1, "%", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 				} else {
-					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.OFFENSIVE, 1, "", displayType));
+					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.OFFENSIVE, 1, "", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 				}
 			}
 		}
@@ -371,11 +375,11 @@ public class TextFormatHelper {
 				}
 					
 				if(attribute.equals(SharedMonsterAttributes.MAX_HEALTH)) {
-					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.DEFENSIVE, 1, " HP", displayType));
+					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.DEFENSIVE, 1, " HP", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 				} else if(attribute.equals(SharedMonsterAttributes.MOVEMENT_SPEED)) {
-					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.DEFENSIVE, 1000, "", displayType));
+					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.DEFENSIVE, 1000, "", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 				} else {
-					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.DEFENSIVE, 1, "", displayType));
+					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.DEFENSIVE, 1, "", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 				}
 			}
 		}
@@ -404,11 +408,11 @@ public class TextFormatHelper {
 				}
 					
 				if(attribute.equals(FBAttributes.DODGE)) {
-					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.EXTRAS, 1, "%", displayType));
+					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.EXTRAS, 1, "%", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 				} else if (attribute.equals(FBAttributes.HEALTH_REGEN) || attribute.equals(FBAttributes.MANA_REGEN)) {
-					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.EXTRAS, 1, "/s", displayType));
+					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.EXTRAS, 1, "/s", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 				} else {
-					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.EXTRAS, 1, "", displayType));
+					tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.EXTRAS, 1, "", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 				}
 			}
 		}
@@ -433,7 +437,7 @@ public class TextFormatHelper {
 					if(offensive == true || defensive == true || extras == true) tooltip.add(new StringTextComponent(""));
 					xp = true;
 				}
-				tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.XP, 1, "%", displayType));
+				tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.XP, 1, "%", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 			}
 		}
 		
@@ -458,7 +462,7 @@ public class TextFormatHelper {
 					slayerLuck = true;
 				}
 					
-				tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.SLAYER_LUCK, 1, "", displayType));
+				tooltip.add(formatModifier(value, reforgeValue, attribute.getName(), reforgeName, AttributeType.SLAYER_LUCK, 1, "", displayType, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 			}
 		}
 		
@@ -470,7 +474,7 @@ public class TextFormatHelper {
 		OFFENSIVE, DEFENSIVE, EXTRAS, XP, SLAYER_LUCK;
 	}
 	
-	public static ITextComponent formatModifier(double value, double reforgeValue, String attributeName, String reforgeName, AttributeType type, double scale, String suffix, AttributeDisplayType displayType) {
+	public static ITextComponent formatModifier(double value, double reforgeValue, String attributeName, String reforgeName, AttributeType type, double scale, String suffix, AttributeDisplayType displayType, @Nullable IItemModifiers extraModifier, @Nullable ItemStack stack) {
 		List<ITextComponent> tooltip = new ArrayList<>();
 		
 		String color;
@@ -543,7 +547,10 @@ public class TextFormatHelper {
 			tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeValue * scale) + suffix + ")"));
 		}
 		
-		return tooltip.get(0);
+		if(extraModifier != null)
+			return tooltip.get(0).appendSibling(formatExtras(attributeName, scale, suffix, extraModifier, stack));
+		else
+			return tooltip.get(0);
 		
 	}
 	
@@ -588,6 +595,28 @@ public class TextFormatHelper {
 		if(!set.isEmpty()) list.add(new StringTextComponent(""));
 		
 		return list;
+	}
+	
+	public static ITextComponent formatExtras(String attributeName, double scale, String suffix, @Nonnull IItemModifiers extraModifier, @Nonnull ItemStack stack) {
+		ITextComponent tc = new StringTextComponent(" "); //Initialise empty component first, append later.
+		Map<AbstractStatsModifier, CompoundNBT> modMap = extraModifier.getMap();
+		Set<Map.Entry<AbstractStatsModifier, CompoundNBT>> modSet = modMap.entrySet();
+		for(Map.Entry<AbstractStatsModifier, CompoundNBT> entry : modSet) { //Apply for every modifier in the map
+			TextFormatting color = entry.getKey().getColor();
+			Multimap<String, AttributeModifier> modifiers = entry.getKey().getModifiers(stack, entry.getValue());
+			double value = 0.0D;
+			for(Map.Entry<String, AttributeModifier> attr : modifiers.entries()) { //Get all additional modifiers
+				if(!attr.getKey().equals(attributeName)) continue;
+				if(attr.getValue().getOperation().equals(AttributeModifier.Operation.ADDITION)) {
+					value += attr.getValue().getAmount();
+				}
+			}
+			if(!MathHelper.epsilonEquals(value, 0.0D)) { //Only apply modifier if non-zero.
+				ITextComponent modTc = new StringTextComponent("(").appendText(formatModifier(value * scale)).appendText(suffix).appendText(")").applyTextStyle(color);
+				tc.appendSibling(modTc);
+			}
+		}
+		return tc;
 	}
 
 }

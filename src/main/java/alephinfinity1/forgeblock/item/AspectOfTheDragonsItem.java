@@ -55,7 +55,7 @@ public class  AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem
 		if(worldIn.isRemote) return ActionResult.resultPass(playerIn.getHeldItem(handIn));
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		PlayerCastSpellEvent event = ForgeBlockEventHooks.onPlayerCastSpell(playerIn, stack, this.getAbilityCost(stack, playerIn));
-		if(playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(() -> new NullPointerException()).consume(event.getManaConsumed()) || !event.isCanceled()) {
+		if(playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(() -> new NullPointerException()).consume(event.getManaConsumed()) && !event.isCanceled()) {
 			activateAbility(worldIn, playerIn, stack);
 			IMana mana = playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
 			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn), new ManaUpdatePacket(mana.getMana()));
