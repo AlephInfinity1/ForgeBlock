@@ -15,6 +15,7 @@ import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.block.BlockState;
@@ -93,6 +94,12 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.putAll(this.attributes);
 		builder.putAll(this.getReforgeModifiers(stack));
+		
+		IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
+		if(itemMod != null) {
+			builder.putAll(itemMod.getModifiers(stack));
+		}
+		
 		return builder.build();
 	}
 

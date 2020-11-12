@@ -307,14 +307,14 @@ public class ModItems {
 	/*
 	 * Misc
 	 */
-	public static final RegistryObject<Item> ENCHANTED_BOOK = OVERRIDE.register("enchanted_book", () -> new FBEnchantedBookItem(new Item.Properties()));
+	public static final RegistryObject<Item> ENCHANTED_BOOK = OVERRIDE.register("enchanted_book", () -> new FBEnchantedBookItem(new Item.Properties().maxStackSize(1)));
 	public static final RegistryObject<Item> EXPERIENCE_BOTTLE = OVERRIDE.register("experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.COMMON, 3, 11));
 	public static final RegistryObject<Item> GRAND_EXPERIENCE_BOTTLE = ITEMS.register("grand_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.UNCOMMON, 1500 - 307, 1500 + 307));
 	public static final RegistryObject<Item> TITANIC_EXPERIENCE_BOTTLE = ITEMS.register("titanic_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.RARE, 139770 - 2477, 139770 + 2477));
 	public static final RegistryObject<Item> COLOSSAL_EXPERIENCE_BOTTLE = ITEMS.register("colossal_experience_bottle", () -> new FBExperienceBottleItem(new Item.Properties(), FBTier.EPIC, 279540 - 4977, 279540 + 4977));
 	
-	public static final RegistryObject<Item> HOT_POTATO_BOOK = ITEMS.register("hot_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1), FBTier.EPIC));
-	public static final RegistryObject<Item> FUMING_POTATO_BOOK = ITEMS.register("fuming_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1), FBTier.EPIC, true));
+	public static final RegistryObject<Item> HOT_POTATO_BOOK = ITEMS.register("hot_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.EPIC));
+	public static final RegistryObject<Item> FUMING_POTATO_BOOK = ITEMS.register("fuming_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.EPIC, true));
 
 	/*
 	 * Custom items/ideas/debug

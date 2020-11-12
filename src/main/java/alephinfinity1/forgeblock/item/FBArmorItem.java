@@ -18,6 +18,7 @@ import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
@@ -158,6 +159,11 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 			break;
 		default:
 			break;
+		}
+		
+		IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
+		if(itemMod != null) {
+			builder.putAll(itemMod.getModifiers(stack));
 		}
 		
 		return builder.build();

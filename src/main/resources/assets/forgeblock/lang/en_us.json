@@ -179,6 +179,7 @@
     "itemGroup.forgeblock_potions": "ForgeBlock Potions",
     "itemGroup.forgeblock_custom": "ForgeBlock Custom Items",
     "itemGroup.forgeblock_mobs": "ForgeBlock Mobs",
+    "itemGroup.forgeblock_misc": "ForgeBlock Misc Items",
     
     "entity.forgeblock.lv1_zombie": "Zombie",
     "entity.forgeblock.lapis_zombie": "Lapis Zombie",
@@ -501,5 +502,16 @@
     "text.forgeblock.xp_bottle_0": "\u00A77Smash it open to receive",
     "text.forgeblock.xp_bottle_1": "\u00A7a%1$s\u00A77–\u00A7a%2$s \u00A77experience!",
     
-    "text.forgeblock.lostCoins": "You died and lost %s coins!"
+    "text.forgeblock.lostCoins": "You died and lost %s coins!",
+    
+    "text.forgeblock.item_desc.hpb_0": "\u00A77Combine this Book in an Anvil",
+    "text.forgeblock.item_desc.hpb_1": "\u00A77with a Weapon or an Armor piece",
+    "text.forgeblock.item_desc.hpb_2": "\u00A77to gain a \u00A7asmall\u00A77 but \u00A7apermanent\u00A77",
+    "text.forgeblock.item_desc.hpb_3": "\u00A77stats boost!",
+    "text.forgeblock.item_desc.hpb_limit": "\u00A78Can be stacked up to 10 times.",
+    
+    "text.forgeblock.item_desc.fuming_0": "\u00A77This book bypasses the",
+    "text.forgeblock.item_desc.fuming_1": "\u00A7aHot Potato Book\u00A77 limit of 10, allow-",
+    "text.forgeblock.item_desc.fuming_2": "\u00A77ing you to upgrade an item up to",
+    "text.forgeblock.item_desc.fuming_3": "\u00A7a15 times\u00A77!"
 }
