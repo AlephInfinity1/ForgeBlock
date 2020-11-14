@@ -24,6 +24,7 @@ import alephinfinity1.forgeblock.item.LapisArmorItem;
 import alephinfinity1.forgeblock.item.MinerOutfitArmorItem;
 import alephinfinity1.forgeblock.item.OneSwordItem;
 import alephinfinity1.forgeblock.item.ProtectorDragonArmorItem;
+import alephinfinity1.forgeblock.item.RecombobulatorItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
 import alephinfinity1.forgeblock.item.SpiderSwordItem;
 import alephinfinity1.forgeblock.item.StonkItem;
@@ -318,6 +319,7 @@ public class ModItems {
 	public static final RegistryObject<Item> HOT_POTATO_BOOK = ITEMS.register("hot_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.EPIC));
 	public static final RegistryObject<Item> FUMING_POTATO_BOOK = ITEMS.register("fuming_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.EPIC, true));
 	public static final RegistryObject<Item> WOOD_SINGULARITY = ITEMS.register("wood_singularity", () -> new WoodSingularityItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.LEGENDARY));
+	public static final RegistryObject<Item> RECOMBOBULATOR_3000 = ITEMS.register("recombobulator_3000", () -> new RecombobulatorItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.LEGENDARY));
 	
 	/*
 	 * Custom items/ideas/debug
