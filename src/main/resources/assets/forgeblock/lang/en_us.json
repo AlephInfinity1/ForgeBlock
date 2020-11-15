@@ -172,6 +172,7 @@
     "item.forgeblock.hot_potato_book": "Hot Potato Book",
     "item.forgeblock.fuming_potato_book": "Fuming Potato Book",
     "item.forgeblock.wood_singularity": "Wood Singularity",
+    "item.forgeblock.recombobulator_3000": "Recombobulator 3000",
     
     "itemGroup.forgeblock_materials": "ForgeBlock Materials",
     "itemGroup.forgeblock_swords": "ForgeBlock Swords",
@@ -520,5 +521,11 @@
     "text.forgeblock.item_desc.wood_1": "\u00A77pile of wood in an Anvil with",
     "text.forgeblock.item_desc.wood_2": "\u00A77any \u00A76wooden sword\u00A77 to add",
     "text.forgeblock.item_desc.wood_3": "\u00A7c+100\u2741 Strength\u00A77 to it!",
-    "text.forgeblock.item_desc.wood_4": "\u00A78Can only be applied once."
+    "text.forgeblock.item_desc.wood_4": "\u00A78Can only be applied once.",
+    
+    "text.forgeblock.item_desc.recomb_0": "\u00A77Use in a \u00A7aReforge Anvil\u00A77 or at",
+    "text.forgeblock.item_desc.recomb_1": "\u00A77the Dungeon Blacksmith to",
+    "text.forgeblock.item_desc.recomb_2": "\u00A77permanently increase the rarity",
+    "text.forgeblock.item_desc.recomb_3": "\u00A77of an item. An item's rarity can",
+    "text.forgeblock.item_desc.recomb_4": "\u00A77only be upgraded once!"
 }

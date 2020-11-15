@@ -154,7 +154,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));
 		
 		boolean recombobulated = false;
-		if(stack.getTag() != null) recombobulated = (stack.getTag().getByte("Recombobulated") == 1);
+		if(stack.getTag() != null) recombobulated = this.isRecombobulated(stack); 
 		String color = tier.color.toString();
 		String bold = TextFormatting.BOLD.toString();
 		String obfuscated = TextFormatting.OBFUSCATED.toString();

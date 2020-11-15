@@ -205,7 +205,7 @@ public class DamageHandler {
 			double skillMultiplier = 0.0D;
 			if(damager instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) damager;
-				skillMultiplier = 0.04D * SkillsHelper.getCombatLevel(player);
+				skillMultiplier = 0.04D * SkillsHelper.getCombatLevelOrElse(player, 0);
 			}
 			
 			result *= (1.0D + enchMultiplier + skillMultiplier);

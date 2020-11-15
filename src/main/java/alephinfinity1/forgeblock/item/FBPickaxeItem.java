@@ -212,7 +212,7 @@ public class FBPickaxeItem extends PickaxeItem implements IFBTieredItem, IReforg
 		//Insert item ability description here (unused for some swords)
 		
 		boolean recombobulated = false;
-		if(stack.getTag() != null) recombobulated = (stack.getTag().getByte("Recombobulated") == 1);
+		if(stack.getTag() != null) recombobulated = this.isRecombobulated(stack);
 		String color = tier.color.toString();
 		String bold = TextFormatting.BOLD.toString();
 		String obfuscated = TextFormatting.OBFUSCATED.toString();

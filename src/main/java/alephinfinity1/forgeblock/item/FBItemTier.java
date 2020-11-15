@@ -3,8 +3,9 @@ package alephinfinity1.forgeblock.item;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 
-/*
+/**
  * A placeholder item tier, as SkyBlock items do not have traditional vanilla tiers.
+ * Not to be confused with {@link FBTier}
  */
 public class FBItemTier implements IItemTier {
 	

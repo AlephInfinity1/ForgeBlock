@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import alephinfinity1.forgeblock.misc.FBItemType;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -39,14 +41,14 @@ public class FBTieredItem extends Item implements IFBTieredItem {
 		return baseTier;
 	}
 	
+	@Override
 	public FBTier getStackTier(ItemStack stack) {
 		if(stack.getTag() != null) {
-			boolean recombobulated = (stack.getTag().getByte("Recombobulated") == 1);
-			boolean woodSingularity = (stack.getTag().getByte("WoodSingularity") == 1);
-			int tierBoost = 0;
-			if(recombobulated) tierBoost++;
-			if(woodSingularity) tierBoost++;
-			return FBTier.changeTier(baseTier, tierBoost);
+			IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
+			if(itemMod != null) {
+				return FBTier.changeTier(baseTier, itemMod.getRarity(stack));
+			}
+			return baseTier;
 		} else {
 			return baseTier;
 		}
@@ -82,6 +84,6 @@ public class FBTieredItem extends Item implements IFBTieredItem {
 	@Override
 	public Rarity getRarity(ItemStack stack) {
 		return getStackTier(stack).getVanillaRarity();
-	}
+	}	
 
 }

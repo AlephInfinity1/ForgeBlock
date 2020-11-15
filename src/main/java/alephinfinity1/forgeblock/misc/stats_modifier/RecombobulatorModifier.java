@@ -12,7 +12,7 @@ public class RecombobulatorModifier extends AbstractStatsModifier {
 		super(
 				(stack, nbt) -> ModifierHelper.emptyModifier(),
 				(stack, nbt) -> 1,
-				TextFormatting.GOLD,
+				TextFormatting.RESET,
 				(stack) -> {	
 					IItemModifiers im = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
 					if(im == null) return false;

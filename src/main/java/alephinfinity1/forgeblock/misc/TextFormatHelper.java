@@ -602,12 +602,13 @@ public class TextFormatHelper {
 		Map<AbstractStatsModifier, CompoundNBT> modMap = extraModifier.getMap();
 		Set<Map.Entry<AbstractStatsModifier, CompoundNBT>> modSet = modMap.entrySet();
 		for(Map.Entry<AbstractStatsModifier, CompoundNBT> entry : modSet) { //Apply for every modifier in the map
-			tc.appendSibling(new StringTextComponent(" "));
 			TextFormatting color = entry.getKey().getColor();
+			if(color.equals(TextFormatting.RESET)) continue; //If set to RESET, the modifier is not displayed.	
 			Multimap<String, AttributeModifier> modifiers = entry.getKey().getModifiers(stack, entry.getValue());
 			double value = 0.0D;
 			for(Map.Entry<String, AttributeModifier> attr : modifiers.entries()) { //Get all additional modifiers
 				if(!attr.getKey().equals(attributeName)) continue;
+				tc.appendSibling(new StringTextComponent(" "));	
 				if(attr.getValue().getOperation().equals(AttributeModifier.Operation.ADDITION)) {
 					value += attr.getValue().getAmount();
 				}

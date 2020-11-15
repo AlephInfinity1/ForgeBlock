@@ -8,7 +8,7 @@ import java.util.List;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModEnchantments;
-import alephinfinity1.forgeblock.misc.event.ForgeBlockEventHooks;
+import alephinfinity1.forgeblock.misc.event.FBEventHooks;
 import alephinfinity1.forgeblock.misc.event.PlayerCastSpellEvent;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.ManaProvider;
@@ -54,7 +54,7 @@ public class  AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if(worldIn.isRemote) return ActionResult.resultPass(playerIn.getHeldItem(handIn));
 		ItemStack stack = playerIn.getHeldItem(handIn);
-		PlayerCastSpellEvent event = ForgeBlockEventHooks.onPlayerCastSpell(playerIn, stack, this.getAbilityCost(stack, playerIn));
+		PlayerCastSpellEvent event = FBEventHooks.onPlayerCastSpell(playerIn, stack, this.getAbilityCost(stack, playerIn));
 		if(playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(() -> new NullPointerException()).consume(event.getManaConsumed()) && !event.isCanceled()) {
 			activateAbility(worldIn, playerIn, stack);
 			IMana mana = playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);

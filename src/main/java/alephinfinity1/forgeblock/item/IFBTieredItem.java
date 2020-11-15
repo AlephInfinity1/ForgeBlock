@@ -1,9 +1,13 @@
 package alephinfinity1.forgeblock.item;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Nullable;
 
+import alephinfinity1.forgeblock.init.ModStatsModifiers;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
+import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -33,13 +37,19 @@ public interface IFBTieredItem extends IFBItem {
 		tooltip.add(new StringTextComponent(tier.color.toString() + tooltip.get(0).getString()));
 		tooltip.remove(0);
 		boolean recombobulated = false;
-		if(stack.getTag() != null) recombobulated = (stack.getTag().getByte("Recombobulated") == 1);
+		if(stack.getTag() != null) recombobulated = this.isRecombobulated(stack);
 		String color = tier.color.toString();
 		String bold = TextFormatting.BOLD.toString();
 		String obfuscated = TextFormatting.OBFUSCATED.toString();
 		String reset = TextFormatting.RESET.toString();
 		if(!recombobulated) tooltip.add(new StringTextComponent(color + bold + tier.name.getString()));
 		else tooltip.add(new StringTextComponent(color + bold + obfuscated + "n " + reset + color + bold + tier.name.getString() + obfuscated + " n"));
+	}
+	
+	default boolean isRecombobulated(ItemStack stack) {
+		IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
+		if(Objects.isNull(itemMod)) return false;
+		else return itemMod.isPresent(ModStatsModifiers.RECOMBOBULATOR.get());
 	}
 
 }
