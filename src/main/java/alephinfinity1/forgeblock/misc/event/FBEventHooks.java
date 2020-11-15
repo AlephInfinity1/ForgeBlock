@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
-public class ForgeBlockEventHooks {
+public class FBEventHooks {
 
 	public static double onPlayerSkillXPGain(PlayerEntity player, SkillType type, double amount) {
 		SkillXPGainEvent event = new SkillXPGainEvent(player, type, amount);
@@ -19,5 +19,11 @@ public class ForgeBlockEventHooks {
 		@SuppressWarnings("unused")
 		boolean canceled = MinecraftForge.EVENT_BUS.post(event);
 		return event;
+	}
+	
+	public static int onPlayerSkillLevelUp(PlayerEntity player, SkillType type, int prevLevel, int newLevel) {
+		SkillLevelUpEvent event = new SkillLevelUpEvent(player, type, prevLevel, newLevel);
+		MinecraftForge.EVENT_BUS.post(event);
+		return event.getNewLevel();
 	}
 }

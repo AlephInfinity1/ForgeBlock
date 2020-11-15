@@ -38,7 +38,7 @@ public class SkillData {
 	}
 	
 	public double getProgressPercentage() {
-		if(level < 50) {
+		if(level < skill.getMaxLevel()) {
 			return progress / skill.getXPForLevel(level);
 		} else {
 			return 0;
@@ -55,7 +55,7 @@ public class SkillData {
 			progress -= skill.getXPForLevel(level);
 			++level;
 		}
-		level = MathHelper.clamp(level, 0, 50);
+		level = MathHelper.clamp(level, 0, skill.getMaxLevel());
 		return flag;
 	}
 	

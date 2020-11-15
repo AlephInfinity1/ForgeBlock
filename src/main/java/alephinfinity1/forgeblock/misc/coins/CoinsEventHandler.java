@@ -1,6 +1,7 @@
 package alephinfinity1.forgeblock.misc.coins;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 import alephinfinity1.forgeblock.entity.IFBEntity;
 import alephinfinity1.forgeblock.network.CoinsUpdatePacket;
@@ -37,11 +38,12 @@ public class CoinsEventHandler {
 				Entity e = event.getSource().getTrueSource();
 				if(!(e instanceof PlayerEntity)) return;
 				PlayerEntity player = (PlayerEntity) e;
-				ICoins coins = player.getCapability(CoinsProvider.COINS_CAPABILITY).orElseThrow(NullPointerException::new);
-				if(event.getEntity() instanceof IFBEntity)
-					coins.add(((IFBEntity) event.getEntity()).getCoins());
-				
-				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new CoinsUpdatePacket(coins.getCoins()));
+				ICoins coins = player.getCapability(CoinsProvider.COINS_CAPABILITY).orElse(null);
+				if(Objects.nonNull(coins)) {
+					if(event.getEntity() instanceof IFBEntity)
+						coins.add(((IFBEntity) event.getEntity()).getCoins());
+					FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new CoinsUpdatePacket(coins.getCoins()));
+				}
 			}
 		}
 	}

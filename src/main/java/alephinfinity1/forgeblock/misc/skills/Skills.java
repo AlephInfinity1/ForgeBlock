@@ -23,6 +23,7 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.misc.CompareTuple;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
@@ -115,8 +116,12 @@ public class Skills implements ISkills {
 	}
 
 	@Override
-	public void addXP(SkillType skill, double amount) {
+	@Deprecated
+	public CompareTuple<Integer> addXP(SkillType skill, double amount) {
+		int prevLevel = this.getLevel(skill);
 		data.get(skill).addXP(amount);
+		int newLevel = this.getLevel(skill);
+		return new CompareTuple<Integer>(prevLevel, newLevel);
 	}
 
 	@Override

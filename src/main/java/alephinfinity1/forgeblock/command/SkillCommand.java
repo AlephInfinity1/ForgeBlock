@@ -78,6 +78,7 @@ public class SkillCommand {
 				);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private static int addSkillExperience(CommandSource source, Collection<? extends ServerPlayerEntity> targets, SkillType skillType, int amount, boolean levels) throws CommandSyntaxException {
 		
 		int i = 0; //Success count
@@ -91,7 +92,7 @@ public class SkillCommand {
 		} else {
 			for(ServerPlayerEntity player : targets) {
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
-				skills.addXP(skillType, amount);
+				skills.addXP(skillType, amount); //Use of addXP accepted here, since event shouldn't be updated.
 				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType)));
 				++i;
 			}
@@ -115,7 +116,7 @@ public class SkillCommand {
 		
 		int i = 0; //Success count
 		if(levels) {
-			if(amount < 0 || amount > 50) throw INVALID_LEVEL.create();
+			if(amount < 0 || amount > skillType.getMaxLevel()) throw INVALID_LEVEL.create();
 			for(ServerPlayerEntity player : targets) {
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
 				skills.setLevel(skillType, amount);

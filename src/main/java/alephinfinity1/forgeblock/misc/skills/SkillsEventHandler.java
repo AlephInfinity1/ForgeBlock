@@ -1,11 +1,16 @@
 package alephinfinity1.forgeblock.misc.skills;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.entity.IFBEntity;
-import alephinfinity1.forgeblock.misc.event.ForgeBlockEventHooks;
+import alephinfinity1.forgeblock.misc.coins.CoinsProvider;
+import alephinfinity1.forgeblock.misc.coins.ICoins;
+import alephinfinity1.forgeblock.misc.event.FBEventHooks;
+import alephinfinity1.forgeblock.misc.event.SkillLevelUpEvent;
 import alephinfinity1.forgeblock.misc.event.SkillXPGainEvent;
+import alephinfinity1.forgeblock.network.CoinsUpdatePacket;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.SkillUpdatePacket;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -52,10 +57,11 @@ public class SkillsEventHandler {
 				Entity e = event.getSource().getTrueSource();
 				if(!(e instanceof PlayerEntity)) return;
 				PlayerEntity player = (PlayerEntity) e;
-				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElse(null);
+				if(Objects.isNull(skills)) return;
 				if(event.getEntity() instanceof IFBEntity)
-					skills.addXP(SkillType.COMBAT, 
-							ForgeBlockEventHooks.onPlayerSkillXPGain(player, SkillType.COMBAT, ((IFBEntity) event.getEntity()).getCombatXP()));
+					SkillsHelper.addXP(player, SkillType.COMBAT, 
+							FBEventHooks.onPlayerSkillXPGain(player, SkillType.COMBAT, ((IFBEntity) event.getEntity()).getCombatXP()));
 				
 				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SkillUpdatePacket(skills.getCompoundNBTFor(SkillType.COMBAT)));
 			}
@@ -181,5 +187,16 @@ public class SkillsEventHandler {
 		if(multiplier < 0.0D) multiplier = 0.0D;
 		
 		event.setAmount(event.getAmount() * multiplier / 100.0D);
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerLevelUp(SkillLevelUpEvent event) {
+		PlayerEntity player = event.getPlayer();
+		ICoins coins = player.getCapability(CoinsProvider.COINS_CAPABILITY).orElse(null);
+		if(Objects.isNull(coins)) return;
+		for(int i = event.getPrevLevel() + 1; i <= event.getNewLevel(); i++) {
+			coins.add(event.getType().getCoinsRewardUponReachingLevel(i));
+		}
+		FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()), new CoinsUpdatePacket(coins.getCoins()));
 	}
 }

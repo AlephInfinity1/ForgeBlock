@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.google.common.collect.Multimap;
 
+import alephinfinity1.forgeblock.misc.CompareTuple;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.nbt.CompoundNBT;
 
@@ -66,7 +67,19 @@ public interface ISkills {
 	 * @return double, XP needed to level up to the next level.
 	 */
 	public double getXPNeededToLevelUp(SkillType skill);
-	public void addXP(SkillType skill, double amount);
+	
+	/**
+	 * Adds XP to a specific skill. Returns a CompareTuple<Integer> in order to trigger FBEventHooks#onPlayerSkillLevelUp.
+	 * 
+	 * @deprecated Use {@link SkillsHelper#addXP(net.minecraft.entity.player.PlayerEntity, SkillType, double)} instead.
+	 * It supports updating Skill levels.
+	 * 
+	 * @param skill SkillType
+	 * @param amount XP to be added
+	 * @return A CompareTuple<Integer>, usage described above.
+	 */
+	@Deprecated
+	public CompareTuple<Integer> addXP(SkillType skill, double amount);
 	public void setLevel(SkillType skill, int level);
 	public void setProgress(SkillType skill, double progress);
 	
