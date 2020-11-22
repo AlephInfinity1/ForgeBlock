@@ -11,6 +11,7 @@ import alephinfinity1.forgeblock.enchantment.GiantKillerEnchantment;
 import alephinfinity1.forgeblock.enchantment.GrowthEnchantment;
 import alephinfinity1.forgeblock.enchantment.LifeStealEnchantment;
 import alephinfinity1.forgeblock.enchantment.LuckEnchantment;
+import alephinfinity1.forgeblock.enchantment.OneForAllEnchantment;
 import alephinfinity1.forgeblock.enchantment.ProtectionEnchantment;
 import alephinfinity1.forgeblock.enchantment.ScavengerEnchantment;
 import alephinfinity1.forgeblock.enchantment.SmeltingTouchEnchantment;
@@ -46,5 +47,6 @@ public class ModEnchantments {
 	public static final RegistryObject<Enchantment> VAMPIRISM = ENCHANTMENTS.register("vampirism", () -> new VampirismEnchantment());
 	
 	public static final RegistryObject<Enchantment> ULTIMATE_WISE = ENCHANTMENTS.register("ultimate_wise", () -> new UltimateWiseEnchantment());
+	public static final RegistryObject<Enchantment> ONE_FOR_ALL = ENCHANTMENTS.register("one_for_all", () -> new OneForAllEnchantment());
 
 }

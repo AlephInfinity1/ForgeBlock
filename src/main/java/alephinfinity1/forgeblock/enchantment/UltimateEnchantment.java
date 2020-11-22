@@ -7,7 +7,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 /*
  * An ultimate enchantment.
  */
-public class UltimateEnchantment extends Enchantment {
+public abstract class UltimateEnchantment extends Enchantment {
 
 	protected UltimateEnchantment(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots) {
 		super(rarityIn, typeIn, slots);
@@ -18,7 +18,7 @@ public class UltimateEnchantment extends Enchantment {
 	 */
 	@Override
 	protected boolean canApplyTogether(Enchantment ench) {
-		return !(ench instanceof UltimateEnchantment);
+		return (!(ench instanceof UltimateEnchantment) && super.canApplyTogether(ench));
 	}
 
 }

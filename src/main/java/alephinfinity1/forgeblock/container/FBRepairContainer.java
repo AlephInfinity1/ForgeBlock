@@ -1,7 +1,9 @@
 package alephinfinity1.forgeblock.container;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModStatsModifiers;
 import alephinfinity1.forgeblock.item.HotPotatoBookItem;
 import alephinfinity1.forgeblock.item.RecombobulatorItem;
@@ -20,7 +22,7 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.text.StringTextComponent;
 
 public class FBRepairContainer extends RepairContainer {
-	
+
 	private static final int MAX_HPB = 10;
 	private static final int MAX_FUMING = 5;
 
@@ -44,7 +46,7 @@ public class FBRepairContainer extends RepairContainer {
 			this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
 			this.maximumCost.set(0);
 			return;
-		} else if(itemstack2.getItem() instanceof HotPotatoBookItem) { //Hot potato book handling
+		} else if (itemstack2.getItem() instanceof HotPotatoBookItem) { //Hot potato book handling
 			ItemStack itemstack1 = itemstack.copy();
 			IItemModifiers im = itemstack1.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
 			if(im == null) { //If no IItemModifiers is present, the item is confirmed to be unapplicable.
@@ -97,7 +99,7 @@ public class FBRepairContainer extends RepairContainer {
 			}
 			this.outputSlot.setInventorySlotContents(0, itemstack1);
 			this.detectAndSendChanges();
-		} else if(itemstack2.getItem() instanceof WoodSingularityItem) { //Wood singularity handling.
+		} else if (itemstack2.getItem() instanceof WoodSingularityItem) { //Wood singularity handling.
 			//ForgeBlock.LOGGER.debug("WoodSingularity placed in anvil slot 2!");
 			ItemStack itemstack1 = itemstack.copy();
 			IItemModifiers im = itemstack1.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
@@ -120,7 +122,7 @@ public class FBRepairContainer extends RepairContainer {
 			}
 			this.outputSlot.setInventorySlotContents(0, itemstack1);
 			this.detectAndSendChanges();
-		} else if(itemstack2.getItem() instanceof RecombobulatorItem) { //Wood singularity handling.
+		} else if (itemstack2.getItem() instanceof RecombobulatorItem) { //Wood singularity handling.
 			//ForgeBlock.LOGGER.debug("WoodSingularity placed in anvil slot 2!");
 			ItemStack itemstack1 = itemstack.copy();
 			IItemModifiers im = itemstack1.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
@@ -142,7 +144,7 @@ public class FBRepairContainer extends RepairContainer {
 				}
 			}
 			this.outputSlot.setInventorySlotContents(0, itemstack1);
-			this.detectAndSendChanges();
+			this.detectAndSendChanges();	
 		} else { //If not mod-specific action, return to vanilla handling.
 			ItemStack itemstack1 = itemstack.copy();
 
@@ -287,23 +289,49 @@ public class FBRepairContainer extends RepairContainer {
          }
 			 */
 
-			 if (!itemstack1.isEmpty()) {
-				 int k2 = itemstack1.getRepairCost();
-				 if (!itemstack2.isEmpty() && k2 < itemstack2.getRepairCost()) {
-					 k2 = itemstack2.getRepairCost();
-				 }
+			if (!itemstack1.isEmpty()) {
+				int k2 = itemstack1.getRepairCost();
+				if (!itemstack2.isEmpty() && k2 < itemstack2.getRepairCost()) {
+					k2 = itemstack2.getRepairCost();
+				}
 
-				 if (k != i || k == 0) {
-					 k2 = getNewRepairCost(k2);
-				 }
+				if (k != i || k == 0) {
+					k2 = getNewRepairCost(k2);
+				}
 
-				 itemstack1.setRepairCost(k2);
-				 EnchantmentHelper.setEnchantments(map, itemstack1);
-			 }
+				itemstack1.setRepairCost(k2);
+				EnchantmentHelper.setEnchantments(map, itemstack1);
+			}
+			
+			//Custom One For All handling, removes every other enchantment.
+			if (FBRepairContainer.hasOneForAll(itemstack2)) {
+				int telekinesisLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.TELEKINESIS.get(), itemstack1);
+				Map<Enchantment, Integer> enchData = new HashMap<>();
+				if(telekinesisLevel != 0) {
+					enchData.put(ModEnchantments.TELEKINESIS.get(), telekinesisLevel);
+				}
+				enchData.put(ModEnchantments.ONE_FOR_ALL.get(), 1);
+				EnchantmentHelper.setEnchantments(enchData, itemstack1);
+			}
 
-			 this.outputSlot.setInventorySlotContents(0, itemstack1);
-			 this.detectAndSendChanges();
+			this.outputSlot.setInventorySlotContents(0, itemstack1);
+			this.detectAndSendChanges();
 		}
+	}
+
+	/**
+	 * Checks if an EnchantedBookItem ItemStack contains the enchantment One For All.
+	 * @param stack The enchanted book
+	 * @return Whether 'One For All' is contained in the book.
+	 */
+	public static boolean hasOneForAll(ItemStack stack) {
+		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
+		for (Enchantment enchantment : enchantments.keySet()) {
+			if (enchantment.equals(ModEnchantments.ONE_FOR_ALL.get())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

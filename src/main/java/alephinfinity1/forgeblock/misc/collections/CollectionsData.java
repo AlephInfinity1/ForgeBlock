@@ -8,17 +8,17 @@ import net.minecraft.item.ItemStack;
 
 public class CollectionsData implements ICollectionsData {
 	
-	private Map<Collection, Integer> data = new HashMap<>();
+	private Map<FBCollection, Integer> data = new HashMap<>();
 
 	@Override
-	public Map<Collection, Integer> getCollections() {
+	public Map<FBCollection, Integer> getCollections() {
 		return data;
 	}
 
 	@Override
 	public void collectItem(ItemStack stack, PlayerEntity player) {
-		for(Map.Entry<Collection, Integer> entry : data.entrySet()) {
-			Collection col = entry.getKey();
+		for(Map.Entry<FBCollection, Integer> entry : data.entrySet()) {
+			FBCollection col = entry.getKey();
 			if(col.getItemStackValue(stack) != 0) {
 				int value = col.getItemStackValue(stack);
 				col.applyRewards(player, entry.getValue(), entry.getValue() + value);
@@ -29,18 +29,27 @@ public class CollectionsData implements ICollectionsData {
 	}
 
 	@Override
-	public int getAmount(Collection collection) {
-		return data.get(collection);
+	public int getAmount(FBCollection fBCollection) {
+		return data.get(fBCollection);
 	}
 
 	@Override
-	public int getTier(Collection collection) {
-		return collection.getTier(data.get(collection));
+	public int getTier(FBCollection fBCollection) {
+		return fBCollection.getTier(data.get(fBCollection));
 	}
 
 	@Override
-	public void setAmount(Collection collection, int amount) {
-		data.put(collection, amount);
+	public void setAmount(FBCollection fBCollection, int amount) {
+		data.put(fBCollection, amount);
+	}
+
+	/**
+	 * Deep copies the map.
+	 */
+	@Override
+	public void setCollections(Map<FBCollection, Integer> map) {	
+		this.data.clear();
+		this.data.putAll(map);
 	}
 
 }

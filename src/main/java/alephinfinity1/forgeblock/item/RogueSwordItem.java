@@ -25,7 +25,7 @@ public class RogueSwordItem extends FBSwordItem {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		UUID uuid = UUID.randomUUID();
 		playerIn.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(new AttributeModifier(uuid, "Rogue Sword Speed Boost", 0.02, Operation.ADDITION));
-		TickHandler.attModifierExpiry.put(new Tuple<LivingEntity, UUID>(playerIn, uuid), TickHandler.tickElapsed + 600);
+		TickHandler.attModifierExpiry.put(new Tuple<LivingEntity, UUID>(playerIn, uuid), TickHandler.ticksElapsed + 600);
 		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 	}
 

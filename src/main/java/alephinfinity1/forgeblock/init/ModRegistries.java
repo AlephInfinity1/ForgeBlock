@@ -1,6 +1,7 @@
 package alephinfinity1.forgeblock.init;
 
 import alephinfinity1.forgeblock.ForgeBlock;
+import alephinfinity1.forgeblock.misc.collections.FBCollection;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.stats_modifier.AbstractStatsModifier;
 import net.minecraft.util.ResourceLocation;
@@ -16,6 +17,7 @@ public class ModRegistries {
 	
 	public static IForgeRegistry<Reforge> REFORGE = null;
 	public static IForgeRegistry<AbstractStatsModifier> STATS_MODIFIER = null;
+	public static IForgeRegistry<FBCollection> COLLECTION = null;
 	
 	@SubscribeEvent
 	public static void registerCustomRegistries(RegistryEvent.NewRegistry event) {
@@ -30,6 +32,12 @@ public class ModRegistries {
 				.setType(AbstractStatsModifier.class);
 		statsModifier.create();
 		STATS_MODIFIER = GameRegistry.findRegistry(AbstractStatsModifier.class);
+		
+		RegistryBuilder<FBCollection> collection = new RegistryBuilder<FBCollection>()
+				.setName(new ResourceLocation(ForgeBlock.MOD_ID, "collection"))
+				.setType(FBCollection.class);
+		collection.create();
+		COLLECTION = GameRegistry.findRegistry(FBCollection.class);
 	}
 
 }

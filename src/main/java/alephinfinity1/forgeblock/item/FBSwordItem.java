@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
+import com.google.common.util.concurrent.AtomicDouble;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
@@ -42,8 +43,8 @@ import net.minecraft.world.World;
 
 public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeableItem {
 
-	private final FBTier tier;
-	private final Multimap<String, AttributeModifier> attributes;
+	protected final FBTier tier;
+	protected final Multimap<String, AttributeModifier> attributes;
 	
 	protected static final UUID STRENGTH_MODIFIER = UUID.fromString("0a8af9f9-7880-40af-a8ff-17e6d98ec482");
 	protected static final UUID CRIT_CHANCE_MODIFIER = UUID.fromString("5265014e-5ab6-4e86-a9a5-7c9117818fbb");
@@ -54,6 +55,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	protected static final UUID WOOD_SINGULARITY_MODIFIER = UUID.fromString("fae06830-e6e7-4df2-927b-2beaa3affb27");
 	
 	protected static final UUID CRITICAL_ENCHANTMENT_MODIFIER = UUID.fromString("ab2c9437-5c8c-4986-8034-4a85dd261c54");
+	protected static final UUID ONE_FOR_ALL_MODIFIER = UUID.fromString("4eb03930-7e1b-4240-8796-a7b3752251f0");
 	
 	//Super constructor, highly recommend not using
 	@Deprecated
@@ -88,16 +90,28 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	
 	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot, ItemStack stack) {
-		if(equipmentSlot != EquipmentSlotType.MAINHAND) return super.getAttributeModifiers(equipmentSlot);
+		if (equipmentSlot != EquipmentSlotType.MAINHAND) return super.getAttributeModifiers(equipmentSlot);
 		Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.putAll(super.getAttributeModifiers(equipmentSlot, stack));
 		builder.putAll(this.getReforgeModifiers(stack));
 		
 		int criticalLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.CRITICAL.get(), stack);
-		if(criticalLevel != 0) builder.put(FBAttributes.CRIT_DAMAGE.getName(), new AttributeModifier(CRITICAL_ENCHANTMENT_MODIFIER, "Crit enchant modifier", 10.0D * criticalLevel, Operation.ADDITION));
+		if (criticalLevel != 0) builder.put(FBAttributes.CRIT_DAMAGE.getName(), new AttributeModifier(CRITICAL_ENCHANTMENT_MODIFIER, "Crit enchant modifier", 10.0D * criticalLevel, Operation.ADDITION));
+		
+		int oneForAllLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.ONE_FOR_ALL.get(), stack);
+		if (oneForAllLevel != 0) {
+			AtomicDouble weaponDamage = new AtomicDouble(0.0D);
+			builder.build().forEach((attrName, modifier) -> {
+				if (attrName.equals(SharedMonsterAttributes.ATTACK_DAMAGE.getName())
+						&& modifier.getOperation().equals(Operation.ADDITION)) {
+					weaponDamage.getAndAdd(modifier.getAmount());
+				}
+			});
+			builder.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ONE_FOR_ALL_MODIFIER, "1FA enchant modifier", weaponDamage.get() * 2.1, Operation.ADDITION));
+		}
 		
 		IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
-		if(itemMod != null) {
+		if (itemMod != null) {
 			builder.putAll(itemMod.getModifiers(stack));
 		}
 		
@@ -214,7 +228,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 
 	@Override
 	public void setReforge(Reforge reforge, ItemStack stack) {
-		stack.getTag().putString("Reforge", ModRegistries.REFORGE.getKey(reforge).toString());
+		stack.getOrCreateTag().putString("Reforge", ModRegistries.REFORGE.getKey(reforge).toString());
 	}
 
 	@Override

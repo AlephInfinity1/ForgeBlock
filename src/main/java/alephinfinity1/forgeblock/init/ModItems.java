@@ -6,6 +6,7 @@ import alephinfinity1.forgeblock.item.AspectOfTheDragonsItem;
 import alephinfinity1.forgeblock.item.AspectOfTheEndItem;
 import alephinfinity1.forgeblock.item.AspectOfTheEnderItem;
 import alephinfinity1.forgeblock.item.BlazeArmorItem;
+import alephinfinity1.forgeblock.item.CrownOfGreedItem;
 import alephinfinity1.forgeblock.item.CustomSwordItem;
 import alephinfinity1.forgeblock.item.EndSwordItem;
 import alephinfinity1.forgeblock.item.FBArmorItem;
@@ -26,6 +27,8 @@ import alephinfinity1.forgeblock.item.OneSwordItem;
 import alephinfinity1.forgeblock.item.ProtectorDragonArmorItem;
 import alephinfinity1.forgeblock.item.RecombobulatorItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
+import alephinfinity1.forgeblock.item.ShadowFuryItem;
+import alephinfinity1.forgeblock.item.SilentDeathItem;
 import alephinfinity1.forgeblock.item.SpiderSwordItem;
 import alephinfinity1.forgeblock.item.StonkItem;
 import alephinfinity1.forgeblock.item.StrongDragonArmorItem;
@@ -117,6 +120,8 @@ public class ModItems {
 	public static final RegistryObject<Item> SPIDER_SWORD = ITEMS.register("spider_sword", () -> new SpiderSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 30, 0, 0, 0));
 	public static final RegistryObject<Item> END_SWORD = ITEMS.register("end_sword", () -> new EndSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.UNCOMMON, 35, 0, 0, 0));
 	public static final RegistryObject<Item> FANCY_SWORD = ITEMS.register("fancy_sword", () -> new FancySwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
+	public static final RegistryObject<Item> SHADOW_FURY = ITEMS.register("shadow_fury", () -> new ShadowFuryItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(300, 125, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, "Shadow Fury Modifier", ShadowFuryItem.SHADOW_FURY_MODIFIER)));
+	public static final RegistryObject<Item> SILENT_DEATH = ITEMS.register("silent_death", () -> new SilentDeathItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.RARE, 130, 50, 1, 10));
 
 	public static final RegistryObject<Item> ASPECT_OF_THE_ENDER = ITEMS.register("aspect_of_the_ender", () -> new AspectOfTheEnderItem(new Item.Properties(), FBTier.EPIC, 175, 100, 0, 0));
 	public static final RegistryObject<Item> CUSTOM_SWORD = ITEMS.register("custom_sword", () -> new CustomSwordItem());
@@ -284,6 +289,10 @@ public class ModItems {
 	public static final RegistryObject<Item> FROZEN_BLAZE_CHESTPLATE = ITEMS.register("frozen_blaze_chestplate", () -> new FrozenBlazeArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 40, 0, 0, 0, 0, 0, 180, 2, 0, 0, 0, 0)));
 	public static final RegistryObject<Item> FROZEN_BLAZE_LEGGINGS = ITEMS.register("frozen_blaze_leggings", () -> new FrozenBlazeArmorItem(EquipmentSlotType.LEGS, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 40, 0, 0, 0, 0, 0, 140, 2, 0, 0, 0, 0)));
 	public static final RegistryObject<Item> FROZEN_BLAZE_BOOTS = ITEMS.register("frozen_blaze_boots", () -> new FrozenBlazeArmorItem(EquipmentSlotType.FEET, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 40, 0, 0, 0, 0, 0, 100, 2, 0, 0, 0, 0)));
+	
+	public static final RegistryObject<Item> CROWN_OF_GREED = ITEMS.register("crown_of_greed", () -> new CrownOfGreedItem(EquipmentSlotType.HEAD, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.LEGENDARY, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 130, 90, 0, 0, 0, 4, 0, 0)));
+	public static final RegistryObject<Item> BLAZE_HAT = ITEMS.register("blaze_hat", () -> new FBArmorItem(EquipmentSlotType.HEAD, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, ModifierHelper.modifierMapFromDoubles(0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)));
+	public static final RegistryObject<Item> CHICKEN_HEAD = ITEMS.register("chicken_head", () -> new FBArmorItem(EquipmentSlotType.HEAD, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_ARMOR), FBTier.COMMON, ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0)));
 
 	/*
 	 * Potion

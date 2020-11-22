@@ -19,8 +19,11 @@ import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.item.BlazeArmorItem;
 import alephinfinity1.forgeblock.item.FrozenBlazeArmorItem;
 import alephinfinity1.forgeblock.item.RogueSwordItem;
+import alephinfinity1.forgeblock.item.ShadowFuryItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.DeathScreen;
+import net.minecraft.command.arguments.EntityAnchorArgument;
+import net.minecraft.command.arguments.LocalLocationArgument;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Pose;
@@ -52,7 +55,7 @@ public class TickHandler {
 	/**
 	 * The number of ticks elapsed.
 	 */
-	public static long tickElapsed = 0;
+	public static long ticksElapsed = 0;
 	
 	/**
 	 * All entities that are newly spawned.
@@ -119,6 +122,12 @@ public class TickHandler {
 	 * If active, Rogue Sword item ability will give half the bonus speed instead.
 	 */
 	public static Map<LivingEntity, Long> rogueActive = new ConcurrentHashMap<>();
+	
+	/**
+	 * Scheduled attacks from {@link ShadowFuryItem}'s ability.
+	 */
+	public static Map<Tuple<LivingEntity, LivingEntity>, Long> shadowFuryTarget = new ConcurrentHashMap<>();
+	
 	public static final Minecraft minecraft = Minecraft.getInstance();
 	
 	@SubscribeEvent
@@ -132,13 +141,13 @@ public class TickHandler {
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		if(event.phase == Phase.START && event.player instanceof ServerPlayerEntity) {
-			++tickElapsed;
+			++ticksElapsed;
 			PlayerEntity player = event.player;
-			if(tickElapsed % 40 == 0) {
+			if(ticksElapsed % 40 == 0) {
 				player.heal((float) (player.getMaxHealth() / 50.0D));
 			}
 			if(healthDirty.get(player) != null) {
-				if(healthDirty.get(player) - tickElapsed < -5) {
+				if(healthDirty.get(player) - ticksElapsed < -5) {
 					player.heal(Float.MAX_VALUE);
 					healthDirty.remove(player);
 				}
@@ -158,7 +167,7 @@ public class TickHandler {
 		if(event.phase == Phase.START) return; 
 		
 		//Complex operation, so updated every 5 seconds.
-		if(tickElapsed % 100 == 0) {
+		if(ticksElapsed % 100 == 0) {
 			
 			//To prevent ConcurrentModificationException. All operations are done in one thread.
 			allEntities.addAll(allEntitiesPre);
@@ -191,7 +200,7 @@ public class TickHandler {
 		
 		if(!damageDisplay.isEmpty()) {
 			for(Map.Entry<ArmorStandEntity, Long> entry : damageDisplay.entrySet()) {
-				if(tickElapsed - entry.getValue() > 20) {
+				if(ticksElapsed - entry.getValue() > 20) {
 					entry.getKey().remove();
 				}
 			}
@@ -200,14 +209,14 @@ public class TickHandler {
 			Iterator<Triple<LivingEntity, Double, Long>> itr = damageIndicatorFix.iterator();
 			while(itr.hasNext()) {
 				Triple<LivingEntity, Double, Long> entry = itr.next(); //Using iterators to fix java.util.ConcurrentModificationException. See https://www.cnblogs.com/dolphin0520/p/3933551.html
-				if(tickElapsed - entry.getRight() > 0) {
+				if(ticksElapsed - entry.getRight() > 0) {
 					entry.getLeft().setHealth((float) (entry.getLeft().getHealth() - entry.getMiddle()));
 					itr.remove();
 				}
 			}
 		}
 
-		if(tickElapsed % 20 == 0) {
+		if(ticksElapsed % 20 == 0) {
 			Set<LivingEntity> entities = isWearingBlazeArmor.keySet();
 			Iterator<LivingEntity> itr = entities.iterator();
 			while(itr.hasNext()) {
@@ -228,7 +237,7 @@ public class TickHandler {
 				ForgeBlock.LOGGER.log(Level.TRACE, "Value: " + isWearingBlazeArmor.get(living).toString());
 			}
 		}
-		if(tickElapsed % 20 == 0) {
+		if(ticksElapsed % 20 == 0) {
 			Set<LivingEntity> entities = isWearingFrozenBlazeArmor.keySet();
 			Iterator<LivingEntity> itr = entities.iterator();
 			while(itr.hasNext()) {
@@ -255,7 +264,7 @@ public class TickHandler {
 			Iterator<Tuple<LivingEntity, DamageSource>> itr = entries.iterator();
 			while(itr.hasNext()) {
 				Tuple<LivingEntity, DamageSource> living = itr.next();
-				if(tickElapsed - ferocitySchedule.get(living) >= 5) {
+				if(ticksElapsed - ferocitySchedule.get(living) >= 5) {
 					living.getA().attackEntityFrom(living.getB(), 2.0f); 
 					//No need to worry about amount, DamageHandler will take care of that. Do not set to 1.0f though as that would be confused with sweep attack
 					itr.remove();
@@ -269,7 +278,7 @@ public class TickHandler {
 			Iterator<Tuple<LivingEntity, UUID>> itr = entries.iterator();
 			while(itr.hasNext()) {
 				Tuple<LivingEntity, UUID> living = itr.next();
-				if(tickElapsed >= attModifierExpiry.get(living)) {
+				if(ticksElapsed >= attModifierExpiry.get(living)) {
 					Collection<IAttributeInstance> attributes = living.getA().getAttributes().getAllAttributes();
 					for(IAttributeInstance attribute : attributes) {
 						attribute.removeModifier(living.getB());
@@ -285,17 +294,46 @@ public class TickHandler {
 			Iterator<LivingEntity> itr = entries.iterator();
 			while(itr.hasNext()) {
 				LivingEntity living = itr.next();
-				if(tickElapsed >= rogueActive.get(living)) {
+				if(ticksElapsed >= rogueActive.get(living)) {
 					itr.remove();
 					continue;
+				}
+			}
+		}
+		
+		if(!shadowFuryTarget.isEmpty()) {
+			Set<Map.Entry<Tuple<LivingEntity, LivingEntity>, Long>> entries = shadowFuryTarget.entrySet();
+			Iterator<Map.Entry<Tuple<LivingEntity, LivingEntity>, Long>> itr = entries.iterator();
+			while(itr.hasNext()) {
+				Map.Entry<Tuple<LivingEntity, LivingEntity>, Long> entry = itr.next();
+				if(ticksElapsed >= entry.getValue()) {
+					Tuple<LivingEntity, LivingEntity> targets = entry.getKey();
+					LivingEntity attacker = targets.getA();
+					LivingEntity victim = targets.getB();
+					Vec3d pos = new LocalLocationArgument(0.0D, 0.0D, -2.0D).getPosition(victim.getCommandSource()); //A hack using LocalLocationArgument to teleport the player 2 blocks behind the victim.
+					attacker.setPositionAndRotation(pos.x, pos.y, pos.z, victim.getYaw(0.0f), victim.getPitch(0.0f));
+					attacker.lookAt(EntityAnchorArgument.Type.EYES, victim.getPositionVec());
+					attacker.setPositionAndUpdate(pos.x, pos.y, pos.z);
+					
+					//Prevents the attacker from being stuck in blocks.
+					while(!attacker.getEntityWorld().isAirBlock(attacker.getPosition())) {
+						attacker.setPositionAndUpdate(attacker.getPosX(), attacker.getPosY() + 1, attacker.getPosZ());
+					}
+					
+					if(targets.getA() instanceof PlayerEntity) {
+						((PlayerEntity) targets.getA()).attackTargetEntityWithCurrentItem(targets.getB()); //Attacks the target with current item. This is to display the attack animation properly.
+					} else {
+						targets.getB().attackEntityFrom(DamageSource.causeMobDamage(targets.getA()), 1.0f);
+					}
+					
+					itr.remove();
 				}
 			}
 		}
 	}
 	
 	/*
-	 * An extremely wonky attempt to fix MC-19690. Death screen still appears for a client tick.
-	 * XXX
+	 * XXX An extremely wonky attempt to fix MC-19690. Death screen still appears for a client tick. 
 	 */
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)

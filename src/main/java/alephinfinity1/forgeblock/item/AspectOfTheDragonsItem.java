@@ -35,7 +35,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class  AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem {
+public class AspectOfTheDragonsItem extends FBSwordItem implements IDamageAbilityItem {
 
 	public AspectOfTheDragonsItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn,
 			double critChanceIn, double critDamageIn) {
@@ -59,7 +59,7 @@ public class  AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem
 			activateAbility(worldIn, playerIn, stack);
 			IMana mana = playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
 			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn), new ManaUpdatePacket(mana.getMana()));
-			playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.useAbility.aotd").getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(event.getManaConsumed()) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"), true);
+			playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent(this.getUnlocalizedUseAbilityName()).getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(event.getManaConsumed()) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"), true);
 			return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 		}
 		playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.notEnoughMana").getString()), true);
@@ -78,8 +78,9 @@ public class  AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem
 		return list;
 	}
 
+	//XXX AotD ability behaves incorrectly as of now. Should be a cone instead of a cuboid.
 	@Override
-	public boolean activateAbility(World world, PlayerEntity player, ItemStack stack) {
+	public AbilityResultType activateAbility(World world, PlayerEntity player, ItemStack stack) {
 		AxisAlignedBB bound = new AxisAlignedBB(player.getPositionVector().add(player.getLookVec().rotateYaw(90.0f).rotatePitch(45.0f).scale(2).add(0, -5, 0)), player.getPositionVector().add(player.getLookVec().scale(8.0)).add(player.getLookVec().rotateYaw(90.0f).rotatePitch(45.0f).scale(-2).add(0, 5, 0)));
 		
 		/*
@@ -98,7 +99,7 @@ public class  AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem
 				
 		player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.PLAYERS, 1.0f, 1.0f);
 		player.getCooldownTracker().setCooldown(this, getCooldown(stack, player));
-		return true;
+		return AbilityResultType.SUCCESS;
 	}
 
 	@Override
@@ -117,18 +118,33 @@ public class  AspectOfTheDragonsItem extends FBSwordItem implements IAbilityItem
 	
 	public float getAbilityDamage(ItemStack stack, PlayerEntity player) {
 		if(player == null) return getAbilityDamage(stack);
-		return (float) (12000 * (1 + 0.001 * player.getAttribute(FBAttributes.INTELLIGENCE).getValue()));
+		return (float) (12000 * (1 + this.getDamageScaling(stack, player) * player.getAttribute(FBAttributes.INTELLIGENCE).getValue()));
 	}
 
 	@Override
 	public int getCooldown(ItemStack stack) {
-		return 10;
+		return 0;
 	}
 
 	@Override
 	public int getCooldown(ItemStack stack, PlayerEntity player) {
 		if(player == null) return getCooldown(stack);
 		return (int) (getCooldown(stack) * (1 - player.getAttribute(FBAttributes.COOLDOWN_REDUCTION).getValue() / 100.0d) - player.getAttribute(FBAttributes.RAW_COOLDOWN_REDUCTION).getValue());
+	}
+
+	@Override
+	public float getDamageScaling(ItemStack stack) {
+		return 0.001f;
+	}
+
+	@Override
+	public float getDamageScaling(ItemStack stack, PlayerEntity player) {
+		return 0.001f;
+	}
+
+	@Override
+	public String getUnlocalizedUseAbilityName() {	
+		return "text.forgeblock.useAbility.aotd";
 	}
 
 }

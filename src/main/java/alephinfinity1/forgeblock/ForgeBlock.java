@@ -8,6 +8,7 @@ import alephinfinity1.forgeblock.client.ClientEventBusSubscriber;
 import alephinfinity1.forgeblock.config.CustomModConfig;
 import alephinfinity1.forgeblock.discordRPC.DiscordRpc;
 import alephinfinity1.forgeblock.init.ModBlocks;
+import alephinfinity1.forgeblock.init.ModCollections;
 import alephinfinity1.forgeblock.init.ModContainerTypes;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
@@ -23,6 +24,9 @@ import alephinfinity1.forgeblock.init.ModStatsModifiers;
 import alephinfinity1.forgeblock.misc.coins.CoinsFactory;
 import alephinfinity1.forgeblock.misc.coins.CoinsStorage;
 import alephinfinity1.forgeblock.misc.coins.ICoins;
+import alephinfinity1.forgeblock.misc.collections.CollectionsDataFactory;
+import alephinfinity1.forgeblock.misc.collections.CollectionsDataStorage;
+import alephinfinity1.forgeblock.misc.collections.ICollectionsData;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.Mana;
 import alephinfinity1.forgeblock.misc.mana.ManaStorage;
@@ -77,6 +81,7 @@ public class ForgeBlock {
 		ModReforges.REFORGES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModStatsModifiers.STATS_MODIFIERS
 		.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModCollections.COLLECTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus()
 		.addListener(ClientEventBusSubscriber::onClientSetup);
@@ -96,6 +101,7 @@ public class ForgeBlock {
 		CapabilityManager.INSTANCE.register(ISkills.class, new SkillsStorage(), new SkillsFactory());
 		CapabilityManager.INSTANCE.register(ICoins.class, new CoinsStorage(), new CoinsFactory());
 		CapabilityManager.INSTANCE.register(IItemModifiers.class, new ItemModifiersStorage(), new ItemModifiersFactory());
+		CapabilityManager.INSTANCE.register(ICollectionsData.class, new CollectionsDataStorage(), new CollectionsDataFactory());
 		BrewingRecipeRegistrar.registerRecipes();
 
 		//Checks if this a client, if so start discordRCP, if not just do nothing.

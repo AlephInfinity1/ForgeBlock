@@ -18,7 +18,7 @@ public class ItemModifiersCapabilityHandler {
 		if(event.getCapabilities().get(ITEM_MODIFIERS_CAPABILITY) == null) {
 			ForgeBlock.LOGGER.warn("Item modifiers not successfully attached to item " + event.getObject().getDisplayName().getString());
 		} else {
-			ForgeBlock.LOGGER.trace("Item modifies attached successfully!");
+			ForgeBlock.LOGGER.trace("Item modifiers attached successfully!");
 		}
 	}
 

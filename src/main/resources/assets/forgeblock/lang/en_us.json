@@ -154,6 +154,11 @@
     "item.forgeblock.spider_sword": "Spider Sword",
     "item.forgeblock.end_sword": "End Sword",
     "item.forgeblock.fancy_sword": "Fancy Sword",
+    "item.forgeblock.shadow_fury": "Shadow Fury",
+    "item.forgeblock.crown_of_greed": "Crown of Greed",
+    "item.forgeblock.blaze_hat": "Blaze Hat",
+    "item.forgeblock.chicken_head": "Chicken Head",
+    "item.forgeblock.silent_death": "Silent Death",
     
     "item.forgeblock.lv1_zombie_spawn_egg": "Zombie (Lv1) Spawn Egg",
     "item.forgeblock.lapis_zombie_spawn_egg": "Lapis Zombie Spawn Egg",
@@ -310,7 +315,7 @@
     "misc.forgeblock.mana": "Mana",
     "text.forgeblock.mana_cost": "\u00A78Mana Cost: \u00A73%s",
     "text.forgeblock.intel_scaling": "\u00A78Intelligence Scaling: \u00A73%s",
-    "text.forgeblock.cooldown": "\u00A78Cooldown: \u00A73%s s",
+    "text.forgeblock.cooldown": "\u00A78Cooldown: \u00A73%ss",
     "misc.forgeblock.woodSingularity": "Thick",
     
     "text.forgeblock.dodge.environmental": "\u00A7f\u00A7lDODGE! \u00A77Dodged \u00A7c%1$s\u00A77 damage from environmental sources.",
@@ -455,6 +460,12 @@
     "text.forgeblock.sword_desc.end_1": "\u00A77Endermen, Endermites,",
     "text.forgeblock.sword_desc.end_2": "\u00A77and Ender Dragons.",
     
+    "text.forgeblock.sword_desc.shadowfury_0": "\u00A76Item Ability: Shadow Fury \u00A7e\u00A7lRIGHT CLICK",
+    "text.forgeblock.sword_desc.shadowfury_1": "\u00A77Rapidly teleports you to up to",
+    "text.forgeblock.sword_desc.shadowfury_2": "\u00A7b5\u00A77 enemies within \u00A7e12",
+    "text.forgeblock.sword_desc.shadowfury_3": "\u00A77blocks, rooting each of them",
+    "text.forgeblock.sword_desc.shadowfury_4": "\u00A77and allowing you to attack them.",
+    
     "text.forgeblock.armor_desc.lapis_0": "\u00A77Each piece of this armor grants",
     "text.forgeblock.armor_desc.lapis_1": "\u00A7a50%\u00A77 bonus experience when",
     "text.forgeblock.armor_desc.lapis_2": "\u00A77mining ores.",
@@ -496,10 +507,12 @@
     "text.forgeblock.armor_desc.superior_3": "\u00A77ability deals \u00A7a50%\u00A77 more damage.",
     
     "text.forgeblock.notEnoughMana": "\u00A7cNot enough mana!",
+    "text.forgeblock.noTarget": "\u00A7cNo available targets!",
     
     "text.forgeblock.useAbility.aote": "\u00A7aUsed \u00A76Instant Transmission\u00A7a!",
     "text.forgeblock.useAbility.strongaote": "\u00A7aUsed \u00A76Instant Transmission II\u00A7a!",
     "text.forgeblock.useAbility.aotd": "\u00A7aUsed \u00A76Dragon Rage\u00A7a!",
+    "text.forgeblock.useAbility.shadowfury": "\u00A7aUsed \u00A76Shadow Fury\u00A7a!",
     
     "text.forgeblock.xp_bottle_0": "\u00A77Smash it open to receive",
     "text.forgeblock.xp_bottle_1": "\u00A7a%1$s\u00A77–\u00A7a%2$s \u00A77experience!",

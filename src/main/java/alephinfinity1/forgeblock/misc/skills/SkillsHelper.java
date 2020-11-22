@@ -10,6 +10,10 @@ import net.minecraft.entity.player.PlayerEntity;
  * A collection of helper methods for viewing/manipulating player skills.
  */
 public class SkillsHelper {
+	
+	private SkillsHelper() {
+		throw new AssertionError("Class SkillsHelper should not be instantiated!");
+	}
 
 	public static ISkills getSkillsCap(PlayerEntity player) {
 		return player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);

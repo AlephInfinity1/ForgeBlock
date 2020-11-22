@@ -12,15 +12,15 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public enum SkillType {
-	FARMING(false, "farming", 50),
-	MINING(false, "mining", 50),
-	COMBAT(false, "combat", 50),
-	FORAGING(false, "foraging", 50),
-	FISHING(false, "fishing", 50),
-	ENCHANTING(false, "enchanting", 50),
-	ALCHEMY(false, "alchemy", 50),
-	TAMING(false, "taming", 50),
-	CARPENTRY(true, "carpentry", 50),
+	FARMING(false, "farming", 100),
+	MINING(false, "mining", 100),
+	COMBAT(false, "combat", 100),
+	FORAGING(false, "foraging", 100),
+	FISHING(false, "fishing", 100),
+	ENCHANTING(false, "enchanting", 100),
+	ALCHEMY(false, "alchemy", 100),
+	TAMING(false, "taming", 100),
+	CARPENTRY(true, "carpentry", 100),
 	RUNECRAFTING(true, "runecrafting", 25);
 	
 	private boolean isCosmetic;

@@ -18,7 +18,9 @@ public interface IAbilityItem {
 	/*
 	 * Returns whether the ability was successfully activated
 	 */
-	public boolean activateAbility(World world, PlayerEntity player, ItemStack stack);
+	public AbilityResultType activateAbility(World world, PlayerEntity player, ItemStack stack);
+	
+	public double getAbilityCost(ItemStack stack);
 	
 	public double getAbilityCost(ItemStack stack, PlayerEntity player);
 	
@@ -31,4 +33,6 @@ public interface IAbilityItem {
 	 * Player-specific version of getCooldown
 	 */
 	public int getCooldown(ItemStack stack, PlayerEntity player);
+	
+	public String getUnlocalizedUseAbilityName();
 }

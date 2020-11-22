@@ -33,7 +33,7 @@ public class ClientEventBusSubscriber {
 	public static final Minecraft mc = Minecraft.getInstance();
 
 	/**
-	 * The anvil register part is wonky. XXX
+	 * XXX The anvil register part is wonky.
 	 */
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
@@ -54,7 +54,7 @@ public class ClientEventBusSubscriber {
 		
 		//Screens
 		ScreenManager.FACTORIES.remove(ModContainerTypes.FB_ANVIL.get());
-		ScreenManager.FACTORIES.remove(ContainerType.ANVIL); //XXX
+		ScreenManager.FACTORIES.remove(ContainerType.ANVIL);
 		ScreenManager.registerFactory(ModContainerTypes.FB_ANVIL.get(), FBAnvilScreen::new);
 		ScreenManager.registerFactory(ContainerType.ANVIL, FBAnvilScreen::new);	
 	}

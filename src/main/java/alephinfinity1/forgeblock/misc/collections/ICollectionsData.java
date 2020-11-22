@@ -6,9 +6,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 public interface ICollectionsData {
-	public Map<Collection, Integer> getCollections();
+	public Map<FBCollection, Integer> getCollections();
+	public void setCollections(Map<FBCollection, Integer> map);
 	public void collectItem(ItemStack stack, PlayerEntity player);
-	public int getAmount(Collection collection);
-	public int getTier(Collection collection);
-	public void setAmount(Collection collection, int amount);
+	public int getAmount(FBCollection fBCollection);
+	public int getTier(FBCollection fBCollection);
+	public void setAmount(FBCollection fBCollection, int amount);
 }

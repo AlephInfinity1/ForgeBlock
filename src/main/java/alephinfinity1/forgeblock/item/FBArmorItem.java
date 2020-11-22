@@ -196,7 +196,7 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 
 	@Override
 	public void setReforge(Reforge reforge, ItemStack stack) {
-		stack.getTag().putString("Reforge", ModRegistries.REFORGE.getKey(reforge).toString());
+		stack.getOrCreateTag().putString("Reforge", ModRegistries.REFORGE.getKey(reforge).toString());
 	}
 
 	@Override

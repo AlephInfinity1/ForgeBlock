@@ -72,7 +72,7 @@ public class AspectOfTheEnderItem extends AspectOfTheEndItem {
 	}
 	
 	@Override
-	public boolean activateAbility(World world, PlayerEntity player, ItemStack stack) {
+	public AbilityResultType activateAbility(World world, PlayerEntity player, ItemStack stack) {
 		Vec3d direction = player.getLookVec();
 		
 		int teleportDistance = 10;
@@ -93,7 +93,7 @@ public class AspectOfTheEnderItem extends AspectOfTheEndItem {
 		player.setVelocity(0.0d, 0.0d, 0.0d);
 		player.addPotionEffect(new EffectInstance(ModEffects.ENDER_WARP_OBJECT.get(), 120, 0));
 		player.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
-		return true;
+		return AbilityResultType.SUCCESS;
 	}
 	
 	@Override

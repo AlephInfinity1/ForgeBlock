@@ -4,6 +4,7 @@ import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.effect.EnderWarpEffect;
 import alephinfinity1.forgeblock.effect.FBAbsorptionEffect;
+import alephinfinity1.forgeblock.effect.ImmunityEffect;
 import alephinfinity1.forgeblock.effect.InstantDamageEffect;
 import alephinfinity1.forgeblock.effect.InstantHealthEffect;
 import alephinfinity1.forgeblock.effect.InstantManaEffect;
@@ -58,6 +59,7 @@ public class ModEffects {
 	public static final Effect SPIRIT = null;
 	public static final Effect MAGIC_FIND = null;
 	public static final Effect PET_LUCK = null;
+	public static final Effect IMMUNITY = new ImmunityEffect(EffectType.BENEFICIAL, 0x808080);
 	
 	public static final RegistryObject<Effect> ENDER_WARP_OBJECT = POTIONS.register("ender_warp", () -> ENDER_WARP);
 	public static final RegistryObject<Effect> STRENGTH_OBJECT = OVERRIDE.register("strength", () -> STRENGTH);
@@ -73,5 +75,6 @@ public class ModEffects {
 	public static final RegistryObject<Effect> WEAKNESS_OBJECT = OVERRIDE.register("weakness", () -> WEAKNESS);
 	public static final RegistryObject<Effect> KNOCKBACK_OBJECT = POTIONS.register("knockback", () -> KNOCKBACK);
 	public static final RegistryObject<Effect> EXPERIENCE_BOOST_OBJECT = POTIONS.register("experience", () -> EXPERIENCE_BOOST);
+	public static final RegistryObject<Effect> IMMUNITY_OBJECT = POTIONS.register("damage_immunity", () -> IMMUNITY);
 
 }

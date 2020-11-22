@@ -5,18 +5,17 @@ import java.util.Map;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class Collection {
+public class FBCollection extends ForgeRegistryEntry<FBCollection> {
 	private CollectionType type;
 	private Map<Integer, CollectionRewards> rewards;
-	private Map<Item, Integer> items;
-	private String id;
+	private Map<Item, Integer> items;	
 	
-	public Collection(CollectionType type, Map<Integer, CollectionRewards> rewards, Map<Item, Integer> items, String id) {
+	public FBCollection(CollectionType type, Map<Integer, CollectionRewards> rewards, Map<Item, Integer> items) {
 		this.type = type;
 		this.rewards = rewards;
 		this.items = items;
-		this.id = id;
 	}
 	
 	public int getItemStackValue(ItemStack stack) {
@@ -50,11 +49,7 @@ public class Collection {
 			if(value >= reward.getKey()) ++i;
 		}
 		return i;
-	}
-	
-	public String getID() {
-		return id;
-	}
+	}	
 	
 }
 

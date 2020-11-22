@@ -1,6 +1,8 @@
 package alephinfinity1.forgeblock.misc;
 
 import java.text.DecimalFormat;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Random;
 
 //import org.apache.commons.lang3.tuple.Triple;
@@ -11,9 +13,12 @@ import alephinfinity1.forgeblock.client.particles.StringParticleData.Style;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModParticles;
+import alephinfinity1.forgeblock.item.CrownOfGreedItem;
 import alephinfinity1.forgeblock.item.EndSwordItem;
 import alephinfinity1.forgeblock.item.SpiderSwordItem;
 import alephinfinity1.forgeblock.item.UndeadSwordItem;
+import alephinfinity1.forgeblock.misc.coins.CoinsProvider;
+import alephinfinity1.forgeblock.misc.coins.ICoins;
 import alephinfinity1.forgeblock.misc.skills.SkillsHelper;
 import alephinfinity1.forgeblock.network.DamageParticlePacket;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
@@ -24,6 +29,8 @@ import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonPartEntity;
 import net.minecraft.entity.item.ArmorStandEntity;
@@ -34,6 +41,7 @@ import net.minecraft.entity.monster.MagmaCubeEntity;
 import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
@@ -70,6 +78,8 @@ public class DamageHandler {
 	public static DamageSource getFerocitySource(LivingEntity source, int stacking) {
 		return new FerocityDamageSource("ferocity", source, stacking);
 	}
+	
+	
 
 	@SubscribeEvent
 	public static void onLivingAttack(LivingHurtEvent event) {
@@ -132,7 +142,7 @@ public class DamageHandler {
 		double result = event.getAmount();
 		
 		//For physical damage only:
-		if(event.getSource().damageType.equals("player") || event.getSource().damageType.equals("mob") || event.getSource().damageType.equals("arrow") || event.getSource().damageType.equals("ferocity")) {
+		if(event.getSource().damageType.equals("player") || event.getSource().damageType.equals("mob") || event.getSource().damageType.equals("arrow") || event.getSource().damageType.equals("ferocity") || event.getSource().damageType.equals("greedy")) {
 			//Prevents crashes
 			if(damager == null) return;
 			if(damager.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) == null) return;
@@ -164,7 +174,7 @@ public class DamageHandler {
 			double strength = damager.getAttribute(FBAttributes.STRENGTH).getValue();
 			result = (damage + Math.floor(strength / 5.0D)) * Math.max(1.0D + strength / 100.0D, 0.0D); //Do not allow negative multiplier
 			
-			//Step 2: calculate enchantment multipliers TODO
+			//TODO Step 2: calculate enchantment multipliers 
 			ItemStack weapon = damager.getHeldItemMainhand();
 			double enchMultiplier = 0.0D;
 			
@@ -201,7 +211,9 @@ public class DamageHandler {
 			}
 			
 			
-			//Step 3: calculate other multipliers (skill, armor effects, etc) TODO
+			//TODO Step 3: calculate other 'pre' multipliers (skill, etc) 
+			
+			//Combat skill
 			double skillMultiplier = 0.0D;
 			if(damager instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) damager;
@@ -210,6 +222,7 @@ public class DamageHandler {
 			
 			result *= (1.0D + enchMultiplier + skillMultiplier);
 			
+			//Mob type-specific weapon modifier
 			if(weapon.getItem() instanceof UndeadSwordItem && victim.getCreatureAttribute().equals(CreatureAttribute.UNDEAD)) result *= 2;
 			if(weapon.getItem() instanceof SpiderSwordItem && victim.getCreatureAttribute().equals(CreatureAttribute.ARTHROPOD)) result *= 2;
 			if(weapon.getItem() instanceof EndSwordItem && (victim instanceof EndermanEntity || victim instanceof EndermiteEntity
@@ -242,7 +255,26 @@ public class DamageHandler {
 				damager.heal(missingHealth * vampirismLevel * 0.01f);
 			}
 			
-			//Step 7: display damage
+			//TODO Step 7: calculate all 'post' multipliers (armour, absolute effects).
+			
+			//Crown of Greed
+			ItemStack helmet = damager.getItemStackFromSlot(EquipmentSlotType.HEAD);
+			if(helmet.getItem() instanceof CrownOfGreedItem) {
+				ICoins coinsCap = damager.getCapability(CoinsProvider.COINS_CAPABILITY).orElse(null);
+				if(Objects.isNull(coinsCap)) return;
+				Collection<AttributeModifier> attackModifiers = weapon.getAttributeModifiers(EquipmentSlotType.MAINHAND).get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
+				double weaponDamage = 0.0D;
+				for(AttributeModifier modifier : attackModifiers) {
+					if(modifier.getOperation().equals(Operation.ADDITION)) {
+						weaponDamage += modifier.getAmount();
+					}
+				}
+				if(coinsCap.consume(weaponDamage)) {
+					result *= 1.25;
+				}
+			}
+			
+			//Step 8: display damage
 			if(damager instanceof PlayerEntity) {
 				//PlayerEntity player = (PlayerEntity) damager;
 				//For debug purposes only
@@ -306,7 +338,7 @@ public class DamageHandler {
 			victim.hurtResistantTime = 0;
 			DamageSource ferocitySource = getFerocitySource(damager, penalty + 1);
 			Tuple<LivingEntity, DamageSource> tuple = new Tuple<LivingEntity, DamageSource>(victim, ferocitySource);
-			TickHandler.ferocitySchedule.put(tuple, TickHandler.tickElapsed);
+			TickHandler.ferocitySchedule.put(tuple, TickHandler.ticksElapsed);
 		}
 	}
 	

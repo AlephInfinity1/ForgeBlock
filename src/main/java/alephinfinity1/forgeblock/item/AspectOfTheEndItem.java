@@ -64,7 +64,7 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 			activateAbility(worldIn, playerIn, stack);
 			IMana mana = playerIn.getCapability(ManaProvider.MANA_CAPABILITY).orElseThrow(NullPointerException::new);
 			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerIn), new ManaUpdatePacket(mana.getMana()));
-			playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.useAbility.aote").getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(event.getManaConsumed()) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"), true);
+			playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent(this.getUnlocalizedUseAbilityName()).getString() + TextFormatting.AQUA.toString() + " (" + new DecimalFormat("#").format(event.getManaConsumed()) + " " + new TranslationTextComponent("misc.forgeblock.mana").getString() + ")"), true);
 			return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 		}
 		playerIn.sendStatusMessage(new StringTextComponent(new TranslationTextComponent("text.forgeblock.notEnoughMana").getString()), true);
@@ -83,7 +83,7 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 	}
 
 	@Override
-	public boolean activateAbility(World world, PlayerEntity player, ItemStack stack) {
+	public AbilityResultType activateAbility(World world, PlayerEntity player, ItemStack stack) {
 		Vec3d direction = player.getLookVec();
 		
 		int teleportDistance = 8;
@@ -104,7 +104,7 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 		player.setVelocity(0.0d, 0.0d, 0.0d);
 		player.addPotionEffect(new EffectInstance(ModEffects.ENDER_WARP_OBJECT.get(), 60, 0));
 		player.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
-		return true;
+		return AbilityResultType.SUCCESS;
 	}
 
 	@Override
@@ -142,6 +142,11 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 	@Override
 	public int getCooldown(ItemStack stack, PlayerEntity player) {
 		return 0;
+	}
+
+	@Override
+	public String getUnlocalizedUseAbilityName() {
+		return "text.forgeblock.useAbility.aote";
 	}
 
 }
