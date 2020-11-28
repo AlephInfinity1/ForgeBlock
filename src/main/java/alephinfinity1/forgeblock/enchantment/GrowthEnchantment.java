@@ -6,7 +6,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class GrowthEnchantment extends Enchantment {
+public class GrowthEnchantment extends Enchantment implements IFBEnchantment {
 
 	public GrowthEnchantment(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots) {
 		super(rarityIn, typeIn, slots);
@@ -18,6 +18,11 @@ public class GrowthEnchantment extends Enchantment {
 	
 	@Override
 	public int getMaxLevel() {
+		return 6;
+	}
+
+	@Override
+	public int getEnchantingTableMaxLevel() {
 		return 5;
 	}
 

@@ -16,6 +16,7 @@ import com.google.common.collect.Multimap;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.config.CustomModConfig;
+import alephinfinity1.forgeblock.enchantment.IFBEnchantment;
 import alephinfinity1.forgeblock.enchantment.UltimateEnchantment;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.stats_modifier.AbstractStatsModifier;
@@ -555,16 +556,28 @@ public class TextFormatHelper {
 	}
 	
 	public static List<ITextComponent> formatEnchantments(ItemStack stack) {
+		return TextFormatHelper.formatEnchantments(stack, EnchantmentHelper.getEnchantments(stack));
+	}
+	
+	public static List<ITextComponent> formatEnchantments(ItemStack stack, Map<Enchantment, Integer> enchantments) {
 		List<ITextComponent> list = new ArrayList<>();
 		
-		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
 		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
 		for(Map.Entry<Enchantment, Integer> entry : set) {
 			if(entry.getKey() instanceof UltimateEnchantment) {
 				list.add(new StringTextComponent(TextFormatting.LIGHT_PURPLE.toString() + TextFormatting.BOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
 			} else {
-				if(entry.getValue() > entry.getKey().getMaxLevel()) list.add(new StringTextComponent(TextFormatting.GOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
-				else list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+				if (entry.getKey() instanceof IFBEnchantment) {
+					if (entry.getValue() > ((IFBEnchantment) entry.getKey()).getEnchantingTableMaxLevel()) {
+						list.add(new StringTextComponent(TextFormatting.GOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+					} else {
+						list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+					}
+				} else if (entry.getValue() > entry.getKey().getMaxLevel()) {
+					list.add(new StringTextComponent(TextFormatting.GOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+				} else {
+					list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+				}
 			}
 		}
 		
@@ -574,27 +587,15 @@ public class TextFormatHelper {
 	}
 	
 	public static List<ITextComponent> formatEnchantments(ItemStack stack, ListNBT enchants) {
-		List<ITextComponent> list = new ArrayList<>();
 		
 		Map<Enchantment, Integer> enchantments = new HashMap<>();
 		for(INBT nbt : enchants) {
 			CompoundNBT compound = (CompoundNBT) nbt;
 			Enchantment ench = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryCreate(compound.getString("id")));
 			if(ench != null) enchantments.put(ench, compound.getInt("lvl"));
-		}
-		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
-		for(Map.Entry<Enchantment, Integer> entry : set) {
-			if(entry.getKey() instanceof UltimateEnchantment) {
-				list.add(new StringTextComponent(TextFormatting.LIGHT_PURPLE.toString() + TextFormatting.BOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
-			} else {
-				if(entry.getValue() > entry.getKey().getMaxLevel()) list.add(new StringTextComponent(TextFormatting.GOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
-				else list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
-			}
-		}
+		}	
 		
-		if(!set.isEmpty()) list.add(new StringTextComponent(""));
-		
-		return list;
+		return TextFormatHelper.formatEnchantments(stack, enchantments);
 	}
 	
 	public static ITextComponent formatExtras(String attributeName, double scale, String suffix, @Nonnull IItemModifiers extraModifier, @Nonnull ItemStack stack) {

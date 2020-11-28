@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
+import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
+import alephinfinity1.forgeblock.misc.skills.SkillsHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
@@ -15,6 +17,7 @@ import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolItem;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -61,6 +64,32 @@ public class TelekinesisEnchantment extends Enchantment {
 		if(player == null) return;
 		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.TELEKINESIS.get(), player.getHeldItemMainhand()) == 0) return;
 		player.giveExperiencePoints(event.getDroppedExperience());
+		
+		//Calculate additional bonus from XP boost effect
+		if (player.getActivePotionEffect(ModEffects.EXPERIENCE_BOOST) != null) {
+			float xpMultiplier = 0.05f + 0.05f * player.getActivePotionEffect(ModEffects.EXPERIENCE_BOOST).getAmplifier(); //Only add the bonus part, the event is not cancelled.
+			int originalValue = event.getDroppedExperience();
+			float value = originalValue * xpMultiplier;
+			player.giveExperiencePoints(MathHelper.floor(value));
+			//If fractional value, chance of giving 1 more XP.
+			if(MathHelper.frac((double) value) > 0) {
+				if(MathHelper.frac((double) value) > Math.random()) {
+					player.giveExperiencePoints(1);
+				}
+			}
+		}
+		
+		//Calculate additional bonus from Enchanting skill
+		int enchantingLvl = SkillsHelper.getEnchantingLevelOrElse(player, 0);
+		float multiplier = 0.04f * enchantingLvl;
+		float bonus = event.getDroppedExperience() * multiplier;
+		player.giveExperiencePoints(MathHelper.fastFloor(bonus));
+		if (MathHelper.frac((double) bonus) != 0) {
+			if (MathHelper.frac((double) bonus) > Math.random()) {
+				player.giveExperiencePoints(1);
+			}
+		}
+		
 		event.setCanceled(true);
 	}
 	
@@ -73,6 +102,32 @@ public class TelekinesisEnchantment extends Enchantment {
 		if(player == null) return;
 		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.TELEKINESIS.get(), player.getHeldItemMainhand()) == 0) return;
 		player.giveExperiencePoints(event.getExpToDrop());
+		
+		//Calculate additional bonus from XP boost effect
+		if (player.getActivePotionEffect(ModEffects.EXPERIENCE_BOOST) != null) {
+			float xpMultiplier = 0.05f + 0.05f * player.getActivePotionEffect(ModEffects.EXPERIENCE_BOOST).getAmplifier(); //Only add the bonus part, the event is not cancelled.
+			int originalValue = event.getExpToDrop();
+			float value = originalValue * xpMultiplier;
+			player.giveExperiencePoints(MathHelper.floor(value));
+			//If fractional value, chance of giving 1 more XP.
+			if(MathHelper.frac((double) value) > 0) {
+				if(MathHelper.frac((double) value) > Math.random()) {
+					player.giveExperiencePoints(1);
+				}
+			}
+		}
+		
+		//Calculate additional bonus from Enchanting skill
+		int enchantingLvl = SkillsHelper.getEnchantingLevelOrElse(player, 0);
+		float multiplier = 0.04f * enchantingLvl;
+		float bonus = event.getExpToDrop() * multiplier;
+		player.giveExperiencePoints(MathHelper.fastFloor(bonus));
+		if (MathHelper.frac((double) bonus) != 0) {
+			if (MathHelper.frac((double) bonus) > Math.random()) {
+				player.giveExperiencePoints(1);
+			}
+		}
+		
 		event.setExpToDrop(0);
 	}
 	
@@ -82,7 +137,7 @@ public class TelekinesisEnchantment extends Enchantment {
 	 */
 	@SubscribeEvent
 	public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
-		if(!(event.getEntity() instanceof ItemEntity)) return;
+		if (!(event.getEntity() instanceof ItemEntity)) return;
 		ItemEntity item = (ItemEntity) event.getEntity();
 		ItemStack stack = item.getItem();
 		if(stack.getTag() == null) return;
@@ -93,7 +148,7 @@ public class TelekinesisEnchantment extends Enchantment {
 		
 		World world = event.getWorld();
 		PlayerEntity player = world.getPlayerByUuid(uuid);
-		if(player.addItemStackToInventory(stack)) { //If stack successfully added, remove item entity from world.
+		if (player.addItemStackToInventory(stack)) { //If stack successfully added, remove item entity from world.
 			item.remove();
 		}
 	}

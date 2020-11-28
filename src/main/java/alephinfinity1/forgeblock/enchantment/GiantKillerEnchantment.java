@@ -4,7 +4,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
 
-public class GiantKillerEnchantment extends Enchantment {
+public class GiantKillerEnchantment extends Enchantment implements IFBEnchantment {
 
 	protected GiantKillerEnchantment(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots) {
 		super(rarityIn, typeIn, slots);
@@ -16,6 +16,11 @@ public class GiantKillerEnchantment extends Enchantment {
 	
 	@Override
 	public int getMaxLevel() {
+		return 6;
+	}	
+
+	@Override
+	public int getEnchantingTableMaxLevel() {
 		return 5;
 	}
 

@@ -4,7 +4,11 @@ import java.util.Objects;
 
 import alephinfinity1.forgeblock.misc.CompareTuple;
 import alephinfinity1.forgeblock.misc.event.FBEventHooks;
+import alephinfinity1.forgeblock.network.FBPacketHandler;
+import alephinfinity1.forgeblock.network.SkillUpdatePacket;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 /**
  * A collection of helper methods for viewing/manipulating player skills.
@@ -178,4 +182,26 @@ public class SkillsHelper {
 			FBEventHooks.onPlayerSkillLevelUp(player, type, cti.A(), cti.B());
 		}
 	}
+	
+	/**
+	 * Updates one SkillType for a server player entity.
+	 * @param splayer
+	 * @param type
+	 */
+	public static void updateSkill(ServerPlayerEntity splayer, SkillType type) {
+		ISkills skills = SkillsHelper.getSkillsCapOrElse(splayer, null);
+		if (Objects.isNull(skills)) return;
+		FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> splayer), new SkillUpdatePacket(skills.getCompoundNBTFor(type)));
+	}
+	
+	/**
+	 * Updates all SkillTypes for a server player entity
+	 */
+	public static void updateAllSkills(ServerPlayerEntity splayer) {
+		ISkills skills = SkillsHelper.getSkillsCapOrElse(splayer, null);
+		if (Objects.isNull(skills)) return;
+		for (SkillType type : SkillType.values())
+			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> splayer), new SkillUpdatePacket(skills.getCompoundNBTFor(type)));
+	}
+	
 }

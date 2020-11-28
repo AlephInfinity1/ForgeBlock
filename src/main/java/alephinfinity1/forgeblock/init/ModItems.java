@@ -42,7 +42,9 @@ import alephinfinity1.forgeblock.item.WoodSingularityItem;
 import alephinfinity1.forgeblock.item.YoungDragonArmorItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -329,6 +331,10 @@ public class ModItems {
 	public static final RegistryObject<Item> FUMING_POTATO_BOOK = ITEMS.register("fuming_potato_book", () -> new HotPotatoBookItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.EPIC, true));
 	public static final RegistryObject<Item> WOOD_SINGULARITY = ITEMS.register("wood_singularity", () -> new WoodSingularityItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.LEGENDARY));
 	public static final RegistryObject<Item> RECOMBOBULATOR_3000 = ITEMS.register("recombobulator_3000", () -> new RecombobulatorItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_MISC), FBTier.LEGENDARY));
+	
+	public static final RegistryObject<Item> ANVIL = OVERRIDE.register("anvil", () -> new BlockItem(ModBlocks.ANVIL.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
+	public static final RegistryObject<Item> CHIPPED_ANVIL = OVERRIDE.register("chipped_anvil", () -> new BlockItem(ModBlocks.CHIPPED_ANVIL.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
+	public static final RegistryObject<Item> DAMAGED_ANVIL = OVERRIDE.register("damaged_anvil", () -> new BlockItem(ModBlocks.DAMAGED_ANVIL.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
 	
 	/*
 	 * Custom items/ideas/debug

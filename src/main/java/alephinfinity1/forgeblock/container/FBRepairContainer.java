@@ -3,6 +3,8 @@ package alephinfinity1.forgeblock.container;
 import java.util.HashMap;
 import java.util.Map;
 
+import alephinfinity1.forgeblock.enchantment.IFBEnchantment;
+import alephinfinity1.forgeblock.enchantment.UltimateEnchantment;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModStatsModifiers;
 import alephinfinity1.forgeblock.item.HotPotatoBookItem;
@@ -25,6 +27,8 @@ public class FBRepairContainer extends RepairContainer {
 
 	private static final int MAX_HPB = 10;
 	private static final int MAX_FUMING = 5;
+	
+	private static final int ULTIMATE_ENCHANT_COST_MULTIPLIER = 50;
 
 	public FBRepairContainer(int p_i50101_1_, PlayerInventory p_i50101_2_) {
 		super(p_i50101_1_, p_i50101_2_);	
@@ -146,6 +150,35 @@ public class FBRepairContainer extends RepairContainer {
 			this.outputSlot.setInventorySlotContents(0, itemstack1);
 			this.detectAndSendChanges();	
 		} else { //If not mod-specific action, return to vanilla handling.
+			
+			/*
+			 * itemstack: the left item
+			 * itemstack2: the right item
+			 * itemstack1: the result item
+			 * 
+			 * flag: whether itemstack2 is an enchanted book and has enchanteds on it.
+			 * flag1: whether the enchantment is applicable to the itemstack.
+			 * flag2: there exists at least one enchant that can be applied to the itemstack.
+			 * flag3: there exists at least one enchant that cannot be applied to the itemstack.
+			 * 
+			 * map: the map of enchantments of the resultant item.
+			 * map1: the map of enchantments of the right item.
+			 * enchantment: an instance of an enchantment in map
+			 * enchantment1: an instance of an enchantment in map1
+			 * 
+			 * i: cost of repair due to enchantments + k.
+			 * j: cost of repair due to item durability repair.
+			 * k: cost of repair due to item rename.
+			 * 
+			 * i3: an iterator that iterates through the size of itemstack2 for repair.
+			 * l2: the amount of durability to repair for one repair item.
+			 * 
+			 * k3: enchantment cost multiplier.
+			 * 
+			 * i2: the level of the enchantment on the left itemstack.
+			 * j2: the level of the enchantment on the result itemstack.
+			 */
+			
 			ItemStack itemstack1 = itemstack.copy();
 
 			Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(itemstack1);
@@ -221,33 +254,48 @@ public class FBRepairContainer extends RepairContainer {
 								flag3 = true;
 							} else {
 								flag2 = true;
-								if (j2 > enchantment1.getMaxLevel()) {
+								
+								// FB edit: max level limit is modified.
+								// Ench table max level applies iff left itemstack is a book, to prevent combining Lv6 books.
+								if (enchantment1 instanceof IFBEnchantment && itemstack.getItem() instanceof EnchantedBookItem) {
+									if (j2 > ((IFBEnchantment) enchantment1).getEnchantingTableMaxLevel()) {
+										j2 = ((IFBEnchantment) enchantment1).getEnchantingTableMaxLevel();
+									}
+								} else if (j2 > enchantment1.getMaxLevel()) {
 									j2 = enchantment1.getMaxLevel();
 								}
 
 								map.put(enchantment1, j2);
-								int k3 = 0;
-								switch(enchantment1.getRarity()) {
-								case COMMON:
-									k3 = 1;
-									break;
-								case UNCOMMON:
-									k3 = 2;
-									break;
-								case RARE:
-									k3 = 4;
-									break;
-								case VERY_RARE:
-									k3 = 8;
-								}
-
-								if (flag) {
-									k3 = Math.max(1, k3 / 2);
-								}
-
-								i += k3 * j2;
-								if (itemstack.getCount() > 1) {
-									i = 40;
+								
+								//FB edit: if the enchantment is an instanceof IFBEnchantment, resort to FB handling
+								if (enchantment1 instanceof IFBEnchantment) {
+									i += ((IFBEnchantment) enchantment1).getRepairCostForLevel(j2);
+								} else { //If not, resort to vanilla handling.
+									int k3 = 0;
+									switch(enchantment1.getRarity()) {
+									case COMMON:
+										k3 = 1;
+										break;
+									case UNCOMMON:
+										k3 = 2;
+										break;
+									case RARE:
+										k3 = 4;
+										break;
+									case VERY_RARE:
+										k3 = 8;
+									}
+	
+									if (flag) {
+										k3 = Math.max(1, k3 / 2);
+									}
+	
+									i += k3 * j2;
+									
+									//FB edit: if invalid stack count, change to invalid min instead.
+									if (itemstack.getCount() > 1) {
+										i = Integer.MIN_VALUE;
+									}
 								}
 							}
 						}
@@ -303,8 +351,13 @@ public class FBRepairContainer extends RepairContainer {
 				EnchantmentHelper.setEnchantments(map, itemstack1);
 			}
 			
+			//Sets the cost to 50 * level, if ultimate is present.
+			if (FBRepairContainer.getUltimateLevel(itemstack2) != 0) {
+				this.maximumCost.set(ULTIMATE_ENCHANT_COST_MULTIPLIER * FBRepairContainer.getUltimateLevel(itemstack2));
+			}
+			
 			//Custom One For All handling, removes every other enchantment.
-			if (FBRepairContainer.hasOneForAll(itemstack2)) {
+			if (FBRepairContainer.hasOneForAll(itemstack2) || FBRepairContainer.hasOneForAll(itemstack1)) {
 				int telekinesisLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.TELEKINESIS.get(), itemstack1);
 				Map<Enchantment, Integer> enchData = new HashMap<>();
 				if(telekinesisLevel != 0) {
@@ -312,7 +365,7 @@ public class FBRepairContainer extends RepairContainer {
 				}
 				enchData.put(ModEnchantments.ONE_FOR_ALL.get(), 1);
 				EnchantmentHelper.setEnchantments(enchData, itemstack1);
-			}
+			}	
 
 			this.outputSlot.setInventorySlotContents(0, itemstack1);
 			this.detectAndSendChanges();
@@ -332,6 +385,33 @@ public class FBRepairContainer extends RepairContainer {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Returns the level of the ultimate enchantment on the book.<br>
+	 * If multiple ultimate enchants are on the book (which should not be
+	 * possible without commands), the first level is returned. <br>
+	 * If there are no ultimates on the book, return 0.
+	 * @param stack The enchanted book
+	 * @return The level of the ultimate enchant on the book, or 0 if absent. 
+	 */
+	public static int getUltimateLevel(ItemStack stack) {
+		Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
+		for (Enchantment enchantment : enchantments.keySet()) {
+			if (enchantment instanceof UltimateEnchantment) {
+				return enchantments.get(enchantment);
+			}
+		}
+		return 0;
+	}
+	
+	/**
+	 * Gets the new repair cost of an item.
+	 * @param previousCost
+	 * @return
+	 */
+	public static int getNewRepairCost(int oldRepairCost) {
+		return (oldRepairCost == 0) ? 4 : (oldRepairCost << 1) + 2;
 	}
 
 }

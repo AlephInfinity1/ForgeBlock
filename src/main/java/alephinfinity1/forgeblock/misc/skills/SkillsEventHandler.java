@@ -17,6 +17,8 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.EnchantmentContainer;
+import net.minecraft.inventory.container.RepairContainer;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -29,6 +31,7 @@ import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -38,10 +41,8 @@ public class SkillsEventHandler {
 
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(PlayerLoggedInEvent event) {
-		PlayerEntity player = event.getPlayer();
-		ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
-		for(SkillType type : SkillType.values())
-			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SkillUpdatePacket(skills.getCompoundNBTFor(type), false));
+		if (event.getPlayer() instanceof ClientPlayerEntity) return;
+		SkillsHelper.updateAllSkills((ServerPlayerEntity) event.getPlayer());
 	}
 	
 	/*
@@ -198,5 +199,33 @@ public class SkillsEventHandler {
 			coins.add(event.getType().getCoinsRewardUponReachingLevel(i));
 		}
 		FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()), new CoinsUpdatePacket(coins.getCoins()));
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerUseXP(PlayerXpEvent.LevelChange event) {
+		//Check if the player's level change was due to spending
+		//If yes, increase the player's Enchanting skill XP.
+		PlayerEntity player = event.getPlayer();
+		if (player instanceof ClientPlayerEntity) return;
+		if (player.openContainer instanceof RepairContainer || player.openContainer instanceof EnchantmentContainer) {
+			SkillsHelper.addXP(player, SkillType.ENCHANTING, 
+					FBEventHooks.onPlayerSkillXPGain(player, SkillType.ENCHANTING, Math.pow(-event.getLevels(), 1.5) * 3.5));
+			SkillsHelper.updateSkill((ServerPlayerEntity) player, SkillType.ENCHANTING);
+		}
+	}
+	
+	//Conjuring skill: additional XP gain when picking up orbs.
+	@SubscribeEvent
+	public static void onPlayerPickUpXP(PlayerXpEvent.PickupXp event) {
+		PlayerEntity player = event.getPlayer();
+		int enchantingLvl = SkillsHelper.getEnchantingLevelOrElse(player, 0);
+		float multiplier = 0.04f * enchantingLvl;
+		float bonus = event.getOrb().getXpValue() * multiplier;
+		player.giveExperiencePoints(MathHelper.fastFloor(bonus));
+		if (MathHelper.frac((double) bonus) != 0) {
+			if (MathHelper.frac((double) bonus) > Math.random()) {
+				player.giveExperiencePoints(1);
+			}
+		}
 	}
 }

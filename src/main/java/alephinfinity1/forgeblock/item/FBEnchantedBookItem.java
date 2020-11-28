@@ -41,7 +41,7 @@ public class FBEnchantedBookItem extends EnchantedBookItem implements IFBItem, I
 		ListNBT nbt = EnchantedBookItem.getEnchantments(stack);
 		for(INBT instance : nbt) {
 			CompoundNBT compound = (CompoundNBT) instance;
-			if(compound.getShort("lvl") > maxLvl) maxLvl = compound.getShort("lvl");
+			maxLvl = (short) Math.max(maxLvl, compound.getShort("lvl"));
 		}
 		switch(maxLvl) {
 		case 5:
