@@ -17,6 +17,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.network.PacketDistributor;
 
@@ -85,15 +86,15 @@ public class SkillCommand {
 		if(levels) {
 			for(ServerPlayerEntity player : targets) {
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
-				skills.setLevel(skillType, skills.getLevel(skillType) + amount);
-				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType)));
+				skills.setLevel(skillType, MathHelper.clamp(skills.getLevel(skillType) + amount, 0, skillType.getMaxLevel()));
+				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType), false));
 				++i;
 			}
 		} else {
 			for(ServerPlayerEntity player : targets) {
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
 				skills.addXP(skillType, amount); //Use of addXP accepted here, since event shouldn't be updated.
-				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType)));
+				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType), false));
 				++i;
 			}
 		}
@@ -120,7 +121,7 @@ public class SkillCommand {
 			for(ServerPlayerEntity player : targets) {
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
 				skills.setLevel(skillType, amount);
-				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType)));
+				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType), false));
 				++i;
 			}
 		} else {
@@ -128,7 +129,7 @@ public class SkillCommand {
 				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
 				if(amount > skills.getXPNeededToLevelUp(skillType) || amount < 0) throw INVALID_POINTS.create();
 				skills.setProgress(skillType, amount);
-				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType)));
+				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType), false));
 				++i;
 			}
 		}

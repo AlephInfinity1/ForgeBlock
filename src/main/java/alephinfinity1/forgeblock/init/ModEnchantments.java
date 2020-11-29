@@ -19,6 +19,7 @@ import alephinfinity1.forgeblock.enchantment.TelekinesisEnchantment;
 import alephinfinity1.forgeblock.enchantment.UltimateWiseEnchantment;
 import alephinfinity1.forgeblock.enchantment.VampirismEnchantment;
 import alephinfinity1.forgeblock.enchantment.VenomousEnchantment;
+import alephinfinity1.forgeblock.enchantment.ViciousEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -45,6 +46,7 @@ public class ModEnchantments {
 	public static final RegistryObject<Enchantment> EXPERIENCE = ENCHANTMENTS.register("experience", () -> new ExperienceEnchantment());
 	public static final RegistryObject<Enchantment> SCAVENGER = ENCHANTMENTS.register("scavenger", () -> new ScavengerEnchantment());
 	public static final RegistryObject<Enchantment> VAMPIRISM = ENCHANTMENTS.register("vampirism", () -> new VampirismEnchantment());
+	public static final RegistryObject<Enchantment> VICIOUS = ENCHANTMENTS.register("vicious", () -> new ViciousEnchantment());
 	
 	public static final RegistryObject<Enchantment> ULTIMATE_WISE = ENCHANTMENTS.register("ultimate_wise", () -> new UltimateWiseEnchantment());
 	public static final RegistryObject<Enchantment> ONE_FOR_ALL = ENCHANTMENTS.register("one_for_all", () -> new OneForAllEnchantment());

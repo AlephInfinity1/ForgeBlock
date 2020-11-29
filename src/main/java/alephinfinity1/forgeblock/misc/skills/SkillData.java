@@ -22,7 +22,7 @@ public class SkillData {
 		this.progress = 0.0d;
 	}
 	
-	//For copying only
+	//For deep-copying only
 	private SkillData(SkillData other) {
 		this.skill = other.skill;
 		this.level = other.level;
@@ -69,8 +69,8 @@ public class SkillData {
 	
 	public void setLevel(int level) {
 		double prog = MathHelper.clamp(this.getProgressPercentage(), 0.0d, 1.0d - Float.MIN_NORMAL);
-		this.level = level;
-		this.progress = skill.getXPForLevel(level) * prog;
+		this.level = MathHelper.clamp(level, 0, this.skill.getMaxLevel());
+		this.progress = skill.getXPForLevel(this.level) * prog;
 		if(Double.isNaN(progress)) progress = 0.0D;
 		update();
 	}

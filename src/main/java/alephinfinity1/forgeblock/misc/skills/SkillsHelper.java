@@ -16,11 +16,19 @@ import net.minecraftforge.fml.network.PacketDistributor;
 public class SkillsHelper {
 	
 	private SkillsHelper() {
-		throw new AssertionError("Class SkillsHelper should not be instantiated!");
+		throw new AssertionError("Class SkillsHelper is a helper methods class and should not be instantiated!");
 	}
 
-	public static ISkills getSkillsCap(PlayerEntity player) {
-		return player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+	public static ISkills getSkillsCapOrNull(PlayerEntity player) {
+		return player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElse(null);
+	}
+	
+	public static ISkills getRequiredSkillsCap(PlayerEntity player) {
+		return player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(() -> new NullPointerException("Error: Skills capability not present on player " + player.getName().getString()));
+	}
+	
+	public static ISkills getRequiredSkillsCap(PlayerEntity player, String message) {
+		return player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(() -> new NullPointerException(message));
 	}
 	
 	public static ISkills getSkillsCapOrElse(PlayerEntity player, ISkills other) {
@@ -31,47 +39,47 @@ public class SkillsHelper {
 	 * Get level methods
 	 */
 	public static int getSkillLevel(PlayerEntity player, SkillType skill) {
-		return getSkillsCap(player).getLevel(skill);
+		return getSkillsCapOrNull(player).getLevel(skill);
 	}
 	
 	public static int getFarmingLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.FARMING);
+		return getSkillsCapOrNull(player).getLevel(SkillType.FARMING);
 	}
 	
 	public static int getMiningLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.MINING);
+		return getSkillsCapOrNull(player).getLevel(SkillType.MINING);
 	}
 	
 	public static int getCombatLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.COMBAT);
+		return getSkillsCapOrNull(player).getLevel(SkillType.COMBAT);
 	}
 	
 	public static int getForagingLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.FORAGING);
+		return getSkillsCapOrNull(player).getLevel(SkillType.FORAGING);
 	}
 	
 	public static int getFishingLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.FISHING);
+		return getSkillsCapOrNull(player).getLevel(SkillType.FISHING);
 	}
 	
 	public static int getEnchantingLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.ENCHANTING);
+		return getSkillsCapOrNull(player).getLevel(SkillType.ENCHANTING);
 	}
 	
 	public static int getAlchemyLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.ALCHEMY);
+		return getSkillsCapOrNull(player).getLevel(SkillType.ALCHEMY);
 	}
 	
 	public static int getTamingLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.TAMING);
+		return getSkillsCapOrNull(player).getLevel(SkillType.TAMING);
 	}
 	
 	public static int getCarpentryLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.CARPENTRY);
+		return getSkillsCapOrNull(player).getLevel(SkillType.CARPENTRY);
 	}
 	
 	public static int getRunecraftingLevel(PlayerEntity player) {
-		return getSkillsCap(player).getLevel(SkillType.RUNECRAFTING);
+		return getSkillsCapOrNull(player).getLevel(SkillType.RUNECRAFTING);
 	}
 	
 	/*
@@ -79,7 +87,7 @@ public class SkillsHelper {
 	 */
 	public static int getSkillLevelOrElse(PlayerEntity player, SkillType skill, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(skill);
+			return getSkillsCapOrNull(player).getLevel(skill);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -87,7 +95,7 @@ public class SkillsHelper {
 	
 	public static int getFarmingLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.FARMING);
+			return getSkillsCapOrNull(player).getLevel(SkillType.FARMING);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -95,7 +103,7 @@ public class SkillsHelper {
 	
 	public static int getMiningLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.MINING);
+			return getSkillsCapOrNull(player).getLevel(SkillType.MINING);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -103,7 +111,7 @@ public class SkillsHelper {
 	
 	public static int getCombatLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.COMBAT);
+			return getSkillsCapOrNull(player).getLevel(SkillType.COMBAT);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}	
@@ -111,7 +119,7 @@ public class SkillsHelper {
 	
 	public static int getForagingLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.FORAGING);
+			return getSkillsCapOrNull(player).getLevel(SkillType.FORAGING);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -119,7 +127,7 @@ public class SkillsHelper {
 	
 	public static int getFishingLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.FISHING);
+			return getSkillsCapOrNull(player).getLevel(SkillType.FISHING);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -127,7 +135,7 @@ public class SkillsHelper {
 	
 	public static int getEnchantingLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.ENCHANTING);
+			return getSkillsCapOrNull(player).getLevel(SkillType.ENCHANTING);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -135,7 +143,7 @@ public class SkillsHelper {
 	
 	public static int getAlchemyLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.ALCHEMY);
+			return getSkillsCapOrNull(player).getLevel(SkillType.ALCHEMY);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -143,7 +151,7 @@ public class SkillsHelper {
 	
 	public static int getTamingLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.TAMING);
+			return getSkillsCapOrNull(player).getLevel(SkillType.TAMING);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -151,7 +159,7 @@ public class SkillsHelper {
 	
 	public static int getCarpentryLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.CARPENTRY);
+			return getSkillsCapOrNull(player).getLevel(SkillType.CARPENTRY);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -159,7 +167,7 @@ public class SkillsHelper {
 	
 	public static int getRunecraftingLevelOrElse(PlayerEntity player, int _default) {
 		try {
-			return getSkillsCap(player).getLevel(SkillType.RUNECRAFTING);
+			return getSkillsCapOrNull(player).getLevel(SkillType.RUNECRAFTING);
 		} catch(NullPointerException nullptrex) {
 			return _default;
 		}
@@ -184,6 +192,19 @@ public class SkillsHelper {
 	}
 	
 	/**
+	 * A helper method to adding XP and updating.
+	 * @param player PlayerEntity
+	 * @param type SkillType
+	 * @param amount amount
+	 */
+	public static void addXPAndUpdate(PlayerEntity player, SkillType type, double amount) {
+		SkillsHelper.addXP(player, type, amount);
+		if (player instanceof ServerPlayerEntity) {
+			SkillsHelper.updateSkill((ServerPlayerEntity) player, type);
+		}
+	}
+	
+	/**
 	 * Updates one SkillType for a server player entity.
 	 * @param splayer
 	 * @param type
@@ -195,6 +216,18 @@ public class SkillsHelper {
 	}
 	
 	/**
+	 * UpdateSkill, but with optional notification.
+	 * @param splayer
+	 * @param type
+	 * @param notify
+	 */
+	public static void updateSkill(ServerPlayerEntity splayer, SkillType type, boolean notify) {
+		ISkills skills = SkillsHelper.getSkillsCapOrElse(splayer, null);
+		if (Objects.isNull(skills)) return;
+		FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> splayer), new SkillUpdatePacket(skills.getCompoundNBTFor(type), notify));
+	}
+	
+	/**
 	 * Updates all SkillTypes for a server player entity
 	 */
 	public static void updateAllSkills(ServerPlayerEntity splayer) {
@@ -202,6 +235,16 @@ public class SkillsHelper {
 		if (Objects.isNull(skills)) return;
 		for (SkillType type : SkillType.values())
 			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> splayer), new SkillUpdatePacket(skills.getCompoundNBTFor(type)));
+	}
+	
+	/**
+	 * Updates all SkillTypes for a server player entity
+	 */
+	public static void updateAllSkills(ServerPlayerEntity splayer, boolean notify) {
+		ISkills skills = SkillsHelper.getSkillsCapOrElse(splayer, null);
+		if (Objects.isNull(skills)) return;
+		for (SkillType type : SkillType.values())
+			FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> splayer), new SkillUpdatePacket(skills.getCompoundNBTFor(type), notify));
 	}
 	
 }

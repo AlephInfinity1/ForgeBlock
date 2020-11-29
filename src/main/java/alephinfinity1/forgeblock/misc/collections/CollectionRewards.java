@@ -7,17 +7,12 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import alephinfinity1.forgeblock.misc.skills.ISkills;
 import alephinfinity1.forgeblock.misc.skills.SkillType;
-import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
-import alephinfinity1.forgeblock.network.FBPacketHandler;
-import alephinfinity1.forgeblock.network.SkillUpdatePacket;
+import alephinfinity1.forgeblock.misc.skills.SkillsHelper;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 public class CollectionRewards {
 	
@@ -66,27 +61,25 @@ public class CollectionRewards {
 	}
 	
 	public void applyReward(PlayerEntity player) {
-		if(player.isServerWorld()) {
-			if(recipeRewards != null) {
-				for(ResourceLocation recipeReward : recipeRewards) {
+		if (player.isServerWorld()) {
+			if (recipeRewards != null) {
+				for (ResourceLocation recipeReward : recipeRewards) {
 					player.unlockRecipes(new ResourceLocation[] {recipeReward});
 				}
 			}
 			
-			if(skillXPRewards != null) {
-				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
-				for(Map.Entry<SkillType, Double> entry : skillXPRewards.entrySet()) {
-					skills.addXP(entry.getKey(), entry.getValue());
-					FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SkillUpdatePacket(skills.getCompoundNBTFor(entry.getKey())));
+			if (skillXPRewards != null) {
+				for (Map.Entry<SkillType, Double> entry : skillXPRewards.entrySet()) {
+					SkillsHelper.addXPAndUpdate(player, entry.getKey(), entry.getValue());	
 				}
 			}
 			
-			if(itemRewards != null) {
-				for(ItemStack stack : itemRewards) {
+			if (itemRewards != null) {
+				for (ItemStack stack : itemRewards) {
 					boolean flag = player.addItemStackToInventory(stack);
-					if(!flag) {
+					if (!flag) {
 						ItemEntity item = player.dropItem(stack, false);
-						if(item != null) {
+						if (item != null) {
 							item.setNoPickupDelay();
 							item.setOwnerId(player.getUniqueID());
 						}

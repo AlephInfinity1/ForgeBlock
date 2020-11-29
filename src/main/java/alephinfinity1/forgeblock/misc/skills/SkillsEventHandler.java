@@ -2,9 +2,11 @@ package alephinfinity1.forgeblock.misc.skills;
 
 import java.text.DecimalFormat;
 import java.util.Objects;
+import java.util.UUID;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.entity.IFBEntity;
+import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.coins.CoinsProvider;
 import alephinfinity1.forgeblock.misc.coins.ICoins;
 import alephinfinity1.forgeblock.misc.event.FBEventHooks;
@@ -15,6 +17,7 @@ import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.SkillUpdatePacket;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.EnchantmentContainer;
@@ -42,7 +45,7 @@ public class SkillsEventHandler {
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(PlayerLoggedInEvent event) {
 		if (event.getPlayer() instanceof ClientPlayerEntity) return;
-		SkillsHelper.updateAllSkills((ServerPlayerEntity) event.getPlayer());
+		SkillsHelper.updateAllSkills((ServerPlayerEntity) event.getPlayer(), false);
 	}
 	
 	/*
@@ -100,18 +103,34 @@ public class SkillsEventHandler {
 		}
 	}
 	
-	public static void notifyPlayerLevelUp(ClientPlayerEntity player, SkillType type, int levelOld, int levelNew) {
+	public static void notifyPlayerLevelUp(ClientPlayerEntity cplayer, SkillType type, int levelOld, int levelNew) {
+		final UUID DUMMY_UUID = UUID.fromString("0afce2d8-e6e2-475f-b628-4704bdb7331c"); //Used for attribute modifier, to pass to TextFormatHelper#formatSpecialModifier()
+		
 		ITextComponent border = new StringTextComponent("\u00A73--------------------------------");
 		ITextComponent line1 = new TranslationTextComponent("skills.forgeblock.levelUpMessage_1", type.getDisplayName().getString(), levelOld, levelNew);
 		ITextComponent line2 = new TranslationTextComponent("skills.forgeblock.levelUpMessage_2");
-		ITextComponent line3 = new TranslationTextComponent("skills.forgeblock.levelUpMessage_3");
 		
-		player.sendMessage(border);
-		player.sendMessage(line1);
-		player.sendMessage(line2);
-		player.sendMessage(line3);
-		player.sendMessage(border);
-		player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
+		ITextComponent line3 = new StringTextComponent(" ".repeat(4)).appendSibling(type.getAbilityName(levelNew));
+		
+		double coinsReward = 0.0D;
+		for (int i = levelOld + 1; i <= levelNew; i++) {
+			coinsReward += type.getCoinsRewardUponReachingLevel(i);
+		}
+		
+		ITextComponent line5 = new TranslationTextComponent("skills.forgeblock.levelUpMessageCoins", new DecimalFormat(",###.#").format(coinsReward));
+		
+		double modifierAmount = type.getAttributeModifierAmount(levelNew) - type.getAttributeModifierAmount(levelOld);
+		
+		ITextComponent line4 = new StringTextComponent(" ".repeat(4)).appendSibling(TextFormatHelper.formatSpecialModifier(type.getAttribute().getName(), new AttributeModifier(DUMMY_UUID, "Dummy string", modifierAmount, type.getOperation())));
+		
+		cplayer.sendMessage(border);
+		cplayer.sendMessage(line1);
+		cplayer.sendMessage(line2);
+		cplayer.sendMessage(line3);
+		cplayer.sendMessage(line4);
+		cplayer.sendMessage(line5);
+		cplayer.sendMessage(border);
+		cplayer.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
 	}
 	
 	public static double calculateXPDiff(SkillType type, ISkills old, ISkills neu) {

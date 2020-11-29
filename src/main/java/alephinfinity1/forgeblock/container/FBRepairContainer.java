@@ -406,9 +406,11 @@ public class FBRepairContainer extends RepairContainer {
 	}
 	
 	/**
-	 * Gets the new repair cost of an item.
-	 * @param previousCost
-	 * @return
+	 * Gets the new repair cost of an item.<br>
+	 * Formula: {@code 2 * oldRepairCost + 2} <br>
+	 * or {@code 3 * (1 << priorReworks) - 2}
+	 * @param previousCost The previous repair cost of the itemstack
+	 * @return The new repair cost of the itemstack, dependent on the previous.
 	 */
 	public static int getNewRepairCost(int oldRepairCost) {
 		return (oldRepairCost == 0) ? 4 : (oldRepairCost << 1) + 2;

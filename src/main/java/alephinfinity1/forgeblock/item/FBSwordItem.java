@@ -56,6 +56,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	
 	protected static final UUID CRITICAL_ENCHANTMENT_MODIFIER = UUID.fromString("ab2c9437-5c8c-4986-8034-4a85dd261c54");
 	protected static final UUID ONE_FOR_ALL_MODIFIER = UUID.fromString("4eb03930-7e1b-4240-8796-a7b3752251f0");
+	protected static final UUID VICIOUS_MODIFIER = UUID.fromString("bf2c5eb4-b057-4f8f-9cea-fdf8eb2275ce");
 	
 	//Super constructor, highly recommend not using
 	@Deprecated
@@ -108,6 +109,11 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 				}
 			});
 			builder.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ONE_FOR_ALL_MODIFIER, "1FA enchant modifier", weaponDamage.get() * 2.1, Operation.ADDITION));
+		}
+		
+		int viciousLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.VICIOUS.get(), stack);
+		if (viciousLevel != 0) {
+			builder.put(FBAttributes.FEROCITY.getName(), new AttributeModifier(VICIOUS_MODIFIER, "Vicious enchant modifier", viciousLevel, Operation.ADDITION));
 		}
 		
 		IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);

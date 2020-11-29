@@ -1,7 +1,6 @@
 package alephinfinity1.forgeblock.item;
 
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -26,8 +25,6 @@ public class UnstableDragonArmorHandler {
 	public static void onTick(PlayerTickEvent event) {
 		if(event.phase == Phase.START && event.player instanceof ServerPlayerEntity) {
 			
-			Random rng = new Random();
-			
 			PlayerEntity player = event.player;
 			World world = player.getEntityWorld();
 			Iterable<ItemStack> armor = player.getArmorInventoryList();
@@ -36,7 +33,7 @@ public class UnstableDragonArmorHandler {
 					return;
 				}
 			}
-			if(rng.nextDouble() < 0.005f) {
+			if(Math.random() < 0.005f) {
 				AxisAlignedBB bound = new AxisAlignedBB(player.getPosition().add(-10, -10, -10), player.getPosition().add(10, 10, 10));
 				List<Entity> entities = world.getEntitiesInAABBexcluding(player, bound, EntityPredicates.NOT_SPECTATING);
 				for(Entity entity : entities) {

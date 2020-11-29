@@ -2,30 +2,79 @@ package alephinfinity1.forgeblock.misc.skills;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableMap;
 
+import alephinfinity1.forgeblock.attribute.FBAttributes;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public enum SkillType {
-	FARMING(false, "farming", 100),
-	MINING(false, "mining", 100),
-	COMBAT(false, "combat", 100),
-	FORAGING(false, "foraging", 100),
-	FISHING(false, "fishing", 100),
-	ENCHANTING(false, "enchanting", 100),
-	ALCHEMY(false, "alchemy", 100),
-	TAMING(false, "taming", 100),
+	FARMING(false, "farming", 100, null, null, SharedMonsterAttributes.MAX_HEALTH, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_1, Skills.FARMING_SKILLS_MODIFIER),
+	MINING(false, "mining", 100, null, null, FBAttributes.DEFENSE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.MINING_SKILLS_MODIFIER),
+	COMBAT(false, "combat", 100, null, null, FBAttributes.CRIT_CHANCE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_COMBAT, Skills.COMBAT_SKILLS_MODIFIER),
+	FORAGING(false, "foraging", 100, null, null, FBAttributes.STRENGTH, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.FORAGING_SKILLS_MODIFIER),
+	FISHING(false, "fishing", 100, null, null, SharedMonsterAttributes.MAX_HEALTH, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_1, Skills.FISHING_SKILLS_MODIFIER),
+	ENCHANTING(false, "enchanting", 100, null, null, FBAttributes.INTELLIGENCE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.ENCHANTING_SKILLS_MODIFIER),
+	ALCHEMY(false, "alchemy", 100, null, null, FBAttributes.INTELLIGENCE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.ALCHEMY_SKILLS_MODIFIER),
+	TAMING(false, "taming", 100, null, null, FBAttributes.PET_LUCK, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_TAMING, Skills.TAMING_SKILLS_MODIFIER),
 	CARPENTRY(true, "carpentry", 100),
 	RUNECRAFTING(true, "runecrafting", 25);
 	
+	/**
+	 * Whether the SkillType is cosmetic or not. If cosmetic, doesn't reward coins and modifiers, and does not count towards skill avg.
+	 */
 	private boolean isCosmetic;
+	
+	/**
+	 * The name of the skill.
+	 */
 	private final String id;
+	
+	/**
+	 * The maximum level achievable.
+	 */
 	private final int maxLevel;
+	
+	/**
+	 * The attribute that the skill modifies.
+	 * Null if cosmetic.
+	 */
+	@Nullable
+	private final IAttribute attribute;
+	
+	/**
+	 * A function that maps between skill levels and its corresponding modifier amount.
+	 * Null if cosmetic.
+	 */
+	@Nullable
+	private final Function<Integer, Double> modifierAmount;
+	
+	/**
+	 * The UUID of the skill's modifier.
+	 * Null if cosmetic.
+	 */
+	@Nullable
+	private final UUID modifierID;
+	
+	/**
+	 * The operation of the skill modifier.
+	 * Addition by default, but can be changed.
+	 * Null if cosmetic.
+	 */
+	@Nullable
+	private final AttributeModifier.Operation operation;
+	
 	public Function<Integer, Double> expTable;
 	public @Nullable Function<Integer, Double> coinsTable; //If null, the skill doesn't reward coins.
 	
@@ -304,6 +353,10 @@ public enum SkillType {
 		this.maxLevel = maxLevel;
 		this.expTable = expTable;
 		this.coinsTable = null;
+		this.attribute = null;
+		this.modifierAmount = null;
+		this.modifierID = null;
+		this.operation = isCosmetic ? null : Operation.ADDITION;
 	}
 	
 	private SkillType(boolean isCosmetic, String id, int maxLevel, Function<Integer, Double> expTable, Function<Integer, Double> coinsTable) {
@@ -312,6 +365,10 @@ public enum SkillType {
 		this.maxLevel = maxLevel;
 		this.expTable = expTable;
 		this.coinsTable = coinsTable;
+		this.attribute = null;
+		this.modifierAmount = null;
+		this.modifierID = null;
+		this.operation = isCosmetic ? null : Operation.ADDITION;
 	}
 	
 	private SkillType(boolean isCosmetic, String id, int maxLevel) {
@@ -320,10 +377,41 @@ public enum SkillType {
 		this.maxLevel = maxLevel;
 		this.expTable = null;
 		this.coinsTable = null;
+		this.attribute = null;
+		this.modifierAmount = null;
+		this.modifierID = null;
+		this.operation = isCosmetic ? null : Operation.ADDITION;
+	}
+	
+	private SkillType(boolean isCosmetic, String id, int maxLevel, Function<Integer, Double> expTable, 
+			Function<Integer, Double> coinsTable, IAttribute attribute, Function<Integer, Double> modifierAmount, UUID modifierID) {
+		this.isCosmetic = isCosmetic;
+		this.id = id;
+		this.maxLevel = maxLevel;
+		this.expTable = expTable;
+		this.coinsTable = coinsTable;
+		this.attribute = attribute;
+		this.modifierAmount = modifierAmount;
+		this.modifierID = modifierID;
+		this.operation = isCosmetic ? null : Operation.ADDITION;
+	}
+	
+	private SkillType(boolean isCosmetic, String id, int maxLevel, Function<Integer, Double> expTable, 
+			Function<Integer, Double> coinsTable, IAttribute attribute, 
+			Function<Integer, Double> modifierAmount, UUID modifierID, AttributeModifier.Operation operation) {
+		this.isCosmetic = isCosmetic;
+		this.id = id;
+		this.maxLevel = maxLevel;
+		this.expTable = expTable;
+		this.coinsTable = coinsTable;
+		this.attribute = attribute;
+		this.modifierAmount = modifierAmount;
+		this.modifierID = modifierID;
+		this.operation = operation;
 	}
 	
 	public double getXPForLevel(int level) {
-		if(this.expTable != null) {
+		if (this.expTable != null) {
 			return this.expTable.apply(level);
 		} else return 0;
 	}
@@ -341,7 +429,7 @@ public enum SkillType {
 	}
 	
 	public double getCoinsRewardUponReachingLevel(int level) {
-		if(this.coinsTable != null) {
+		if (this.coinsTable != null) {
 			return this.coinsTable.apply(level);
 		} else return 0;
 	}
@@ -354,77 +442,25 @@ public enum SkillType {
 		return id;
 	}
 	
-	public static SkillType getSkillTypeByID(String id) {
-		final SkillType[] types = new SkillType[] {FARMING, MINING, COMBAT, FORAGING, FISHING, 
-				ENCHANTING, ALCHEMY, TAMING, CARPENTRY, RUNECRAFTING};
-		for(SkillType type : types) {
-			if(type.getID().equals(id)) return type;
+	public static SkillType getSkillTypeByID(String id) {	
+		for (SkillType type : SkillType.values()) {
+			if (type.getID().equals(id)) return type;
 		}
 		
 		throw new IllegalArgumentException("ID does not match with any of the skills!");
 	}
 	
-	/*
-	 * Get the magnitude of attribute modifier. Used for farming and fishing.
-	 */
-	private static final Function<Integer, Double> ATTRIBUTE_MODIFIER_AMOUNT_1 = (level) -> {
-		if(level <= 14) {
-			return Double.valueOf(level * 2);
-		} else if(level >= 15 && level <= 19) {
-			return Double.valueOf(level * 3 - 14);
-		} else if(level >= 20 && level <= 25) {
-			return Double.valueOf(level * 4 - 33);
-		} else {
-			return Double.valueOf(level * 5 - 58);
-		}
-	};
-	
-	/*
-	 * Get the magnitude of attribute modifier. Used for mining, foraging, enchanting, and alchemy.
-	 */
-	private static final Function<Integer, Double> ATTRIBUTE_MODIFIER_AMOUNT_2 = (level) -> {
-		if(level <= 14) {
-			return Double.valueOf(level);
-		} else {
-			return Double.valueOf(level * 2 - 14);
-		}
-	};
-	
-	/*
-	 * Get the magnitude of attribute modifier. Used for combat.
-	 */
-	private static final Function<Integer, Double> ATTRIBUTE_MODIFIER_AMOUNT_COMBAT = (level) -> {
-		return Double.valueOf(level * 0.5);
-	};
-	
-	/*
-	 * Get the magnitude of attribute modifier. Used for taming. (Purely for semantic reasons lol)
-	 */
-	private static final Function<Integer, Double> ATTRIBUTE_MODIFIER_AMOUNT_TAMING = (level) -> {
-		return Double.valueOf(level);
-	};
-	
 	public double getAttributeModifierAmount(int level) {
-		switch(this) {
-		case FARMING:
-		case FISHING:
-			return ATTRIBUTE_MODIFIER_AMOUNT_1.apply(level);
-		case MINING:
-		case FORAGING:
-		case ENCHANTING:
-		case ALCHEMY:
-			return ATTRIBUTE_MODIFIER_AMOUNT_2.apply(level);
-		case COMBAT:
-			return ATTRIBUTE_MODIFIER_AMOUNT_COMBAT.apply(level);
-		case TAMING:
-			return ATTRIBUTE_MODIFIER_AMOUNT_TAMING.apply(level);
-		default:
-			return 0.0d;
-		}
+		if (Objects.isNull(this.modifierAmount)) return 0.0D;
+		return this.modifierAmount.apply(level);
 	}
 	
 	public ITextComponent getDisplayName() {
 		return new TranslationTextComponent("skills.forgeblock." + id + ".name");
+	}
+	
+	public ITextComponent getAbilityName(int level) {
+		return new TranslationTextComponent("skills.forgeblock." + id + ".ability", level).applyTextStyle(TextFormatting.YELLOW);
 	}
 	
 	public static final SkillType[] NON_COSMETIC_TYPES = new SkillType[] {
@@ -437,4 +473,34 @@ public enum SkillType {
 			ALCHEMY,
 			TAMING
 	};
+	
+	/**
+	 * Returns the attribute to be modified.
+	 * Null iff cosmetic.
+	 * @return
+	 */
+	@Nullable
+	public IAttribute getAttribute() {
+		return this.attribute;
+	}
+	
+	/**
+	 * Returns the UUID to be used with the modifier.
+	 * Null iff cosmetic.
+	 * @return
+	 */
+	@Nullable
+	public UUID getModifierUUID() {
+		return this.modifierID;
+	}
+	
+	/**
+	 * Returns the operation of the modifier.
+	 * Null iff cosmetic.
+	 * @return
+	 */
+	@Nullable
+	public AttributeModifier.Operation getOperation() {
+		return this.operation;
+	}
 }

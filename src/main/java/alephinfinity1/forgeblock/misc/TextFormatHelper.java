@@ -145,7 +145,12 @@ public class TextFormatHelper {
 		}
 	}
 
-	public static String formatModifier(double amount) {
+	/**
+	 * Formats a number.
+	 * @param amount
+	 * @return
+	 */
+	public static String formatDouble(double amount) {
 		StringBuffer str = new StringBuffer(new DecimalFormat(",###.#").format(amount));
 		if(amount > 0.0D) {
 			str.insert(0, '+');
@@ -187,6 +192,11 @@ public class TextFormatHelper {
 		
 	}
 	
+	/**
+	 * Converts an integer to a roman numeral.
+	 * @param value
+	 * @return
+	 */
 	public static String getRomanNumeral(int value) {
 		if(value == 5000) return "TOO_HIGH_NUMBER";
 		if(value > 3999 || value < 1) {
@@ -311,6 +321,16 @@ public class TextFormatHelper {
 		return thousands + hundreds + tens + ones;
 	}
 	
+	/**
+	 * Formats a modifier map present on an item. <br>
+	 * Should only be used on Swords, Bows, Armours, and Tools. <br>
+	 * @param modifiers
+	 * @param reforge
+	 * @param tier
+	 * @param extraModifiers
+	 * @param stack
+	 * @return
+	 */
 	public static List<ITextComponent> formatModifierMap(Multimap<String, AttributeModifier> modifiers, @Nullable Reforge reforge, FBTier tier, @Nullable IItemModifiers extraModifiers, @Nullable ItemStack stack) {
 		
 		List<ITextComponent> tooltip = new ArrayList<>();
@@ -475,6 +495,20 @@ public class TextFormatHelper {
 		OFFENSIVE, DEFENSIVE, EXTRAS, XP, SLAYER_LUCK;
 	}
 	
+	/**
+	 * Formats a single attribute modifier, in the item style.
+	 * @param value
+	 * @param reforgeValue
+	 * @param attributeName
+	 * @param reforgeName
+	 * @param type
+	 * @param scale
+	 * @param suffix
+	 * @param displayType
+	 * @param extraModifier
+	 * @param stack
+	 * @return
+	 */
 	public static ITextComponent formatModifier(double value, double reforgeValue, String attributeName, String reforgeName, AttributeType type, double scale, String suffix, AttributeDisplayType displayType, @Nullable IItemModifiers extraModifier, @Nullable ItemStack stack) {
 		List<ITextComponent> tooltip = new ArrayList<>();
 		
@@ -513,26 +547,26 @@ public class TextFormatHelper {
 			switch(displayType) {
 			case BOTH:
 				if(value != 0.0D) {
-					if(reforgeValue == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent(iconName).getString() + " " + TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix));
-					else tooltip.add(new StringTextComponent(new TranslationTextComponent(iconName).getString() + " " + TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeValue * scale) + suffix + ")"));
+					if(reforgeValue == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent(iconName).getString() + " " + TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix));
+					else tooltip.add(new StringTextComponent(new TranslationTextComponent(iconName).getString() + " " + TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatDouble(reforgeValue * scale) + suffix + ")"));
 				} else if(reforgeValue != 0.0D) {
-					tooltip.add(new StringTextComponent(new TranslationTextComponent(iconName).getString() + " " + TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeValue * scale) + suffix + ")"));
+					tooltip.add(new StringTextComponent(new TranslationTextComponent(iconName).getString() + " " + TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatDouble(reforgeValue * scale) + suffix + ")"));
 				}
 				break;
 			case SHORT:
 				if(value != 0.0D) {
-					if(reforgeValue == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent(shortName).getString() + TextFormatting.GRAY.toString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix));
-					else tooltip.add(new StringTextComponent(new TranslationTextComponent(shortName).getString() + TextFormatting.GRAY.toString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeValue * scale) + suffix + ")"));
+					if(reforgeValue == 0.0D) tooltip.add(new StringTextComponent(new TranslationTextComponent(shortName).getString() + TextFormatting.GRAY.toString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix));
+					else tooltip.add(new StringTextComponent(new TranslationTextComponent(shortName).getString() + TextFormatting.GRAY.toString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatDouble(reforgeValue * scale) + suffix + ")"));
 				} else if(reforgeValue != 0.0D) {
-					tooltip.add(new StringTextComponent(new TranslationTextComponent(shortName).getString() + TextFormatting.GRAY.toString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeValue * scale) + suffix + ")"));
+					tooltip.add(new StringTextComponent(new TranslationTextComponent(shortName).getString() + TextFormatting.GRAY.toString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatDouble(reforgeValue * scale) + suffix + ")"));
 				}
 				break;
 			case TEXT:
 				if(value != 0.0D) {
-					if(reforgeValue == 0.0D) tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix));
-					else tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeValue * scale) + suffix + ")"));
+					if(reforgeValue == 0.0D) tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix));
+					else tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatDouble(reforgeValue * scale) + suffix + ")"));
 				} else if(reforgeValue != 0.0D) {
-					tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeValue * scale) + suffix + ")"));
+					tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatDouble(reforgeValue * scale) + suffix + ")"));
 				}
 				break;
 			default:
@@ -542,10 +576,10 @@ public class TextFormatHelper {
 		}
 		
 		if(value != 0.0D) {
-			if(reforgeValue == 0.0D) tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix));
-			else tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeValue * scale) + suffix + ")"));
+			if(reforgeValue == 0.0D) tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix));
+			else tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatDouble(reforgeValue * scale) + suffix + ")"));
 		} else if(reforgeValue != 0.0D) {
-			tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatModifier(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatModifier(reforgeValue * scale) + suffix + ")"));
+			tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(attrName).getString() + ": " + color + TextFormatHelper.formatDouble(value * scale) + suffix + TextFormatting.BLUE.toString() + " (" + reforgeName + " " + TextFormatHelper.formatDouble(reforgeValue * scale) + suffix + ")"));
 		}
 		
 		if(extraModifier != null)
@@ -555,11 +589,22 @@ public class TextFormatHelper {
 		
 	}
 	
+	/**
+	 * Formats enchantments.
+	 * @param stack
+	 * @return
+	 */
 	public static List<ITextComponent> formatEnchantments(ItemStack stack) {
 		return TextFormatHelper.formatEnchantments(stack, EnchantmentHelper.getEnchantments(stack));
 	}
 	
-	public static List<ITextComponent> formatEnchantments(ItemStack stack, Map<Enchantment, Integer> enchantments) {
+	/**
+	 * Formats enchantments.
+	 * @param stack
+	 * @param enchantments
+	 * @return
+	 */
+	private static List<ITextComponent> formatEnchantments(ItemStack stack, Map<Enchantment, Integer> enchantments) {
 		List<ITextComponent> list = new ArrayList<>();
 		
 		Set<Map.Entry<Enchantment, Integer>> set = enchantments.entrySet();
@@ -586,8 +631,13 @@ public class TextFormatHelper {
 		return list;
 	}
 	
+	/**
+	 * Formats enchantments, through a given ListNBT.
+	 * @param stack
+	 * @param enchants
+	 * @return
+	 */
 	public static List<ITextComponent> formatEnchantments(ItemStack stack, ListNBT enchants) {
-		
 		Map<Enchantment, Integer> enchantments = new HashMap<>();
 		for(INBT nbt : enchants) {
 			CompoundNBT compound = (CompoundNBT) nbt;
@@ -598,6 +648,15 @@ public class TextFormatHelper {
 		return TextFormatHelper.formatEnchantments(stack, enchantments);
 	}
 	
+	/**
+	 * Formats extra modifiers provided by IItemModifiers capability.
+	 * @param attributeName
+	 * @param scale
+	 * @param suffix
+	 * @param extraModifier
+	 * @param stack
+	 * @return
+	 */
 	public static ITextComponent formatExtras(String attributeName, double scale, String suffix, @Nonnull IItemModifiers extraModifier, @Nonnull ItemStack stack) {
 		ITextComponent tc = new StringTextComponent(""); //Initialise empty component first, append later.
 		Map<AbstractStatsModifier, CompoundNBT> modMap = extraModifier.getMap();
@@ -615,11 +674,83 @@ public class TextFormatHelper {
 				}
 			}
 			if(!MathHelper.epsilonEquals(value, 0.0D)) { //Only apply modifier if non-zero.
-				ITextComponent modTc = new StringTextComponent("(").appendText(formatModifier(value * scale)).appendText(suffix).appendText(")").applyTextStyle(color);
+				ITextComponent modTc = new StringTextComponent("(").appendText(formatDouble(value * scale)).appendText(suffix).appendText(")").applyTextStyle(color);
 				tc.appendSibling(modTc);
 			}
 		}
 		return tc;
+	}
+	
+	/**
+	 * Gets the representative colour of an attribute. Gray for secondary attributes.
+	 * @param attr
+	 * @return
+	 */
+	private static TextFormatting getAttributeColor(IAttribute attr) {
+		if (attr.equals(SharedMonsterAttributes.ATTACK_DAMAGE)) return TextFormatting.RED;
+		else if (attr.equals(FBAttributes.STRENGTH)) return TextFormatting.RED;
+		else if (attr.equals(FBAttributes.CRIT_CHANCE)) return TextFormatting.BLUE;
+		else if (attr.equals(FBAttributes.CRIT_DAMAGE)) return TextFormatting.BLUE;
+		else if (attr.equals(FBAttributes.BONUS_ATTACK_SPEED)) return TextFormatting.YELLOW;
+		else if (attr.equals(FBAttributes.SEA_CREATURE_CHANCE)) return TextFormatting.DARK_AQUA;
+		else if (attr.equals(SharedMonsterAttributes.MAX_HEALTH)) return TextFormatting.RED;
+		else if (attr.equals(FBAttributes.DEFENSE)) return TextFormatting.GREEN;
+		else if (attr.equals(SharedMonsterAttributes.MOVEMENT_SPEED)) return TextFormatting.WHITE;
+		else if (attr.equals(FBAttributes.INTELLIGENCE)) return TextFormatting.AQUA;
+		else if (attr.equals(FBAttributes.TRUE_DEFENSE)) return TextFormatting.WHITE;
+		else if (attr.equals(FBAttributes.MAGIC_FIND)) return TextFormatting.AQUA;
+		else if (attr.equals(FBAttributes.PET_LUCK)) return TextFormatting.LIGHT_PURPLE;
+		else if (attr.equals(FBAttributes.FEROCITY)) return TextFormatting.RED;
+		else return TextFormatting.GRAY;
+	}
+	
+	/**
+	 * Formats a special modifier, as used in potions, skill rewards, and etc. <br>
+	 * E.g. "+100❁ Strength", "+25%❈ Defense" <br>
+	 * Should only be used on attributes with an icon and a colour.
+	 * @param modifier
+	 * @return
+	 */
+	public static ITextComponent formatSpecialModifier(String attributeName, AttributeModifier modifier) {
+		double amount = modifier.getAmount();
+		AttributeModifier.Operation operation = modifier.getOperation();
+		
+		String attrName;
+		if (attributeName.equals("generic.attackDamage")) attrName = "attribute.name.forgeblock.damage";
+		else if (attributeName.equals("generic.maxHealth")) attrName = "attribute.name.forgeblock.health";
+		else if (attributeName.equals("generic.movementSpeed")) attrName = "attribute.name.forgeblock.speed";
+		else attrName = "attribute.name." + attributeName;
+		
+		final int PREFIX_LENGTH = 26; //The length of 'attribute.name.forgeblock.'. Used to avoid magic numbers.
+		
+		String iconName = "misc.forgeblock.attributeicon." + attrName.substring(PREFIX_LENGTH);
+		
+		switch (operation) {
+		case ADDITION:
+			return new StringTextComponent(TextFormatHelper.formatDouble(amount))
+				.appendSibling(new TranslationTextComponent(iconName))
+				.appendText(" ")
+				.appendSibling(new TranslationTextComponent(attrName))
+				.applyTextStyle(TextFormatHelper.getAttributeColor(FBAttributes.getPrimaryAttributeByName(attributeName)));
+		case MULTIPLY_BASE: //TODO fix formatSpecialModifier for +x% and *x.
+			return new StringTextComponent(TextFormatHelper.formatDouble(amount))
+				.appendSibling(new TranslationTextComponent(iconName))
+				.appendText(" ")
+				.appendSibling(new TranslationTextComponent(attrName))
+				.applyTextStyle(TextFormatHelper.getAttributeColor(FBAttributes.getPrimaryAttributeByName(attributeName)));
+		case MULTIPLY_TOTAL:
+			return new StringTextComponent(TextFormatHelper.formatDouble(amount))
+				.appendSibling(new TranslationTextComponent(iconName))
+				.appendText(" ")
+				.appendSibling(new TranslationTextComponent(attrName))
+				.applyTextStyle(TextFormatHelper.getAttributeColor(FBAttributes.getPrimaryAttributeByName(attributeName)));
+		default:
+			return new StringTextComponent(TextFormatHelper.formatDouble(amount))
+				.appendSibling(new TranslationTextComponent(iconName))
+				.appendText(" ")
+				.appendSibling(new TranslationTextComponent(attrName))
+				.applyTextStyle(TextFormatHelper.getAttributeColor(FBAttributes.getPrimaryAttributeByName(attributeName)));
+		}
 	}
 
 }

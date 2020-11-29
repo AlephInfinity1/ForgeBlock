@@ -310,7 +310,7 @@
     "misc.forgeblock.attributeshort.trueDefense": "\u00A7f\u2742 Tr Def",
     "misc.forgeblock.attributeshort.magicFind": "\u00A7b\u20AA MF",
     "misc.forgeblock.attributeshort.petLuck": "\u00A7d\u2663 PL",
-    "misc.forgeblock.attributeshort.ferocity": "\u00A7c\u2e17 Fc",
+    "misc.forgeblock.attributeshort.ferocity": "\u00A7c\u2e17 Fc", 
     
     "misc.forgeblock.mana": "Mana",
     "text.forgeblock.mana_cost": "\u00A78Mana Cost: \u00A73%s",
@@ -342,6 +342,7 @@
     "enchantment.forgeblock.scavenger": "Scavenger",
     "enchantment.forgeblock.vampirism": "Vampirism",
     "enchantment.forgeblock.one_for_all": "One For All",
+    "enchantment.forgeblock.vicious": "Vicious",
 
     "effect.forgeblock.ender_warp": "Ender Warp",
     "effect.forgeblock.rogue_speed_boost": "Rogue Speed Boost",
@@ -373,9 +374,20 @@
     "skills.forgeblock.carpentry.name": "Carpentry",
     "skills.forgeblock.runecrafting.name": "Runecrafting",
     
+    "skills.forgeblock.farming.ability": "Farmhand %s",
+    "skills.forgeblock.mining.ability": "Spelunker %s",
+    "skills.forgeblock.combat.ability": "Warrior %s",
+    "skills.forgeblock.foraging.ability": "Logger %s",
+    "skills.forgeblock.fishing.ability": "Treasure Hunter %s",
+    "skills.forgeblock.enchanting.ability": "Conjurer %s",
+    "skills.forgeblock.alchemy.ability": "Brewer %s",
+    "skills.forgeblock.taming.ability": "Zoologist %s",
+    "skills.forgeblock.carpentry.ability": "Carpenter %s",
+    "skills.forgeblock.runecrafting.ability": "Runecrafter %s",
+    
     "skills.forgeblock.levelUpMessage_1": "  \u00A7b\u00A7lSKILL LEVEL UP \u00A73%1$s \u00A78%2$s\u279c\u00A73%3$s",
     "skills.forgeblock.levelUpMessage_2": "  \u00A7a\u00A7lREWARDS",
-    "skills.forgeblock.levelUpMessage_3": "    \u00A77\u00af\u005c\u005f\u0028\u30c4\u0029\u005f\u002f\u00af (for now)",
+    "skills.forgeblock.levelUpMessageCoins": "    \u00A77+\u00A76%s Coins",
     
     "commands.forgeblock.reforge.success": "Successfully reforged %1$s's %2$s to %3$s.",
     "commands.forgeblock.reforge.randomSuccess": "Successfully reforged %1$s's %2$s randomly.",

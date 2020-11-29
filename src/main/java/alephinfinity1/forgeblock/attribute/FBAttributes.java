@@ -85,4 +85,18 @@ public final class FBAttributes {
 			FORAGING_XP_BOOST, FISHING_XP_BOOST, ENCHANTING_XP_BOOST, ALCHEMY_XP_BOOST, TAMING_XP_BOOST};
 
 	public static final IAttribute[] SLAYER_LUCKS = new IAttribute[] {ZOMBIE_SLAYER_LUCK, SPIDER_SLAYER_LUCK, WOLF_SLAYER_LUCK};
+	
+	/**
+	 * Returns a primary attribute by name, or null if name doesn't match any.
+	 * @param name
+	 * @return
+	 */
+	public static final IAttribute getPrimaryAttributeByName(String name) {
+		for (IAttribute attr : PRIMARY_ATTRIBUTES) {
+			if (attr.getName().equals(name)) {
+				return attr;
+			}
+		}
+		return null;
+	}
 }

@@ -41,10 +41,13 @@ import alephinfinity1.forgeblock.item.WoodSingularityApplicableSwordItem;
 import alephinfinity1.forgeblock.item.WoodSingularityItem;
 import alephinfinity1.forgeblock.item.YoungDragonArmorItem;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.MinecartItem;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -335,6 +338,11 @@ public class ModItems {
 	public static final RegistryObject<Item> ANVIL = OVERRIDE.register("anvil", () -> new BlockItem(ModBlocks.ANVIL.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
 	public static final RegistryObject<Item> CHIPPED_ANVIL = OVERRIDE.register("chipped_anvil", () -> new BlockItem(ModBlocks.CHIPPED_ANVIL.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
 	public static final RegistryObject<Item> DAMAGED_ANVIL = OVERRIDE.register("damaged_anvil", () -> new BlockItem(ModBlocks.DAMAGED_ANVIL.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
+	
+	public static final RegistryObject<Item> COMMAND_BLOCK = OVERRIDE.register("command_block", () -> new BlockItem(Blocks.COMMAND_BLOCK, new Item.Properties().group(ItemGroup.REDSTONE)));
+	public static final RegistryObject<Item> CHAIN_COMMAND_BLOCK = OVERRIDE.register("chain_command_block", () -> new BlockItem(Blocks.CHAIN_COMMAND_BLOCK, new Item.Properties().group(ItemGroup.REDSTONE)));
+	public static final RegistryObject<Item> REPEATING_COMMAND_BLOCK = OVERRIDE.register("repeating_command_block", () -> new BlockItem(Blocks.REPEATING_COMMAND_BLOCK, new Item.Properties().group(ItemGroup.REDSTONE)));
+	public static final RegistryObject<Item> COMMAND_BLOCK_MINECART = OVERRIDE.register("command_block_minecart", () -> new MinecartItem(AbstractMinecartEntity.Type.COMMAND_BLOCK, new Item.Properties().maxStackSize(1).group(ItemGroup.REDSTONE)));
 	
 	/*
 	 * Custom items/ideas/debug
