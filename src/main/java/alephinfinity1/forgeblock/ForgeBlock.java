@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import alephinfinity1.forgeblock.attribute.AttributeHelper;
 import alephinfinity1.forgeblock.client.ClientEventBusSubscriber;
-import alephinfinity1.forgeblock.config.CustomModConfig;
+import alephinfinity1.forgeblock.config.FBModConfig;
 import alephinfinity1.forgeblock.discordRPC.DiscordRpc;
 import alephinfinity1.forgeblock.init.ModBlocks;
 import alephinfinity1.forgeblock.init.ModCollections;
@@ -90,8 +90,8 @@ public class ForgeBlock {
 
 		FBPacketHandler.register();
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CustomModConfig.CLIENT_CONFIG);
-		CustomModConfig.loadConfig(CustomModConfig.CLIENT_CONFIG,
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, FBModConfig.CLIENT_CONFIG);
+		FBModConfig.loadConfig(FBModConfig.CLIENT_CONFIG,
 				FMLPaths.CONFIGDIR.get().resolve("forgeblock-client.toml"));	
 	}
 

@@ -15,7 +15,7 @@ import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
-import alephinfinity1.forgeblock.config.CustomModConfig;
+import alephinfinity1.forgeblock.config.FBModConfig;
 import alephinfinity1.forgeblock.enchantment.IFBEnchantment;
 import alephinfinity1.forgeblock.enchantment.UltimateEnchantment;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
@@ -337,8 +337,8 @@ public class TextFormatHelper {
 		boolean offensive = false, defensive = false, extras = false, xp = false, slayerLuck = false;
 		
 		AttributeDisplayType displayType = AttributeDisplayType.TEXT;
-		if(CustomModConfig.ATTRIBUTE_DISPLAY_TYPE != null) {
-			if(CustomModConfig.ATTRIBUTE_DISPLAY_TYPE.get() != null) displayType = CustomModConfig.ATTRIBUTE_DISPLAY_TYPE.get();
+		if(FBModConfig.ATTRIBUTE_DISPLAY_TYPE != null) {
+			if(FBModConfig.ATTRIBUTE_DISPLAY_TYPE.get() != null) displayType = FBModConfig.ATTRIBUTE_DISPLAY_TYPE.get();
 		}
 		
 		Multimap<String, AttributeModifier> reforgeModifiers;
@@ -614,12 +614,12 @@ public class TextFormatHelper {
 			} else {
 				if (entry.getKey() instanceof IFBEnchantment) {
 					if (entry.getValue() > ((IFBEnchantment) entry.getKey()).getEnchantingTableMaxLevel()) {
-						list.add(new StringTextComponent(TextFormatting.GOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+						list.add(new StringTextComponent((FBModConfig.ENABLE_GOLDEN_ENCHANTS.get() ? TextFormatting.GOLD.toString() : TextFormatting.BLUE.toString()) + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
 					} else {
 						list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
 					}
 				} else if (entry.getValue() > entry.getKey().getMaxLevel()) {
-					list.add(new StringTextComponent(TextFormatting.GOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+					list.add(new StringTextComponent((FBModConfig.ENABLE_GOLDEN_ENCHANTS.get() ? TextFormatting.GOLD.toString() : TextFormatting.BLUE.toString()) + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
 				} else {
 					list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
 				}

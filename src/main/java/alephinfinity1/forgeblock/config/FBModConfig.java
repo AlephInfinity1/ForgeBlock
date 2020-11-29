@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
 @Mod.EventBusSubscriber
-public class CustomModConfig {
+public class FBModConfig {
 	
 	public static final String CATEGORY_GENERAL = "General";
 	public static final String CATEGORY_TIER = "Rarity";
@@ -25,6 +25,7 @@ public class CustomModConfig {
 	
 	public static ForgeConfigSpec CLIENT_CONFIG;
 	
+	//Tier colours.
 	public static ForgeConfigSpec.EnumValue<TextFormatting> COMMON_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> UNCOMMON_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> RARE_TIER_COLOR;
@@ -35,10 +36,15 @@ public class CustomModConfig {
 	public static ForgeConfigSpec.EnumValue<TextFormatting> SPECIAL_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> VERY_SPECIAL_TIER_COLOR;
 	
+	//The way to display attributes.
 	public static ForgeConfigSpec.EnumValue<AttributeDisplayType> ATTRIBUTE_DISPLAY_TYPE;
+	
+	//Whether high-level and rare enchants should be golden instead of blue.
+	public static ForgeConfigSpec.BooleanValue ENABLE_GOLDEN_ENCHANTS;
 	
 	static {
 		CLIENT_BUILDER.comment("General config").push(CATEGORY_GENERAL);
+		ENABLE_GOLDEN_ENCHANTS = CLIENT_BUILDER.comment("Enable golden enchants").define("goldenEnchants", true);
 		CLIENT_BUILDER.pop();
 		
 		CLIENT_BUILDER.comment("Rarity config").push(CATEGORY_TIER);

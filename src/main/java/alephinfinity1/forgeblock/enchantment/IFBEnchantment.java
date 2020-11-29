@@ -34,7 +34,7 @@ public interface IFBEnchantment {
 	/**
 	 * Gets the maximum level of this enchantment obtainable on an enchanting table,
 	 * as opposed to the 'actual' maximum level that can be obtained elsewhere. <br>
-	 * If unobtainable at enchantment table, return -1.
+	 * If unobtainable at enchantment table (e.g. Replenish and Vicious), return -1.
 	 * @return The max level of this enchantment obtainable on an enchanting table.
 	 */
 	public int getEnchantingTableMaxLevel();

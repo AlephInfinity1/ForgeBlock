@@ -1,24 +1,24 @@
 package alephinfinity1.forgeblock.misc.tier;
 
-import alephinfinity1.forgeblock.config.CustomModConfig;
+import alephinfinity1.forgeblock.config.FBModConfig;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
 /**
- * The rarity/tier of an item.
+ * The rarity/tier of an item. <br>
  * Better known as 'Rarity' in-game, however the official terminology, as shown in the API doc, is 'Tier'.
  */
 public enum FBTier {
-	COMMON(CustomModConfig.COMMON_TIER_COLOR.get(), "misc.forgeblock.tier.common"),
-	UNCOMMON(CustomModConfig.UNCOMMON_TIER_COLOR.get(), "misc.forgeblock.tier.uncommon"),
-	RARE(CustomModConfig.RARE_TIER_COLOR.get(), "misc.forgeblock.tier.rare"),
-	EPIC(CustomModConfig.EPIC_TIER_COLOR.get(), "misc.forgeblock.tier.epic"),
-	LEGENDARY(CustomModConfig.LEGENDARY_TIER_COLOR.get(), "misc.forgeblock.tier.legendary"),
-	MYTHIC(CustomModConfig.MYTHIC_TIER_COLOR.get(), "misc.forgeblock.tier.mythic"),
-	SUPREME(CustomModConfig.SUPREME_TIER_COLOR.get(), "misc.forgeblock.tier.supreme"),
-	SPECIAL(CustomModConfig.SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.special"),
-	VERY_SPECIAL(CustomModConfig.VERY_SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.very_special");
+	COMMON(FBModConfig.COMMON_TIER_COLOR.get(), "misc.forgeblock.tier.common"),
+	UNCOMMON(FBModConfig.UNCOMMON_TIER_COLOR.get(), "misc.forgeblock.tier.uncommon"),
+	RARE(FBModConfig.RARE_TIER_COLOR.get(), "misc.forgeblock.tier.rare"),
+	EPIC(FBModConfig.EPIC_TIER_COLOR.get(), "misc.forgeblock.tier.epic"),
+	LEGENDARY(FBModConfig.LEGENDARY_TIER_COLOR.get(), "misc.forgeblock.tier.legendary"),
+	MYTHIC(FBModConfig.MYTHIC_TIER_COLOR.get(), "misc.forgeblock.tier.mythic"),
+	SUPREME(FBModConfig.SUPREME_TIER_COLOR.get(), "misc.forgeblock.tier.supreme"),
+	SPECIAL(FBModConfig.SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.special"),
+	VERY_SPECIAL(FBModConfig.VERY_SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.very_special");
 	
 	public TextFormatting color;
 	public TranslationTextComponent name;
@@ -86,23 +86,23 @@ public enum FBTier {
 	public Rarity getVanillaRarity() {
 		switch(this) {
 		case COMMON:
-			return Rarity.create("FB_COMMON", CustomModConfig.COMMON_TIER_COLOR.get());
+			return Rarity.create("FB_COMMON", FBModConfig.COMMON_TIER_COLOR.get());
 		case UNCOMMON:
-			return Rarity.create("FB_UNCOMMON", CustomModConfig.UNCOMMON_TIER_COLOR.get());
+			return Rarity.create("FB_UNCOMMON", FBModConfig.UNCOMMON_TIER_COLOR.get());
 		case RARE:
-			return Rarity.create("FB_RARE", CustomModConfig.RARE_TIER_COLOR.get());
+			return Rarity.create("FB_RARE", FBModConfig.RARE_TIER_COLOR.get());
 		case EPIC:
-			return Rarity.create("FB_EPIC", CustomModConfig.EPIC_TIER_COLOR.get());
+			return Rarity.create("FB_EPIC", FBModConfig.EPIC_TIER_COLOR.get());
 		case LEGENDARY:
-			return Rarity.create("FB_LEGENDARY", CustomModConfig.LEGENDARY_TIER_COLOR.get());
+			return Rarity.create("FB_LEGENDARY", FBModConfig.LEGENDARY_TIER_COLOR.get());
 		case MYTHIC:
-			return Rarity.create("FB_MYTHIC", CustomModConfig.MYTHIC_TIER_COLOR.get());
+			return Rarity.create("FB_MYTHIC", FBModConfig.MYTHIC_TIER_COLOR.get());
 		case SUPREME:
-			return Rarity.create("FB_SUPREME", CustomModConfig.SUPREME_TIER_COLOR.get());
+			return Rarity.create("FB_SUPREME", FBModConfig.SUPREME_TIER_COLOR.get());
 		case SPECIAL:
-			return Rarity.create("FB_SPECIAL", CustomModConfig.SPECIAL_TIER_COLOR.get());
+			return Rarity.create("FB_SPECIAL", FBModConfig.SPECIAL_TIER_COLOR.get());
 		case VERY_SPECIAL:
-			return Rarity.create("FB_VERY_SPECIAL", CustomModConfig.VERY_SPECIAL_TIER_COLOR.get());
+			return Rarity.create("FB_VERY_SPECIAL", FBModConfig.VERY_SPECIAL_TIER_COLOR.get());
 		default:
 			return Rarity.COMMON;
 		}
