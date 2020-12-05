@@ -3,6 +3,9 @@ package alephinfinity1.forgeblock.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
+import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -17,7 +20,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class MinerOutfitArmorItem extends FBArmorItem {
+public class MinerOutfitArmorItem extends FBArmorItem implements IRequirementItem {
 
 	public MinerOutfitArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier, double defenseIn,
 			double healthIn) {
@@ -43,6 +46,11 @@ public class MinerOutfitArmorItem extends FBArmorItem {
 		}
 		EffectInstance haste = new EffectInstance(Effects.HASTE, 100, 1, true, true);
 		living.addPotionEffect(haste);
+	}
+
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {SkillRequirementPredicate.skillRequirement(SkillType.MINING, 5)};
 	}
 
 }

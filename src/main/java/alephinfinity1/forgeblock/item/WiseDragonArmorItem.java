@@ -7,6 +7,8 @@ import java.util.UUID;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.misc.event.PlayerCastSpellEvent;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class WiseDragonArmorItem extends FBArmorItem {
+public class WiseDragonArmorItem extends FBArmorItem implements IRequirementItem {
 	
 	public static final UUID WISE_MANA_EFFICIENCY_BOOST = UUID.fromString("0fc05101-3872-4de2-815d-0c2862277b7a");
 
@@ -46,6 +48,11 @@ public class WiseDragonArmorItem extends FBArmorItem {
 			if(!(stack.getItem() instanceof WiseDragonArmorItem)) return;
 		}
 		event.setManaConsumed(event.getManaConsumed() * 2.0D / 3.0D);
+	}
+	
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {SkillRequirementPredicate.combatRequirement(16)};
 	}
 
 }

@@ -10,6 +10,8 @@ import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.misc.event.FBEventHooks;
 import alephinfinity1.forgeblock.misc.event.PlayerCastSpellEvent;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.ManaProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
@@ -35,7 +37,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class AspectOfTheDragonsItem extends FBSwordItem implements IDamageAbilityItem {
+public class AspectOfTheDragonsItem extends FBSwordItem implements IDamageAbilityItem, IRequirementItem {
 
 	public AspectOfTheDragonsItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn,
 			double critChanceIn, double critDamageIn) {
@@ -145,6 +147,11 @@ public class AspectOfTheDragonsItem extends FBSwordItem implements IDamageAbilit
 	@Override
 	public String getUnlocalizedUseAbilityName() {	
 		return "text.forgeblock.useAbility.aotd";
+	}	
+
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {SkillRequirementPredicate.combatRequirement(18)};
 	}
 
 }

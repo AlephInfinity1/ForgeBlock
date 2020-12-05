@@ -5,14 +5,17 @@ import java.util.List;
 
 import com.google.common.collect.Multimap;
 
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class StrongDragonArmorItem extends FBArmorItem {
+public class StrongDragonArmorItem extends FBArmorItem implements IRequirementItem {
 
 	public StrongDragonArmorItem(EquipmentSlotType slot, String name, Properties props, FBTier tier,
 			Multimap<String, AttributeModifier> modifiers) {
@@ -28,6 +31,11 @@ public class StrongDragonArmorItem extends FBArmorItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.armor_desc.strong_3").getString()));
 		list.add(new StringTextComponent(""));
 		return list;
+	}
+
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {SkillRequirementPredicate.combatRequirement(18)};
 	}
 
 }

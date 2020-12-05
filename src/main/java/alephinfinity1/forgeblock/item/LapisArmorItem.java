@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.UUID;
 
 import alephinfinity1.forgeblock.entity.LapisZombieEntity;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
+import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -23,7 +26,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class LapisArmorItem extends FBArmorItem {
+public class LapisArmorItem extends FBArmorItem implements IRequirementItem {
 	
 	private static final UUID LAPIS_HEALTH_BOOST = UUID.fromString("654d36d0-50ea-4d7d-9a93-1c0b7e9ddaea");
 
@@ -73,6 +76,11 @@ public class LapisArmorItem extends FBArmorItem {
 			if(stack.getItem() instanceof LapisArmorItem) ++piecesCount;
 		}
 		event.setExpToDrop((int) (event.getExpToDrop() * (1 + 0.5 * piecesCount)));
+	}
+
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {SkillRequirementPredicate.skillRequirement(SkillType.MINING, 5)};
 	}
 
 }

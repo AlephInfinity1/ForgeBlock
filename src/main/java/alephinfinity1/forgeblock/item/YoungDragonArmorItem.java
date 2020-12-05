@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import com.google.common.collect.Multimap;
 
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -21,7 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class YoungDragonArmorItem extends FBArmorItem {
+public class YoungDragonArmorItem extends FBArmorItem implements IRequirementItem {
 	
 	private static final UUID YOUNG_SPEED_BOOST = UUID.fromString("a4fd3d7d-ae27-47f1-b58b-1736d9eecc4e");
 	
@@ -61,5 +63,9 @@ public class YoungDragonArmorItem extends FBArmorItem {
 		}
 	}
 	
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {SkillRequirementPredicate.combatRequirement(16)};
+	}
 
 }

@@ -553,5 +553,13 @@
     "text.forgeblock.item_desc.recomb_1": "\u00A77the Dungeon Blacksmith to",
     "text.forgeblock.item_desc.recomb_2": "\u00A77permanently increase the rarity",
     "text.forgeblock.item_desc.recomb_3": "\u00A77of an item. An item's rarity can",
-    "text.forgeblock.item_desc.recomb_4": "\u00A77only be upgraded once!"
+    "text.forgeblock.item_desc.recomb_4": "\u00A77only be upgraded once!",
+    
+    "text.forgeblock.levelReq": "Requires %1$s Level %2$s",
+    "text.forgeblock.levelReqNotMet": "Requires %1$s Level %2$s (%3$s/%2$s)",
+    "text.forgeblock.opReq": "Requires Operator Permissions",
+    "text.forgeblock.attrReqAbove": "%1$s Min: %2$s",
+    "text.forgeblock.attrReqBelow": "%1$s Max: %2$s",
+    "text.forgeblock.attrReqRange": "%1$s Req: %2$s-%3$s",
+    "text.forgeblock.reqNotMet": "You do not meet the requirements to use this item!"
 }

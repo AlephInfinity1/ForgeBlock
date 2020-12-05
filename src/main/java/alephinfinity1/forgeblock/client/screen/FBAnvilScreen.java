@@ -76,7 +76,7 @@ public class FBAnvilScreen extends ContainerScreen<RepairContainer> implements I
 	 */
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		RenderSystem.disableBlend();
-		this.font.drawString(this.title.getFormattedText(), 60.0F, 6.0F, 4210752);
+		this.font.drawString(this.title.getFormattedText(), 60.0F, 18.0F, 4210752);
 		int i = this.container.getMaximumCost();
 		if (i > 0) {
 			int j = 8453920;

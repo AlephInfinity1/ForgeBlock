@@ -18,6 +18,8 @@ import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.config.FBModConfig;
 import alephinfinity1.forgeblock.enchantment.IFBEnchantment;
 import alephinfinity1.forgeblock.enchantment.UltimateEnchantment;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.stats_modifier.AbstractStatsModifier;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
@@ -751,6 +753,32 @@ public class TextFormatHelper {
 				.appendSibling(new TranslationTextComponent(attrName))
 				.applyTextStyle(TextFormatHelper.getAttributeColor(FBAttributes.getPrimaryAttributeByName(attributeName)));
 		}
+	}
+	
+	public static List<ITextComponent> formatRequirements(IRequirementPredicate predicate) {
+		List<ITextComponent> list = new ArrayList<>();
+		
+		//TODO Add formatting for other types of predicates.
+		if (predicate instanceof SkillRequirementPredicate) {	
+			list.add(new TranslationTextComponent("text.forgeblock.levelReq", 
+					((SkillRequirementPredicate) predicate).getType().getDisplayName(), 
+					((SkillRequirementPredicate) predicate).getLevel()).applyTextStyle(TextFormatting.RED));
+			list.add(new StringTextComponent(""));
+		}
+		
+		return list;
+	}
+	
+	public static String getUnlocalizedAttrName(IAttribute attribute) {
+		String attributeName = attribute.getName();
+		
+		String attrName;
+		if (attributeName.equals("generic.attackDamage")) attrName = "attribute.name.forgeblock.damage";
+		else if (attributeName.equals("generic.maxHealth")) attrName = "attribute.name.forgeblock.health";
+		else if (attributeName.equals("generic.movementSpeed")) attrName = "attribute.name.forgeblock.speed";
+		else attrName = "attribute.name." + attributeName;	
+		
+		return attrName;
 	}
 
 }

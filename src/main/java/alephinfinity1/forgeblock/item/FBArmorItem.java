@@ -2,6 +2,7 @@ package alephinfinity1.forgeblock.item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -10,12 +11,14 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
+import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModRegistries;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
@@ -26,6 +29,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
@@ -37,6 +41,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeableItem {
 
@@ -261,6 +267,26 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		return new ArrayList<ITextComponent>();
 	}
 	
+	@OnlyIn(Dist.CLIENT)
+	protected List<ITextComponent> requirementsInformation(ItemStack stack) {
+		List<ITextComponent> list = new ArrayList<>();
+		if (this instanceof IRequirementItem) {
+			IRequirementPredicate[] reqs = ((IRequirementItem) this).getRequirements(stack);
+			PlayerEntity cplayer = ForgeBlock.MINECRAFT.player;
+			if (Objects.isNull(cplayer)) return list;
+			for (IRequirementPredicate irp : reqs) {
+				list.addAll(irp.getDisplay(cplayer));
+			}
+		}
+		
+		//Insert a newline if not empty
+		if (!list.isEmpty()) {
+			list.add(new StringTextComponent(""));
+		}
+		
+		return list;
+	}
+	
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		FBTier tier = this.getStackTier(stack);
@@ -279,6 +305,7 @@ public class FBArmorItem extends ArmorItem implements IFBTieredItem, IReforgeabl
 		
 		//Insert item ability description here (unused for some items)
 		tooltip.addAll(additional);
+		tooltip.addAll(this.requirementsInformation(stack));
 				
 		//If this item is reforgeable but not reforged
 		if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));

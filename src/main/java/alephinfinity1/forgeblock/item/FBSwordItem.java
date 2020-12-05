@@ -2,6 +2,7 @@ package alephinfinity1.forgeblock.item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -11,12 +12,14 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 import com.google.common.util.concurrent.AtomicDouble;
 
+import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModRegistries;
 import alephinfinity1.forgeblock.misc.FBItemType;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
 import alephinfinity1.forgeblock.misc.reforge.IReforgeableItem;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
@@ -40,6 +43,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeableItem {
 
@@ -149,6 +154,26 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		return new ArrayList<ITextComponent>();
 	}
 	
+	@OnlyIn(Dist.CLIENT)
+	protected List<ITextComponent> requirementsInformation(ItemStack stack) {
+		List<ITextComponent> list = new ArrayList<>();
+		if (this instanceof IRequirementItem) {
+			IRequirementPredicate[] reqs = ((IRequirementItem) this).getRequirements(stack);
+			PlayerEntity cplayer = ForgeBlock.MINECRAFT.player;
+			if (Objects.isNull(cplayer)) return list; //If null, return right away.
+			for (IRequirementPredicate irp : reqs) {
+				list.addAll(irp.getDisplay(cplayer));
+			}
+		}
+		
+		//Insert a newline if not empty
+		if (!list.isEmpty()) {
+			list.add(new StringTextComponent(""));
+		}
+		
+		return list;
+	}
+	
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		FBTier tier = this.getStackTier(stack);
@@ -169,6 +194,7 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 		//Insert item ability description here (unused for some swords)
 		tooltip.addAll(additional);
 		tooltip.addAll(additional1);
+		tooltip.addAll(this.requirementsInformation(stack));
 		
 		//If this item is reforgeable but not reforged
 		if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));

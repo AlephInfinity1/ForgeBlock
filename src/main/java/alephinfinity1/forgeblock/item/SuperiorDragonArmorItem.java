@@ -7,6 +7,8 @@ import java.util.UUID;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -23,7 +25,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class SuperiorDragonArmorItem extends FBArmorItem {
+public class SuperiorDragonArmorItem extends FBArmorItem implements IRequirementItem {
 	
 	public static final UUID SUPERIOR_MODIFIER = UUID.fromString("0f370ec2-fa7e-4dc3-9308-6cec80de3053");
 
@@ -63,6 +65,11 @@ public class SuperiorDragonArmorItem extends FBArmorItem {
 				living.getAttribute(attribute).applyModifier(new AttributeModifier(SUPERIOR_MODIFIER, "Superior modifier", 0.05, Operation.MULTIPLY_TOTAL));
 			}
 		}
+	}
+
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {SkillRequirementPredicate.combatRequirement(20)};
 	}
 
 }

@@ -3,12 +3,15 @@ package alephinfinity1.forgeblock.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.OperatorOnlyRequirementPredicate;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class SwordOfTheStarsItem extends FBSwordItem {
+public class SwordOfTheStarsItem extends FBSwordItem implements IRequirementItem {
 
 	public SwordOfTheStarsItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn,
 			double critChanceIn, double critDamageIn) {
@@ -23,6 +26,11 @@ public class SwordOfTheStarsItem extends FBSwordItem {
 		list.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.sword_desc.sots_2").getString()));
 		list.add(new StringTextComponent(""));
 		return list;
+	}
+
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {OperatorOnlyRequirementPredicate.isOP()};
 	}
 	
 	/*

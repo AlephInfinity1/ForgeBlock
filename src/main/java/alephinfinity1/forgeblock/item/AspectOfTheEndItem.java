@@ -12,6 +12,8 @@ import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModItems;
 import alephinfinity1.forgeblock.misc.event.FBEventHooks;
 import alephinfinity1.forgeblock.misc.event.PlayerCastSpellEvent;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
 import alephinfinity1.forgeblock.misc.mana.IMana;
 import alephinfinity1.forgeblock.misc.mana.ManaProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
@@ -41,7 +43,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 @Mod.EventBusSubscriber
-public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
+public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem, IRequirementItem {
 	
 	public AspectOfTheEndItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn, double critChanceIn, double critDamageIn) {
 		super(props, tier, attackDamageIn, strengthIn, critChanceIn, critDamageIn);
@@ -147,6 +149,11 @@ public class AspectOfTheEndItem extends FBSwordItem implements IAbilityItem {
 	@Override
 	public String getUnlocalizedUseAbilityName() {
 		return "text.forgeblock.useAbility.aote";
+	}
+
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {SkillRequirementPredicate.combatRequirement(9)};
 	}
 
 }

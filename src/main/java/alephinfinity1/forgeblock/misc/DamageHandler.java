@@ -392,6 +392,7 @@ public class DamageHandler {
 	@SubscribeEvent
 	@SuppressWarnings("unused")
 	public static void onPlayerAttack(AttackEntityEvent event) {
+		if (event.isCanceled()) return;
 		Entity targetEntity = event.getTarget();
 		PlayerEntity player = event.getPlayer();
 		if (targetEntity.canBeAttackedWithItem()) {
