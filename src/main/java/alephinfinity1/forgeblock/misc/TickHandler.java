@@ -365,7 +365,7 @@ public class TickHandler {
 				if(entity.getDistanceSq(living) > 25.0) continue;
 				LivingEntity victim = (LivingEntity) entity;
 				Vec3d prevVel = victim.getMotion();
-				victim.attackEntityFrom(DamageHandler.getBlazeArmorDamageSource(living), victim.getMaxHealth() > 166666.67f ? 5000.0f : victim.getMaxHealth() * 0.03f);
+				victim.attackEntityFrom(DamageHandler.causeBlazeArmorDamage(living), victim.getMaxHealth() > 166666.67f ? 5000.0f : victim.getMaxHealth() * 0.03f);
 				victim.setMotion(prevVel);
 				victim.hurtResistantTime = 0; //No damage tick here
 			} 
@@ -387,7 +387,7 @@ public class TickHandler {
 				if(entity.getDistanceSq(living) > 25.0) continue;
 				LivingEntity victim = (LivingEntity) entity;
 				Vec3d prevVel = victim.getMotion();
-				victim.attackEntityFrom(DamageHandler.getBlazeArmorDamageSource(living), victim.getMaxHealth() > 166666.67f ? 5000.0f : victim.getMaxHealth() * 0.03f + 300.0f);
+				victim.attackEntityFrom(DamageHandler.causeBlazeArmorDamage(living), victim.getMaxHealth() > 166666.67f ? 5000.0f : victim.getMaxHealth() * 0.03f + 300.0f);
 				victim.setMotion(prevVel);
 				victim.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 80, 0, false, false));
 				victim.hurtResistantTime = 0; //No damage tick here

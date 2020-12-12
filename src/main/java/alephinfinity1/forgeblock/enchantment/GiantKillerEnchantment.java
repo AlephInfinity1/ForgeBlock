@@ -24,4 +24,9 @@ public class GiantKillerEnchantment extends Enchantment implements IFBEnchantmen
 		return 5;
 	}
 
+	@Override
+	public int getRequiredSkillLevel(int level) {	
+		return 8;
+	}
+
 }

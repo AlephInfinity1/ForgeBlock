@@ -24,4 +24,9 @@ public class FirstStrikeEnchantment extends Enchantment implements IFBEnchantmen
 		return 4;
 	}
 
+	@Override
+	public int getRequiredSkillLevel(int level) {
+		return 10;
+	}
+
 }

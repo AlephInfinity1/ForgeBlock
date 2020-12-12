@@ -20,15 +20,15 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public enum SkillType {
-	FARMING(false, "farming", 100, null, null, SharedMonsterAttributes.MAX_HEALTH, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_1, Skills.FARMING_SKILLS_MODIFIER),
-	MINING(false, "mining", 100, null, null, FBAttributes.DEFENSE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.MINING_SKILLS_MODIFIER),
-	COMBAT(false, "combat", 100, null, null, FBAttributes.CRIT_CHANCE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_COMBAT, Skills.COMBAT_SKILLS_MODIFIER),
-	FORAGING(false, "foraging", 100, null, null, FBAttributes.STRENGTH, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.FORAGING_SKILLS_MODIFIER),
-	FISHING(false, "fishing", 100, null, null, SharedMonsterAttributes.MAX_HEALTH, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_1, Skills.FISHING_SKILLS_MODIFIER),
-	ENCHANTING(false, "enchanting", 100, null, null, FBAttributes.INTELLIGENCE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.ENCHANTING_SKILLS_MODIFIER),
-	ALCHEMY(false, "alchemy", 100, null, null, FBAttributes.INTELLIGENCE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.ALCHEMY_SKILLS_MODIFIER),
-	TAMING(false, "taming", 100, null, null, FBAttributes.PET_LUCK, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_TAMING, Skills.TAMING_SKILLS_MODIFIER),
-	CARPENTRY(true, "carpentry", 100),
+	FARMING(false, "farming", 50, null, null, SharedMonsterAttributes.MAX_HEALTH, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_1, Skills.FARMING_SKILLS_MODIFIER),
+	MINING(false, "mining", 50, null, null, FBAttributes.DEFENSE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.MINING_SKILLS_MODIFIER),
+	COMBAT(false, "combat", 50, null, null, FBAttributes.CRIT_CHANCE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_COMBAT, Skills.COMBAT_SKILLS_MODIFIER),
+	FORAGING(false, "foraging", 50, null, null, FBAttributes.STRENGTH, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.FORAGING_SKILLS_MODIFIER),
+	FISHING(false, "fishing", 50, null, null, SharedMonsterAttributes.MAX_HEALTH, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_1, Skills.FISHING_SKILLS_MODIFIER),
+	ENCHANTING(false, "enchanting", 50, null, null, FBAttributes.INTELLIGENCE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.ENCHANTING_SKILLS_MODIFIER),
+	ALCHEMY(false, "alchemy", 50, null, null, FBAttributes.INTELLIGENCE, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_2, Skills.ALCHEMY_SKILLS_MODIFIER),
+	TAMING(false, "taming", 50, null, null, FBAttributes.PET_LUCK, SkillsCapabilityHandler.ATTRIBUTE_MODIFIER_AMOUNT_TAMING, Skills.TAMING_SKILLS_MODIFIER),
+	CARPENTRY(true, "carpentry", 50),
 	RUNECRAFTING(true, "runecrafting", 25);
 	
 	/**
@@ -90,100 +90,100 @@ public enum SkillType {
 		aMap.put(3, 300.0);
 		aMap.put(4, 500.0);
 		aMap.put(5, 750.0);
-		aMap.put(6, 1000.0);
-		aMap.put(7, 1500.0);
-		aMap.put(8, 2000.0);
-		aMap.put(9, 3500.0);
-		aMap.put(10, 5000.0);
-		aMap.put(11, 7500.0);
-		aMap.put(12, 10000.0);
-		aMap.put(13, 15000.0);
-		aMap.put(14, 20000.0);
-		aMap.put(15, 30000.0);
-		aMap.put(16, 50000.0);
-		aMap.put(17, 75000.0);
-		aMap.put(18, 100000.0);
-		aMap.put(19, 200000.0);
-		aMap.put(20, 300000.0);
-		aMap.put(21, 400000.0);
-		aMap.put(22, 500000.0);
-		aMap.put(23, 600000.0);
-		aMap.put(24, 700000.0);
-		aMap.put(25, 800000.0);
-		aMap.put(26, 900000.0);
-		aMap.put(27, 1000000.0);
-		aMap.put(28, 1100000.0);
-		aMap.put(29, 1200000.0);
-		aMap.put(30, 1300000.0);
-		aMap.put(31, 1400000.0);
-		aMap.put(32, 1500000.0);
-		aMap.put(33, 1600000.0);
-		aMap.put(34, 1700000.0);
-		aMap.put(35, 1800000.0);
-		aMap.put(36, 1900000.0);
-		aMap.put(37, 2000000.0);
-		aMap.put(38, 2100000.0);
-		aMap.put(39, 2200000.0);
-		aMap.put(40, 2300000.0);
-		aMap.put(41, 2400000.0);
-		aMap.put(42, 2500000.0);
-		aMap.put(43, 2600000.0);
-		aMap.put(44, 2750000.0);
-		aMap.put(45, 2900000.0);
-		aMap.put(46, 3100000.0);
-		aMap.put(47, 3400000.0);
-		aMap.put(48, 3700000.0);
-		aMap.put(49, 4000000.0);
-		aMap.put(50, 4400000.0);
-		aMap.put(51, 4800000.0);
-		aMap.put(52, 5200000.0);
-		aMap.put(53, 5600000.0);
-		aMap.put(54, 6000000.0);
-		aMap.put(55, 6500000.0);
-		aMap.put(56, 7000000.0);
-		aMap.put(57, 7500000.0);
-		aMap.put(58, 8100000.0);
-		aMap.put(59, 8750000.0);
-		aMap.put(60, 9450000.0);
-		aMap.put(61, 10200000.0);
-		aMap.put(62, 11000000.0);
-		aMap.put(63, 11850000.0);
-		aMap.put(64, 12700000.0);
-		aMap.put(65, 13550000.0);
-		aMap.put(66, 14400000.0);
-		aMap.put(67, 15250000.0);
-		aMap.put(68, 16100000.0);
-		aMap.put(69, 17000000.0);
-		aMap.put(70, 17950000.0);
-		aMap.put(71, 18950000.0);
-		aMap.put(72, 20000000.0);
-		aMap.put(73, 21050000.0);
-		aMap.put(74, 22150000.0);
-		aMap.put(75, 23500000.0);
-		aMap.put(76, 25000000.0);
-		aMap.put(77, 26500000.0);
-		aMap.put(78, 28000000.0);
-		aMap.put(79, 29500000.0);
-		aMap.put(80, 31000000.0);
-		aMap.put(81, 32500000.0);
-		aMap.put(82, 34000000.0);
-		aMap.put(83, 35750000.0);
-		aMap.put(84, 37500000.0);
-		aMap.put(85, 39500000.0);
-		aMap.put(86, 41500000.0);
-		aMap.put(87, 44000000.0);
-		aMap.put(88, 47000000.0);
-		aMap.put(89, 50000000.0);
-		aMap.put(90, 53500000.0);
-		aMap.put(91, 57500000.0);
-		aMap.put(92, 62000000.0);
-		aMap.put(93, 67000000.0);
-		aMap.put(94, 72500000.0);
-		aMap.put(95, 78500000.0);
-		aMap.put(96, 85000000.0);
-		aMap.put(97, 92000000.0);
-		aMap.put(98, 99500000.0);
-		aMap.put(99, 107500000.0);
+		aMap.put(6, 1_000.0);
+		aMap.put(7, 1_500.0);
+		aMap.put(8, 2_000.0);
+		aMap.put(9, 3_500.0);
+		aMap.put(10, 5_000.0);
+		aMap.put(11, 7_500.0);
+		aMap.put(12, 10_000.0);
+		aMap.put(13, 15_000.0);
+		aMap.put(14, 20_000.0);
+		aMap.put(15, 30_000.0);
+		aMap.put(16, 50_000.0);
+		aMap.put(17, 75_000.0);
+		aMap.put(18, 100_000.0);
+		aMap.put(19, 200_000.0);
+		aMap.put(20, 300_000.0);
+		aMap.put(21, 400_000.0);
+		aMap.put(22, 500_000.0);
+		aMap.put(23, 600_000.0);
+		aMap.put(24, 700_000.0);
+		aMap.put(25, 800_000.0);
+		aMap.put(26, 900_000.0);
+		aMap.put(27, 1_000_000.0);
+		aMap.put(28, 1_100_000.0);
+		aMap.put(29, 1_200_000.0);
+		aMap.put(30, 1_300_000.0);
+		aMap.put(31, 1_400_000.0);
+		aMap.put(32, 1_500_000.0);
+		aMap.put(33, 1_600_000.0);
+		aMap.put(34, 1_700_000.0);
+		aMap.put(35, 1_800_000.0);
+		aMap.put(36, 1_900_000.0);
+		aMap.put(37, 2_000_000.0);
+		aMap.put(38, 2_100_000.0);
+		aMap.put(39, 2_200_000.0);
+		aMap.put(40, 2_300_000.0);
+		aMap.put(41, 2_400_000.0);
+		aMap.put(42, 2_500_000.0);
+		aMap.put(43, 2_600_000.0);
+		aMap.put(44, 2_750_000.0);
+		aMap.put(45, 2_900_000.0);
+		aMap.put(46, 3_100_000.0);
+		aMap.put(47, 3_400_000.0);
+		aMap.put(48, 3_700_000.0);
+		aMap.put(49, 4_000_000.0);
+		aMap.put(50, 4_400_000.0);
+		aMap.put(51, 4_800_000.0);
+		aMap.put(52, 5_200_000.0);
+		aMap.put(53, 5_600_000.0);
+		aMap.put(54, 6_000_000.0);
+		aMap.put(55, 6_500_000.0);
+		aMap.put(56, 7_000_000.0);
+		aMap.put(57, 7_500_000.0);
+		aMap.put(58, 8_100_000.0);
+		aMap.put(59, 8_750_000.0);
+		aMap.put(60, 9_450_000.0);
+		aMap.put(61, 10_200_000.0);
+		aMap.put(62, 11_000_000.0);
+		aMap.put(63, 11_850_000.0);
+		aMap.put(64, 12_700_000.0);
+		aMap.put(65, 13_550_000.0);
+		aMap.put(66, 14_400_000.0);
+		aMap.put(67, 15_250_000.0);
+		aMap.put(68, 16_100_000.0);
+		aMap.put(69, 17_000_000.0);
+		aMap.put(70, 17_950_000.0);
+		aMap.put(71, 18_950_000.0);
+		aMap.put(72, 20_000_000.0);
+		aMap.put(73, 21_050_000.0);
+		aMap.put(74, 22_150_000.0);
+		aMap.put(75, 23_500_000.0);
+		aMap.put(76, 25_000_000.0);
+		aMap.put(77, 26_500_000.0);
+		aMap.put(78, 28_000_000.0);
+		aMap.put(79, 29_500_000.0);
+		aMap.put(80, 31_000_000.0);
+		aMap.put(81, 32_500_000.0);
+		aMap.put(82, 34_000_000.0);
+		aMap.put(83, 35_750_000.0);
+		aMap.put(84, 37_500_000.0);
+		aMap.put(85, 39_500_000.0);
+		aMap.put(86, 41_500_000.0);
+		aMap.put(87, 44_000_000.0);
+		aMap.put(88, 47_000_000.0);
+		aMap.put(89, 50_000_000.0);
+		aMap.put(90, 53_500_000.0);
+		aMap.put(91, 57_500_000.0);
+		aMap.put(92, 62_000_000.0);
+		aMap.put(93, 67_000_000.0);
+		aMap.put(94, 72_500_000.0);
+		aMap.put(95, 78_500_000.0);
+		aMap.put(96, 85_000_000.0);
+		aMap.put(97, 92_000_000.0);
+		aMap.put(98, 99_500_000.0);
+		aMap.put(99, 107_500_000.0);
 		DEFAULT_XP_TABLE = ImmutableMap.copyOf(aMap);
 		
 		Map<Integer, Double> bMap = new HashMap<>();

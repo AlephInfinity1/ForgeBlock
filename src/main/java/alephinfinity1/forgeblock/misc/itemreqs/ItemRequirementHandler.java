@@ -11,6 +11,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -72,6 +73,32 @@ public class ItemRequirementHandler {
 						player.sendStatusMessage(new TranslationTextComponent("text.forgeblock.reqNotMet").applyTextStyle(TextFormatting.RED), true);
 					}
 				}
+			}
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onPlayerLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+		PlayerEntity player = event.getPlayer();
+		ItemStack stack = player.getHeldItemMainhand();
+		if (stack.getItem() instanceof IRequirementItem) {
+			if (!((IRequirementItem) stack.getItem()).canPlayerUseItem(player, stack)) {
+				event.setCanceled(true);
+				player.sendStatusMessage(new TranslationTextComponent("text.forgeblock.reqNotMet").applyTextStyle(TextFormatting.RED), true);
+				return;
+			}
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onPlayerRightClickItem(PlayerInteractEvent.RightClickItem event) {
+		PlayerEntity player = event.getPlayer();
+		ItemStack stack = player.getHeldItemMainhand();
+		if (stack.getItem() instanceof IRequirementItem) {
+			if (!((IRequirementItem) stack.getItem()).canPlayerUseItem(player, stack)) {
+				event.setCanceled(true);
+				player.sendStatusMessage(new TranslationTextComponent("text.forgeblock.reqNotMet").applyTextStyle(TextFormatting.RED), true);
+				return;
 			}
 		}
 	}

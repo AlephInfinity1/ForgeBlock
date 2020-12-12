@@ -44,7 +44,7 @@ public class UnstableDragonArmorItem extends FBArmorItem implements IRequirement
 	
 	@Override
 	public IRequirementPredicate[] getRequirements(ItemStack stack) {
-		return new IRequirementPredicate[] {SkillRequirementPredicate.combatRequirement(16), AttributeRequirementPredicate.minimum(FBAttributes.STRENGTH, 100)};
+		return new IRequirementPredicate[] {SkillRequirementPredicate.combatRequirement(16)};
 	}
 
 }

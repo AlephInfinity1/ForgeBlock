@@ -14,7 +14,9 @@ import alephinfinity1.forgeblock.enchantment.LuckEnchantment;
 import alephinfinity1.forgeblock.enchantment.OneForAllEnchantment;
 import alephinfinity1.forgeblock.enchantment.ProtectionEnchantment;
 import alephinfinity1.forgeblock.enchantment.ScavengerEnchantment;
+import alephinfinity1.forgeblock.enchantment.SharpnessEnchantment;
 import alephinfinity1.forgeblock.enchantment.SmeltingTouchEnchantment;
+import alephinfinity1.forgeblock.enchantment.SyphonEnchantment;
 import alephinfinity1.forgeblock.enchantment.TelekinesisEnchantment;
 import alephinfinity1.forgeblock.enchantment.UltimateWiseEnchantment;
 import alephinfinity1.forgeblock.enchantment.VampirismEnchantment;
@@ -30,6 +32,7 @@ public class ModEnchantments {
 	public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, ForgeBlock.MOD_ID);
 	public static final DeferredRegister<Enchantment> OVERRIDE = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, ForgeBlock.MINECRAFT_ID);
 	
+	public static final RegistryObject<Enchantment> SHARPNESS = OVERRIDE.register("sharpness", () -> new SharpnessEnchantment());
 	public static final RegistryObject<Enchantment> GROWTH = ENCHANTMENTS.register("growth", () -> new GrowthEnchantment());
 	public static final RegistryObject<Enchantment> TELEKINESIS = ENCHANTMENTS.register("telekinesis", () -> new TelekinesisEnchantment());
 	public static final RegistryObject<Enchantment> LIFE_STEAL = ENCHANTMENTS.register("life_steal", () -> new LifeStealEnchantment());
@@ -47,6 +50,7 @@ public class ModEnchantments {
 	public static final RegistryObject<Enchantment> SCAVENGER = ENCHANTMENTS.register("scavenger", () -> new ScavengerEnchantment());
 	public static final RegistryObject<Enchantment> VAMPIRISM = ENCHANTMENTS.register("vampirism", () -> new VampirismEnchantment());
 	public static final RegistryObject<Enchantment> VICIOUS = ENCHANTMENTS.register("vicious", () -> new ViciousEnchantment());
+	public static final RegistryObject<Enchantment> SYPHON = ENCHANTMENTS.register("syphon", () -> new SyphonEnchantment());
 	
 	public static final RegistryObject<Enchantment> ULTIMATE_WISE = ENCHANTMENTS.register("ultimate_wise", () -> new UltimateWiseEnchantment());
 	public static final RegistryObject<Enchantment> ONE_FOR_ALL = ENCHANTMENTS.register("one_for_all", () -> new OneForAllEnchantment());

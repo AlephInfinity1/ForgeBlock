@@ -1,6 +1,7 @@
 package alephinfinity1.forgeblock.client;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
@@ -109,10 +110,12 @@ public class EntityRenderHandler {
 		if(entity instanceof IFBEntity) {
 			str.append(((IFBEntity) entity).getLevel());
 		} else if(entity instanceof PlayerEntity) { //If player, level is the sum of all non-cosmetic skill levels (max 400), or 8 times the player's true skill avg.
-			ISkills skills = ((PlayerEntity) entity).getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+			ISkills skills = ((PlayerEntity) entity).getCapability(SkillsProvider.SKILLS_CAPABILITY).orElse(null);
 			int playerLvl = 0;
-			for(SkillType type : SkillType.NON_COSMETIC_TYPES) {
-				playerLvl += skills.getLevel(type);
+			if (Objects.nonNull(skills)) {
+				for (SkillType type : SkillType.NON_COSMETIC_TYPES) {
+					playerLvl += skills.getLevel(type);
+				}
 			}
 			str.append(playerLvl);
 		} else { //If not a ForgeBlock mob, default to default formula if hostile, or 0 if passive.
