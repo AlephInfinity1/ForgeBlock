@@ -415,7 +415,7 @@ public class DamageHandler {
 	
 	/*
 	 * Disables sweep attack
-	 * Code mostly copied from PlayerEntity, lines 1150–1299
+	 * Code mostly copied from PlayerEntity, lines 1150-1299
 	 */
 	@SubscribeEvent
 	@SuppressWarnings("unused")

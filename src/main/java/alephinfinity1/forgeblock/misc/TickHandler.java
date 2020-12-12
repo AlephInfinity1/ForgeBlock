@@ -86,23 +86,23 @@ public class TickHandler {
 	/**
 	 * Unused.
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated
 	public static Map<ArmorStandEntity, Long> damageDisplay = new HashMap<>();
 	
 	/**
 	 * Unused.
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated
 	public static List<Triple<LivingEntity, Double, Long>> damageIndicatorFix = new ArrayList<>();
 	
 	/**
-	 * All entities thar are wearing {@link BlazeArmorItem}.
+	 * All entities that are wearing {@link BlazeArmorItem}.
 	 * Affects full set bonus actuation.
 	 */
 	public static Map<LivingEntity, Boolean> isWearingBlazeArmor = new ConcurrentHashMap<>();
 	
 	/**
-	 * All entities thar are wearing {@link FrozenBlazeArmorItem}.
+	 * All entities that are wearing {@link FrozenBlazeArmorItem}.
 	 * Affects full set bonus actuation.
 	 */
 	public static Map<LivingEntity, Boolean> isWearingFrozenBlazeArmor = new ConcurrentHashMap<>();

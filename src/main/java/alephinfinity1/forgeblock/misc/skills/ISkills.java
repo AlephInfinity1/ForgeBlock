@@ -50,7 +50,7 @@ public interface ISkills {
 	public double getAbsoluteProgress(SkillType skill);
 	
 	/**
-	 * Gets the double percentage progress, between 0–1, to the next level of a SkillType
+	 * Gets the double percentage progress, between 0-1, to the next level of a SkillType
 	 * E.g. If a player is at Combat 23 and (200,000/600k), this method will return 0.333...d.
 	 * @param skill SkillType
 	 * @return double, percentage progress to the next level (Between 0.0d and 1.0d).

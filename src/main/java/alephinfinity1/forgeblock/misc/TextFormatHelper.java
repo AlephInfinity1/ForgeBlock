@@ -716,7 +716,7 @@ public class TextFormatHelper {
 	
 	/**
 	 * Formats a special modifier, as used in potions, skill rewards, and etc. <br>
-	 * E.g. "+100❁ Strength", "+25%❈ Defense" <br>
+	 * E.g. "+100 Strength", "+25 Defense" <br>
 	 * Should only be used on attributes with an icon and a colour.
 	 * @param modifier
 	 * @return
