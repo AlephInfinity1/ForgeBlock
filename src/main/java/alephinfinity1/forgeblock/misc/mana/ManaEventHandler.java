@@ -65,17 +65,17 @@ public class ManaEventHandler {
 			manaValue = mana.getMana();
 			maxManaValue = player.getAttribute(FBAttributes.INTELLIGENCE).getValue() + 100;
 		} catch(Exception e) {
-			;
+			e.printStackTrace();
 		}
 		
 		double progress = manaValue / maxManaValue;
 		if(progress > 1.0D) progress = 1.0D;
-		if(event.getType() == ElementType.FOOD) {
+		if(event.getType() == ElementType.ALL && !player.abilities.disableDamage) {
 			mc.fontRenderer.drawStringWithShadow((new DecimalFormat("#")).format(manaValue) + "/" + (new DecimalFormat("#")).format(maxManaValue), width / 2 + 25, height - 50, 0x5555FF);
-			mc.getTextureManager().bindTexture(new ResourceLocation("minecraft", "textures/gui/icons.png"));
-			RenderSystem.color3f(0.5f, 0.5f, 1.0f);
-			mc.ingameGUI.blit(width / 2, height - 40, 91, 64, 91, 5);
-			mc.ingameGUI.blit(width / 2 + 91 - (int) (91.0 * progress), height - 40, 182 - (int) (91.0 * progress), 69, (int) (91.0 * progress), 5);
+			mc.getTextureManager().bindTexture(new ResourceLocation("minecraft", "textures/gui/bars.png"));
+			RenderSystem.color3f(0.33f, 0.33f, 1.0f);
+			mc.ingameGUI.blit(width / 2, height - 40, 91, 60, 91, 5);
+			mc.ingameGUI.blit(width / 2 + 91 - (int) (91.0 * progress), height - 40, 182 - (int) (91.0 * progress), 65, (int) (91.0 * progress), 5);
 			RenderSystem.clearCurrentColor();
 		}
 	}
