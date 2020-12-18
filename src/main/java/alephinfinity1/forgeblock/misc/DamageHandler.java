@@ -71,16 +71,19 @@ import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 public class DamageHandler {
 	
 	//Mod-defined DamageSource s
-	public static DamageSource getBlazeArmorDamageSource(LivingEntity source) {
+	public static DamageSource causeBlazeArmorDamage(LivingEntity source) {
 		return new EntityDamageSource("blaze_armor", source);
 	}
 	
-	public static DamageSource getFerocitySource(LivingEntity source, int stacking) {
+	public static DamageSource causeFerocityDamage(LivingEntity source, int stacking) {
 		return new FerocityDamageSource("ferocity", source, stacking);
 	}
 	
-	
+	public static DamageSource causeSpellDamage(PlayerEntity castor) {
+		return new EntityDamageSource("player_magic", castor);
+	}
 
+	//TODO Remove the damage handler here, and replace it with player AttackEntityEvent
 	@SubscribeEvent
 	public static void onLivingAttack(LivingHurtEvent event) {
 		//Pre: get damager and victim.
@@ -96,15 +99,28 @@ public class DamageHandler {
 			if(event.getSource().equals(DamageSource.OUT_OF_WORLD)){
 				event.setAmount(Float.MAX_VALUE);
 				return;
-			} else if(event.getSource().equals(DamageSource.IN_FIRE) || event.getSource().equals(DamageSource.ON_FIRE)) {
-				event.setAmount(5);
-			} else if(event.getSource().equals(DamageSource.LAVA)) {
-				event.setAmount(20);
-			} else if(event.getSource().equals(DamageSource.STARVE)) { //Disable all starve damage
+			} else if (event.getSource().equals(DamageSource.IN_FIRE)) {
+				double defense = event.getEntityLiving().getAttribute(FBAttributes.DEFENSE).getValue();
+				damageMultiplier = (defense + 100.0D) / 100.0D; //Here to revert the armour calculation.
+				event.setAmount((victim.getMaxHealth() * 0.03f + 2f) * (float) damageMultiplier);
+			} else if (event.getSource().equals(DamageSource.ON_FIRE)) {
+				event.setAmount((victim.getMaxHealth() * 0.03f + 2f)); //Make on fire damage absorbed by defense.
+			} else if (event.getSource().equals(DamageSource.LAVA)) {
+				double defense = event.getEntityLiving().getAttribute(FBAttributes.DEFENSE).getValue();
+				damageMultiplier = (defense + 100.0D) / 100.0D; //Here to revert the armour calculation.
+				event.setAmount((victim.getMaxHealth() * 0.15f + 5.0f) * 0.75f * (float) damageMultiplier);
+			} else if (event.getSource().equals(DamageSource.STARVE)) { //Disable all starve damage
 				event.setAmount(0);
-			} else if(event.getSource().equals(DamageSource.MAGIC)) { //If magic, do not multiply by 5
-			} else {
-				event.setAmount(event.getAmount() * 5);
+			} else if (event.getSource().equals(DamageSource.MAGIC)) { //If magic, do not multiply by 5
+			} else if (event.getSource().equals(DamageSource.FALL)) {
+				event.setAmount((event.getAmount() - 3) * (victim.getMaxHealth() * 0.025f + 2.5f));
+				if (event.getAmount() <= 0.0D) {
+					event.setCanceled(true);
+				}
+			} else if (event.getSource().equals(DamageSource.DROWN)) {	
+				event.setAmount((victim.getMaxHealth() * 0.075f + 2.5f) * (float) damageMultiplier);
+			} else if (event.getSource().equals(DamageSource.CACTUS)) {
+				event.setAmount(victim.getMaxHealth() * 0.01f);
 			}
 			
 			//If the damage is affected by armor, also apply normal defense bonus
@@ -179,7 +195,7 @@ public class DamageHandler {
 			double enchMultiplier = 0.0D;
 			
 			//a: sharpness & variants
-			enchMultiplier += 0.05 * EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, weapon);
+			enchMultiplier += 0.05 * EnchantmentHelper.getEnchantmentLevel(ModEnchantments.SHARPNESS.get(), weapon);
 			if(victim.getCreatureAttribute().equals(CreatureAttribute.ARTHROPOD)) {
 				enchMultiplier += 0.08 * EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, weapon);
 			} else if(victim.getCreatureAttribute().equals(CreatureAttribute.UNDEAD)) {
@@ -295,6 +311,18 @@ public class DamageHandler {
 					FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) victim), new DamageParticlePacket(result, "normal", victim.getPositionVec().add(0, victim.getHeight() / 2.0, 0)));
 			}
 		} else {
+			if (event.getSource().damageType.equals("player_magic")) { //Player-caused magic damage
+				//Only increased by Combat lvl
+				double skillMultiplier = 0.0D;
+				if(damager instanceof PlayerEntity) {
+					PlayerEntity player = (PlayerEntity) damager;
+					skillMultiplier = 0.04D * SkillsHelper.getCombatLevelOrElse(player, 0);
+				}
+			
+				result *= (1.0D + skillMultiplier);
+				event.setAmount((float) result);
+			}
+			
 			FBPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(TargetPoint.p(victim.getPosX(), victim.getPosY(), victim.getPosZ(), 64.0D, victim.dimension)), new DamageParticlePacket(result, event.getSource().damageType, victim.getPositionVec().add(0, victim.getHeight() / 2.0, 0)));
 		}
 		
@@ -336,7 +364,7 @@ public class DamageHandler {
 		double f = (ferocity / 100.0D) - penalty; //Chance of applying another ferocity strike.
 		if(RNGHelper.randomChance(f, new Random())) {
 			victim.hurtResistantTime = 0;
-			DamageSource ferocitySource = getFerocitySource(damager, penalty + 1);
+			DamageSource ferocitySource = causeFerocityDamage(damager, penalty + 1);
 			Tuple<LivingEntity, DamageSource> tuple = new Tuple<LivingEntity, DamageSource>(victim, ferocitySource);
 			TickHandler.ferocitySchedule.put(tuple, TickHandler.ticksElapsed);
 		}
@@ -387,7 +415,7 @@ public class DamageHandler {
 	
 	/*
 	 * Disables sweep attack
-	 * Code mostly copied from PlayerEntity, lines 1150–1299
+	 * Code mostly copied from PlayerEntity, lines 1150-1299
 	 */
 	@SubscribeEvent
 	@SuppressWarnings("unused")

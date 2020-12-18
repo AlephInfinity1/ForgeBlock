@@ -41,4 +41,9 @@ public class CubismEnchantment extends Enchantment implements IFBEnchantment {
 		return 5;
 	}
 
+	@Override
+	public int getRequiredSkillLevel(int level) {	
+		return 3;
+	}
+
 }

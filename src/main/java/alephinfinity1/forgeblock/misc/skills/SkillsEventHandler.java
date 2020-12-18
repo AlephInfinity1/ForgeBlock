@@ -105,12 +105,13 @@ public class SkillsEventHandler {
 	
 	public static void notifyPlayerLevelUp(ClientPlayerEntity cplayer, SkillType type, int levelOld, int levelNew) {
 		final UUID DUMMY_UUID = UUID.fromString("0afce2d8-e6e2-475f-b628-4704bdb7331c"); //Used for attribute modifier, to pass to TextFormatHelper#formatSpecialModifier()
+		final String INDENT = "    "; //4 spaces here, nothing special
 		
 		ITextComponent border = new StringTextComponent("\u00A73--------------------------------");
 		ITextComponent line1 = new TranslationTextComponent("skills.forgeblock.levelUpMessage_1", type.getDisplayName().getString(), levelOld, levelNew);
 		ITextComponent line2 = new TranslationTextComponent("skills.forgeblock.levelUpMessage_2");
 		
-		ITextComponent line3 = new StringTextComponent(" ".repeat(4)).appendSibling(type.getAbilityName(levelNew));
+		ITextComponent line3 = new StringTextComponent(INDENT).appendSibling(type.getAbilityName(levelNew));
 		
 		double coinsReward = 0.0D;
 		for (int i = levelOld + 1; i <= levelNew; i++) {
@@ -121,7 +122,7 @@ public class SkillsEventHandler {
 		
 		double modifierAmount = type.getAttributeModifierAmount(levelNew) - type.getAttributeModifierAmount(levelOld);
 		
-		ITextComponent line4 = new StringTextComponent(" ".repeat(4)).appendSibling(TextFormatHelper.formatSpecialModifier(type.getAttribute().getName(), new AttributeModifier(DUMMY_UUID, "Dummy string", modifierAmount, type.getOperation())));
+		ITextComponent line4 = new StringTextComponent(INDENT).appendSibling(TextFormatHelper.formatSpecialModifier(type.getAttribute().getName(), new AttributeModifier(DUMMY_UUID, "Dummy string", modifierAmount, type.getOperation())));
 		
 		cplayer.sendMessage(border);
 		cplayer.sendMessage(line1);

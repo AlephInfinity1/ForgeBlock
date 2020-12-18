@@ -4,30 +4,29 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
 
-public class ViciousEnchantment extends Enchantment implements IFBEnchantment {
+public class SharpnessEnchantment extends Enchantment implements IFBEnchantment {
 
-	protected ViciousEnchantment(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots) {
+	protected SharpnessEnchantment(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType[] slots) {
 		super(rarityIn, typeIn, slots);	
 	}
 	
-	public ViciousEnchantment() {
-		super(Rarity.VERY_RARE, EnchantmentType.WEAPON, new EquipmentSlotType[] {EquipmentSlotType.MAINHAND});
+	public SharpnessEnchantment() {
+		super(Rarity.COMMON, EnchantmentType.WEAPON, new EquipmentSlotType[] {EquipmentSlotType.MAINHAND});
 	}
 	
 	@Override
 	public int getMaxLevel() {
-		return 5;
+		return 6;
 	}
 
-	//Unobtainable at ench table.
 	@Override
 	public int getEnchantingTableMaxLevel() {
-		return -1;
+		return 5;
 	}
 
 	@Override
 	public int getRequiredSkillLevel(int level) {
-		return 26;
+		return 0;
 	}
 
 }

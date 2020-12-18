@@ -21,6 +21,7 @@ import alephinfinity1.forgeblock.init.ModPotions;
 import alephinfinity1.forgeblock.init.ModRecipes;
 import alephinfinity1.forgeblock.init.ModReforges;
 import alephinfinity1.forgeblock.init.ModStatsModifiers;
+import alephinfinity1.forgeblock.init.ModTileEntityTypes;
 import alephinfinity1.forgeblock.misc.coins.CoinsFactory;
 import alephinfinity1.forgeblock.misc.coins.CoinsStorage;
 import alephinfinity1.forgeblock.misc.coins.ICoins;
@@ -82,6 +83,8 @@ public class ForgeBlock {
 		ModStatsModifiers.STATS_MODIFIERS
 		.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ModCollections.COLLECTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModTileEntityTypes.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ModTileEntityTypes.OVERRIDE.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus()
 		.addListener(ClientEventBusSubscriber::onClientSetup);

@@ -26,4 +26,9 @@ public class GrowthEnchantment extends Enchantment implements IFBEnchantment {
 		return 5;
 	}
 
+	@Override
+	public int getRequiredSkillLevel(int level) {	
+		return 5;
+	}
+
 }

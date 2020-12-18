@@ -3,6 +3,9 @@ package alephinfinity1.forgeblock.item;
 import java.util.Random;
 
 import alephinfinity1.forgeblock.init.ModEnchantments;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
+import alephinfinity1.forgeblock.misc.skills.SkillType;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantments;
@@ -15,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
-public class StonkItem extends FBPickaxeItem {
+public class StonkItem extends FBPickaxeItem implements IRequirementItem {
 
 	public StonkItem(Properties props, FBTier tier, double damage, int harvestLevel, float destroySpeed, double yield) {
 		super(props, tier, damage, harvestLevel, destroySpeed, yield);
@@ -44,6 +47,11 @@ public class StonkItem extends FBPickaxeItem {
 		if (this.isInGroup(group)) {
 			items.add(this.getDefaultInstance());
 		}
+	}
+
+	@Override
+	public IRequirementPredicate[] getRequirements(ItemStack stack) {
+		return new IRequirementPredicate[] {SkillRequirementPredicate.skillRequirement(SkillType.MINING, 12)};
 	}
 
 }

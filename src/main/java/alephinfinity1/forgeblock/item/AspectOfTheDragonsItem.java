@@ -8,6 +8,7 @@ import java.util.List;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModEnchantments;
+import alephinfinity1.forgeblock.misc.DamageHandler;
 import alephinfinity1.forgeblock.misc.event.FBEventHooks;
 import alephinfinity1.forgeblock.misc.event.PlayerCastSpellEvent;
 import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
@@ -24,7 +25,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -94,7 +94,7 @@ public class AspectOfTheDragonsItem extends FBSwordItem implements IDamageAbilit
 		for(Entity entity : list) {
 			if(entity instanceof LivingEntity) {
 				LivingEntity living = (LivingEntity) entity;
-				living.attackEntityFrom(DamageSource.causeIndirectMagicDamage(player, player), this.getAbilityDamage(stack, player));
+				living.attackEntityFrom(DamageHandler.causeSpellDamage(player), this.getAbilityDamage(stack, player));
 				living.setVelocity(player.getLookVec().getX() * 4.0, player.getLookVec().getY() * 1.5, player.getLookVec().getZ() * 4.0);
 			}
 		}

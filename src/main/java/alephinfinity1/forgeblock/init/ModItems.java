@@ -348,5 +348,9 @@ public class ModItems {
 	 * Custom items/ideas/debug
 	 */
 	public static final RegistryObject<Item> DIMENSIUS = ITEMS.register("dimensius", () -> new FBArmorItem(EquipmentSlotType.HEAD, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.MYTHIC, ModifierHelper.modifierMapFromDoubles(0, -1000, 0, 0, 0, 0, -1000, 0, 0, 3000, 0, 0, 0, Integer.MAX_VALUE)));
+	public static final RegistryObject<Item> JESTER_HELMET = ITEMS.register("jester_helmet", () -> new FBArmorItem(EquipmentSlotType.HEAD, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, -40, 0, 0, 0, 0, 0, -150, 0, 400, 0, -3, 0, 0)));
+	public static final RegistryObject<Item> JESTER_CHESTPLATE = ITEMS.register("jester_chestplate", () -> new FBArmorItem(EquipmentSlotType.CHEST, "minecraft:diamond", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, -40, 0, 0, 0, 0, 0, 300, 0, -200, 0, -3, 0, 0)));
+	public static final RegistryObject<Item> JESTER_LEGGINGS = ITEMS.register("jester_leggings", () -> new FBArmorItem(EquipmentSlotType.LEGS, "minecraft:iron", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, 80, 0, 0, 0, 0, 0, -150, 0, -200, 0, -3, 0, 0)));
+	public static final RegistryObject<Item> JESTER_BOOTS = ITEMS.register("jester_boots", () -> new FBArmorItem(EquipmentSlotType.FEET, "minecraft:chainmail", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, -40, 0, 0, 0, 0, 0, -150, 0, -200, 0, 6, 0, 0)));
 	public static final RegistryObject<Item> ONE = ITEMS.register("one", () -> new OneSwordItem(new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.SPECIAL));
 }

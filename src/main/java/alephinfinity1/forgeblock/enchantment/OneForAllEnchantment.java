@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.enchantment;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
 
@@ -11,6 +12,11 @@ public class OneForAllEnchantment extends UltimateEnchantment {
 	
 	public OneForAllEnchantment() {
 		super(Rarity.VERY_RARE, EnchantmentType.WEAPON, new EquipmentSlotType[] {EquipmentSlotType.MAINHAND});
+	}
+	
+	@Override
+	public boolean canApplyTogether(Enchantment other) {
+		return (other instanceof TelekinesisEnchantment);
 	}
 
 }

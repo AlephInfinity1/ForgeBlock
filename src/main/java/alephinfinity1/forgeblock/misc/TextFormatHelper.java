@@ -13,6 +13,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Multimap;
 
+import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.config.FBModConfig;
@@ -41,6 +42,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class TextFormatHelper {
@@ -606,6 +609,7 @@ public class TextFormatHelper {
 	 * @param enchantments
 	 * @return
 	 */
+	@OnlyIn(Dist.CLIENT)
 	private static List<ITextComponent> formatEnchantments(ItemStack stack, Map<Enchantment, Integer> enchantments) {
 		List<ITextComponent> list = new ArrayList<>();
 		
@@ -615,10 +619,14 @@ public class TextFormatHelper {
 				list.add(new StringTextComponent(TextFormatting.LIGHT_PURPLE.toString() + TextFormatting.BOLD.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
 			} else {
 				if (entry.getKey() instanceof IFBEnchantment) {
-					if (entry.getValue() > ((IFBEnchantment) entry.getKey()).getEnchantingTableMaxLevel()) {
-						list.add(new StringTextComponent((FBModConfig.ENABLE_GOLDEN_ENCHANTS.get() ? TextFormatting.GOLD.toString() : TextFormatting.BLUE.toString()) + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+					if (((IFBEnchantment) entry.getKey()).canUse(ForgeBlock.MINECRAFT.player, entry.getValue())) {
+						if (entry.getValue() > ((IFBEnchantment) entry.getKey()).getEnchantingTableMaxLevel()) {
+							list.add(new StringTextComponent((FBModConfig.ENABLE_GOLDEN_ENCHANTS.get() ? TextFormatting.GOLD.toString() : TextFormatting.BLUE.toString()) + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+						} else {
+							list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+						}
 					} else {
-						list.add(new StringTextComponent(TextFormatting.BLUE.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
+						list.add(new StringTextComponent(TextFormatting.GRAY.toString() + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())).appendText(" (" + Integer.toString(((IFBEnchantment) entry.getKey()).getRequiredSkillLevel(entry.getValue())) + ")"));
 					}
 				} else if (entry.getValue() > entry.getKey().getMaxLevel()) {
 					list.add(new StringTextComponent((FBModConfig.ENABLE_GOLDEN_ENCHANTS.get() ? TextFormatting.GOLD.toString() : TextFormatting.BLUE.toString()) + new TranslationTextComponent(entry.getKey().getName()).getString() + " " + TextFormatHelper.getRomanNumeral(entry.getValue())));
@@ -708,7 +716,7 @@ public class TextFormatHelper {
 	
 	/**
 	 * Formats a special modifier, as used in potions, skill rewards, and etc. <br>
-	 * E.g. "+100❁ Strength", "+25%❈ Defense" <br>
+	 * E.g. "+100 Strength", "+25 Defense" <br>
 	 * Should only be used on attributes with an icon and a colour.
 	 * @param modifier
 	 * @return
@@ -755,10 +763,15 @@ public class TextFormatHelper {
 		}
 	}
 	
+	/**
+	 * @deprecated Use {@link IRequirementPredicate#getDisplay(net.minecraft.entity.player.PlayerEntity)} instead.
+	 * @param predicate
+	 * @return
+	 */
+	@Deprecated
 	public static List<ITextComponent> formatRequirements(IRequirementPredicate predicate) {
 		List<ITextComponent> list = new ArrayList<>();
 		
-		//TODO Add formatting for other types of predicates.
 		if (predicate instanceof SkillRequirementPredicate) {	
 			list.add(new TranslationTextComponent("text.forgeblock.levelReq", 
 					((SkillRequirementPredicate) predicate).getType().getDisplayName(), 

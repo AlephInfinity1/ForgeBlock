@@ -104,7 +104,7 @@ public class ShadowFuryItem extends FBSwordItem implements IAbilityItem {
 		
 		//Shuffle the list of accepted entities, and select 5 of them to cast the attack on (randomly).
 		Collections.shuffle(accepted);
-		player.addPotionEffect(new EffectInstance(ModEffects.IMMUNITY, 10 * accepted.size(), 0, true, true));
+		player.addPotionEffect(new EffectInstance(ModEffects.IMMUNITY, 10 * ((accepted.size() > 5) ? 5 : accepted.size()), 0, true, true));
 		for(int i = 0; i < (accepted.size() > 5 ? 5 : accepted.size()); i++) {
 			int ticksAfter = 10 * i + 5;
 			Tuple<LivingEntity, LivingEntity> targets = new Tuple<>(player, (LivingEntity) accepted.get(i));

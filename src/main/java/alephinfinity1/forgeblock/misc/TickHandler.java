@@ -86,23 +86,23 @@ public class TickHandler {
 	/**
 	 * Unused.
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated
 	public static Map<ArmorStandEntity, Long> damageDisplay = new HashMap<>();
 	
 	/**
 	 * Unused.
 	 */
-	@Deprecated(forRemoval = true)
+	@Deprecated
 	public static List<Triple<LivingEntity, Double, Long>> damageIndicatorFix = new ArrayList<>();
 	
 	/**
-	 * All entities thar are wearing {@link BlazeArmorItem}.
+	 * All entities that are wearing {@link BlazeArmorItem}.
 	 * Affects full set bonus actuation.
 	 */
 	public static Map<LivingEntity, Boolean> isWearingBlazeArmor = new ConcurrentHashMap<>();
 	
 	/**
-	 * All entities thar are wearing {@link FrozenBlazeArmorItem}.
+	 * All entities that are wearing {@link FrozenBlazeArmorItem}.
 	 * Affects full set bonus actuation.
 	 */
 	public static Map<LivingEntity, Boolean> isWearingFrozenBlazeArmor = new ConcurrentHashMap<>();
@@ -365,7 +365,7 @@ public class TickHandler {
 				if(entity.getDistanceSq(living) > 25.0) continue;
 				LivingEntity victim = (LivingEntity) entity;
 				Vec3d prevVel = victim.getMotion();
-				victim.attackEntityFrom(DamageHandler.getBlazeArmorDamageSource(living), victim.getMaxHealth() > 166666.67f ? 5000.0f : victim.getMaxHealth() * 0.03f);
+				victim.attackEntityFrom(DamageHandler.causeBlazeArmorDamage(living), victim.getMaxHealth() > 166666.67f ? 5000.0f : victim.getMaxHealth() * 0.03f);
 				victim.setMotion(prevVel);
 				victim.hurtResistantTime = 0; //No damage tick here
 			} 
@@ -387,7 +387,7 @@ public class TickHandler {
 				if(entity.getDistanceSq(living) > 25.0) continue;
 				LivingEntity victim = (LivingEntity) entity;
 				Vec3d prevVel = victim.getMotion();
-				victim.attackEntityFrom(DamageHandler.getBlazeArmorDamageSource(living), victim.getMaxHealth() > 166666.67f ? 5000.0f : victim.getMaxHealth() * 0.03f + 300.0f);
+				victim.attackEntityFrom(DamageHandler.causeBlazeArmorDamage(living), victim.getMaxHealth() > 166666.67f ? 5000.0f : victim.getMaxHealth() * 0.03f + 300.0f);
 				victim.setMotion(prevVel);
 				victim.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 80, 0, false, false));
 				victim.hurtResistantTime = 0; //No damage tick here

@@ -1,5 +1,9 @@
 package alephinfinity1.forgeblock.misc;
 
+import net.minecraft.command.arguments.LocalLocationArgument;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.Vec3d;
+
 /**
  * A class dedicated to functions and convenient utilities relating to mathematics.
  */
@@ -88,6 +92,18 @@ public class FBMathUtils {
 		}
 		
 		return list[index];
+	}
+	
+	/**
+	 * Get an offset location of an entity, similar to if it ran a command with ^ ^ ^
+	 * @param entity The entity
+	 * @param left The amount of blocks to move leftwards
+	 * @param up The amount of blocks to move upwards
+	 * @param forwards The amount of blocks to move forwards
+	 * @return The offset Vec3d
+	 */
+	public Vec3d offsetEntityLocalCoordinates(Entity entity, double left, double up, double forwards) {
+		return new LocalLocationArgument(left, up, forwards).getPosition(entity.getCommandSource());
 	}
 
 }
