@@ -42,6 +42,12 @@ public class FBModConfig {
 	//Whether high-level and rare enchants should be golden instead of blue.
 	public static ForgeConfigSpec.BooleanValue ENABLE_GOLDEN_ENCHANTS;
 	
+	//Whether to display rarity glow.
+	public static ForgeConfigSpec.BooleanValue RARITY_GLOW;
+	
+	//The opacity of the rarity glow. 0.0d for fully transparent and 1.0d for fully opaque.
+	public static ForgeConfigSpec.DoubleValue RARITY_GLOW_OPACITY;
+	
 	static {
 		CLIENT_BUILDER.comment("General config").push(CATEGORY_GENERAL);
 		ENABLE_GOLDEN_ENCHANTS = CLIENT_BUILDER.comment("Enable golden enchants").define("goldenEnchants", true);
@@ -71,6 +77,9 @@ public class FBModConfig {
 		SUPREME_TIER_COLOR = CLIENT_BUILDER.comment("Supreme rarity color").defineEnum("supremeColor", TextFormatting.DARK_RED, acceptableValues);
 		SPECIAL_TIER_COLOR = CLIENT_BUILDER.comment("Special rarity color").defineEnum("specialColor", TextFormatting.RED, acceptableValues);
 		VERY_SPECIAL_TIER_COLOR = CLIENT_BUILDER.comment("Very special rarity color").defineEnum("verySpecialColor", TextFormatting.RED, acceptableValues);
+		
+		RARITY_GLOW = CLIENT_BUILDER.comment("Enable rarity glow").define("rarityGlow", true);
+		RARITY_GLOW_OPACITY = CLIENT_BUILDER.comment("Rarity glow opacity").defineInRange("rarityGlowOpacity", 0.5d, 0.0d, 1.0d);
 
 	}
 	

@@ -1,5 +1,7 @@
 package alephinfinity1.forgeblock.client;
 
+import java.lang.reflect.Field;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.MarkerManager.Log4jMarker;
 
@@ -22,6 +24,7 @@ import net.minecraft.client.renderer.entity.ZombieVillagerRenderer;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -57,6 +60,55 @@ public class ClientEventBusSubscriber {
 		ScreenManager.FACTORIES.remove(ContainerType.ANVIL);
 		ScreenManager.registerFactory(ModContainerTypes.FB_ANVIL.get(), FBAnvilScreen::new);	
 		ScreenManager.registerFactory(ContainerType.ANVIL, FBAnvilScreen::new);
+		
+		/**
+		 * XXX overrides {@link net.minecraft.client.Minecraft}'s several renderers.
+		 * May be potentially very destructive and unstable
+		 */
+		try {
+			Field itemRenderer = Minecraft.class.getDeclaredField("itemRenderer");
+			itemRenderer.setAccessible(true);
+			itemRenderer.set(ForgeBlock.MINECRAFT, new FBItemRenderer(ForgeBlock.MINECRAFT.textureManager,
+					ForgeBlock.MINECRAFT.getModelManager(),
+					ForgeBlock.MINECRAFT.getItemColors()));
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onTextureStitchPost(TextureStitchEvent.Post event) {
+		//XXX Update texture after stitch to prevent magenta-black checkerboxes.
+		//Can be unstable.
+		try {
+			Field itemRenderer = Minecraft.class.getDeclaredField("itemRenderer");
+			itemRenderer.setAccessible(true);
+			itemRenderer.set(ForgeBlock.MINECRAFT, new FBItemRenderer(ForgeBlock.MINECRAFT.textureManager,
+					ForgeBlock.MINECRAFT.getModelManager(),
+					ForgeBlock.MINECRAFT.getItemColors()));
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@SubscribeEvent
