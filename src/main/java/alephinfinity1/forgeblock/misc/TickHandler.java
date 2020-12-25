@@ -44,6 +44,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -55,7 +56,7 @@ public class TickHandler {
 	/**
 	 * The number of ticks elapsed.
 	 */
-	public static long ticksElapsed = 0;
+	public static long serverTicksElapsed = 0;
 	
 	/**
 	 * All entities that are newly spawned.
@@ -108,7 +109,7 @@ public class TickHandler {
 	public static Map<LivingEntity, Boolean> isWearingFrozenBlazeArmor = new ConcurrentHashMap<>();
 	
 	/**
-	 * Scheduled extra attacks from {@link FBAttributes#FEROCITY}.
+	 * Scheduled extra attacks from {@link FBAttributes#FEROCITY Ferocity}.
 	 */
 	public static Map<Tuple<LivingEntity, DamageSource>, Long> ferocitySchedule = new ConcurrentHashMap<>();
 	
@@ -141,13 +142,12 @@ public class TickHandler {
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		if(event.phase == Phase.START && event.player instanceof ServerPlayerEntity) {
-			++ticksElapsed;
 			PlayerEntity player = event.player;
-			if(ticksElapsed % 40 == 0) {
+			if(serverTicksElapsed % 40 == 0) {
 				player.heal((float) (player.getMaxHealth() / 50.0D));
 			}
 			if(healthDirty.get(player) != null) {
-				if(healthDirty.get(player) - ticksElapsed < -5) {
+				if(healthDirty.get(player) - serverTicksElapsed < -5) {
 					player.heal(Float.MAX_VALUE);
 					healthDirty.remove(player);
 				}
@@ -160,14 +160,24 @@ public class TickHandler {
 		}
 	}
 	
+	@SubscribeEvent
+	public static void onLivingTick(LivingUpdateEvent event) {
+		LivingEntity living = event.getEntityLiving();
+		if (living.getEntityWorld().isRemote()) return;
+		double healthRegen = living.getAttribute(FBAttributes.HEALTH_REGEN).getValue();
+		living.heal((float) (healthRegen / 20.0d));
+	}
+	
 	@SuppressWarnings("resource")
 	@SubscribeEvent
 	public static void onServerTick(TickEvent.ServerTickEvent event) {
 		
 		if(event.phase == Phase.START) return; 
 		
+		serverTicksElapsed++;
+		
 		//Complex operation, so updated every 5 seconds.
-		if(ticksElapsed % 100 == 0) {
+		if(serverTicksElapsed % 100 == 0) {
 			
 			//To prevent ConcurrentModificationException. All operations are done in one thread.
 			allEntities.addAll(allEntitiesPre);
@@ -188,6 +198,7 @@ public class TickHandler {
 			}
 		}
 		
+		/*
 		Iterator<LivingEntity> livingItr = allLiving.iterator();
 		while(livingItr.hasNext()) {
 			LivingEntity living = livingItr.next();
@@ -196,11 +207,13 @@ public class TickHandler {
 				continue;
 			}
 			living.heal((float) (living.getAttribute(FBAttributes.HEALTH_REGEN).getValue() / 20.0D));
+		
 		}
+		*/
 		
 		if(!damageDisplay.isEmpty()) {
 			for(Map.Entry<ArmorStandEntity, Long> entry : damageDisplay.entrySet()) {
-				if(ticksElapsed - entry.getValue() > 20) {
+				if(serverTicksElapsed - entry.getValue() > 20) {
 					entry.getKey().remove();
 				}
 			}
@@ -209,14 +222,14 @@ public class TickHandler {
 			Iterator<Triple<LivingEntity, Double, Long>> itr = damageIndicatorFix.iterator();
 			while(itr.hasNext()) {
 				Triple<LivingEntity, Double, Long> entry = itr.next(); //Using iterators to fix java.util.ConcurrentModificationException. See https://www.cnblogs.com/dolphin0520/p/3933551.html
-				if(ticksElapsed - entry.getRight() > 0) {
+				if(serverTicksElapsed - entry.getRight() > 0) {
 					entry.getLeft().setHealth((float) (entry.getLeft().getHealth() - entry.getMiddle()));
 					itr.remove();
 				}
 			}
 		}
 
-		if(ticksElapsed % 20 == 0) {
+		if(serverTicksElapsed % 20 == 0) {
 			Set<LivingEntity> entities = isWearingBlazeArmor.keySet();
 			Iterator<LivingEntity> itr = entities.iterator();
 			while(itr.hasNext()) {
@@ -237,7 +250,7 @@ public class TickHandler {
 				ForgeBlock.LOGGER.log(Level.TRACE, "Value: " + isWearingBlazeArmor.get(living).toString());
 			}
 		}
-		if(ticksElapsed % 20 == 0) {
+		if(serverTicksElapsed % 20 == 0) {
 			Set<LivingEntity> entities = isWearingFrozenBlazeArmor.keySet();
 			Iterator<LivingEntity> itr = entities.iterator();
 			while(itr.hasNext()) {
@@ -264,7 +277,7 @@ public class TickHandler {
 			Iterator<Tuple<LivingEntity, DamageSource>> itr = entries.iterator();
 			while(itr.hasNext()) {
 				Tuple<LivingEntity, DamageSource> living = itr.next();
-				if(ticksElapsed - ferocitySchedule.get(living) >= 5) {
+				if(serverTicksElapsed - ferocitySchedule.get(living) >= 5) {
 					living.getA().attackEntityFrom(living.getB(), 2.0f); 
 					//No need to worry about amount, DamageHandler will take care of that. Do not set to 1.0f though as that would be confused with sweep attack
 					itr.remove();
@@ -278,7 +291,7 @@ public class TickHandler {
 			Iterator<Tuple<LivingEntity, UUID>> itr = entries.iterator();
 			while(itr.hasNext()) {
 				Tuple<LivingEntity, UUID> living = itr.next();
-				if(ticksElapsed >= attModifierExpiry.get(living)) {
+				if(serverTicksElapsed >= attModifierExpiry.get(living)) {
 					Collection<IAttributeInstance> attributes = living.getA().getAttributes().getAllAttributes();
 					for(IAttributeInstance attribute : attributes) {
 						attribute.removeModifier(living.getB());
@@ -294,7 +307,7 @@ public class TickHandler {
 			Iterator<LivingEntity> itr = entries.iterator();
 			while(itr.hasNext()) {
 				LivingEntity living = itr.next();
-				if(ticksElapsed >= rogueActive.get(living)) {
+				if(serverTicksElapsed >= rogueActive.get(living)) {
 					itr.remove();
 					continue;
 				}
@@ -306,7 +319,7 @@ public class TickHandler {
 			Iterator<Map.Entry<Tuple<LivingEntity, LivingEntity>, Long>> itr = entries.iterator();
 			while(itr.hasNext()) {
 				Map.Entry<Tuple<LivingEntity, LivingEntity>, Long> entry = itr.next();
-				if(ticksElapsed >= entry.getValue()) {
+				if(serverTicksElapsed >= entry.getValue()) {
 					Tuple<LivingEntity, LivingEntity> targets = entry.getKey();
 					LivingEntity attacker = targets.getA();
 					LivingEntity victim = targets.getB();

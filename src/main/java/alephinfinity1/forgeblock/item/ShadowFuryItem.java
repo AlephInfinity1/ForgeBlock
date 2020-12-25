@@ -108,7 +108,7 @@ public class ShadowFuryItem extends FBSwordItem implements IAbilityItem {
 		for(int i = 0; i < (accepted.size() > 5 ? 5 : accepted.size()); i++) {
 			int ticksAfter = 10 * i + 5;
 			Tuple<LivingEntity, LivingEntity> targets = new Tuple<>(player, (LivingEntity) accepted.get(i));
-			TickHandler.shadowFuryTarget.put(targets, TickHandler.ticksElapsed + ticksAfter);
+			TickHandler.shadowFuryTarget.put(targets, TickHandler.serverTicksElapsed + ticksAfter);
 		}
 		
 		player.getCooldownTracker().setCooldown(this, getCooldown(stack, player));	

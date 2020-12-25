@@ -342,10 +342,10 @@ public class DamageHandler {
 			TickHandler.damageIndicatorFix.add(Triple.of(victim, result, TickHandler.tickElapsed));
 		}*/
 		
-		/**
-		 * Sets the victim's hurt resistance time based on the damager's attack speed attribute.
-		 * See line 927 of LivingEntity
-		 * @see LivingEntity#attackEntityFrom(DamageSource source, float amount)
+		/*
+		  Sets the victim's hurt resistance time based on the damager's attack speed attribute.
+		  See line 927 of LivingEntity
+		  @see LivingEntity#attackEntityFrom(DamageSource source, float amount)
 		 */
 		victim.hurtResistantTime = (int) (Math.round(10.0 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue())) + 10);
 		
@@ -366,7 +366,7 @@ public class DamageHandler {
 			victim.hurtResistantTime = 0;
 			DamageSource ferocitySource = causeFerocityDamage(damager, penalty + 1);
 			Tuple<LivingEntity, DamageSource> tuple = new Tuple<LivingEntity, DamageSource>(victim, ferocitySource);
-			TickHandler.ferocitySchedule.put(tuple, TickHandler.ticksElapsed);
+			TickHandler.ferocitySchedule.put(tuple, TickHandler.serverTicksElapsed);
 		}
 	}
 	

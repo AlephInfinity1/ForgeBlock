@@ -1,0 +1,11 @@
+{
+    "required": true,
+    "minVersion": "0.7.10",
+    "package": "alephinfinity1.forgeblock.mixin",
+    "refmap": "mixins.forgeblock.refmap.json",
+    "target": "@env(DEFAULT)",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "MixinMinecraftServer"
+    ]
+}

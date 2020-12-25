@@ -47,10 +47,10 @@ public class FBItemRenderer extends ItemRenderer {
 
 	public void drawWithTexture(BufferBuilder renderer, int x, int y, int width, int height, int red, int green, int blue, int alpha) {
 		renderer.begin(7, DefaultVertexFormats.POSITION_COLOR_TEX);
-		renderer.pos((double)(x + 0), (double)(y + 0), 0.0D).color(red, green, blue, alpha).tex(0, 0).endVertex();
-		renderer.pos((double)(x + 0), (double)(y + height), 0.0D).color(red, green, blue, alpha).tex(0, 1).endVertex();
-		renderer.pos((double)(x + width), (double)(y + height), 0.0D).color(red, green, blue, alpha).tex(1, 1).endVertex();
-		renderer.pos((double)(x + width), (double)(y + 0), 0.0D).color(red, green, blue, alpha).tex(1, 0).endVertex();
+		renderer.pos(x, y, 0.0D).color(red, green, blue, alpha).tex(0, 0).endVertex();
+		renderer.pos(x, y + height, 0.0D).color(red, green, blue, alpha).tex(0, 1).endVertex();
+		renderer.pos(x + width, y + height, 0.0D).color(red, green, blue, alpha).tex(1, 1).endVertex();
+		renderer.pos(x + width, y, 0.0D).color(red, green, blue, alpha).tex(1, 0).endVertex();
 		Tessellator.getInstance().draw();
 	}
 
