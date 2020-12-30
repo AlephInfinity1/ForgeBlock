@@ -102,6 +102,12 @@ repositories {
     jcenter()
 }
 
+sourceSets {
+    main {
+        ext.refMap = "mixins.forgeblock.refmap.json"
+    }
+}
+
 
 dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
@@ -111,9 +117,11 @@ dependencies {
 
     compile 'club.minnced:java-discord-rpc:2.0.2'
 
-    compile 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
+    compile 'org.spongepowered:mixin:0.8.1'
 
     compile 'org.spongepowered:spongeapi:7.1.0'
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
     // compile "some.group:artifact:version"
@@ -144,15 +152,16 @@ jar {
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"examplemodsareus",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            "MixinConnector": "alephinfinity1.forgeblock.misc.MixinConnector"
         ])
 
     }
 
     manifest.attributes(
             'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-            'MixinConfigs': 'mixins.myplugin.json',
-            'FMLCorePluginContainsFMLMod': 'true',
+            'MixinConfigs': 'mixins.forgeblock.json',
+            'FMLCorePluginContainsFMLMod': 'true'
     )
 }
 

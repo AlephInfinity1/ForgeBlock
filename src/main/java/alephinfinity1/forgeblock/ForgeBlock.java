@@ -48,6 +48,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.loading.FMLPaths;
+import org.spongepowered.asm.launch.MixinBootstrap;
 
 @Mod(value = ForgeBlock.MOD_ID)
 public class ForgeBlock {
@@ -95,7 +96,9 @@ public class ForgeBlock {
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, FBModConfig.CLIENT_CONFIG);
 		FBModConfig.loadConfig(FBModConfig.CLIENT_CONFIG,
-				FMLPaths.CONFIGDIR.get().resolve("forgeblock-client.toml"));	
+				FMLPaths.CONFIGDIR.get().resolve("forgeblock-client.toml"));
+
+		MixinBootstrap.init();
 	}
 
 	private void setup(FMLCommonSetupEvent event) {
