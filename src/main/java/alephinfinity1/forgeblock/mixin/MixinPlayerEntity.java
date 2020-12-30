@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlayerEntity.class)
 public abstract class MixinPlayerEntity {
 
-    @Inject(at = @At("RETURN"), method = "xpBarCap()I", cancellable = true)
+    //@Inject(at = @At("RETURN"), method = "xpBarCap()I", cancellable = true)
     public void xpBarCap(CallbackInfoReturnable<Integer> cir) {
         cir.cancel();
         cir.setReturnValue(5);
