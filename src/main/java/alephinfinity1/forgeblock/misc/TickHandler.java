@@ -164,6 +164,7 @@ public class TickHandler {
 	public static void onLivingTick(LivingUpdateEvent event) {
 		LivingEntity living = event.getEntityLiving();
 		if (living.getEntityWorld().isRemote()) return;
+		if (living.getAttribute(FBAttributes.HEALTH_REGEN) == null) return;
 		double healthRegen = living.getAttribute(FBAttributes.HEALTH_REGEN).getValue();
 		living.heal((float) (healthRegen / 20.0d));
 	}

@@ -114,7 +114,6 @@ public class ForgeBlock {
 		if (FMLEnvironment.dist.isClient()) {
 			DiscordRpc.getInstance().startRpc();
 		}
-
 	}
 
 }

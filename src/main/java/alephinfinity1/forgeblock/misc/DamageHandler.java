@@ -69,7 +69,6 @@ import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 
 @Mod.EventBusSubscriber
 public class DamageHandler {
-	
 	//Mod-defined DamageSource s
 	public static DamageSource causeBlazeArmorDamage(LivingEntity source) {
 		return new EntityDamageSource("blaze_armor", source);
@@ -84,13 +83,15 @@ public class DamageHandler {
 	}
 
 	//TODO Remove the damage handler here, and replace it with player AttackEntityEvent
-	@SubscribeEvent
+	//@SubscribeEvent
 	public static void onLivingAttack(LivingHurtEvent event) {
 		//Pre: get damager and victim.
 		
 		Entity trueSource = event.getSource().getTrueSource();
 		LivingEntity damager = trueSource instanceof LivingEntity ? (LivingEntity) trueSource : null;
 		LivingEntity victim = event.getEntityLiving();
+		victim.hurtResistantTime = 0;
+		victim.hurtTime = 0;
 		
 		Random rng = new Random();
 		
@@ -347,7 +348,7 @@ public class DamageHandler {
 		  See line 927 of LivingEntity
 		  @see LivingEntity#attackEntityFrom(DamageSource source, float amount)
 		 */
-		victim.hurtResistantTime = (int) (Math.round(10.0 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue())) + 10);
+		//victim.hurtResistantTime = (int) (Math.round(10.0 / (1 + 0.01 * damager.getAttribute(FBAttributes.BONUS_ATTACK_SPEED).getValue())) + 10);
 		
 		//Adds to player stats.
 		if(damager instanceof PlayerEntity) {
@@ -365,11 +366,11 @@ public class DamageHandler {
 		if(RNGHelper.randomChance(f, new Random())) {
 			victim.hurtResistantTime = 0;
 			DamageSource ferocitySource = causeFerocityDamage(damager, penalty + 1);
-			Tuple<LivingEntity, DamageSource> tuple = new Tuple<LivingEntity, DamageSource>(victim, ferocitySource);
+			Tuple<LivingEntity, DamageSource> tuple = new Tuple<>(victim, ferocitySource);
 			TickHandler.ferocitySchedule.put(tuple, TickHandler.serverTicksElapsed);
 		}
 	}
-	
+
 	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, Style style) {
 		if(world.isRemote) {
 			ClientWorld cw = ((ClientWorld) world);
@@ -417,7 +418,7 @@ public class DamageHandler {
 	 * Disables sweep attack
 	 * Code mostly copied from PlayerEntity, lines 1150-1299
 	 */
-	@SubscribeEvent
+	//@SubscribeEvent
 	@SuppressWarnings("unused")
 	public static void onPlayerAttack(AttackEntityEvent event) {
 		if (event.isCanceled()) return;

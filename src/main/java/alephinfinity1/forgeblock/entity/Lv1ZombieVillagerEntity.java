@@ -33,6 +33,7 @@ public class Lv1ZombieVillagerEntity extends ZombieVillagerEntity implements IFB
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
+		this.registerFBAttributes();
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.3F);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(120.0D);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(24.0D);

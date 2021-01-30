@@ -17,6 +17,7 @@ public class OldWolfEntity extends Lv15WolfEntity {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
+		this.registerFBAttributes();
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.45F);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15000.0D);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(720.0D);

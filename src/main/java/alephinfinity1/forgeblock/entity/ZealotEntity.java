@@ -29,6 +29,7 @@ public class ZealotEntity extends EndermanEntity implements IFBEntity {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
+		this.registerFBAttributes();
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(13000.0D);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1250.0D);
 		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0D);

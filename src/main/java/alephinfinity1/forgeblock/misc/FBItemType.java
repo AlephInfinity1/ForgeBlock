@@ -22,9 +22,9 @@ public enum FBItemType {
 	POTION("misc.forgeblock.itemtype.potion"),
 	ENCHANTED_BOOK("misc.forgeblock.itemtype.enchanted_book");
 	
-	String unlocalizedName;
+	private String unlocalizedName;
 	
-	private FBItemType(String unlocalizedName) {
+	FBItemType(String unlocalizedName) {
 		this.unlocalizedName = unlocalizedName;
 	}
 	

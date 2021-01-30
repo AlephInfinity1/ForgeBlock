@@ -39,6 +39,7 @@ public class LapisZombieEntity extends ZombieEntity implements IFBEntity {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
+		this.registerFBAttributes();
 		this.goalSelector.addGoal(0, new ZombieAttackGoal(this, 1.0D, false));
 		this.goalSelector.addGoal(1, new SwimGoal(this));
 		this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
@@ -81,6 +82,7 @@ public class LapisZombieEntity extends ZombieEntity implements IFBEntity {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
+		this.registerFBAttributes();
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(50.0D);
 		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0D);

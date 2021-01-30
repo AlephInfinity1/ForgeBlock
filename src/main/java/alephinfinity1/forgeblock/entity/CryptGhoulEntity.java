@@ -23,6 +23,7 @@ public class CryptGhoulEntity extends Lv1ZombieEntity {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
+		this.registerFBAttributes();
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.275F);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2000.0D);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(350.0D);
