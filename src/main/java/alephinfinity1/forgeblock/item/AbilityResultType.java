@@ -4,5 +4,4 @@ public enum AbilityResultType {
 	SUCCESS,
 	NOT_ENOUGH_MANA,
 	NO_TARGET;
-
 }

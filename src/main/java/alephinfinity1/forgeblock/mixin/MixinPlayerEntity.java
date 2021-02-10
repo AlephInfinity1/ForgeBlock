@@ -219,13 +219,13 @@ public abstract class MixinPlayerEntity {
 
                             for(LivingEntity livingentity : ((PlayerEntity)(Object) this).world.getEntitiesWithinAABB(LivingEntity.class, targetEntity.getBoundingBox().grow(1.0D, 0.25D, 1.0D))) {
                                 if (livingentity != ((Object) this) && livingentity != targetEntity && !((PlayerEntity)(Object) this).isOnSameTeam(livingentity) && (!(livingentity instanceof ArmorStandEntity) || !((ArmorStandEntity)livingentity).hasMarker()) && ((PlayerEntity)(Object) this).getDistanceSq(livingentity) < 9.0D) {
-                                    livingentity.knockBack(((PlayerEntity)(Object) this), 0.4F, (double)MathHelper.sin(((PlayerEntity)(Object) this).rotationYaw * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(((PlayerEntity)(Object) this).rotationYaw * ((float)Math.PI / 180F))));
-                                    livingentity.attackEntityFrom(DamageSource.causePlayerDamage(((PlayerEntity)(Object) this)), f3);
+                                    //livingentity.knockBack(((PlayerEntity)(Object) this), 0.4F, (double)MathHelper.sin(((PlayerEntity)(Object) this).rotationYaw * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(((PlayerEntity)(Object) this).rotationYaw * ((float)Math.PI / 180F))));
+                                    //livingentity.attackEntityFrom(DamageSource.causePlayerDamage(((PlayerEntity)(Object) this)), f3);
                                 }
                             }
 
                             ((PlayerEntity)(Object) this).world.playSound(null, ((PlayerEntity)(Object) this).getPosX(), ((PlayerEntity)(Object) this).getPosY(), ((PlayerEntity)(Object) this).getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, ((PlayerEntity)(Object) this).getSoundCategory(), 1.0F, 1.0F);
-                            ((PlayerEntity)(Object) this).spawnSweepParticles();
+                            //((PlayerEntity)(Object) this).spawnSweepParticles();
                         }
 
                         if (targetEntity instanceof ServerPlayerEntity && targetEntity.velocityChanged) {
@@ -294,7 +294,13 @@ public abstract class MixinPlayerEntity {
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "xpBarCap()I", cancellable = true)
+    @Inject(at = @At(value = "RETURN", ordinal = 2), method = "attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z", cancellable = true)
+    public void attackEntityFrom(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        double defense = ((PlayerEntity) (Object) this).getAttribute(FBAttributes.DEFENSE).getValue();
+
+    }
+
+    //@Inject(at = @At("RETURN"), method = "xpBarCap()I", cancellable = true)
     public void xpBarCap(CallbackInfoReturnable<Integer> cir) {
         cir.cancel();
         int level = ((PlayerEntity) (Object) this).experienceLevel;

@@ -48,12 +48,12 @@ public class SuperiorDragonArmorItem extends FBArmorItem implements IRequirement
 	@SubscribeEvent
 	public static void onLivingUpdate(LivingUpdateEvent event) {
 		LivingEntity living = event.getEntityLiving();
-		if(!(living instanceof PlayerEntity)) return;
+		if(living == null || !(living instanceof PlayerEntity)) return;
 		Iterable<ItemStack> armor = living.getArmorInventoryList();
 		for(ItemStack stack : armor) {
 			if(!(stack.getItem() instanceof SuperiorDragonArmorItem)) {
 				for(IAttribute attribute : FBAttributes.PRIMARY_ATTRIBUTES) {
-					if(living.getAttribute(attribute).getModifier(SUPERIOR_MODIFIER) != null) {
+					if(living.getAttribute(attribute) != null && living.getAttribute(attribute).getModifier(SUPERIOR_MODIFIER) != null) {
 						living.getAttribute(attribute).removeModifier(SUPERIOR_MODIFIER);
 					}
 				}

@@ -22,20 +22,17 @@ public enum FBTier {
 	
 	public TextFormatting color;
 	public TranslationTextComponent name;
-	private FBTier(TextFormatting color, String key) {
+	FBTier(TextFormatting color, String key) {
 		this.color = color;
 		this.name = new TranslationTextComponent(key);
 	}
 	
 	/**
 	 * Checks if this rarity is special.
-	 * 
 	 * @return whether this rarity is special.
 	 */
 	public boolean isSpecial() {
-		if(this == SPECIAL || this == VERY_SPECIAL) {
-			return true;
-		} else return false;
+		return this == SPECIAL || this == VERY_SPECIAL;
 	}
 	
 	/**
