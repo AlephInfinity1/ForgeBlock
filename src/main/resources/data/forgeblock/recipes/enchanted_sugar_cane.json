@@ -1,0 +1,17 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        " x ",
+        "xxx",
+        " x "
+    ],
+    "key": {
+        "x": {
+            "item": "forgeblock:enchanted_sugar",
+            "count": 32
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_sugar_cane"
+    }
+}

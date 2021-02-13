@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.init;
 
+import alephinfinity1.forgeblock.command.CoinsCommand;
 import alephinfinity1.forgeblock.command.RandomSwordCommand;
 import alephinfinity1.forgeblock.command.ReforgeCommand;
 import alephinfinity1.forgeblock.command.SkillCommand;
@@ -11,10 +12,11 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 public class ModCommands {
 	
 	@SubscribeEvent
-	public static void onCommonSetup(FMLServerStartingEvent event) {
+	public static void onCommandSetup(FMLServerStartingEvent event) {
 		ReforgeCommand.register(event.getCommandDispatcher());
 		RandomSwordCommand.register(event.getCommandDispatcher());
 		SkillCommand.register(event.getCommandDispatcher());
+		CoinsCommand.register(event.getCommandDispatcher());
 	}
 
 }

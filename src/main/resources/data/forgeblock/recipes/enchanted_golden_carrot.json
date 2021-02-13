@@ -1,0 +1,22 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        " x ",
+        "xax",
+        " x "
+    ],
+    "key": {
+        "x": {
+            "item": "forgeblock:enchanted_carrot",
+            "count": 32
+        },
+        "a": {
+            "item": "minecraft:golden_carrot",
+            "count": 32
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_golden_carrot",
+        "count": 1
+    }
+}

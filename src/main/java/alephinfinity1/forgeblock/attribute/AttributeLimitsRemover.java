@@ -28,7 +28,7 @@ import net.minecraftforge.fml.common.Mod;
  * Some code is taken from https://github.com/Darkhax-Minecraft/AttributeFix
  */
 @Mod.EventBusSubscriber
-public class AttributeHelper {
+public class AttributeLimitsRemover {
 	
 	/*
 	 * Vanilla attributes, for modification
@@ -39,7 +39,7 @@ public class AttributeHelper {
 	 * Custom attributes
 	 * Note: American spelling is used in all of the below
 	 */
-	private AttributeHelper() {
+	private AttributeLimitsRemover() {
 		throw new AssertionError("AttributeHelper should not be instantiated!");
 	}
 	

@@ -1,0 +1,17 @@
+{
+	"type": "forgeblock:multi_crafting_shaped",
+	"pattern": [
+		"xxx",
+		"xx ",
+		"   "
+	],
+	"key": {
+		"x": {
+			"item": "forgeblock:enchanted_pumpkin",
+			"count": 32
+		}
+	},
+	"result": {
+		"item": "forgeblock:enchanted_jack_o_lantern"
+	}
+}

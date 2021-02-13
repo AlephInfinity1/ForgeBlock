@@ -1,0 +1,18 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        " x ",
+        "xxx",
+        " x "
+    ],
+    "key": {
+        "x": {
+            "item": "minecraft:spruce_log",
+            "count": 32
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_spruce_log",
+        "count": 1
+    }
+}

@@ -18,6 +18,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber
+@SuppressWarnings("unused")
 public class ModItems {
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ForgeBlock.MOD_ID);
@@ -27,6 +28,8 @@ public class ModItems {
 	/*
 	 * Enchanted items
 	 */
+
+	//Mining enchanted
 	public static final RegistryObject<Item> ENCHANTED_COBBLESTONE = ITEMS.register("enchanted_cobblestone", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_IRON = ITEMS.register("enchanted_iron", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_GOLD = ITEMS.register("enchanted_gold", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
@@ -41,6 +44,7 @@ public class ModItems {
 	public static final RegistryObject<Item> ENCHANTED_GLOWSTONE_DUST = ITEMS.register("enchanted_glowstone_dust", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_END_STONE = ITEMS.register("enchanted_end_stone", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 
+	//Mining enchanted II
 	public static final RegistryObject<Item> ENCHANTED_STONE = ITEMS.register("enchanted_stone", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_IRON_BLOCK = ITEMS.register("enchanted_iron_block", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_GOLD_BLOCK = ITEMS.register("enchanted_gold_block", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
@@ -53,6 +57,7 @@ public class ModItems {
 	public static final RegistryObject<Item> ENCHANTED_PACKED_ICE = ITEMS.register("enchanted_packed_ice", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_GLOWSTONE = ITEMS.register("enchanted_glowstone", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 
+	//Combat enchanted
 	public static final RegistryObject<Item> ENCHANTED_ROTTEN_FLESH = ITEMS.register("enchanted_rotten_flesh", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.COMMON));
 	public static final RegistryObject<Item> ENCHANTED_BONE = ITEMS.register("enchanted_bone", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.COMMON));
 	public static final RegistryObject<Item> ENCHANTED_STRING = ITEMS.register("enchanted_string", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
@@ -64,13 +69,61 @@ public class ModItems {
 	public static final RegistryObject<Item> ENCHANTED_BLAZE_POWDER = ITEMS.register("enchanted_blaze_powder", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_MAGMA_CREAM = ITEMS.register("enchanted_magma_cream", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 
+	//Combat enchanted II
 	public static final RegistryObject<Item> ENCHANTED_SLIME_BLOCK = ITEMS.register("enchanted_slime_block", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_BLAZE_ROD = ITEMS.register("enchanted_blaze_rod", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_ENDER_EYE = ITEMS.register("enchanted_ender_eye", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 
+	//Foraging enchanted
+	public static final RegistryObject<Item> ENCHANTED_OAK_LOG = ITEMS.register("enchanted_oak_log", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_SPRUCE_LOG = ITEMS.register("enchanted_spruce_log", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_BIRCH_LOG = ITEMS.register("enchanted_birch_log", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_JUNGLE_LOG = ITEMS.register("enchanted_jungle_log", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_ACACIA_LOG = ITEMS.register("enchanted_acacia_log", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_DARK_OAK_LOG = ITEMS.register("enchanted_dark_oak_log", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+
+	//Farming enchanted
+	public static final RegistryObject<Item> ENCHANTED_BREAD = ITEMS.register("enchanted_bread", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.COMMON));
+	public static final RegistryObject<Item> ENCHANTED_CARROT = ITEMS.register("enchanted_carrot", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_POTATO = ITEMS.register("enchanted_potato", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_PUMPKIN = ITEMS.register("enchanted_pumpkin", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_MELON = ITEMS.register("enchanted_melon", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_BROWN_MUSHROOM = ITEMS.register("enchanted_brown_mushroom", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.COMMON));
+	public static final RegistryObject<Item> ENCHANTED_RED_MUSHROOM = ITEMS.register("enchanted_red_mushroom", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.COMMON));
+	public static final RegistryObject<Item> ENCHANTED_COCOA_BEANS = ITEMS.register("enchanted_cocoa_beans", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_CACTUS_GREEN = ITEMS.register("enchanted_cactus_green", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_SUGAR = ITEMS.register("enchanted_sugar", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_PAPER = ITEMS.register("enchanted_paper", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_FEATHER = ITEMS.register("enchanted_feather", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_BEEF = ITEMS.register("enchanted_beef", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_PORKCHOP = ITEMS.register("enchanted_porkchop", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_CHICKEN = ITEMS.register("enchanted_chicken", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_MUTTON = ITEMS.register("enchanted_mutton", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_RABBIT_FOOT = ITEMS.register("enchanted_rabbit_foot", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_RABBIT_HIDE = ITEMS.register("enchanted_rabbit_hide", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_NETHER_WART = ITEMS.register("enchanted_nether_wart", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+
+	//Farming enchanted II
+	public static final RegistryObject<Item> ENCHANTED_HAY_BALE = ITEMS.register("enchanted_hay_bale", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_GOLDEN_CARROT = ITEMS.register("enchanted_golden_carrot", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_BAKED_POTATO = ITEMS.register("enchanted_baked_potato", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_JACK_O_LANTERN = ITEMS.register("enchanted_jack_o_lantern", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_GLISTERING_MELON = ITEMS.register("enchanted_glistering_melon", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_MELON_BLOCK = ITEMS.register("enchanted_melon_block", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_BROWN_MUSHROOM_BLOCK = ITEMS.register("enchanted_brown_mushroom_block", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.COMMON));
+	public static final RegistryObject<Item> ENCHANTED_RED_MUSHROOM_BLOCK = ITEMS.register("enchanted_red_mushroom_block", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.COMMON));
+	public static final RegistryObject<Item> ENCHANTED_COOKIE = ITEMS.register("enchanted_cookie", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_CACTUS = ITEMS.register("enchanted_cactus", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_SUGAR_CANE = ITEMS.register("enchanted_sugar_cane", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_LEATHER = ITEMS.register("enchanted_leather", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_GRILLED_PORKCHOP = ITEMS.register("enchanted_grilled_porkchop", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_EGG = ITEMS.register("enchanted_egg", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_CAKE = ITEMS.register("enchanted_cake", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> SUPER_ENCHANTED_EGG = ITEMS.register("super_enchanted_egg", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_COOKED_MUTTON = ITEMS.register("enchanted_cooked_mutton", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 
 	/*
-	 * Swords
+	Swords
 	 */
 	public static final RegistryObject<Item> WOODEN_SWORD = OVERRIDE.register("wooden_sword", () -> new WoodSingularityApplicableSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
 	public static final RegistryObject<Item> GOLDEN_SWORD = OVERRIDE.register("golden_sword", () -> new FBSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
@@ -92,7 +145,7 @@ public class ModItems {
 	public static final RegistryObject<Item> SILENT_DEATH = ITEMS.register("silent_death", () -> new SilentDeathItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.RARE, 130, 50, 1, 10));
 
 	public static final RegistryObject<Item> ASPECT_OF_THE_ENDER = ITEMS.register("aspect_of_the_ender", () -> new AspectOfTheEnderItem(new Item.Properties(), FBTier.EPIC, 175, 100, 0, 0));
-	public static final RegistryObject<Item> CUSTOM_SWORD = ITEMS.register("custom_sword", () -> new CustomSwordItem());
+	public static final RegistryObject<Item> CUSTOM_SWORD = ITEMS.register("custom_sword", CustomSwordItem::new);
 
 	/*
 	 * Pickaxes

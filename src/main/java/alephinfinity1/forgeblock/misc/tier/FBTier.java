@@ -20,8 +20,8 @@ public enum FBTier {
 	SPECIAL(FBModConfig.SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.special"),
 	VERY_SPECIAL(FBModConfig.VERY_SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.very_special");
 	
-	public TextFormatting color;
-	public TranslationTextComponent name;
+	public final TextFormatting color;
+	public final TranslationTextComponent name;
 	FBTier(TextFormatting color, String key) {
 		this.color = color;
 		this.name = new TranslationTextComponent(key);

@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "mmm",
+        "ses",
+        "www"
+    ],
+    "key": {
+        "m": {
+            "item": "minecraft:milk_bucket"
+        },
+        "s": {
+            "item": "forgeblock:enchanted_sugar"
+        },
+        "e": {
+            "item": "forgeblock:enchanted_egg"
+        },
+        "w": {
+            "item": "minecraft:wheat"
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_cake"
+    }
+}

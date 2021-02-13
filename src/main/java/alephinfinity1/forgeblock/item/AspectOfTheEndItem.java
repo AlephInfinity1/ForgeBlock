@@ -10,6 +10,7 @@ import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModEffects;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModItems;
+import alephinfinity1.forgeblock.misc.ability.AbilityResultType;
 import alephinfinity1.forgeblock.misc.event.FBEventHooks;
 import alephinfinity1.forgeblock.misc.event.PlayerCastSpellEvent;
 import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;

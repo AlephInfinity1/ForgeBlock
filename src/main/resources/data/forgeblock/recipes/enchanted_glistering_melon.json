@@ -1,0 +1,17 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        "xxx",
+        "x x",
+        "xxx"
+    ],
+    "key": {
+        "x": {
+            "item": "minecraft:glistering_melon_slice",
+            "count": 32
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_glistering_melon"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        "xxx",
+        "xxx",
+        "xxx"
+    ],
+    "key": {
+        "x": {
+            "item": "forgeblock:enchanted_egg",
+            "count": 16
+        }
+    },
+    "result": {
+        "item": "forgeblock:super_enchanted_egg",
+        "count": 1
+    }
+}

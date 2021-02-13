@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import alephinfinity1.forgeblock.misc.ability.AbilityResultType;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.ForgeBlock;

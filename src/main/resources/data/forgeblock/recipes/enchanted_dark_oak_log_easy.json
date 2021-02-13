@@ -1,0 +1,18 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        "xxx",
+        "xx ",
+        "   "
+    ],
+    "key": {
+        "x": {
+            "item": "minecraft:dark_oak_log",
+            "count": 32
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_dark_oak_log",
+        "count": 1
+    }
+}

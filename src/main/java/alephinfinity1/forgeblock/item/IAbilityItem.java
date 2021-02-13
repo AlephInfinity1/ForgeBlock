@@ -2,6 +2,7 @@ package alephinfinity1.forgeblock.item;
 
 import java.util.List;
 
+import alephinfinity1.forgeblock.misc.ability.AbilityResultType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;

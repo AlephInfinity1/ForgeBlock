@@ -3,7 +3,7 @@ package alephinfinity1.forgeblock;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import alephinfinity1.forgeblock.attribute.AttributeHelper;
+import alephinfinity1.forgeblock.attribute.AttributeLimitsRemover;
 import alephinfinity1.forgeblock.client.ClientEventBusSubscriber;
 import alephinfinity1.forgeblock.config.FBModConfig;
 import alephinfinity1.forgeblock.discordRPC.DiscordRpc;
@@ -102,7 +102,7 @@ public class ForgeBlock {
 	}
 
 	private void setup(FMLCommonSetupEvent event) {
-		AttributeHelper.removeLimits();
+		AttributeLimitsRemover.removeLimits();
 		CapabilityManager.INSTANCE.register(IMana.class, new ManaStorage(), Mana::new);
 		CapabilityManager.INSTANCE.register(ISkills.class, new SkillsStorage(), new SkillsFactory());
 		CapabilityManager.INSTANCE.register(ICoins.class, new CoinsStorage(), new CoinsFactory());

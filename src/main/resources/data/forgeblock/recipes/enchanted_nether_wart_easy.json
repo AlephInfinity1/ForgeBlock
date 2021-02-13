@@ -1,0 +1,18 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        "xxx",
+        "xx ",
+        "   "
+    ],
+    "key": {
+        "x": {
+            "item": "minecraft:nether_wart",
+            "count": 32
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_nether_wart",
+        "count": 1
+    }
+}

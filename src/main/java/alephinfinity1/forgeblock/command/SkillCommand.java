@@ -20,44 +20,36 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.network.PacketDistributor;
+import org.spongepowered.api.text.translation.Translation;
 
 public class SkillCommand {
-	
+	public static final SimpleCommandExceptionType NO_SKILL_CAP = new SimpleCommandExceptionType(new TranslationTextComponent("commands.forgeblock.skill.noSkillCap")); //Thrown if player does not have skill capacity.
 	public static final SimpleCommandExceptionType INVALID_SKILL = new SimpleCommandExceptionType(new TranslationTextComponent("commands.forgeblock.skill.invalidSkillType"));
 	public static final SimpleCommandExceptionType INVALID_LEVEL = new SimpleCommandExceptionType(new TranslationTextComponent("commands.forgeblock.skill.set.invalidLevel"));
 	public static final SimpleCommandExceptionType INVALID_POINTS = new SimpleCommandExceptionType(new TranslationTextComponent("commands.forgeblock.skill.set.invalidPoints")); //Thrown if set points is larger than maximum points available for level
 
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
-		dispatcher.register(Commands.literal("skill").requires((commandSource) -> {
-			return commandSource.hasPermissionLevel(2);
-			}).then(Commands.literal("add")
-					.then(Commands.argument("targets", EntityArgument.players())
-							.then(Commands.argument("skillType", SkillArgument.skill())
-									.then(Commands.argument("amount", IntegerArgumentType.integer(0))
-											.then(Commands.literal("levels")
-													.executes((commandSource) -> {
-														return addSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), true);
-													}))
-											.then(Commands.literal("points")
-													.executes((commandSource) -> {
-														return addSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), false);
-													}))
-											)
-									)
-							)
-					)
+		dispatcher.register(Commands.literal("skill").requires((commandSource) -> commandSource.hasPermissionLevel(2))
+				.then(Commands.literal("add")
+						.then(Commands.argument("targets", EntityArgument.players())
+								.then(Commands.argument("skillType", SkillArgument.skill())
+										.then(Commands.argument("amount", IntegerArgumentType.integer(0))
+												.then(Commands.literal("levels")
+														.executes((commandSource) -> addSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), true)))
+												.then(Commands.literal("points")
+														.executes((commandSource) -> addSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), false)))
+												)
+										)
+								)
+						)
 				.then(Commands.literal("set")
 						.then(Commands.argument("targets", EntityArgument.players())
 								.then(Commands.argument("skillType", SkillArgument.skill())
 										.then(Commands.argument("amount", IntegerArgumentType.integer(0))
 												.then(Commands.literal("levels")
-														.executes((commandSource) -> {
-															return setSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), true);
-														}))
+														.executes((commandSource) -> setSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), true)))
 												.then(Commands.literal("points")
-														.executes((commandSource) -> {
-															return setSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), false);
-														}))
+														.executes((commandSource) -> setSkillExperience(commandSource.getSource(), EntityArgument.getPlayers(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), IntegerArgumentType.getInteger(commandSource, "amount"), false)))
 												)
 										)
 								)
@@ -66,13 +58,9 @@ public class SkillCommand {
 						.then(Commands.argument("targets", EntityArgument.player())
 								.then(Commands.argument("skillType", SkillArgument.skill())
 										.then(Commands.literal("levels")
-												.executes((commandSource) -> {
-													return querySkillExperience(commandSource.getSource(), EntityArgument.getPlayer(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), true);
-												}))
+												.executes((commandSource) -> querySkillExperience(commandSource.getSource(), EntityArgument.getPlayer(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), true)))
 										.then(Commands.literal("points")
-												.executes((commandSource) -> {
-													return querySkillExperience(commandSource.getSource(), EntityArgument.getPlayer(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), false);
-												}))
+												.executes((commandSource) -> querySkillExperience(commandSource.getSource(), EntityArgument.getPlayer(commandSource, "targets"), SkillArgument.getSkill(commandSource, "skillType"), false)))
 										)
 								)
 						)
@@ -85,14 +73,14 @@ public class SkillCommand {
 		int i = 0; //Success count
 		if(levels) {
 			for(ServerPlayerEntity player : targets) {
-				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NO_SKILL_CAP::create);
 				skills.setLevel(skillType, MathHelper.clamp(skills.getLevel(skillType) + amount, 0, skillType.getMaxLevel()));
 				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType), false));
 				++i;
 			}
 		} else {
 			for(ServerPlayerEntity player : targets) {
-				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NO_SKILL_CAP::create);
 				skills.addXP(skillType, amount); //Use of addXP accepted here, since event shouldn't be updated.
 				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType), false));
 				++i;
@@ -119,14 +107,14 @@ public class SkillCommand {
 		if(levels) {
 			if(amount < 0 || amount > skillType.getMaxLevel()) throw INVALID_LEVEL.create();
 			for(ServerPlayerEntity player : targets) {
-				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NO_SKILL_CAP::create);
 				skills.setLevel(skillType, amount);
 				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType), false));
 				++i;
 			}
 		} else {
 			for(ServerPlayerEntity player : targets) {
-				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NO_SKILL_CAP::create);
 				if(amount > skills.getXPNeededToLevelUp(skillType) || amount < 0) throw INVALID_POINTS.create();
 				skills.setProgress(skillType, amount);
 				FBPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new SkillUpdatePacket(skills.getCompoundNBTFor(skillType), false));
@@ -150,7 +138,7 @@ public class SkillCommand {
 	
 	private static int querySkillExperience(CommandSource source, ServerPlayerEntity target, SkillType skillType, boolean levels) throws CommandSyntaxException {
 		
-		ISkills skills = target.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+		ISkills skills = target.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NO_SKILL_CAP::create);
 		
 		int i;
 		if(levels) {

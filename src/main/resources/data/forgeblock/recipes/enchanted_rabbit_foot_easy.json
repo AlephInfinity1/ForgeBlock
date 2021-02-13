@@ -1,0 +1,18 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        "xxx",
+        "xx ",
+        "   "
+    ],
+    "key": {
+        "x": {
+            "item": "minecraft:rabbit_foot",
+            "count": 32
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_rabbit_foot",
+        "count": 1
+    }
+}

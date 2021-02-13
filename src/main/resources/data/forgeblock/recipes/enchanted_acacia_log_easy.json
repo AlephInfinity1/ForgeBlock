@@ -1,0 +1,18 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        "xxx",
+        "xx ",
+        "   "
+    ],
+    "key": {
+        "x": {
+            "item": "minecraft:acacia_log",
+            "count": 32
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_acacia_log",
+        "count": 1
+    }
+}

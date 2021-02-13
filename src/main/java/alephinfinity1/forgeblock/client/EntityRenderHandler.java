@@ -30,6 +30,7 @@ import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
@@ -43,8 +44,9 @@ public class EntityRenderHandler {
 	@SubscribeEvent
 	public static void onLivingRender(RenderLivingEvent.Post<? extends LivingEntity, ? extends EntityModel<?>> event) {
 		//Some code copied and modified from EntityRenderer$renderName
-		Entity entityIn = event.getEntity();
+		LivingEntity entityIn = event.getEntity();
 		if(entityIn instanceof ArmorStandEntity) return;
+		if (entityIn.isPotionActive(Effects.INVISIBILITY)) return;
 		MatrixStack matrixStackIn = new MatrixStack();
 		
 		float partialTicks = event.getPartialRenderTick();

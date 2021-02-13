@@ -1,0 +1,18 @@
+{
+    "type": "forgeblock:multi_crafting_shaped",
+    "pattern": [
+        "xxx",
+        "xxx",
+        "xxx"
+    ],
+    "key": {
+        "x": {
+            "item": "minecraft:hay_block",
+            "count": 16
+        }
+    },
+    "result": {
+        "item": "forgeblock:enchanted_hay_bale",
+        "count": 1
+    }
+}
