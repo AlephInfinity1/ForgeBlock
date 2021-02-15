@@ -36,10 +36,10 @@ public class NotifyKiller extends LootFunction {
 	
 	public static class NotifyType {
 		
-		public static final NotifyType RARE = new NotifyType("misc.forgeblock.rareDrop");           //RARE DROP!
-		public static final NotifyType EPIC = new NotifyType("misc.forgeblock.epicDrop");           //VERY RARE DROP!
-		public static final NotifyType LEGENDARY = new NotifyType("misc.forgeblock.legendaryDrop"); //CRAZY RARE DROP!
-		public static final NotifyType PET = new NotifyType("misc.forgeblock.petDrop");             //PET DROP!
+		public static final NotifyType RARE = new NotifyType("misc.forgeblock.dropRate.rare");				//RARE DROP!
+		public static final NotifyType EPIC = new NotifyType("misc.forgeblock.dropRate.epic");				//VERY RARE DROP!
+		public static final NotifyType LEGENDARY = new NotifyType("misc.forgeblock.dropRate.legendary");	//CRAZY RARE DROP!
+		public static final NotifyType PET = new NotifyType("misc.forgeblock.dropRate.pet");				//PET DROP!
 		
 		public String translationKey;
 		
@@ -48,23 +48,28 @@ public class NotifyKiller extends LootFunction {
 		}
 		
 		public static NotifyType parse(String str) {
-			if(str.equals("rare")) {
+			switch (str) {
+			case "rare":
 				return RARE;
-			} else if(str.equals("epic") || str.equals("very_rare")) {
+			case "epic":
+			case "very_rare":
 				return EPIC;
-			} else if(str.equals("legendary") || str.equals("crazy_rare")) {
+			case "legendary":
+			case "crazy_rare":
 				return LEGENDARY;
-			} else if(str.equals("pet")) {
+			case "pet":
 				return PET;
-			} else return RARE;
+			default:
+				return RARE;
+			}
 		}
 		
 		@Override
 		public String toString() {
-			if(this.equals(RARE)) return "rare";
-			else if(this.equals(EPIC)) return "epic";
-			else if(this.equals(LEGENDARY)) return "legendary";
-			else if(this.equals(PET)) return "pet";
+			if (this.equals(RARE)) return "rare";
+			else if (this.equals(EPIC)) return "epic";
+			else if (this.equals(LEGENDARY)) return "legendary";
+			else if (this.equals(PET)) return "pet";
 			else return super.toString();
 		}
 		
@@ -78,7 +83,7 @@ public class NotifyKiller extends LootFunction {
 			@Override
 			public NotifyType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 					throws JsonParseException {
-				if(json.isJsonPrimitive()) return NotifyType.parse(json.getAsString());
+				if (json.isJsonPrimitive()) return NotifyType.parse(json.getAsString());
 				else throw new JsonParseException("Json must be a string");
 			}
 			
@@ -95,15 +100,15 @@ public class NotifyKiller extends LootFunction {
 	@Override
 	protected ItemStack doApply(ItemStack stack, LootContext context) {
 		Entity killer = context.get(LootParameters.KILLER_ENTITY);
-		if(!(killer instanceof PlayerEntity)) LOGGER.trace("Killer is not a player.");
+		if (!(killer instanceof PlayerEntity)) LOGGER.trace("Killer is not a player.");
 		else {
 			PlayerEntity player = (PlayerEntity) killer;
 			ITextComponent message = new TranslationTextComponent(this.type.translationKey, stack.getDisplayName().getString());
-			if(this.useMF) {
+			if (this.useMF) {
 				String mf = new DecimalFormat(",###.#").format(player.getAttribute(FBAttributes.MAGIC_FIND).getValue()).replaceAll("\u00A0", ",");
 				message.appendSibling(new TranslationTextComponent("misc.forgeblock.magicFindBonus", mf));
 			}
-			if(this.usePL) {
+			if (this.usePL) {
 				String pl = new DecimalFormat(",###.#").format(player.getAttribute(FBAttributes.PET_LUCK).getValue()).replaceAll("\u00A0", ",");
 				message.appendSibling(new TranslationTextComponent("misc.forgeblock.petLuckBonus", pl));
 			}

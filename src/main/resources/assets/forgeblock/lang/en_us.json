@@ -439,35 +439,35 @@
     "skills.forgeblock.levelUpMessage_2": "  \u00A7a\u00A7lREWARDS",
     "skills.forgeblock.levelUpMessageCoins": "    \u00A77+\u00A76%s Coins",
     
-    "commands.forgeblock.reforge.success": "Successfully reforged %1$s's %2$s to %3$s.",
-    "commands.forgeblock.reforge.randomSuccess": "Successfully reforged %1$s's %2$s randomly.",
+    "commands.forgeblock.reforge.success": "Successfully reforged %1$s's %2$s to %3$s",
+    "commands.forgeblock.reforge.randomSuccess": "Successfully reforged %1$s's %2$s randomly",
     "commands.forgeblock.reforge.invalidReforge": "That reforge does not exist!",
     "commands.forgeblock.reforge.nonreforgeable": "%1$s cannot be reforged!",
     
-    "commands.forgeblock.skill.add.levels.single": "Increased the amount of %3$s levels %1$s has by %2$s.",
-    "commands.forgeblock.skill.add.points.single": "Increased the amount of %3$s points %1$s has by %2$s.",
-    "commands.forgeblock.skill.add.levels.multi": "Increased the amount of %3$s levels %1$s targets have by %2$s.",
-    "commands.forgeblock.skill.add.points.multi": "Increased the amount of %3$s points %1$s targets have by %2$s.",
+    "commands.forgeblock.skill.add.levels.single": "Increased the amount of %3$s levels %1$s has by %2$s",
+    "commands.forgeblock.skill.add.points.single": "Increased the amount of %3$s points %1$s has by %2$s",
+    "commands.forgeblock.skill.add.levels.multi": "Increased the amount of %3$s levels %1$s targets have by %2$s",
+    "commands.forgeblock.skill.add.points.multi": "Increased the amount of %3$s points %1$s targets have by %2$s",
     
-    "commands.forgeblock.skill.set.levels.single": "Set the amount of %3$s levels %1$s has to %2$s.",
-    "commands.forgeblock.skill.set.points.single": "Set the amount of %3$s points %1$s has to %2$s.",
-    "commands.forgeblock.skill.set.levels.multi": "Set the amount of %3$s levels %1$s targets have to %2$s.",
-    "commands.forgeblock.skill.set.points.multi": "Set the amount of %3$s points %1$s targets have to %2$s.",
+    "commands.forgeblock.skill.set.levels.single": "Set the amount of %3$s levels %1$s has to %2$s",
+    "commands.forgeblock.skill.set.points.single": "Set the amount of %3$s points %1$s has to %2$s",
+    "commands.forgeblock.skill.set.levels.multi": "Set the amount of %3$s levels %1$s targets have to %2$s",
+    "commands.forgeblock.skill.set.points.multi": "Set the amount of %3$s points %1$s targets have to %2$s",
     
-    "commands.forgeblock.skill.query.levels": "%1$s has %2$s %3$s levels.",
-    "commands.forgeblock.skill.query.points": "%1$s has %2$s %3$s points.",
+    "commands.forgeblock.skill.query.levels": "%1$s has %2$s %3$s levels",
+    "commands.forgeblock.skill.query.points": "%1$s has %2$s %3$s points",
     
     "commands.forgeblock.skill.invalidSkillType": "Invalid skill type!",
     "commands.forgeblock.skill.invalidLevel": "Invalid level! (Must be between 0 and 50)",
     "commands.forgeblock.skill.invalidPoints": "Invalid points!",
 
-    "commands.forgeblock.coins.add.single": "Given %2$s coins to %1$s.",
-    "commands.forgeblock.coins.add.multi": "Given %2$s coins to %1$s targets.",
+    "commands.forgeblock.coins.add.single": "Given %2$s coins to %1$s",
+    "commands.forgeblock.coins.add.multi": "Given %2$s coins to %1$s targets",
 
-    "commands.forgeblock.coins.set.single": "Set the amount of coins %1$s has to %2$s.",
-    "commands.forgeblock.coins.set.multi": "Set the amount of coins %1$s targets have to %2$s.",
+    "commands.forgeblock.coins.set.single": "Set the amount of coins %1$s has to %2$s",
+    "commands.forgeblock.coins.set.multi": "Set the amount of coins %1$s targets have to %2$s",
 
-    "commands.forgeblock.coins.query": "%1$s has %2$s coins.",
+    "commands.forgeblock.coins.query": "%1$s has %2$s coins",
 
     "reforge.forgeblock.gentle": "Gentle",
     "reforge.forgeblock.odd": "Odd",
@@ -493,12 +493,12 @@
     
     "text.forgeblock.reforgeable": "\u00A78This item can be reforged!",
     
-    "misc.forgeblock.rareDrop": "\u00A76\u00A7lRARE DROP! \u00A7f%s ",
-    "misc.forgeblock.epicDrop": "\u00A75\u00A7lVERY RARE DROP! \u00A7f%s ",
-    "misc.forgeblock.legendaryDrop": "\u00A7d\u00A7lCRAZY RARE DROP! \u00A7f%s ",
-    "misc.forgeblock.petDrop": "\u00A76\u00A7lPET DROP! \u00A7f%s ",
-    "misc.forgeblock.magicFindBonus": "\u00A7b(+%s% Magic Find!)",
-    "misc.forgeblock.petLuckBonus": "\u00A7d(+%s% Pet Luck!)",
+    "misc.forgeblock.dropRate.rare": "\u00A76\u00A7lRARE DROP! \u00A7f%s ",
+    "misc.forgeblock.dropRate.epic": "\u00A75\u00A7lVERY RARE DROP! \u00A7f%s ",
+    "misc.forgeblock.dropRate.legendary": "\u00A7d\u00A7lCRAZY RARE DROP! \u00A7f%s ",
+    "misc.forgeblock.dropRate.pet": "\u00A76\u00A7lPET DROP! \u00A7f%s ",
+    "misc.forgeblock.magicFindBonus": "\u00A7b(+%s%% Magic Find!)",
+    "misc.forgeblock.petLuckBonus": "\u00A7d(+%s%% Pet Luck!)",
     
     "text.forgeblock.sword_desc.aote_0": "\u00A76Item Ability: Instant Transmission \u00A7e\u00A7lRIGHT CLICK",
     "text.forgeblock.sword_desc.aote_1": "\u00A77Teleport \u00A7a8 blocks\u00A77 ahead of",

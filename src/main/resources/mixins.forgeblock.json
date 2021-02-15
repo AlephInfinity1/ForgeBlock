@@ -6,9 +6,12 @@
     "target": "@env(DEFAULT)",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+        "AccessorEntity",
+        "MixinEnderPearlItem",
+        "MixinLivingEntity",
         "MixinMinecraftServer",
-        "MixinPlayerEntity",
-        "MixinEnderPearlItem"
+        "MixinMobEntity",
+        "MixinPlayerEntity"
     ],
     "client": [],
     "server": [],

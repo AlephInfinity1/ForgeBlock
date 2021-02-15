@@ -117,13 +117,13 @@ public class ModItems {
 	public static final RegistryObject<Item> ENCHANTED_SUGAR_CANE = ITEMS.register("enchanted_sugar_cane", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_LEATHER = ITEMS.register("enchanted_leather", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_GRILLED_PORKCHOP = ITEMS.register("enchanted_grilled_porkchop", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
-	public static final RegistryObject<Item> ENCHANTED_EGG = ITEMS.register("enchanted_egg", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_EGG = ITEMS.register("enchanted_egg", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS).maxStackSize(16), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_CAKE = ITEMS.register("enchanted_cake", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> SUPER_ENCHANTED_EGG = ITEMS.register("super_enchanted_egg", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_COOKED_MUTTON = ITEMS.register("enchanted_cooked_mutton", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 
 	/*
-	Swords
+	 * Swords
 	 */
 	public static final RegistryObject<Item> WOODEN_SWORD = OVERRIDE.register("wooden_sword", () -> new WoodSingularityApplicableSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
 	public static final RegistryObject<Item> GOLDEN_SWORD = OVERRIDE.register("golden_sword", () -> new FBSwordItem(new Item.Properties().group(ModItemGroups.FB_SWORDS), FBTier.COMMON, 20, 0, 0, 0));
