@@ -17,8 +17,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -37,7 +35,6 @@ public class AttributeLimitsRemover {
 	
 	/*
 	 * Custom attributes
-	 * Note: American spelling is used in all of the below
 	 */
 	private AttributeLimitsRemover() {
 		throw new AssertionError("AttributeHelper should not be instantiated!");
@@ -48,8 +45,8 @@ public class AttributeLimitsRemover {
 			if(attribute instanceof RangedAttribute) {
 				RangedAttribute ranged = (RangedAttribute) attribute;
 				ranged.maximumValue = Double.MAX_VALUE;
-				if(attribute.equals(MAX_HEALTH)) ranged.minimumValue = 1.0D;
-				else ranged.minimumValue = -Double.MAX_VALUE;
+				if (attribute.equals(MAX_HEALTH)) ranged.minimumValue = 1.0D;
+				else ranged.minimumValue = Double.MIN_VALUE;
 			}
 		}
 	}

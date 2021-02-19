@@ -123,7 +123,7 @@ public class Interval<T extends Comparable<T>> {
 		}
 		
 		public static DoubleInterval under(double max, boolean inclusive) {
-			return new DoubleInterval(Double.NEGATIVE_INFINITY, max, false, inclusive, IntervalType.UNDER);
+			return new DoubleInterval(Double.NEGATIVE_INFINITY, max, true, inclusive, IntervalType.UNDER);
 		}
 		
 		public static DoubleInterval under(double max) {
@@ -135,7 +135,7 @@ public class Interval<T extends Comparable<T>> {
 		}
 		
 		public static DoubleInterval above(double min, boolean inclusive) {
-			return new DoubleInterval(min, Double.POSITIVE_INFINITY, inclusive, false, IntervalType.ABOVE);
+			return new DoubleInterval(min, Double.POSITIVE_INFINITY, inclusive, true, IntervalType.ABOVE);
 		}
 		
 		public static DoubleInterval above(double min) {
@@ -152,7 +152,7 @@ public class Interval<T extends Comparable<T>> {
 		
 	}
 	
-	public static enum IntervalType {
+	public enum IntervalType {
 		RANGE,
 		UNDER,
 		ABOVE

@@ -51,6 +51,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.spongepowered.asm.launch.MixinBootstrap;
 
 @Mod(value = ForgeBlock.MOD_ID)
+@Mod.EventBusSubscriber
 public class ForgeBlock {
 
 	public static final String MOD_ID = "forgeblock";

@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.network;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import alephinfinity1.forgeblock.ForgeBlock;
@@ -42,7 +43,8 @@ public class SkillUpdatePacket {
 		if(ctx.get().getDirection().getReceptionSide().isClient()) {
 			ctx.get().enqueueWork(() -> {
 				ClientPlayerEntity player = ForgeBlock.MINECRAFT.player;
-				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElse(null);
+				if (Objects.isNull(skills)) { return; }
 				ISkills old = skills.copy();
 				SkillType type = SkillType.getSkillTypeByID(msg.nbt.getString("SkillType"));
 				skills.setLevel(type, msg.nbt.getInt("Level"));
@@ -55,7 +57,8 @@ public class SkillUpdatePacket {
 		if(ctx.get().getDirection().getReceptionSide().isServer()) {
 			ctx.get().enqueueWork(() -> {
 				ServerPlayerEntity player = ctx.get().getSender();
-				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElseThrow(NullPointerException::new);
+				ISkills skills = player.getCapability(SkillsProvider.SKILLS_CAPABILITY).orElse(null);
+				if (Objects.isNull(skills)) { return; }
 				SkillType type = SkillType.getSkillTypeByID(msg.nbt.getString("SkillType"));
 				skills.setLevel(type, msg.nbt.getInt("Level"));
 				skills.setProgress(type, msg.nbt.getDouble("Progress"));

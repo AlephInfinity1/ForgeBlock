@@ -82,8 +82,18 @@ public class DamageHandler {
 		return new EntityDamageSource("player_magic", castor);
 	}
 
+	public static DamageSource causeEntityTrueDamage(LivingEntity source) {
+		return new EntityDamageSource("true", source).setDamageIsAbsolute().setDamageBypassesArmor();
+	}
+
 	//TODO Remove the damage handler here, and replace it with player AttackEntityEvent
 	//@SubscribeEvent
+	/**
+	 * Handle living attack
+	 * @param event The event that triggered the damage
+	 * @deprecated No longer used. Replaced with mixins.
+	 */
+	@Deprecated
 	public static void onLivingAttack(LivingHurtEvent event) {
 		//Pre: get damager and victim.
 		
@@ -381,7 +391,8 @@ public class DamageHandler {
 					MathHelper.nextDouble(new Random(), -1, 1));
 		}
 	}
-	
+
+	@Deprecated
 	public static void addDamageDisplay(World world, double posX, double posY, double posZ, double amount, DamageSource source) {
 		String num = new DecimalFormat(",###").format(amount).replaceAll("\u00A0", ",");
 		@SuppressWarnings("unused")
@@ -420,6 +431,7 @@ public class DamageHandler {
 	 */
 	//@SubscribeEvent
 	@SuppressWarnings("unused")
+	@Deprecated
 	public static void onPlayerAttack(AttackEntityEvent event) {
 		if (event.isCanceled()) return;
 		Entity targetEntity = event.getTarget();

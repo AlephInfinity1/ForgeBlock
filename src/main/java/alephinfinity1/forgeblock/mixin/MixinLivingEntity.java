@@ -32,4 +32,14 @@ public abstract class MixinLivingEntity {
 
         return damage;
     }
+
+    /**
+     * @author AlephInfinity1
+     * @reason
+     * Custom void death handling. Used to prevent high-health mobs from being stuck in the void for a long long time.
+     */
+    @Overwrite
+    protected void outOfWorld() {
+        ((LivingEntity) (Object) this).attackEntityFrom(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+    }
 }

@@ -12,6 +12,7 @@ import alephinfinity1.forgeblock.item.RecombobulatorItem;
 import alephinfinity1.forgeblock.item.WoodSingularityItem;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
+import alephinfinity1.forgeblock.mixin.AccessorRepairContainer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerInventory;
@@ -42,20 +43,20 @@ public class FBRepairContainer extends RepairContainer {
 	public void updateRepairOutput() {
 		ItemStack itemstack = this.inputSlots.getStackInSlot(0);
 		ItemStack itemstack2 = this.inputSlots.getStackInSlot(1);
-		this.maximumCost.set(1);
+		((AccessorRepairContainer) this).getMaximumCost().set(1);
 		int i = 0;
 		int j = 0;
 		int k = 0;
 		if (itemstack.isEmpty()) {
 			this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-			this.maximumCost.set(0);
+			((AccessorRepairContainer) this).getMaximumCost().set(0);
 			return;
 		} else if (itemstack2.getItem() instanceof HotPotatoBookItem) { //Hot potato book handling
 			ItemStack itemstack1 = itemstack.copy();
 			IItemModifiers im = itemstack1.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
 			if(im == null) { //If no IItemModifiers is present, the item is confirmed to be unapplicable.
 				this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-				this.maximumCost.set(0);
+				((AccessorRepairContainer) this).getMaximumCost().set(0);
 				return;
 			} else {
 				if(ModStatsModifiers.HOT_POTATO_BOOK.get().isApplicable(itemstack1)) { //Only apply if applicable, otherwise reset.
@@ -65,7 +66,7 @@ public class FBRepairContainer extends RepairContainer {
 							short fuming = nbt.getShort("FumingAmount");
 							if(fuming >= MAX_FUMING) { //If already at max amount, fail to apply.
 								this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-								this.maximumCost.set(0);
+								((AccessorRepairContainer) this).getMaximumCost().set(0);
 								return;
 							} else { //Otherwise, increment by 1
 								fuming++;
@@ -76,7 +77,7 @@ public class FBRepairContainer extends RepairContainer {
 							short amount = nbt.getShort("Amount");
 							if(amount >= MAX_HPB) { //If at max amount
 								this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-								this.maximumCost.set(0);
+								((AccessorRepairContainer) this).getMaximumCost().set(0);
 								return;
 							} else { //Otherwise +1
 								amount++;
@@ -97,7 +98,7 @@ public class FBRepairContainer extends RepairContainer {
 					}
 				} else {
 					this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-					this.maximumCost.set(0);
+					((AccessorRepairContainer) this).getMaximumCost().set(0);
 					return;
 				}
 			}
@@ -110,7 +111,7 @@ public class FBRepairContainer extends RepairContainer {
 			if(im == null) { //If no IItemModifiers is present, the item is confirmed to be unapplicable.
 				//ForgeBlock.LOGGER.debug("IM is null, returning");
 				this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-				this.maximumCost.set(0);
+				((AccessorRepairContainer) this).getMaximumCost().set(0);
 				return;
 			} else {
 				if(ModStatsModifiers.WOOD_SINGULARITY.get().isApplicable(itemstack1)) { //Only apply if applicable, otherwise reset.
@@ -120,7 +121,7 @@ public class FBRepairContainer extends RepairContainer {
 					//ForgeBlock.LOGGER.debug("Wood singularity applied successfully");
 				} else {
 					this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-					this.maximumCost.set(0);
+					((AccessorRepairContainer) this).getMaximumCost().set(0);
 					return;
 				}
 			}
@@ -133,7 +134,7 @@ public class FBRepairContainer extends RepairContainer {
 			if(im == null) { //If no IItemModifiers is present, the item is confirmed to be unapplicable.
 				//ForgeBlock.LOGGER.debug("IM is null, returning");
 				this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-				this.maximumCost.set(0);
+				((AccessorRepairContainer) this).getMaximumCost().set(0);
 				return;
 			} else {
 				if(ModStatsModifiers.RECOMBOBULATOR.get().isApplicable(itemstack1)) { //Only apply if applicable, otherwise reset.
@@ -143,7 +144,7 @@ public class FBRepairContainer extends RepairContainer {
 					//ForgeBlock.LOGGER.debug("Wood singularity applied successfully");
 				} else {
 					this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-					this.maximumCost.set(0);
+					((AccessorRepairContainer) this).getMaximumCost().set(0);
 					return;
 				}
 			}
@@ -193,7 +194,7 @@ public class FBRepairContainer extends RepairContainer {
 					int l2 = Math.min(itemstack1.getDamage(), itemstack1.getMaxDamage() / 4);
 					if (l2 <= 0) {
 						this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-						this.maximumCost.set(0);
+						((AccessorRepairContainer) this).getMaximumCost().set(0);
 						return;
 					}
 
@@ -209,7 +210,7 @@ public class FBRepairContainer extends RepairContainer {
 				} else {
 					if (!flag && (itemstack1.getItem() != itemstack2.getItem() || !itemstack1.isDamageable())) {
 						this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-						this.maximumCost.set(0);
+						((AccessorRepairContainer) this).getMaximumCost().set(0);
 						return;
 					}
 
@@ -303,7 +304,7 @@ public class FBRepairContainer extends RepairContainer {
 
 					if (flag3 && !flag2) {
 						this.outputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-						this.maximumCost.set(0);
+						((AccessorRepairContainer) this).getMaximumCost().set(0);
 						return;
 					}
 				}
@@ -322,13 +323,13 @@ public class FBRepairContainer extends RepairContainer {
 			}
 			if (flag && !itemstack1.isBookEnchantable(itemstack2)) itemstack1 = ItemStack.EMPTY;
 
-			this.maximumCost.set(j + i);
+			((AccessorRepairContainer) this).getMaximumCost().set(j + i);
 			if (i <= 0) {
 				itemstack1 = ItemStack.EMPTY;
 			}
 
-			if (k == i && k > 0 && this.maximumCost.get() >= 40) {
-				this.maximumCost.set(39);
+			if (k == i && k > 0 && ((AccessorRepairContainer) this).getMaximumCost().get() >= 40) {
+				((AccessorRepairContainer) this).getMaximumCost().set(39);
 			}
 
 			/*
@@ -353,7 +354,7 @@ public class FBRepairContainer extends RepairContainer {
 			
 			//Sets the cost to 50 * level, if ultimate is present.
 			if (FBRepairContainer.getUltimateLevel(itemstack2) != 0) {
-				this.maximumCost.set(ULTIMATE_ENCHANT_COST_MULTIPLIER * FBRepairContainer.getUltimateLevel(itemstack2));
+				((AccessorRepairContainer) this).getMaximumCost().set(ULTIMATE_ENCHANT_COST_MULTIPLIER * FBRepairContainer.getUltimateLevel(itemstack2));
 			}
 			
 			//Custom One For All handling, removes every other enchantment.
@@ -409,7 +410,7 @@ public class FBRepairContainer extends RepairContainer {
 	 * Gets the new repair cost of an item.<br>
 	 * Formula: {@code 2 * oldRepairCost + 2} <br>
 	 * or {@code 3 * (1 << priorReworks) - 2}
-	 * @param previousCost The previous repair cost of the itemstack
+	 * @param oldRepairCost The previous repair cost of the itemstack
 	 * @return The new repair cost of the itemstack, dependent on the previous.
 	 */
 	public static int getNewRepairCost(int oldRepairCost) {

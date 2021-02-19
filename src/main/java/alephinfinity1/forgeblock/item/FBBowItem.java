@@ -23,8 +23,9 @@ import java.util.UUID;
 import static alephinfinity1.forgeblock.item.FBSwordItem.SWORD_REFORGE_MODIFIER;
 
 public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredItem {
-    protected final FBTier tier;
-    protected final Multimap<String, AttributeModifier> attributes;
+    private final FBTier tier;
+    private final Multimap<String, AttributeModifier> attributes;
+    private final double drawSpeed;
 
     protected static final UUID BOW_STRENGTH_MODIFIER = UUID.fromString("f1c2a376-481b-43d7-a257-7a2f38126500");
     protected static final UUID BOW_CRIT_CHANCE_MODIFIER = UUID.fromString("53305ff6-a0dd-4039-a2ad-653c74786f7d");
@@ -32,7 +33,7 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
 
     protected static final UUID BOW_REFORGE_MODIFIER = UUID.fromString("71b440d6-9a6a-49ad-b3c3-4a4fb03a8afb");
 
-    public FBBowItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn, double critChanceIn, double critDamageIn) {
+    public FBBowItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn, double critChanceIn, double critDamageIn, double drawSpeedIn) {
         super(props);
         this.tier = tier;
         ImmutableMultimap.Builder<String, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -41,6 +42,7 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
         builder.put(FBAttributes.CRIT_CHANCE.getName(), new AttributeModifier(BOW_CRIT_CHANCE_MODIFIER, "Crit chance modifier", critChanceIn, AttributeModifier.Operation.ADDITION));
         builder.put(FBAttributes.CRIT_DAMAGE.getName(), new AttributeModifier(BOW_CRIT_DAMAGE_MODIFIER, "Crit damage modifier", critDamageIn, AttributeModifier.Operation.ADDITION));
         attributes = builder.build();
+        this.drawSpeed = drawSpeedIn;
     }
 
     @Override

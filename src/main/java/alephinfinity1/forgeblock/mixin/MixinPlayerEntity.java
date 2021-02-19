@@ -1,13 +1,17 @@
 package alephinfinity1.forgeblock.mixin;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
+import alephinfinity1.forgeblock.client.ClientEventBusSubscriber;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.misc.AttributeHelper;
 import alephinfinity1.forgeblock.misc.FBCreatureAttributes;
+import alephinfinity1.forgeblock.misc.FBFoodStats;
 import alephinfinity1.forgeblock.misc.RNGHelper;
 import alephinfinity1.forgeblock.misc.skills.SkillsHelper;
 import alephinfinity1.forgeblock.network.DamageParticlePacket;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
+import com.mojang.authlib.GameProfile;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CreatureAttribute;
@@ -31,6 +35,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,6 +49,11 @@ import java.util.Random;
 
 @Mixin(PlayerEntity.class)
 public abstract class MixinPlayerEntity {
+
+    @Inject(at = @At("RETURN"), method = "<init>")
+    public void overrideFood(World worldIn, GameProfile gameProfileIn, CallbackInfo ci) {
+        ((AccessorPlayerEntity) this).setFoodStats(new FBFoodStats());
+    }
 
     @Inject(at = @At("RETURN"), method = "registerAttributes()V", cancellable = true)
     public void registerAttributes(CallbackInfo ci) {
@@ -88,6 +98,7 @@ public abstract class MixinPlayerEntity {
     //TODO Add handling for custom enchantments
     public void attackTargetEntityWithCurrentItem(Entity targetEntity) {
         PlayerEntity player = (PlayerEntity) (Object) this;
+        if (player instanceof ClientPlayerEntity) return;
         if (!net.minecraftforge.common.ForgeHooks.onPlayerAttackTarget(((PlayerEntity) (Object)this), targetEntity)) return;
         if (targetEntity.canBeAttackedWithItem()) {
             if (!targetEntity.hitByEntity(player)) {
@@ -204,9 +215,9 @@ public abstract class MixinPlayerEntity {
                         }
                         if (i > 0) {
                             if (targetEntity instanceof LivingEntity) {
-                                ((LivingEntity)targetEntity).knockBack(player, (float)i * 0.5F, (double) MathHelper.sin(player.rotationYaw * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(player.rotationYaw * ((float)Math.PI / 180F))));
+                                ((LivingEntity)targetEntity).knockBack(player, (float)i * 0.5F, MathHelper.sin(player.rotationYaw * ((float)Math.PI / 180F)), -MathHelper.cos(player.rotationYaw * ((float)Math.PI / 180F)));
                             } else {
-                                targetEntity.addVelocity((-MathHelper.sin(player.rotationYaw * ((float)Math.PI / 180F)) * (float)i * 0.5F), 0.1D, (double)(MathHelper.cos(player.rotationYaw * ((float)Math.PI / 180F)) * (float)i * 0.5F));
+                                targetEntity.addVelocity((-MathHelper.sin(player.rotationYaw * ((float)Math.PI / 180F)) * (float)i * 0.5F), 0.1D, MathHelper.cos(player.rotationYaw * ((float)Math.PI / 180F)) * (float)i * 0.5F);
                             }
 
                             player.setMotion(player.getMotion().mul(0.6D, 1.0D, 0.6D));
@@ -297,29 +308,6 @@ public abstract class MixinPlayerEntity {
     public void attackEntityFrom(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         double defense = ((PlayerEntity) (Object) this).getAttribute(FBAttributes.DEFENSE).getValue();
 
-    }
-
-    //@Inject(at = @At("RETURN"), method = "xpBarCap()I", cancellable = true)
-    public void xpBarCap(CallbackInfoReturnable<Integer> cir) {
-        cir.cancel();
-        int level = ((PlayerEntity) (Object) this).experienceLevel;
-        switch (level % 100) {
-        case 0:
-            cir.setReturnValue(500);
-            break;
-        case 1:
-            cir.setReturnValue(1000);
-            break;
-        case 2:
-            cir.setReturnValue(2000);
-            break;
-        case 3:
-            cir.setReturnValue(3500);
-            break;
-        default:
-            cir.setReturnValue(5000);
-            break;
-        }
     }
 
 }

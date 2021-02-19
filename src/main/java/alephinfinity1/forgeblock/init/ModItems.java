@@ -98,6 +98,8 @@ public class ModItems {
 	public static final RegistryObject<Item> ENCHANTED_BEEF = ITEMS.register("enchanted_beef", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_PORKCHOP = ITEMS.register("enchanted_porkchop", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_CHICKEN = ITEMS.register("enchanted_chicken", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
+	public static final RegistryObject<Item> ENCHANTED_EGG = ITEMS.register("enchanted_egg", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS).maxStackSize(16), FBTier.RARE));
+	public static final RegistryObject<Item> ENCHANTED_CAKE = ITEMS.register("enchanted_cake", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_MUTTON = ITEMS.register("enchanted_mutton", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_RABBIT_FOOT = ITEMS.register("enchanted_rabbit_foot", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_RABBIT_HIDE = ITEMS.register("enchanted_rabbit_hide", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
@@ -117,8 +119,6 @@ public class ModItems {
 	public static final RegistryObject<Item> ENCHANTED_SUGAR_CANE = ITEMS.register("enchanted_sugar_cane", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_LEATHER = ITEMS.register("enchanted_leather", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> ENCHANTED_GRILLED_PORKCHOP = ITEMS.register("enchanted_grilled_porkchop", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
-	public static final RegistryObject<Item> ENCHANTED_EGG = ITEMS.register("enchanted_egg", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS).maxStackSize(16), FBTier.RARE));
-	public static final RegistryObject<Item> ENCHANTED_CAKE = ITEMS.register("enchanted_cake", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.UNCOMMON));
 	public static final RegistryObject<Item> SUPER_ENCHANTED_EGG = ITEMS.register("super_enchanted_egg", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 	public static final RegistryObject<Item> ENCHANTED_COOKED_MUTTON = ITEMS.register("enchanted_cooked_mutton", () -> new FBGlintedItem(new Item.Properties().group(ModItemGroups.FB_MATERIALS), FBTier.RARE));
 
@@ -370,4 +370,5 @@ public class ModItems {
 	public static final RegistryObject<Item> JESTER_BOOTS = ITEMS.register("jester_boots", () -> new FBArmorItem(EquipmentSlotType.FEET, "minecraft:chainmail", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.EPIC, ModifierHelper.modifierMapFromDoubles(0, -40, 0, 0, 0, 0, 0, -150, 0, -200, 0, 6, 0, 0)));
 	public static final RegistryObject<Item> ONE = ITEMS.register("one", () -> new OneSwordItem(new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.SPECIAL));
 	public static final RegistryObject<Item> TEST_HELMET = ITEMS.register("test", () -> new TestArmorItem(EquipmentSlotType.HEAD, "minecraft:gold", new Item.Properties().group(ModItemGroups.FB_CUSTOM), FBTier.EPIC));
+
 }

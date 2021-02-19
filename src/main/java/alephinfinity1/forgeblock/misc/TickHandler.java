@@ -356,7 +356,7 @@ public class TickHandler {
 			if(minecraft.currentScreen instanceof DeathScreen && minecraft.player.getHealth() > 0) {
 				minecraft.displayGuiScreen(null);
 				minecraft.player.deathTime = 0;
-				minecraft.player.getDataManager().set(Entity.POSE, Pose.STANDING);
+				//minecraft.player.getDataManager().set(Entity.POSE, Pose.STANDING);
 			}
 		}
 		if(minecraft.player != null) {
