@@ -148,6 +148,12 @@ public class ModItems {
 	public static final RegistryObject<Item> CUSTOM_SWORD = ITEMS.register("custom_sword", CustomSwordItem::new);
 
 	/*
+	 * Bows
+	 */
+	public static final RegistryObject<Item> BOW = OVERRIDE.register("bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1), FBTier.COMMON, 30, 0, 0, 0, 1.0));
+	public static final RegistryObject<Item> DECENT_BOW = ITEMS.register("decent_bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1), FBTier.UNCOMMON, 45, 0, 0, 0, 1.0));
+
+	/*
 	 * Pickaxes
 	 */
 	public static final RegistryObject<Item> WOODEN_PICKAXE = OVERRIDE.register("wooden_pickaxe", () -> new FBPickaxeItem(new Item.Properties().group(ModItemGroups.FB_HARVESTING_TOOLS), FBTier.COMMON, 15, 1, 1.5f, 1));

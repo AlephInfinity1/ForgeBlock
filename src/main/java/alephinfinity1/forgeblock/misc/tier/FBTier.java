@@ -10,6 +10,7 @@ import net.minecraft.util.text.TranslationTextComponent;
  * Better known as 'Rarity' in-game, however the official terminology, as shown in the API doc, is 'Tier'.
  */
 public enum FBTier {
+	POOR(FBModConfig.POOR_TIER_COLOR.get(), "misc.forgeblock.tier.poor"),
 	COMMON(FBModConfig.COMMON_TIER_COLOR.get(), "misc.forgeblock.tier.common"),
 	UNCOMMON(FBModConfig.UNCOMMON_TIER_COLOR.get(), "misc.forgeblock.tier.uncommon"),
 	RARE(FBModConfig.RARE_TIER_COLOR.get(), "misc.forgeblock.tier.rare"),
@@ -57,6 +58,8 @@ public enum FBTier {
 	 */
 	public int getInt() {
 		switch(this) {
+		case POOR:
+			return -1;
 		case COMMON:
 			return 0;
 		case UNCOMMON:
@@ -76,12 +79,14 @@ public enum FBTier {
 		case VERY_SPECIAL:
 			return 8;
 		default:
-			return -1;
+			return -32767;
 		}
 	}
 	
 	public Rarity getVanillaRarity() {
 		switch(this) {
+		case POOR:
+			return Rarity.create("FB_POOR", FBModConfig.POOR_TIER_COLOR.get());
 		case COMMON:
 			return Rarity.create("FB_COMMON", FBModConfig.COMMON_TIER_COLOR.get());
 		case UNCOMMON:
@@ -126,6 +131,8 @@ public enum FBTier {
 	 */
 	public static FBTier valueOf(int i, boolean allowSpecial) {
 		switch(i) {
+		case -1:
+			return POOR;
 		case 0:
 			return COMMON;
 		case 1:
@@ -145,7 +152,7 @@ public enum FBTier {
 		case 8:
 			return allowSpecial ? VERY_SPECIAL : SUPREME;
 		default:
-			if(i < 0) return COMMON;
+			if(i < -1) return COMMON;
 			else return allowSpecial ? VERY_SPECIAL: SUPREME;
 		}
 	}

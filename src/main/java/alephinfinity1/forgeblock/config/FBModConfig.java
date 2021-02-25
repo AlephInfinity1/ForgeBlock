@@ -26,6 +26,7 @@ public class FBModConfig {
 	public static ForgeConfigSpec CLIENT_CONFIG;
 	
 	//Tier colours.
+	public static ForgeConfigSpec.EnumValue<TextFormatting> POOR_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> COMMON_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> UNCOMMON_TIER_COLOR;
 	public static ForgeConfigSpec.EnumValue<TextFormatting> RARE_TIER_COLOR;
@@ -66,17 +67,18 @@ public class FBModConfig {
 	}
 
 	public static void setupTierConfig() {
-		List<TextFormatting> acceptableValues = Arrays.asList(TextFormatting.AQUA, TextFormatting.BLACK, TextFormatting.BLUE, TextFormatting.DARK_AQUA, TextFormatting.DARK_BLUE, TextFormatting.DARK_GRAY, TextFormatting.DARK_GREEN, TextFormatting.DARK_PURPLE, TextFormatting.DARK_RED, TextFormatting.GOLD, TextFormatting.GRAY, TextFormatting.GREEN, TextFormatting.LIGHT_PURPLE, TextFormatting.RED, TextFormatting.WHITE, TextFormatting.YELLOW);
-		
-		COMMON_TIER_COLOR = CLIENT_BUILDER.comment("Common rarity color").defineEnum("commonColor", TextFormatting.WHITE, acceptableValues);
-		UNCOMMON_TIER_COLOR = CLIENT_BUILDER.comment("Uncommon rarity color").defineEnum("uncommonColor", TextFormatting.GREEN, acceptableValues);
-		RARE_TIER_COLOR = CLIENT_BUILDER.comment("Rare rarity color").defineEnum("rareColor", TextFormatting.BLUE, acceptableValues);
-		EPIC_TIER_COLOR = CLIENT_BUILDER.comment("Epic rarity color").defineEnum("epicColor", TextFormatting.DARK_PURPLE, acceptableValues);
-		LEGENDARY_TIER_COLOR = CLIENT_BUILDER.comment("Legendary rarity color").defineEnum("legendaryColor", TextFormatting.GOLD, acceptableValues);
-		MYTHIC_TIER_COLOR = CLIENT_BUILDER.comment("Mythic rarity color").defineEnum("mythicColor", TextFormatting.LIGHT_PURPLE, acceptableValues);
-		SUPREME_TIER_COLOR = CLIENT_BUILDER.comment("Supreme rarity color").defineEnum("supremeColor", TextFormatting.DARK_RED, acceptableValues);
-		SPECIAL_TIER_COLOR = CLIENT_BUILDER.comment("Special rarity color").defineEnum("specialColor", TextFormatting.RED, acceptableValues);
-		VERY_SPECIAL_TIER_COLOR = CLIENT_BUILDER.comment("Very special rarity color").defineEnum("verySpecialColor", TextFormatting.RED, acceptableValues);
+		List<TextFormatting> colors = Arrays.asList(TextFormatting.AQUA, TextFormatting.BLACK, TextFormatting.BLUE, TextFormatting.DARK_AQUA, TextFormatting.DARK_BLUE, TextFormatting.DARK_GRAY, TextFormatting.DARK_GREEN, TextFormatting.DARK_PURPLE, TextFormatting.DARK_RED, TextFormatting.GOLD, TextFormatting.GRAY, TextFormatting.GREEN, TextFormatting.LIGHT_PURPLE, TextFormatting.RED, TextFormatting.WHITE, TextFormatting.YELLOW);
+
+		POOR_TIER_COLOR = CLIENT_BUILDER.comment("Poor rarity color").defineEnum("poorColor", TextFormatting.GRAY, colors);
+		COMMON_TIER_COLOR = CLIENT_BUILDER.comment("Common rarity color").defineEnum("commonColor", TextFormatting.WHITE, colors);
+		UNCOMMON_TIER_COLOR = CLIENT_BUILDER.comment("Uncommon rarity color").defineEnum("uncommonColor", TextFormatting.GREEN, colors);
+		RARE_TIER_COLOR = CLIENT_BUILDER.comment("Rare rarity color").defineEnum("rareColor", TextFormatting.BLUE, colors);
+		EPIC_TIER_COLOR = CLIENT_BUILDER.comment("Epic rarity color").defineEnum("epicColor", TextFormatting.DARK_PURPLE, colors);
+		LEGENDARY_TIER_COLOR = CLIENT_BUILDER.comment("Legendary rarity color").defineEnum("legendaryColor", TextFormatting.GOLD, colors);
+		MYTHIC_TIER_COLOR = CLIENT_BUILDER.comment("Mythic rarity color").defineEnum("mythicColor", TextFormatting.LIGHT_PURPLE, colors);
+		SUPREME_TIER_COLOR = CLIENT_BUILDER.comment("Supreme rarity color").defineEnum("supremeColor", TextFormatting.DARK_RED, colors);
+		SPECIAL_TIER_COLOR = CLIENT_BUILDER.comment("Special rarity color").defineEnum("specialColor", TextFormatting.RED, colors);
+		VERY_SPECIAL_TIER_COLOR = CLIENT_BUILDER.comment("Very special rarity color").defineEnum("verySpecialColor", TextFormatting.RED, colors);
 		
 		RARITY_GLOW = CLIENT_BUILDER.comment("Enable rarity glow").define("rarityGlow", true);
 		RARITY_GLOW_OPACITY = CLIENT_BUILDER.comment("Rarity glow opacity").defineInRange("rarityGlowOpacity", 0.5d, 0.0d, 1.0d);

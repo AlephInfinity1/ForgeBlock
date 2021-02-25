@@ -13,6 +13,17 @@ public class RNGHelper {
 	public static boolean fractionalChance(int numerator, int denominator, Random random) {
 		return random.nextInt(denominator) < numerator;
 	}
+
+	/**
+	 * Returns an integer in the interval [min, max).
+	 * @param random The RNG to generate the number with
+	 * @param min The minimum number.
+	 * @param max The maximum number. Cannot actually be generated.
+	 * @return A random number within the above interval.
+	 */
+	public static int nextIntBetween(Random random, int min, int max) {
+		return min + random.nextInt(max - min);
+	}
 	
 	/*
 	 * The below methods refers to https://gaming.stackexchange.com/questions/161430/calculating-the-constant-c-in-dota-2-pseudo-random-distribution
@@ -46,20 +57,20 @@ public class RNGHelper {
 	}
 	
 	public static double getPFromC(double C) {
-		if(C < 0.0D || C > 1.0D) throw new IllegalArgumentException("C must be between 0.0 and 1.0.");
-		
+		if (C < 0.0D || C > 1.0D) throw new IllegalArgumentException("C must be between 0.0 and 1.0.");
+
 		double procOn = 0.0D; //The probability of proccing on a try.
 		double procBefore = 0.0D; //The probability of proccing before a try.
 		double expectancy = 0.0D; //The expectancy number of procs to get a drop.
-		
+
 		final double MAX_TRIES = Math.ceil(1.0D / C); //The number of procs needed to get a guaranteed drop.
-		
-		for(int i = 1; i <= MAX_TRIES; i++) { //Simulates proccing.
+
+		for (int i = 1; i <= MAX_TRIES; i++) { //Simulates proccing.
 			procOn = Math.min(C * i, 1.0D) * (1 - procBefore);
 			procBefore += procOn; //Adds chance of being procced before.
 			expectancy += i * procOn;
 		}
-		
+
 		return (1.0D / expectancy);
 	}
 	

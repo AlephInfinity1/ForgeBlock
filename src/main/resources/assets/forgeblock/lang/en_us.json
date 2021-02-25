@@ -209,6 +209,7 @@
     "item.forgeblock.jester_chestplate": "Jester Chestplate",
     "item.forgeblock.jester_leggings": "Jester Leggings",
     "item.forgeblock.jester_boots": "Jester Boots",
+    "item.forgeblock.decent_bow": "Decent Bow",
     
     "item.forgeblock.lv1_zombie_spawn_egg": "Zombie (Lv1) Spawn Egg",
     "item.forgeblock.lapis_zombie_spawn_egg": "Lapis Zombie Spawn Egg",
@@ -262,6 +263,7 @@
     
     "misc.forgeblock.itemtype.general": "",
     "misc.forgeblock.itemtype.sword": "SWORD",
+    "misc.forgeblock.itemtype.bow": "BOW",
     "misc.forgeblock.itemtype.pickaxe": "PICKAXE",
     "misc.forgeblock.itemtype.axe": "AXE",
     "misc.forgeblock.itemtype.shovel": "SHOVEL",
@@ -289,6 +291,8 @@
     "misc.forgeblock.harvestLevel.4": "(Obsidian)",
     "misc.forgeblock.harvestLevel.5": "(Cobalt)",
     "misc.forgeblock.harvestLevel.high": "(Obsidian+)",
+
+    "misc.forgeblock.drawSpeed": "\u00A77Draw Speed: \u00A7c%s",
     
     "attribute.name.forgeblock.damage": "Damage",
     "attribute.name.forgeblock.strength": "Strength",
