@@ -6,6 +6,7 @@ import alephinfinity1.forgeblock.entity.FBArrowEntity;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModEntities;
 import alephinfinity1.forgeblock.init.ModRegistries;
+import alephinfinity1.forgeblock.misc.RNGHelper;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
 import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
@@ -44,6 +45,7 @@ import javax.annotation.Nullable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import static alephinfinity1.forgeblock.item.FBSwordItem.SWORD_REFORGE_MODIFIER;
@@ -165,7 +167,7 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
 
                 float f = getArrowVelocity(i, drawSpeed, velocityMul);
                 if (!((double)f < 0.1D)) {
-                    boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
+                    boolean flag1 = playerentity.abilities.isCreativeMode || RNGHelper.fractionalChance(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.INFINITE_QUIVER.get(), stack), 10, new Random());
                     if (!worldIn.isRemote) {
                         ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
                         AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
@@ -178,12 +180,29 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
 
                         int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
                         if (j > 0) {
-                            abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double)j * 0.5D + 0.5D);
+                            ((FBArrowEntity) abstractarrowentity).setMultiplier(
+                                    ((FBArrowEntity) abstractarrowentity).getMultiplier() + 0.08 * j
+                            );
                         }
 
                         int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
                         if (k > 0) {
                             abstractarrowentity.setKnockbackStrength(k);
+                        }
+
+                        int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.AIMING.get(), stack);
+                        if (l > 0) {
+                            ((FBArrowEntity) abstractarrowentity).setAimingLvl(l);
+                        }
+
+                        int m = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.SNIPE.get(), stack);
+                        if (m > 0) {
+                            ((FBArrowEntity) abstractarrowentity).setSnipeLvl(m);
+                        }
+
+                        int n = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.CUBISM.get(), stack);
+                        if (n > 0) {
+                            ((FBArrowEntity) abstractarrowentity).setCubismMultiplier(n * 0.10);
                         }
 
                         if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
@@ -241,7 +260,7 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
         tooltip.addAll(this.requirementsInformation(stack));
 
         //If this item is reforgeable but not reforged
-        if(this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));
+        if (this.getReforge(stack) == null) tooltip.add(new StringTextComponent(new TranslationTextComponent("text.forgeblock.reforgeable").getString()));
 
         boolean recombobulated = false;
         if(stack.getTag() != null) recombobulated = this.isRecombobulated(stack);
@@ -287,12 +306,12 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
     @Override
     public ITextComponent getDisplayName(ItemStack stack) {
         String reforgeName = "";
-        if(this.getReforge(stack) != null) {
+        if (this.getReforge(stack) != null) {
             reforgeName = this.getReforge(stack).getDisplayName();
         }
         FBTier tier = getStackTier(stack);
         String color = tier.color.toString();
-        if(this.getReforge(stack) != null)
+        if (this.getReforge(stack) != null)
             return new StringTextComponent(color + reforgeName + " " + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
         else
             return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());

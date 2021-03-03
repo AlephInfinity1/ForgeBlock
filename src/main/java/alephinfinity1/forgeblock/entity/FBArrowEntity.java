@@ -20,13 +20,18 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SChangeGameStatePacket;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class FBArrowEntity extends AbstractArrowEntity {
@@ -35,6 +40,10 @@ public class FBArrowEntity extends AbstractArrowEntity {
     private double critChance;
     private double critDamage;
     private double multiplier = 1.0D;
+    private double cubismMultiplier = 0.0D;
+    private int aimingLvl = 0;
+    private int snipeLvl = 0;
+    private double distance = 0.0D; //Distance travelled. Used for snipe calculation.
 
     public FBArrowEntity(EntityType<? extends AbstractArrowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -58,24 +67,29 @@ public class FBArrowEntity extends AbstractArrowEntity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    public void setDamage(double damage) {
-        this.damage = damage;
-    }
-
-    public void setStrength(double strength) {
-        this.strength = strength;
-    }
-
-    public void setCritChance(double critChance) {
-        this.critChance = critChance;
-    }
-
-    public void setCritDamage(double critDamage) {
-        this.critDamage = critDamage;
-    }
-
-    public void setMultiplier(double multiplier) {
-        this.multiplier = multiplier;
+    @Override
+    public void tick() {
+        super.tick();
+        if (aimingLvl != 0 && !this.inGround && ((AccessorAbstractArrowEntity) this).getTicksInAir() % 5 == 0) {
+            AxisAlignedBB bound = new AxisAlignedBB(this.getPositionVec().add(-aimingLvl * 2, -aimingLvl * 2, -aimingLvl * 2), this.getPositionVec().add(aimingLvl * 2, aimingLvl * 2, aimingLvl * 2));
+            List<Entity> list = world.getEntitiesInAABBexcluding(this.getShooter(), bound, (entity) -> entity instanceof LivingEntity && entity.isAlive());
+            if (list.isEmpty()) return;
+            Entity target = null;
+            double minDist = Double.MAX_VALUE;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getDistanceSq(this) < minDist) {
+                    target = list.get(i);
+                    minDist = list.get(i).getDistanceSq(this);
+                }
+            }
+            if (target != null) {
+                Vec3d diff = target.getPositionVec().add(this.getPositionVec().inverse()); //The difference in position
+                this.setMotion(diff.scale(this.getMotion().length() / diff.length()));
+            }
+        }
+        if (snipeLvl != 0 && !this.inGround && ((AccessorAbstractArrowEntity) this).getTicksInAir() % 2 == 0) {
+            distance += this.getMotion().length() * 2;
+        }
     }
 
     @Override
@@ -97,6 +111,50 @@ public class FBArrowEntity extends AbstractArrowEntity {
 
     public double getMultiplier() {
         return multiplier;
+    }
+
+    public int getAimingLvl() {
+        return aimingLvl;
+    }
+
+    public int getSnipeLvl() {
+        return snipeLvl;
+    }
+
+    public double getCubismMultiplier() {
+        return cubismMultiplier;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    public void setStrength(double strength) {
+        this.strength = strength;
+    }
+
+    public void setCritChance(double critChance) {
+        this.critChance = critChance;
+    }
+
+    public void setCritDamage(double critDamage) {
+        this.critDamage = critDamage;
+    }
+
+    public void setMultiplier(double multiplier) {
+        this.multiplier = multiplier;
+    }
+
+    public void setAimingLvl(int aimingLvl) {
+        this.aimingLvl = aimingLvl;
+    }
+
+    public void setSnipeLvl(int snipeLvl) {
+        this.snipeLvl = snipeLvl;
+    }
+
+    public void setCubismMultiplier(double cubismMultiplier) {
+        this.cubismMultiplier = cubismMultiplier;
     }
 
     public void setStats(LivingEntity livingEntity) {
@@ -150,6 +208,10 @@ public class FBArrowEntity extends AbstractArrowEntity {
         int j = entity.getFireTimer();
         if (this.isBurning() && !flag) {
             entity.setFire(5);
+        }
+
+        if (this.snipeLvl != 0) {
+            multiplier += this.snipeLvl * distance / 10.0 / 100.0;
         }
 
         if (entity.attackEntityFrom(damagesource, (float) (i * multiplier))) {

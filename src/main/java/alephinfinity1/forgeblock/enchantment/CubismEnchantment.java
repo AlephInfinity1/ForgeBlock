@@ -3,6 +3,9 @@ package alephinfinity1.forgeblock.enchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.BowItem;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolItem;
 
 public class CubismEnchantment extends Enchantment implements IFBEnchantment {
 
@@ -11,7 +14,7 @@ public class CubismEnchantment extends Enchantment implements IFBEnchantment {
 	}
 	
 	public CubismEnchantment() {
-		super(Rarity.UNCOMMON, EnchantmentType.WEAPON, new EquipmentSlotType[] {EquipmentSlotType.MAINHAND});
+		super(Rarity.UNCOMMON, EnchantmentType.create("SWORD_AND_BOW", (item) -> (item instanceof SwordItem || item instanceof BowItem)), new EquipmentSlotType[] {EquipmentSlotType.MAINHAND});
 	}
 	
 	@Override
