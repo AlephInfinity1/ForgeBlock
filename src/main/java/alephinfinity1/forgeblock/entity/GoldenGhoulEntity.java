@@ -24,11 +24,11 @@ public class GoldenGhoulEntity extends Lv1ZombieEntity {
 	protected void registerAttributes() {
 		super.registerAttributes();
 		this.registerFBAttributes();
-		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.185F);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(45000.0D);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(800.0D);
-		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0D);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.185);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(45000.0);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(800.0);
+		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.0);
 	}
 	
 	@Override

@@ -30,8 +30,10 @@ public class CoinsUpdatePacket {
 		if(ctx.get().getDirection().getReceptionSide().isClient()) {
 			ctx.get().enqueueWork(() -> {
 				ClientPlayerEntity player = Minecraft.getInstance().player;
-				ICoins coins = player.getCapability(CoinsProvider.COINS_CAPABILITY).orElseThrow(NullPointerException::new);
-				coins.set(msg.amount);
+				ICoins coins = player.getCapability(CoinsProvider.COINS_CAPABILITY).orElse(null);
+				if (coins != null) {
+					coins.set(msg.amount);
+				}
 			});
 		}
 		

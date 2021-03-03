@@ -1,16 +1,7 @@
 package alephinfinity1.forgeblock.init;
 
 import alephinfinity1.forgeblock.ForgeBlock;
-import alephinfinity1.forgeblock.entity.CryptGhoulEntity;
-import alephinfinity1.forgeblock.entity.FBExperienceBottleEntity;
-import alephinfinity1.forgeblock.entity.GoldenGhoulEntity;
-import alephinfinity1.forgeblock.entity.LapisZombieEntity;
-import alephinfinity1.forgeblock.entity.Lv15WolfEntity;
-import alephinfinity1.forgeblock.entity.Lv1ZombieEntity;
-import alephinfinity1.forgeblock.entity.Lv1ZombieVillagerEntity;
-import alephinfinity1.forgeblock.entity.OldWolfEntity;
-import alephinfinity1.forgeblock.entity.SpecialZealotEntity;
-import alephinfinity1.forgeblock.entity.ZealotEntity;
+import alephinfinity1.forgeblock.entity.*;
 import alephinfinity1.forgeblock.entity.minion.MinionEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -68,6 +59,10 @@ public class ModEntities {
             MinionEntity::new,
             EntityClassification.MISC).size(0.50f, 0.50f).build(new ResourceLocation(ForgeBlock.MOD_ID, "minion").toString());
 
+    public static final EntityType<FBArrowEntity> FB_ARROW_TYPE = EntityType.Builder.<FBArrowEntity>create(
+            FBArrowEntity::new,
+            EntityClassification.MISC).size(0.1f, 0.1f).build(new ResourceLocation(ForgeBlock.MOD_ID, "arrow").toString());
+
     public static final RegistryObject<EntityType<Lv1ZombieEntity>> LV1_ZOMBIE = ENTITIES.register("lv1_zombie", () -> LV1_ZOMBIE_TYPE);
     public static final RegistryObject<EntityType<LapisZombieEntity>> LAPIS_ZOMBIE = ENTITIES.register("lapis_zombie", () -> LAPIS_ZOMBIE_TYPE);
     public static final RegistryObject<EntityType<ZealotEntity>> ZEALOT = ENTITIES.register("zealot", () -> ZEALOT_TYPE);
@@ -78,6 +73,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<Lv1ZombieVillagerEntity>> LV1_ZOMBIE_VILLAGER = ENTITIES.register("lv1_zombie_villager", () -> LV1_ZOMBIE_VILLAGER_TYPE);
     public static final RegistryObject<EntityType<CryptGhoulEntity>> CRYPT_GHOUL = ENTITIES.register("crypt_ghoul", () -> CRYPT_GHOUL_TYPE);
     public static final RegistryObject<EntityType<GoldenGhoulEntity>> GOLDEN_GHOUL = ENTITIES.register("golden_ghoul", () -> GOLDEN_GHOUL_TYPE);
+    public static final RegistryObject<EntityType<FBArrowEntity>> FB_ARROW = ENTITIES.register("arrow", () -> FB_ARROW_TYPE);
 
 
     public static final RegistryObject<EntityType<MinionEntity>> MINION = ENTITIES.register("minion", () -> MINION_TYPE);

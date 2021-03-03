@@ -150,9 +150,8 @@ public class ModItems {
 	/*
 	 * Bows
 	 */
-	public static final RegistryObject<Item> BOW = OVERRIDE.register("bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1), FBTier.COMMON, 30, 0, 0, 0, 1.0));
-	public static final RegistryObject<Item> DECENT_BOW = ITEMS.register("decent_bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1), FBTier.UNCOMMON, 45, 0, 0, 0, 1.0));
-
+	public static final RegistryObject<Item> BOW = OVERRIDE.register("bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_BOWS), FBTier.COMMON, 30, 0, 0, 0, 1.0f, 1.0f, 1.0f));
+	public static final RegistryObject<Item> DECENT_BOW = ITEMS.register("decent_bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_BOWS), FBTier.UNCOMMON, 45, 0, 0, 0, 1.0f, 1.0f, 1.0f));
 	/*
 	 * Pickaxes
 	 */

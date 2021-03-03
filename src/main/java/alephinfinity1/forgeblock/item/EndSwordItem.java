@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import alephinfinity1.forgeblock.misc.tier.FBTier;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -14,7 +16,7 @@ public class EndSwordItem extends FBSwordItem {
 			double critDamageIn) {
 		super(props, tier, attackDamageIn, strengthIn, critChanceIn, critDamageIn);
 	}
-	
+
 	@Override
 	public List<ITextComponent> additionalInformation() {
 		List<ITextComponent> list = new ArrayList<>();

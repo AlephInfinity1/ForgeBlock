@@ -6,6 +6,7 @@
     "target": "@env(DEFAULT)",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+        "AccessorAbstractArrowEntity",
         "AccessorEntity",
         "AccessorPlayerEntity",
         "AccessorRepairContainer",
@@ -15,7 +16,9 @@
         "MixinMobEntity",
         "MixinPlayerEntity"
     ],
-    "client": [],
+    "client": [
+        "MixinAbstractClientPlayerEntity"
+    ],
     "server": [],
     "injectors": {
         "defaultRequire": 1

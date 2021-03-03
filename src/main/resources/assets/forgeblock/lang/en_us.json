@@ -293,6 +293,8 @@
     "misc.forgeblock.harvestLevel.high": "(Obsidian+)",
 
     "misc.forgeblock.drawSpeed": "\u00A77Draw Speed: \u00A7c%s",
+    "misc.forgeblock.velocityMul": "\u00A77Velocity Multiplier: \u00A7d%s",
+    "misc.forgeblock.accuracy": "\u00A77Accuracy: \u00A7e%s",
     
     "attribute.name.forgeblock.damage": "Damage",
     "attribute.name.forgeblock.strength": "Strength",

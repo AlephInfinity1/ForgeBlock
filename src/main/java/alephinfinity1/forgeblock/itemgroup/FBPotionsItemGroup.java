@@ -1,4 +1,4 @@
-package alephinfinity1.forgeblock.init;
+package alephinfinity1.forgeblock.itemgroup;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;

@@ -2,6 +2,9 @@ package alephinfinity1.forgeblock.client;
 
 import java.lang.reflect.Field;
 
+import alephinfinity1.forgeblock.entity.FBArrowEntity;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.MarkerManager.Log4jMarker;
 
@@ -16,11 +19,6 @@ import alephinfinity1.forgeblock.init.ModParticles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.renderer.entity.EndermanRenderer;
-import net.minecraft.client.renderer.entity.SpriteRenderer;
-import net.minecraft.client.renderer.entity.WolfRenderer;
-import net.minecraft.client.renderer.entity.ZombieRenderer;
-import net.minecraft.client.renderer.entity.ZombieVillagerRenderer;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
@@ -51,6 +49,12 @@ public class ClientEventBusSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_ZOMBIE_VILLAGER.get(), (erm) -> new ZombieVillagerRenderer(erm, mc.resourceManager));
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.CRYPT_GHOUL.get(), ZombieRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.GOLDEN_GHOUL.get(), ZombieRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntities.FB_ARROW.get(), erm -> new ArrowRenderer<FBArrowEntity>(erm){
+			@Override
+			public ResourceLocation getEntityTexture(FBArrowEntity entity) {
+				return TippedArrowRenderer.RES_ARROW;
+			}
+		});
 
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.MINION.get(), MinionRenderer::new);
 		ForgeBlock.LOGGER.log(Level.TRACE, new Log4jMarker("Test"), "Client stuff fired!");	
