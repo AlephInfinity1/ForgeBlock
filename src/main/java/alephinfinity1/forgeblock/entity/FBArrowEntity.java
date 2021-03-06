@@ -2,7 +2,7 @@ package alephinfinity1.forgeblock.entity;
 
 import alephinfinity1.forgeblock.misc.AttributeHelper;
 import alephinfinity1.forgeblock.misc.RNGHelper;
-import alephinfinity1.forgeblock.misc.skills.SkillsHelper;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillsHelper;
 import alephinfinity1.forgeblock.mixin.AccessorAbstractArrowEntity;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
@@ -20,21 +20,20 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SChangeGameStatePacket;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class FBArrowEntity extends AbstractArrowEntity {
+    public static final double AIMING_RANGE_MULTIPLIER = 5.0D; //The range of aiming enchant per level, in metres.
+
     private double damage; //Note: different from the damage in AbstractArrowEntity, this refers to the FB player stat
     private double strength;
     private double critChance;
@@ -44,6 +43,7 @@ public class FBArrowEntity extends AbstractArrowEntity {
     private int aimingLvl = 0;
     private int snipeLvl = 0;
     private double distance = 0.0D; //Distance travelled. Used for snipe calculation.
+    private UUID target = null; //Target if aiming. Null if no target.
 
     public FBArrowEntity(EntityType<? extends AbstractArrowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -70,21 +70,35 @@ public class FBArrowEntity extends AbstractArrowEntity {
     @Override
     public void tick() {
         super.tick();
-        if (aimingLvl != 0 && !this.inGround && ((AccessorAbstractArrowEntity) this).getTicksInAir() % 5 == 0) {
-            AxisAlignedBB bound = new AxisAlignedBB(this.getPositionVec().add(-aimingLvl * 2, -aimingLvl * 2, -aimingLvl * 2), this.getPositionVec().add(aimingLvl * 2, aimingLvl * 2, aimingLvl * 2));
-            List<Entity> list = world.getEntitiesInAABBexcluding(this.getShooter(), bound, (entity) -> entity instanceof LivingEntity && entity.isAlive());
-            if (list.isEmpty()) return;
-            Entity target = null;
-            double minDist = Double.MAX_VALUE;
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getDistanceSq(this) < minDist) {
-                    target = list.get(i);
-                    minDist = list.get(i).getDistanceSq(this);
+        if (aimingLvl != 0 && !this.inGround) {
+            if (!this.hasTarget() && ((AccessorAbstractArrowEntity) this).getTicksInAir() % 2 == 0) {
+                AxisAlignedBB bound = new AxisAlignedBB(this.getPositionVec().add(-aimingLvl * AIMING_RANGE_MULTIPLIER, -aimingLvl * AIMING_RANGE_MULTIPLIER, -aimingLvl * AIMING_RANGE_MULTIPLIER), this.getPositionVec().add(aimingLvl * AIMING_RANGE_MULTIPLIER, aimingLvl * AIMING_RANGE_MULTIPLIER, aimingLvl * AIMING_RANGE_MULTIPLIER));
+                //Filters out all entities that are separated by blocks
+                List<Entity> list = world.getEntitiesInAABBexcluding(this.getShooter(), bound, (entity) -> entity instanceof LivingEntity && entity.isAlive())
+                        .stream()
+                        .filter(entity -> entity.getDistanceSq(this) > AIMING_RANGE_MULTIPLIER * AIMING_RANGE_MULTIPLIER * aimingLvl * aimingLvl)
+                        .filter(entity -> this.world.rayTraceBlocks(new RayTraceContext(this.getPositionVec(), entity.getPositionVec().add(0.0, entity.getEyeHeight(), 0.0), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, null)).getType().equals(RayTraceResult.Type.MISS))
+                        .collect(Collectors.toList());
+                if (list.isEmpty()) return;
+                Entity potentialTarget = null;
+                double minDist = Double.MAX_VALUE;
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getDistanceSq(this) < minDist) {
+                        potentialTarget = list.get(i);
+                        minDist = list.get(i).getDistanceSq(this);
+                    }
+                }
+                if (potentialTarget != null) {
+                    this.target = potentialTarget.getUniqueID();
                 }
             }
-            if (target != null) {
-                Vec3d diff = target.getPositionVec().add(this.getPositionVec().inverse()); //The difference in position
-                this.setMotion(diff.scale(this.getMotion().length() / diff.length()));
+            if (this.hasTarget()) {
+                if (!this.getTarget().isAlive()) {
+                    this.target = null;
+                } else {
+                    Vec3d diff = this.getTarget().getPositionVec().add(0.0, getTarget().getEyeHeight(), 0.0).add(this.getPositionVec().inverse()); //The difference in position
+                    this.setMotion(diff.scale(this.getMotion().length() / diff.length()));
+                }
             }
         }
         if (snipeLvl != 0 && !this.inGround && ((AccessorAbstractArrowEntity) this).getTicksInAir() % 2 == 0) {
@@ -123,6 +137,17 @@ public class FBArrowEntity extends AbstractArrowEntity {
 
     public double getCubismMultiplier() {
         return cubismMultiplier;
+    }
+
+    //Return the target this arrow is locked to.
+    //Fixes arrow 'indecisiveness' issues.
+    public Entity getTarget() {
+        return this.target != null && this.world instanceof ServerWorld ? ((ServerWorld) this.world).getEntityByUuid(this.target) : null;
+    }
+
+    //Return whether this arrow has a target to aim for.
+    public boolean hasTarget() {
+        return getTarget() != null;
     }
 
     public void setDamage(double damage) {

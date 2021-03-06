@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import alephinfinity1.forgeblock.misc.FBItemType;
-import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
-import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.IItemModifiers;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;

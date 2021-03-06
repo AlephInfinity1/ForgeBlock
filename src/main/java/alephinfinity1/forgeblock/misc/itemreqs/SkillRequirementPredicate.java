@@ -3,8 +3,8 @@ package alephinfinity1.forgeblock.misc.itemreqs;
 import java.util.ArrayList;
 import java.util.List;
 
-import alephinfinity1.forgeblock.misc.skills.SkillType;
-import alephinfinity1.forgeblock.misc.skills.SkillsHelper;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillType;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillsHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;

@@ -1,10 +1,11 @@
 package alephinfinity1.forgeblock.item;
 
+import alephinfinity1.forgeblock.item.swords.FBSwordItem;
 import com.google.common.collect.Multimap;
 
 import alephinfinity1.forgeblock.init.ModStatsModifiers;
-import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
-import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.IItemModifiers;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.ItemModifiersProvider;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;

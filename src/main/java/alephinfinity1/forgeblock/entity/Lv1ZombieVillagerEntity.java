@@ -3,7 +3,7 @@ package alephinfinity1.forgeblock.entity;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModItems;
-import alephinfinity1.forgeblock.item.FBArmorItem;
+import alephinfinity1.forgeblock.item.armor.FBArmorItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;

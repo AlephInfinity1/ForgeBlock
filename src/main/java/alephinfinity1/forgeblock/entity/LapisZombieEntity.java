@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModItems;
-import alephinfinity1.forgeblock.item.FBArmorItem;
+import alephinfinity1.forgeblock.item.armor.FBArmorItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;

@@ -2,8 +2,8 @@ package alephinfinity1.forgeblock.network;
 
 import java.util.function.Supplier;
 
-import alephinfinity1.forgeblock.misc.mana.IMana;
-import alephinfinity1.forgeblock.misc.mana.ManaProvider;
+import alephinfinity1.forgeblock.misc.capability.mana.IMana;
+import alephinfinity1.forgeblock.misc.capability.mana.ManaProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.network.PacketBuffer;

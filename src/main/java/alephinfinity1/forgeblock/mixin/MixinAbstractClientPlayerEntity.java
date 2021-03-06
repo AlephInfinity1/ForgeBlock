@@ -1,6 +1,6 @@
 package alephinfinity1.forgeblock.mixin;
 
-import alephinfinity1.forgeblock.item.FBBowItem;
+import alephinfinity1.forgeblock.item.bows.FBBowItem;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;

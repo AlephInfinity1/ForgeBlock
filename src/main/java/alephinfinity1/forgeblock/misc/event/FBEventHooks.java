@@ -1,6 +1,6 @@
 package alephinfinity1.forgeblock.misc.event;
 
-import alephinfinity1.forgeblock.misc.skills.SkillType;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;

@@ -1,10 +1,9 @@
 package alephinfinity1.forgeblock.command;
 
-import alephinfinity1.forgeblock.misc.coins.CoinsProvider;
-import alephinfinity1.forgeblock.misc.coins.ICoins;
+import alephinfinity1.forgeblock.misc.capability.coins.CoinsProvider;
+import alephinfinity1.forgeblock.misc.capability.coins.ICoins;
 import alephinfinity1.forgeblock.network.CoinsUpdatePacket;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
-import alephinfinity1.forgeblock.network.SkillUpdatePacket;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

@@ -6,8 +6,8 @@ import java.text.DecimalFormat;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import alephinfinity1.forgeblock.misc.coins.CoinsProvider;
-import alephinfinity1.forgeblock.misc.coins.ICoins;
+import alephinfinity1.forgeblock.misc.capability.coins.CoinsProvider;
+import alephinfinity1.forgeblock.misc.capability.coins.ICoins;
 import net.minecraft.client.gui.IngameGui;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;

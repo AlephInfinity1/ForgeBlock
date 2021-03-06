@@ -8,9 +8,9 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 
 import alephinfinity1.forgeblock.command.argument.SkillArgument;
-import alephinfinity1.forgeblock.misc.skills.ISkills;
-import alephinfinity1.forgeblock.misc.skills.SkillType;
-import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
+import alephinfinity1.forgeblock.misc.capability.skills.ISkills;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillType;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillsProvider;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.SkillUpdatePacket;
 import net.minecraft.command.CommandSource;
@@ -20,7 +20,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.network.PacketDistributor;
-import org.spongepowered.api.text.translation.Translation;
 
 public class SkillCommand {
 	public static final SimpleCommandExceptionType NO_SKILL_CAP = new SimpleCommandExceptionType(new TranslationTextComponent("commands.forgeblock.skill.noSkillCap")); //Thrown if player does not have skill capacity.

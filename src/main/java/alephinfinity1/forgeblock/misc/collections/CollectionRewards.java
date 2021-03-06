@@ -7,8 +7,8 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import alephinfinity1.forgeblock.misc.skills.SkillType;
-import alephinfinity1.forgeblock.misc.skills.SkillsHelper;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillType;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillsHelper;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

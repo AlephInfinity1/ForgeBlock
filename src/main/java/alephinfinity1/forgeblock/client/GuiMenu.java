@@ -4,9 +4,9 @@ import static alephinfinity1.forgeblock.ForgeBlock.MINECRAFT;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import alephinfinity1.forgeblock.misc.skills.ISkills;
-import alephinfinity1.forgeblock.misc.skills.SkillType;
-import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
+import alephinfinity1.forgeblock.misc.capability.skills.ISkills;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillType;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillsProvider;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.SkillUpdatePacket;
 import net.minecraft.client.entity.player.ClientPlayerEntity;

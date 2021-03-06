@@ -1,13 +1,12 @@
 package alephinfinity1.forgeblock.mixin;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
-import alephinfinity1.forgeblock.client.ClientEventBusSubscriber;
 import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.misc.AttributeHelper;
 import alephinfinity1.forgeblock.misc.FBCreatureAttributes;
 import alephinfinity1.forgeblock.misc.FBFoodStats;
 import alephinfinity1.forgeblock.misc.RNGHelper;
-import alephinfinity1.forgeblock.misc.skills.SkillsHelper;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillsHelper;
 import alephinfinity1.forgeblock.network.DamageParticlePacket;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import com.mojang.authlib.GameProfile;

@@ -4,10 +4,10 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import alephinfinity1.forgeblock.ForgeBlock;
-import alephinfinity1.forgeblock.misc.skills.ISkills;
-import alephinfinity1.forgeblock.misc.skills.SkillType;
-import alephinfinity1.forgeblock.misc.skills.SkillsEventHandler;
-import alephinfinity1.forgeblock.misc.skills.SkillsProvider;
+import alephinfinity1.forgeblock.misc.capability.skills.ISkills;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillType;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillsEventHandler;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillsProvider;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;

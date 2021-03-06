@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import alephinfinity1.forgeblock.init.ModRegistries;
-import alephinfinity1.forgeblock.misc.stats_modifier.AbstractStatsModifier;
-import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
-import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.AbstractStatsModifier;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.IItemModifiers;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.ItemModifiersProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;

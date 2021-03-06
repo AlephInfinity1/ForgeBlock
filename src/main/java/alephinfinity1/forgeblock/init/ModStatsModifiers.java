@@ -1,10 +1,10 @@
 package alephinfinity1.forgeblock.init;
 
 import alephinfinity1.forgeblock.ForgeBlock;
-import alephinfinity1.forgeblock.misc.stats_modifier.AbstractStatsModifier;
-import alephinfinity1.forgeblock.misc.stats_modifier.HotPotatoBookModifier;
-import alephinfinity1.forgeblock.misc.stats_modifier.RecombobulatorModifier;
-import alephinfinity1.forgeblock.misc.stats_modifier.WoodSingularityModifier;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.AbstractStatsModifier;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.HotPotatoBookModifier;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.RecombobulatorModifier;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.WoodSingularityModifier;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 

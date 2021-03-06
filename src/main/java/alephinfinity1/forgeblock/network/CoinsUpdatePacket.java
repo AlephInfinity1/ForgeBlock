@@ -2,8 +2,8 @@ package alephinfinity1.forgeblock.network;
 
 import java.util.function.Supplier;
 
-import alephinfinity1.forgeblock.misc.coins.CoinsProvider;
-import alephinfinity1.forgeblock.misc.coins.ICoins;
+import alephinfinity1.forgeblock.misc.capability.coins.CoinsProvider;
+import alephinfinity1.forgeblock.misc.capability.coins.ICoins;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.network.PacketBuffer;

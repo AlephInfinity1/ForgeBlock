@@ -3,8 +3,8 @@ package alephinfinity1.forgeblock.effect;
 import javax.annotation.Nullable;
 
 import alephinfinity1.forgeblock.attribute.FBAttributes;
-import alephinfinity1.forgeblock.misc.mana.IMana;
-import alephinfinity1.forgeblock.misc.mana.ManaProvider;
+import alephinfinity1.forgeblock.misc.capability.mana.IMana;
+import alephinfinity1.forgeblock.misc.capability.mana.ManaProvider;
 import alephinfinity1.forgeblock.network.FBPacketHandler;
 import alephinfinity1.forgeblock.network.ManaUpdatePacket;
 import net.minecraft.entity.Entity;

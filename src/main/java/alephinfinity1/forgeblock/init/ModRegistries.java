@@ -3,7 +3,7 @@ package alephinfinity1.forgeblock.init;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.misc.collections.FBCollection;
 import alephinfinity1.forgeblock.misc.reforge.Reforge;
-import alephinfinity1.forgeblock.misc.stats_modifier.AbstractStatsModifier;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.AbstractStatsModifier;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

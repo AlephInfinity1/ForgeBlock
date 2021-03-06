@@ -3,6 +3,7 @@ package alephinfinity1.forgeblock.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import alephinfinity1.forgeblock.item.swords.FBSwordItem;
 import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
 import alephinfinity1.forgeblock.misc.itemreqs.OperatorOnlyRequirementPredicate;
 import alephinfinity1.forgeblock.misc.tier.FBTier;

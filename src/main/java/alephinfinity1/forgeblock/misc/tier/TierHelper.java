@@ -3,8 +3,8 @@ package alephinfinity1.forgeblock.misc.tier;
 import java.util.HashMap;
 import java.util.Map;
 
-import alephinfinity1.forgeblock.misc.stats_modifier.capability.IItemModifiers;
-import alephinfinity1.forgeblock.misc.stats_modifier.capability.ItemModifiersProvider;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.IItemModifiers;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.ItemModifiersProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;

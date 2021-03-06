@@ -1,7 +1,7 @@
 package alephinfinity1.forgeblock.misc;
 
 import alephinfinity1.forgeblock.enchantment.IFBEnchantment;
-import alephinfinity1.forgeblock.misc.skills.SkillType;
+import alephinfinity1.forgeblock.misc.capability.skills.SkillType;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;

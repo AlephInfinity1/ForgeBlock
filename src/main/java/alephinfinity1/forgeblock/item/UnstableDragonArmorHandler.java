@@ -2,6 +2,7 @@ package alephinfinity1.forgeblock.item;
 
 import java.util.List;
 
+import alephinfinity1.forgeblock.item.armor.UnstableDragonArmorItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
