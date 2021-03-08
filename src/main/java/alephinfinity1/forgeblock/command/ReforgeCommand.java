@@ -26,9 +26,7 @@ public class ReforgeCommand {
 	});
 	
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
-		dispatcher.register(Commands.literal("reforge").requires((commander) -> {
-			return commander.hasPermissionLevel(2);
-		}).executes((commandSource) -> {
+		dispatcher.register(Commands.literal("reforge").requires((commander) -> commander.hasPermissionLevel(2)).executes((commandSource) -> {
 			return reforgeCommand(commandSource.getSource(), Arrays.asList(commandSource.getSource().getEntity()));
 		}).then(Commands.argument("targets", EntityArgument.entities())
 				.executes((commandSource) -> {
@@ -43,7 +41,6 @@ public class ReforgeCommand {
 	}
 	
 	public static int reforgeCommand(CommandSource source, Collection<? extends Entity> targets) throws CommandSyntaxException {
-		
 		int i = 0; //Success count
 		
 		for(Entity entity : targets) {
@@ -62,7 +59,6 @@ public class ReforgeCommand {
 	}
 	
 	public static int reforgeCommand(CommandSource source, Collection<? extends Entity> targets, Reforge reforge) throws CommandSyntaxException {
-		
 		int i = 0; //Success count
 		
 		for(Entity entity : targets) {

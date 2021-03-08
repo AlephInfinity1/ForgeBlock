@@ -57,7 +57,7 @@ public class ForgeBlock {
 	public static final String MOD_ID = "forgeblock";
 	public static final String MINECRAFT_ID = "minecraft";
 
-	public static final String VERSION = "0.0.148";
+	public static final String VERSION = "0.0.162";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
 	//TODO: this doesnt support servers, crashes them as its a client side class only.

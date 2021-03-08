@@ -1,5 +1,6 @@
 package alephinfinity1.forgeblock.item.bows;
 
+import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.entity.FBArrowEntity;
@@ -7,10 +8,13 @@ import alephinfinity1.forgeblock.init.ModEnchantments;
 import alephinfinity1.forgeblock.init.ModEntities;
 import alephinfinity1.forgeblock.init.ModRegistries;
 import alephinfinity1.forgeblock.item.IFBTieredItem;
+import alephinfinity1.forgeblock.item.IRequirementItem;
 import alephinfinity1.forgeblock.misc.RNGHelper;
 import alephinfinity1.forgeblock.misc.TextFormatHelper;
 import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.IItemModifiers;
 import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.ItemModifiersProvider;
+import alephinfinity1.forgeblock.misc.itemreqs.IRequirementPredicate;
+import alephinfinity1.forgeblock.misc.itemreqs.SkillRequirementPredicate;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 
@@ -27,10 +31,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.BowItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -40,20 +41,20 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredItem {
     private final FBTier tier;
     private final Multimap<String, AttributeModifier> attributes;
-    private final float drawSpeed;
-    private final float velocityMul;
-    private final float accuracy;
+    protected final float drawSpeed;
+    protected final float velocityMul;
+    protected final float accuracy;
+    protected boolean isSavanna = false;
 
     protected static final UUID BOW_STRENGTH_MODIFIER = UUID.fromString("f1c2a376-481b-43d7-a257-7a2f38126500");
     protected static final UUID BOW_CRIT_CHANCE_MODIFIER = UUID.fromString("53305ff6-a0dd-4039-a2ad-653c74786f7d");
@@ -82,6 +83,15 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
         this.drawSpeed = drawSpeedIn;
         this.velocityMul = velocityMul;
         this.accuracy = accuracy;
+    }
+
+    public FBBowItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn, double critChanceIn, double critDamageIn) {
+        this(props, tier, attackDamageIn, strengthIn, critChanceIn, critDamageIn, 1.0f, 1.0f, 1.0f);
+    }
+
+    public FBBowItem(Properties props, FBTier tier, double attackDamageIn, double strengthIn, double critChanceIn, double critDamageIn, boolean isSavanna) {
+        this(props, tier, attackDamageIn, strengthIn, critChanceIn, critDamageIn, 1.0f, 1.0f, 1.0f);
+        this.isSavanna = true;
     }
 
     @Override
@@ -172,6 +182,9 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
                         abstractarrowentity = customeArrow(abstractarrowentity);
                         ((FBArrowEntity) abstractarrowentity).setStats(entityLiving);
                         abstractarrowentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F / accuracy);
+                        if (this.isSavanna) {
+                            ((FBArrowEntity) abstractarrowentity).setSavanna(true);
+                        }
                         if (f >= this.velocityMul) {
                             abstractarrowentity.setIsCritical(true);
                         }
@@ -230,7 +243,26 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
 
     public List<ITextComponent> additionalInformation() { return new ArrayList<>(); }
     public List<ITextComponent> additionalInformation(ItemStack stack) { return new ArrayList<>(); }
-    public List<ITextComponent> requirementsInformation(ItemStack stack) { return new ArrayList<>(); }
+
+    @OnlyIn(Dist.CLIENT)
+    protected List<ITextComponent> requirementsInformation(ItemStack stack) {
+        List<ITextComponent> list = new ArrayList<>();
+        if (this instanceof IRequirementItem) {
+            IRequirementPredicate[] reqs = ((IRequirementItem) this).getRequirements(stack);
+            PlayerEntity cplayer = ForgeBlock.MINECRAFT.player;
+            if (Objects.isNull(cplayer)) return list; //If null, return right away.
+            for (IRequirementPredicate irp : reqs) {
+                list.addAll(irp.getDisplay(cplayer));
+            }
+        }
+
+        //Insert a newline if not empty
+        if (!list.isEmpty()) {
+            list.add(new StringTextComponent(""));
+        }
+
+        return list;
+    }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -241,9 +273,9 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
         List<ITextComponent> additional = this.additionalInformation();
         List<ITextComponent> additional1 = this.additionalInformation(stack);
 
-        tooltip.add(new TranslationTextComponent("misc.forgeblock.drawSpeed", new DecimalFormat(",##0.0").format(drawSpeed)));
-        tooltip.add(new TranslationTextComponent("misc.forgeblock.velocityMul", new DecimalFormat(",##0.0").format(velocityMul)));
-        tooltip.add(new TranslationTextComponent("misc.forgeblock.accuracy", new DecimalFormat(",##0.0").format(accuracy)));
+//        tooltip.add(new TranslationTextComponent("misc.forgeblock.drawSpeed", new DecimalFormat(",##0.0").format(drawSpeed)));
+//        tooltip.add(new TranslationTextComponent("misc.forgeblock.velocityMul", new DecimalFormat(",##0.0").format(velocityMul)));
+//        tooltip.add(new TranslationTextComponent("misc.forgeblock.accuracy", new DecimalFormat(",##0.0").format(accuracy)));
 
         tooltip.addAll(TextFormatHelper.formatModifierMap(attributes, this.getReforge(stack), tier, stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null), stack));
 
@@ -255,6 +287,10 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
         //Insert item ability description here (unused for some swords)
         tooltip.addAll(additional);
         tooltip.addAll(additional1);
+        if (isSavanna) {
+            tooltip.add(new TranslationTextComponent("text.forgeblock.bow_desc.savanna"));
+            tooltip.add(new StringTextComponent(""));
+        }
         tooltip.addAll(this.requirementsInformation(stack));
 
         //If this item is reforgeable but not reforged
@@ -315,4 +351,8 @@ public class FBBowItem extends BowItem implements IReforgeableItem, IFBTieredIte
             return new StringTextComponent(color + new TranslationTextComponent(this.getTranslationKey(stack)).getString());
     }
 
+    @Override
+    public Rarity getRarity(ItemStack stack) {
+        return getStackTier(stack).getVanillaRarity();
+    }
 }

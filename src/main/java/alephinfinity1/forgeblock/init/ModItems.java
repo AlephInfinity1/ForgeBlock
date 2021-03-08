@@ -5,6 +5,8 @@ import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.item.*;
 import alephinfinity1.forgeblock.item.armor.*;
 import alephinfinity1.forgeblock.item.bows.FBBowItem;
+import alephinfinity1.forgeblock.item.bows.HurricaneBowItem;
+import alephinfinity1.forgeblock.item.bows.RunaansBowItem;
 import alephinfinity1.forgeblock.item.pickaxes.FBPickaxeItem;
 import alephinfinity1.forgeblock.item.pickaxes.StonkItem;
 import alephinfinity1.forgeblock.item.swords.*;
@@ -155,8 +157,11 @@ public class ModItems {
 	/*
 	 * Bows
 	 */
-	public static final RegistryObject<Item> BOW = OVERRIDE.register("bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_BOWS), FBTier.COMMON, 30, 0, 0, 0, 1.0f, 1.0f, 1.0f));
-	public static final RegistryObject<Item> DECENT_BOW = ITEMS.register("decent_bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_BOWS), FBTier.UNCOMMON, 45, 0, 0, 0, 1.0f, 1.0f, 1.0f));
+	public static final RegistryObject<Item> BOW = OVERRIDE.register("bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_BOWS), FBTier.COMMON, 30, 0, 0, 0));
+	public static final RegistryObject<Item> DECENT_BOW = ITEMS.register("decent_bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_BOWS), FBTier.UNCOMMON, 45, 0, 0, 0));
+	public static final RegistryObject<Item> SAVANNA_BOW = ITEMS.register("savanna_bow", () -> new FBBowItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_BOWS), FBTier.UNCOMMON, 50, 0, 0, 0, true));
+	public static final RegistryObject<Item> HURRICANE_BOW = ITEMS.register("hurricane_bow", () -> new HurricaneBowItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_BOWS), FBTier.EPIC, 120, 50, 0, 0));
+	public static final RegistryObject<Item> RUNAANS_BOW = ITEMS.register("runaans_bow", () -> new RunaansBowItem(new Item.Properties().maxStackSize(1).group(ModItemGroups.FB_BOWS), FBTier.LEGENDARY, 160, 50, 0, 0));
 	/*
 	 * Pickaxes
 	 */

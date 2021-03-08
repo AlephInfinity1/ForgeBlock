@@ -1,9 +1,14 @@
 package alephinfinity1.forgeblock.entity;
 
+import alephinfinity1.forgeblock.client.particles.StringParticleData;
+import alephinfinity1.forgeblock.item.bows.HurricaneBowItem;
 import alephinfinity1.forgeblock.misc.AttributeHelper;
+import alephinfinity1.forgeblock.misc.DamageHandler;
 import alephinfinity1.forgeblock.misc.RNGHelper;
 import alephinfinity1.forgeblock.misc.capability.skills.SkillsHelper;
 import alephinfinity1.forgeblock.mixin.AccessorAbstractArrowEntity;
+import alephinfinity1.forgeblock.network.DamageParticlePacket;
+import alephinfinity1.forgeblock.network.FBPacketHandler;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -24,6 +29,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +38,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class FBArrowEntity extends AbstractArrowEntity {
-    public static final double AIMING_RANGE_MULTIPLIER = 5.0D; //The range of aiming enchant per level, in metres.
+    public static final double AIMING_RANGE_MULTIPLIER = 0.75D; //The range of aiming enchant per level, in metres.
 
     private double damage; //Note: different from the damage in AbstractArrowEntity, this refers to the FB player stat
     private double strength;
@@ -43,7 +49,9 @@ public class FBArrowEntity extends AbstractArrowEntity {
     private int aimingLvl = 0;
     private int snipeLvl = 0;
     private double distance = 0.0D; //Distance travelled. Used for snipe calculation.
+    private boolean isSavanna = false; //Whether the arrow is shot from a savanna bow. x2 damage if true.
     private UUID target = null; //Target if aiming. Null if no target.
+    private ItemStack hurricane = null; //The hurricane bow this belongs to. Used for incrementing kill count.
 
     public FBArrowEntity(EntityType<? extends AbstractArrowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -70,7 +78,7 @@ public class FBArrowEntity extends AbstractArrowEntity {
     @Override
     public void tick() {
         super.tick();
-        if (aimingLvl != 0 && !this.inGround) {
+        if (aimingLvl != 0 && !this.inGround && ((AccessorAbstractArrowEntity) this).getTicksInAir() >= 3) { //Only start looking for targets after .15 seconds
             if (!this.hasTarget() && ((AccessorAbstractArrowEntity) this).getTicksInAir() % 2 == 0) {
                 AxisAlignedBB bound = new AxisAlignedBB(this.getPositionVec().add(-aimingLvl * AIMING_RANGE_MULTIPLIER, -aimingLvl * AIMING_RANGE_MULTIPLIER, -aimingLvl * AIMING_RANGE_MULTIPLIER), this.getPositionVec().add(aimingLvl * AIMING_RANGE_MULTIPLIER, aimingLvl * AIMING_RANGE_MULTIPLIER, aimingLvl * AIMING_RANGE_MULTIPLIER));
                 //Filters out all entities that are separated by blocks
@@ -145,6 +153,10 @@ public class FBArrowEntity extends AbstractArrowEntity {
         return this.target != null && this.world instanceof ServerWorld ? ((ServerWorld) this.world).getEntityByUuid(this.target) : null;
     }
 
+    public ItemStack getHurricane() {
+        return this.hurricane;
+    }
+
     //Return whether this arrow has a target to aim for.
     public boolean hasTarget() {
         return getTarget() != null;
@@ -190,6 +202,20 @@ public class FBArrowEntity extends AbstractArrowEntity {
         if (livingEntity instanceof PlayerEntity) {
             setMultiplier(1.0 + SkillsHelper.getCombatLevelOrElse((PlayerEntity) livingEntity, 0) * 0.04);
         }
+    }
+
+    public void setHurricane(ItemStack hurricane) {
+        this.hurricane = hurricane;
+    }
+
+    public void incrementHurricane() {
+        if (hurricane != null) {
+            HurricaneBowItem.incrementKills(hurricane);
+        }
+    }
+
+    public void setSavanna(boolean savanna) {
+        isSavanna = savanna;
     }
 
     protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
@@ -239,7 +265,8 @@ public class FBArrowEntity extends AbstractArrowEntity {
             multiplier += this.snipeLvl * distance / 10.0 / 100.0;
         }
 
-        if (entity.attackEntityFrom(damagesource, (float) (i * multiplier))) {
+        float damage;
+        if (entity.attackEntityFrom(damagesource, damage = (float) (i * multiplier) * (isSavanna ? 2.0f : 1.0f))) {
             if (flag) {
                 return;
             }
@@ -263,8 +290,19 @@ public class FBArrowEntity extends AbstractArrowEntity {
                 }
 
                 this.arrowHit(livingentity);
+
+                if (crit) {
+                    FBPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(() -> new PacketDistributor.TargetPoint(this.getPosX(), this.getPosY(), this.getPosZ(), 256, this.dimension)), new DamageParticlePacket(damage, "crit", entity.getPositionVec().add(0, entity.getHeight() / 2.0, 0)));
+                } else {
+                    FBPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(() -> new PacketDistributor.TargetPoint(this.getPosX(), this.getPosY(), this.getPosZ(), 256, this.dimension)), new DamageParticlePacket(damage, "normal", entity.getPositionVec().add(0, entity.getHeight() / 2.0, 0)));
+                }
+
                 if (entity1 != null && livingentity != entity1 && livingentity instanceof PlayerEntity && entity1 instanceof ServerPlayerEntity) {
                     ((ServerPlayerEntity)entity1).connection.sendPacket(new SChangeGameStatePacket(6, 0.0F));
+                }
+
+                if (!entity.isAlive() && this.getHurricane() != null) {
+                    this.incrementHurricane();
                 }
 
                 if (!entity.isAlive() && ((AccessorAbstractArrowEntity) this).getHitEntities() != null) {

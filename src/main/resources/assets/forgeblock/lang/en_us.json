@@ -210,6 +210,9 @@
     "item.forgeblock.jester_leggings": "Jester Leggings",
     "item.forgeblock.jester_boots": "Jester Boots",
     "item.forgeblock.decent_bow": "Decent Bow",
+    "item.forgeblock.runaans_bow": "Runaan's Bow",
+    "item.forgeblock.hurricane_bow": "Hurricane Bow",
+    "item.forgeblock.savanna_bow": "Savanna Bow",
     
     "item.forgeblock.lv1_zombie_spawn_egg": "Zombie (Lv1) Spawn Egg",
     "item.forgeblock.lapis_zombie_spawn_egg": "Lapis Zombie Spawn Egg",
@@ -621,6 +624,21 @@
     "text.forgeblock.item_desc.recomb_2": "\u00A77permanently increase the rarity",
     "text.forgeblock.item_desc.recomb_3": "\u00A77of an item. An item's rarity can",
     "text.forgeblock.item_desc.recomb_4": "\u00A77only be upgraded once!",
+
+    "text.forgeblock.bow_desc.savanna": "\u00A77Damage dealt by this bow is \u00A7adoubled\u00A77.",
+
+    "text.forgeblock.bow_desc.hurricane_0": "\u00A76Passive Ability: Tempest",
+    "text.forgeblock.bow_desc.hurricane_1": "\u00A77The more kills you get using",
+    "text.forgeblock.bow_desc.hurricane_2": "\u00A77this bow, the more powerful it",
+    "text.forgeblock.bow_desc.hurricane_3": "\u00A77becomes! Reach \u00A76250\u00A77 kills to",
+    "text.forgeblock.bow_desc.hurricane_4": "\u00A77unlock its full potential.",
+    "text.forgeblock.bow_desc.hurricane_kills": "\u00A77Kills: \u00A7b%d",
+    "text.forgeblock.bow_desc.hurricane_maxed": "\u00A77Kills: \u00A7b%d \u00A7a\u00A7lMAXED!",
+
+    "text.forgeblock.bow_desc.runaan_0": "\u00A76Passive Ability: Triple Shot",
+    "text.forgeblock.bow_desc.runaan_1": "\u00A77Shoot 3 arrows at a time! The 2",
+    "text.forgeblock.bow_desc.runaan_2": "\u00A77extra arrows deal \u00A7a40%",
+    "text.forgeblock.bow_desc.runaan_3": "\u00A77of the damage.",
     
     "text.forgeblock.levelReq": "Requires %1$s Level %2$s",
     "text.forgeblock.levelReqNotMet": "Requires %1$s Level %2$s (%3$s/%2$s)",

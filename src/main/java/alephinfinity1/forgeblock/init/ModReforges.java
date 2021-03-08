@@ -173,4 +173,84 @@ public class ModReforges {
 			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 20, 0, 2, 150, 0, 0, 0, uuid),
 			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 0, 0, 0, 0, 27, 0, 3, 200, 0, 0, 0, uuid)));
 
+	public static final RegistryObject<Reforge> DEADLY = REFORGES.register("deadly", () -> new Reforge(new FBItemType[] {FBItemType.BOW}, false,
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 10, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 13, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 16, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 19, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 22, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 25, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 28, 112, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid)));
+
+	public static final RegistryObject<Reforge> FINE = REFORGES.register("fine", () -> new Reforge(new FBItemType[] {FBItemType.BOW}, false,
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 3, 5, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 7, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 12, 9, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 18, 12, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 25, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 33, 18, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 42, 22, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid)));
+
+	public static final RegistryObject<Reforge> GRAND = REFORGES.register("grand", () -> new Reforge(new FBItemType[] {FBItemType.BOW}, false,
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid)));
+
+	public static final RegistryObject<Reforge> HASTY = REFORGES.register("hasty", () -> new Reforge(new FBItemType[] {FBItemType.BOW}, false,
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 3, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 5, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 7, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 10, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 15, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 20, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 27, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid)));
+
+	public static final RegistryObject<Reforge> NEAT = REFORGES.register("neat", () -> new Reforge(new FBItemType[] {FBItemType.BOW}, false,
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 10, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 12, 8, 0, 0, 0, 0, 0, 6, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 14, 14, 0, 0, 0, 0, 0, 10, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 17, 20, 0, 0, 0, 0, 0, 15, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 20, 30, 0, 0, 0, 0, 0, 20, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 25, 40, 0, 0, 0, 0, 0, 25, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 32, 50, 0, 0, 0, 0, 0, 32, 0, 0, 0, uuid)));
+
+	public static final RegistryObject<Reforge> RAPID = REFORGES.register("rapid", () -> new Reforge(new FBItemType[] {FBItemType.BOW}, false,
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 2, 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 3, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 4, 0, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 7, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 10, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 15, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 21, 0, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid)));
+
+	public static final RegistryObject<Reforge> UNREAL = REFORGES.register("unreal", () -> new Reforge(new FBItemType[] {FBItemType.BOW}, false,
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 3, 8, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 7, 9, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 12, 10, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 18, 11, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 25, 13, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 34, 15, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 45, 17.5, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, uuid)));
+
+	public static final RegistryObject<Reforge> AWKWARD = REFORGES.register("awkward", () -> new Reforge(new FBItemType[] {FBItemType.BOW}, false,
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 10, 5, 0, 0, 0, 0, 0, -5, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 12, 10, 0, 0, 0, 0, 0, -10, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 15, 15, 0, 0, 0, 0, 0, -18, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 20, 22, 0, 0, 0, 0, 0, -32, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 25, 30, 0, 0, 0, 0, 0, -50, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 30, 35, 0, 0, 0, 0, 0, -72, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 0, 37.5, 42.5, 0, 0, 0, 0, 0, -95, 0, 0, 0, uuid)));
+
+	public static final RegistryObject<Reforge> RICH = REFORGES.register("rich", () -> new Reforge(new FBItemType[] {FBItemType.BOW}, false,
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 2, 10, 1, 0, 0, 0, 0, 0, 20, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 3, 12, 2, 0, 0, 0, 0, 0, 25, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 4, 14, 4, 0, 0, 0, 0, 0, 30, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 7, 17, 7, 0, 0, 0, 0, 0, 40, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 10, 20, 10, 0, 0, 0, 0, 0, 50, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 15, 25, 15, 0, 0, 0, 0, 0, 60, 0, 0, 0, uuid),
+			(uuid) -> ModifierHelper.modifierMapFromDoubles(0, 21, 32, 21, 0, 0, 0, 0, 0, 75, 0, 0, 0, uuid)));
 }

@@ -22,9 +22,11 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
@@ -118,7 +120,6 @@ public class SilentDeathItem extends FBSwordItem implements IAbilityItem, IQuali
 
 	@Override
 	public AbilityResultType activateAbility(World world, PlayerEntity player, ItemStack stack) {
-		// TODO Auto-generated method stub
 		return AbilityResultType.SUCCESS;
 	}
 

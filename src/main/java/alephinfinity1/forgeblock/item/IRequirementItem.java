@@ -11,7 +11,7 @@ public interface IRequirementItem {
 	/**
 	 * Returns whether if a player can use an item.
 	 * @param player
-	 * @param item
+	 * @param stack
 	 * @return
 	 */
 	default boolean canPlayerUseItem(PlayerEntity player, ItemStack stack) {
