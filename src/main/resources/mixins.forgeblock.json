@@ -8,6 +8,7 @@
     "mixins": [
         "AccessorAbstractArrowEntity",
         "AccessorEntity",
+        "AccessorInventory",
         "AccessorPlayerEntity",
         "AccessorRepairContainer",
         "MixinEnderPearlItem",

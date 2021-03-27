@@ -13,7 +13,7 @@ public class CollectionsCapabilityHandler {
 	
 	public static final ResourceLocation COLLECTIONS_CAPABILITY = new ResourceLocation(ForgeBlock.MOD_ID, "collections");
 	
-	@SubscribeEvent
+	//@SubscribeEvent
 	public static void onCapabilityAttach(AttachCapabilitiesEvent<Entity> event) {
 		if(event.getObject() instanceof PlayerEntity) {
 			event.addCapability(COLLECTIONS_CAPABILITY, new CollectionsDataProvider());

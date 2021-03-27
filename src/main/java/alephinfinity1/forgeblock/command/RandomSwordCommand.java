@@ -26,7 +26,7 @@ public class RandomSwordCommand {
 	
 	public static int randomSwordCommand(CommandSource source) throws CommandSyntaxException {
 		Entity entity = source.assertIsEntity();
-		if(entity instanceof PlayerEntity) {
+		if (entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) entity;
 			player.addItemStackToInventory(CustomSwordItem.randomSword());
 			return 1;
@@ -36,7 +36,7 @@ public class RandomSwordCommand {
 	
 	public static int randomSwordCommand(CommandSource source, int count) throws CommandSyntaxException {
 		Entity entity = source.assertIsEntity();
-		if(entity instanceof PlayerEntity) {
+		if (entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) entity;
 			for(int i = 0; i < count; i++)
 				player.addItemStackToInventory(CustomSwordItem.randomSword());

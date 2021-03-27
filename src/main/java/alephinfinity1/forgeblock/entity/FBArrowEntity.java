@@ -1,9 +1,7 @@
 package alephinfinity1.forgeblock.entity;
 
-import alephinfinity1.forgeblock.client.particles.StringParticleData;
 import alephinfinity1.forgeblock.item.bows.HurricaneBowItem;
 import alephinfinity1.forgeblock.misc.AttributeHelper;
-import alephinfinity1.forgeblock.misc.DamageHandler;
 import alephinfinity1.forgeblock.misc.RNGHelper;
 import alephinfinity1.forgeblock.misc.capability.skills.SkillsHelper;
 import alephinfinity1.forgeblock.mixin.AccessorAbstractArrowEntity;
@@ -38,7 +36,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class FBArrowEntity extends AbstractArrowEntity {
-    public static final double AIMING_RANGE_MULTIPLIER = 0.75D; //The range of aiming enchant per level, in metres.
+    public static final double AIMING_RANGE_MULTIPLIER = 1.5D; //The range of aiming enchant per level, in metres.
 
     private double damage; //Note: different from the damage in AbstractArrowEntity, this refers to the FB player stat
     private double strength;
@@ -82,22 +80,23 @@ public class FBArrowEntity extends AbstractArrowEntity {
             if (!this.hasTarget() && ((AccessorAbstractArrowEntity) this).getTicksInAir() % 2 == 0) {
                 AxisAlignedBB bound = new AxisAlignedBB(this.getPositionVec().add(-aimingLvl * AIMING_RANGE_MULTIPLIER, -aimingLvl * AIMING_RANGE_MULTIPLIER, -aimingLvl * AIMING_RANGE_MULTIPLIER), this.getPositionVec().add(aimingLvl * AIMING_RANGE_MULTIPLIER, aimingLvl * AIMING_RANGE_MULTIPLIER, aimingLvl * AIMING_RANGE_MULTIPLIER));
                 //Filters out all entities that are separated by blocks
-                List<Entity> list = world.getEntitiesInAABBexcluding(this.getShooter(), bound, (entity) -> entity instanceof LivingEntity && entity.isAlive())
+                List<Entity> list = world.getEntitiesInAABBexcluding(this.getShooter(), bound, (entity) -> entity instanceof LivingEntity && entity.isAlive() && !entity.isSpectator() && !(entity instanceof PlayerEntity && ((PlayerEntity) entity).isCreative()))
                         .stream()
-                        .filter(entity -> entity.getDistanceSq(this) > AIMING_RANGE_MULTIPLIER * AIMING_RANGE_MULTIPLIER * aimingLvl * aimingLvl)
+                        .filter(entity -> entity.getDistanceSq(this) < AIMING_RANGE_MULTIPLIER * AIMING_RANGE_MULTIPLIER * aimingLvl * aimingLvl)
                         .filter(entity -> this.world.rayTraceBlocks(new RayTraceContext(this.getPositionVec(), entity.getPositionVec().add(0.0, entity.getEyeHeight(), 0.0), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, null)).getType().equals(RayTraceResult.Type.MISS))
                         .collect(Collectors.toList());
-                if (list.isEmpty()) return;
-                Entity potentialTarget = null;
-                double minDist = Double.MAX_VALUE;
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getDistanceSq(this) < minDist) {
-                        potentialTarget = list.get(i);
-                        minDist = list.get(i).getDistanceSq(this);
+                if (!list.isEmpty()) {
+                    Entity potentialTarget = null;
+                    double minDist = Double.MAX_VALUE;
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getDistanceSq(this) < minDist) {
+                            potentialTarget = list.get(i);
+                            minDist = list.get(i).getDistanceSq(this);
+                        }
                     }
-                }
-                if (potentialTarget != null) {
-                    this.target = potentialTarget.getUniqueID();
+                    if (potentialTarget != null) {
+                        this.target = potentialTarget.getUniqueID();
+                    }
                 }
             }
             if (this.hasTarget()) {
@@ -159,7 +158,7 @@ public class FBArrowEntity extends AbstractArrowEntity {
 
     //Return whether this arrow has a target to aim for.
     public boolean hasTarget() {
-        return getTarget() != null;
+        return getTarget() != null && getTarget().isAlive();
     }
 
     public void setDamage(double damage) {
@@ -220,6 +219,7 @@ public class FBArrowEntity extends AbstractArrowEntity {
 
     protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
         Entity entity = p_213868_1_.getEntity();
+        if (entity == this.getShooter()) return;
         float f = (float)this.getMotion().length();
         double i = (damage + Math.floor(strength / 5.0)) * (1.0 + strength / 100.0);
         if (this.getPierceLevel() > 0) {
@@ -273,6 +273,7 @@ public class FBArrowEntity extends AbstractArrowEntity {
 
             if (entity instanceof LivingEntity) {
                 LivingEntity livingentity = (LivingEntity)entity;
+                livingentity.hurtResistantTime = 0;
                 if (!this.world.isRemote && this.getPierceLevel() <= 0) {
                     livingentity.setArrowCountInEntity(livingentity.getArrowCountInEntity() + 1);
                 }
@@ -342,10 +343,11 @@ public class FBArrowEntity extends AbstractArrowEntity {
     @Override
     public void writeAdditional(CompoundNBT compoundNBT) {
         super.writeAdditional(compoundNBT);
-        compoundNBT.putDouble("damage", getDamage());
-        compoundNBT.putDouble("strength", getStrength());
-        compoundNBT.putDouble("critChance", getCritChance());
-        compoundNBT.putDouble("critDamage", getCritDamage());
+        compoundNBT.putDouble("damage", damage);
+        compoundNBT.putDouble("strength", strength);
+        compoundNBT.putDouble("critChance", critChance);
+        compoundNBT.putDouble("critDamage", critDamage);
+        compoundNBT.putInt("aimingLvl", aimingLvl);
     }
 
     @Override
@@ -362,6 +364,9 @@ public class FBArrowEntity extends AbstractArrowEntity {
         }
         if (compoundNBT.contains("critDamage")) {
             this.critDamage = compoundNBT.getDouble("critDamage");
+        }
+        if (compoundNBT.contains("aimingLvl")) {
+            this.aimingLvl = compoundNBT.getInt("aimingLvl");
         }
     }
 }

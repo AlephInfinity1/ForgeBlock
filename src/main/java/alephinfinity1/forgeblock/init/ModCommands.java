@@ -1,9 +1,7 @@
 package alephinfinity1.forgeblock.init;
 
-import alephinfinity1.forgeblock.command.CoinsCommand;
-import alephinfinity1.forgeblock.command.RandomSwordCommand;
-import alephinfinity1.forgeblock.command.ReforgeCommand;
-import alephinfinity1.forgeblock.command.SkillCommand;
+import alephinfinity1.forgeblock.command.*;
+import alephinfinity1.forgeblock.misc.capability.accessories.AccessoriesProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -17,6 +15,7 @@ public class ModCommands {
 		RandomSwordCommand.register(event.getCommandDispatcher());
 		SkillCommand.register(event.getCommandDispatcher());
 		CoinsCommand.register(event.getCommandDispatcher());
+		AccCommand.register(event.getCommandDispatcher());
 	}
 
 }

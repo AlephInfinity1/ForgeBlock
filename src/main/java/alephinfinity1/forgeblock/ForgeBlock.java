@@ -1,5 +1,11 @@
 package alephinfinity1.forgeblock;
 
+import alephinfinity1.forgeblock.misc.capability.accessories.AccessoriesData;
+import alephinfinity1.forgeblock.misc.capability.accessories.AccessoriesStorage;
+import alephinfinity1.forgeblock.misc.capability.accessories.IAccessoriesData;
+import alephinfinity1.forgeblock.misc.capability.coins.Coins;
+import alephinfinity1.forgeblock.misc.capability.skills.Skills;
+import alephinfinity1.forgeblock.misc.capability.stats_modifier.capability.ItemModifiers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -105,10 +111,11 @@ public class ForgeBlock {
 	private void setup(FMLCommonSetupEvent event) {
 		AttributeLimitsRemover.removeLimits();
 		CapabilityManager.INSTANCE.register(IMana.class, new ManaStorage(), Mana::new);
-		CapabilityManager.INSTANCE.register(ISkills.class, new SkillsStorage(), new SkillsFactory());
-		CapabilityManager.INSTANCE.register(ICoins.class, new CoinsStorage(), new CoinsFactory());
-		CapabilityManager.INSTANCE.register(IItemModifiers.class, new ItemModifiersStorage(), new ItemModifiersFactory());
-		CapabilityManager.INSTANCE.register(ICollectionsData.class, new CollectionsDataStorage(), new CollectionsDataFactory());
+		CapabilityManager.INSTANCE.register(ISkills.class, new SkillsStorage(), Skills::new);
+		CapabilityManager.INSTANCE.register(ICoins.class, new CoinsStorage(), Coins::new);
+		CapabilityManager.INSTANCE.register(IItemModifiers.class, new ItemModifiersStorage(), ItemModifiers::new);
+		//CapabilityManager.INSTANCE.register(ICollectionsData.class, new CollectionsDataStorage(), new CollectionsDataFactory());
+		CapabilityManager.INSTANCE.register(IAccessoriesData.class, new AccessoriesStorage(), AccessoriesData::new);
 		BrewingRecipeRegistrar.registerRecipes();
 
 		//Checks if this a client, if so start discordRCP, if not just do nothing.
