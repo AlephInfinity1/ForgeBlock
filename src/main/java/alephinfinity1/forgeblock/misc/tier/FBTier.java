@@ -10,15 +10,15 @@ import net.minecraft.util.text.TranslationTextComponent;
  * Better known as 'Rarity' in-game, however the official terminology, as shown in the API doc, is 'Tier'.
  */
 public enum FBTier {
-	POOR(FBModConfig.POOR_TIER_COLOR.get(), "misc.forgeblock.tier.poor"),
-	COMMON(FBModConfig.COMMON_TIER_COLOR.get(), "misc.forgeblock.tier.common"),
-	UNCOMMON(FBModConfig.UNCOMMON_TIER_COLOR.get(), "misc.forgeblock.tier.uncommon"),
-	RARE(FBModConfig.RARE_TIER_COLOR.get(), "misc.forgeblock.tier.rare"),
-	EPIC(FBModConfig.EPIC_TIER_COLOR.get(), "misc.forgeblock.tier.epic"),
-	LEGENDARY(FBModConfig.LEGENDARY_TIER_COLOR.get(), "misc.forgeblock.tier.legendary"),
-	MYTHIC(FBModConfig.MYTHIC_TIER_COLOR.get(), "misc.forgeblock.tier.mythic"),
-	SUPREME(FBModConfig.SUPREME_TIER_COLOR.get(), "misc.forgeblock.tier.supreme"),
-	SPECIAL(FBModConfig.SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.special"),
+	POOR		(FBModConfig.POOR_TIER_COLOR.get(), "misc.forgeblock.tier.poor"),
+	COMMON		(FBModConfig.COMMON_TIER_COLOR.get(), "misc.forgeblock.tier.common"),
+	UNCOMMON	(FBModConfig.UNCOMMON_TIER_COLOR.get(), "misc.forgeblock.tier.uncommon"),
+	RARE		(FBModConfig.RARE_TIER_COLOR.get(), "misc.forgeblock.tier.rare"),
+	EPIC		(FBModConfig.EPIC_TIER_COLOR.get(), "misc.forgeblock.tier.epic"),
+	LEGENDARY	(FBModConfig.LEGENDARY_TIER_COLOR.get(), "misc.forgeblock.tier.legendary"),
+	MYTHIC		(FBModConfig.MYTHIC_TIER_COLOR.get(), "misc.forgeblock.tier.mythic"),
+	SUPREME		(FBModConfig.SUPREME_TIER_COLOR.get(), "misc.forgeblock.tier.supreme"),
+	SPECIAL		(FBModConfig.SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.special"),
 	VERY_SPECIAL(FBModConfig.VERY_SPECIAL_TIER_COLOR.get(), "misc.forgeblock.tier.very_special");
 	
 	public final TextFormatting color;

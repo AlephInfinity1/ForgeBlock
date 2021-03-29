@@ -1,10 +1,13 @@
 package alephinfinity1.forgeblock.misc.capability.accessories;
 
+import alephinfinity1.forgeblock.item.accessories.IAccessoryItem;
 import alephinfinity1.forgeblock.mixin.AccessorInventory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -105,5 +108,41 @@ public class AccessoriesData implements IAccessoriesData {
         if (tag instanceof CompoundNBT) {
             ItemStackHelper.loadAllItems((CompoundNBT) tag, ((AccessorInventory) contents).getInventoryContents());
         }
+    }
+
+    /**
+     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
+     */
+    @Override
+    public int getInventoryStackLimit() {
+        return 1;
+    }
+
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
+     * guis use Slot.isItemValid
+     *
+     * @param index
+     * @param stack
+     */
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return stack.getItem() instanceof IAccessoryItem;
+    }
+
+    @Override
+    public void addListener(IInventoryChangedListener listener) {
+        contents.addListener(listener);
+    }
+
+    @Override
+    public boolean isPresent(Item item) {
+        for (int i = 0; i < this.getSizeInventory(); i++) {
+            ItemStack itemstack = this.getStackInSlot(i);
+            if (itemstack.getItem().equals(item)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

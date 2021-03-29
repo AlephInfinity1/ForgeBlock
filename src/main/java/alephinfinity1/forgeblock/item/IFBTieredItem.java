@@ -21,12 +21,12 @@ public interface IFBTieredItem extends IFBItem {
 	/*
 	 * Gets the base tier of this item.
 	 */
-	public FBTier getFBTier();
+	FBTier getFBTier();
 
 	/*
 	 * Gets the tier of the ItemStack. May be modified
 	 */
-	public FBTier getStackTier(ItemStack stack);
+	FBTier getStackTier(ItemStack stack);
 	
 	default Rarity getRarity(ItemStack stack) {
 		return getStackTier(stack).getVanillaRarity();
