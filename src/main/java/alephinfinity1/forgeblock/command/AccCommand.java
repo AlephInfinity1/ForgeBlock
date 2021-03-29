@@ -1,8 +1,10 @@
 package alephinfinity1.forgeblock.command;
 
+import alephinfinity1.forgeblock.item.swords.CustomSwordItem;
 import alephinfinity1.forgeblock.misc.capability.accessories.AccessoriesProvider;
 import alephinfinity1.forgeblock.misc.capability.accessories.IAccessoriesData;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -13,6 +15,8 @@ import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.util.text.StringTextComponent;
+
+import javax.lang.model.util.SimpleElementVisitor6;
 
 public class AccCommand {
     public static void register(CommandDispatcher<CommandSource> dispatcher) {

@@ -124,13 +124,15 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 	
 	@Override
 	public FBTier getStackTier(ItemStack stack) {
-		if (stack.getTag() != null) {
+		if(stack.getTag() != null) {
 			IItemModifiers itemMod = stack.getCapability(ItemModifiersProvider.ITEM_MODIFIERS_CAPABILITY).orElse(null);
 			if(itemMod != null) {
 				return FBTier.changeTier(tier, itemMod.getRarity(stack));
 			}
+			return tier;
+		} else {
+			return tier;
 		}
-		return tier;
 	}
 	
 	public List<ITextComponent> additionalInformation() {
@@ -216,9 +218,8 @@ public class FBSwordItem extends SwordItem implements IFBTieredItem, IReforgeabl
 
 	@Override
 	public Multimap<String, AttributeModifier> getReforgeModifiers(ItemStack stack) {
-		if (getReforge(stack) == null) {
-			return ModifierHelper.emptyModifier();
-		} else {
+		if(getReforge(stack) == null) return ModifierHelper.emptyModifier();
+		else {
 			Reforge reforge = getReforge(stack);
 			return reforge.getModifierMapByTier(getStackTier(stack), SWORD_REFORGE_MODIFIER);
 		}

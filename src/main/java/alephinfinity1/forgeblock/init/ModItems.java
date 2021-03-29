@@ -3,7 +3,6 @@ package alephinfinity1.forgeblock.init;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.ModifierHelper;
 import alephinfinity1.forgeblock.item.*;
-import alephinfinity1.forgeblock.item.accessories.AccessoryItem;
 import alephinfinity1.forgeblock.item.armor.*;
 import alephinfinity1.forgeblock.item.bows.FBBowItem;
 import alephinfinity1.forgeblock.item.bows.HurricaneBowItem;
@@ -11,12 +10,8 @@ import alephinfinity1.forgeblock.item.bows.RunaansBowItem;
 import alephinfinity1.forgeblock.item.pickaxes.FBPickaxeItem;
 import alephinfinity1.forgeblock.item.pickaxes.StonkItem;
 import alephinfinity1.forgeblock.item.swords.*;
-import alephinfinity1.forgeblock.misc.AttributeHelper;
 import alephinfinity1.forgeblock.misc.tier.FBTier;
-import com.google.common.collect.ImmutableMultimap;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BlockItem;
@@ -356,11 +351,6 @@ public class ModItems {
 	 * Not final
 	 */
 	public static final RegistryObject<Item> MINION_SPAWN_EGG = ITEMS.register("minion_spawn_egg", () -> new SpawnEggItem(ModEntities.MINION_TYPE, 1080802, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
-
-	/*
-	 * Accs
-	 */
-	public static final RegistryObject<Item> SPEED_TALISMAN = ITEMS.register("speed_talisman", () -> new AccessoryItem(new Item.Properties().maxStackSize(1).group(ItemGroup.MISC), FBTier.COMMON, ImmutableMultimap.of(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier("Speed talisman", 0.001D, AttributeModifier.Operation.ADDITION))));
 
 	/*
 	 * Misc
