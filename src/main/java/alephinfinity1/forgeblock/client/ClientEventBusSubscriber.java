@@ -12,7 +12,7 @@ import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.client.particles.NumericDamageIndicatorParticle;
 import alephinfinity1.forgeblock.client.screen.FBAnvilScreen;
 import alephinfinity1.forgeblock.entity.FBExperienceBottleEntity;
-import alephinfinity1.forgeblock.entity.minion.render.MinionRenderer;
+import alephinfinity1.forgeblock.entity.minion.basic.render.MinionRenderer;
 import alephinfinity1.forgeblock.init.ModContainerTypes;
 import alephinfinity1.forgeblock.init.ModEntities;
 import alephinfinity1.forgeblock.init.ModParticles;

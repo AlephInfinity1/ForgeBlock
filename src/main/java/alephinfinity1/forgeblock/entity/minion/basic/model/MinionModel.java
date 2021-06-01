@@ -1,4 +1,4 @@
-package alephinfinity1.forgeblock.entity.minion.model;
+package alephinfinity1.forgeblock.entity.minion.basic.model;
 
 import alephinfinity1.forgeblock.entity.minion.MinionEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;

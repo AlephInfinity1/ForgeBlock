@@ -1,11 +1,11 @@
-package alephinfinity1.forgeblock.entity.minion.goal;
+package alephinfinity1.forgeblock.entity.minion.basic.goal;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import alephinfinity1.forgeblock.entity.minion.MinionEntity;
-import alephinfinity1.forgeblock.entity.minion.inventory.MinionInv;
+import alephinfinity1.forgeblock.entity.minion.basic.inventory.MinionInv;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -77,6 +77,10 @@ public class MiningGoal extends Goal {
 		if (tick % actionDelay == 0) {
 			BlockPos pos = new BlockPos(minionEntity.getPosX(), minionEntity.getPosY() - 1,
 					minionEntity.getPosZ());
+
+			minionEntity.rotateTowards(
+					Math.atan2(pos.getZ() - minionEntity.getPosZ(), pos.getX() - minionEntity.getPosX()),
+					0);
 			if(!blockPlace(pos)) { //Attempt to place a block. If unsuccessful, destroy a block instead.
 				this.removeBlock(pos);
 			}
@@ -88,7 +92,6 @@ public class MiningGoal extends Goal {
 	 * Sets the block to any block in game.
 	 *
 	 * @param blockPlace Blocks
-	 * @param blockType  Blocks
 	 * @return Whether the block is successfully placed or not.
 	 */
 	public boolean blockPlace(BlockPos blockPlace) {

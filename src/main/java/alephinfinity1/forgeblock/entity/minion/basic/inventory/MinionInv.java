@@ -1,4 +1,4 @@
-package alephinfinity1.forgeblock.entity.minion.inventory;
+package alephinfinity1.forgeblock.entity.minion.basic.inventory;
 
 import net.minecraft.inventory.Inventory;
 
