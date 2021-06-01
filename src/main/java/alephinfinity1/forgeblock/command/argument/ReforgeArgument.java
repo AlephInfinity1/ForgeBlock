@@ -19,9 +19,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 public class ReforgeArgument implements ArgumentType<Reforge> {
 
-	public static final DynamicCommandExceptionType REFORGE_UNKNOWN = new DynamicCommandExceptionType((p_208662_0_) -> {
-		return new TranslationTextComponent("reforge.unknown", p_208662_0_);
-	});
+	public static final DynamicCommandExceptionType REFORGE_UNKNOWN = new DynamicCommandExceptionType((p_208662_0_) -> new TranslationTextComponent("reforge.unknown", p_208662_0_));
 	
 	public static ReforgeArgument reforge() {
 		return new ReforgeArgument();

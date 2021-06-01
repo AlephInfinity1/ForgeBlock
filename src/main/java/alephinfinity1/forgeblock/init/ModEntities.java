@@ -63,6 +63,7 @@ public class ModEntities {
     
 
 
+
     public static final EntityType<FBArrowEntity> FB_ARROW_TYPE = EntityType.Builder.<FBArrowEntity>create(
             FBArrowEntity::new,
             EntityClassification.MISC).size(0.1f, 0.1f).build(new ResourceLocation(ForgeBlock.MOD_ID, "arrow").toString());

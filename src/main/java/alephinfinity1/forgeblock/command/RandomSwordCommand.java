@@ -19,11 +19,9 @@ public class RandomSwordCommand {
 			return randomSwordCommand(commandSource.getSource());
 		}).then(Commands.argument("count", IntegerArgumentType.integer(1)).executes((commandSource) -> {
 			return randomSwordCommand(commandSource.getSource(), IntegerArgumentType.getInteger(commandSource, "count"));
-		}).then(Commands.argument("quality", IntegerArgumentType.integer()).executes((commandSource) -> {
-			return randomSwordCommand(commandSource.getSource(), IntegerArgumentType.getInteger(commandSource, "count"), IntegerArgumentType.getInteger(commandSource, "quality"));
-		}))));
+		}).then(Commands.argument("quality", IntegerArgumentType.integer()).executes((commandSource) -> randomSwordCommand(commandSource.getSource(), IntegerArgumentType.getInteger(commandSource, "count"), IntegerArgumentType.getInteger(commandSource, "quality"))))));
 	}
-	
+
 	public static int randomSwordCommand(CommandSource source) throws CommandSyntaxException {
 		Entity entity = source.assertIsEntity();
 		if (entity instanceof PlayerEntity) {
@@ -33,7 +31,7 @@ public class RandomSwordCommand {
 		}
 		return 0;
 	}
-	
+
 	public static int randomSwordCommand(CommandSource source, int count) throws CommandSyntaxException {
 		Entity entity = source.assertIsEntity();
 		if (entity instanceof PlayerEntity) {
@@ -44,7 +42,7 @@ public class RandomSwordCommand {
 		}
 		return 0;
 	}
-	
+
 	public static int randomSwordCommand(CommandSource source, int count, int quality) throws CommandSyntaxException {
 		Entity entity = source.assertIsEntity();
 		if(entity instanceof PlayerEntity) {

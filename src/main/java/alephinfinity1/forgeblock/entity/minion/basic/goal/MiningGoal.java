@@ -9,6 +9,7 @@ import alephinfinity1.forgeblock.entity.minion.MinionEntity;
 import alephinfinity1.forgeblock.entity.minion.basic.inventory.MinionInv;
 import net.minecraft.block.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.command.arguments.EntityAnchorArgument;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.ChestContainer;
@@ -19,6 +20,7 @@ import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.loot.LootContext.Builder;
@@ -89,6 +91,9 @@ public class MiningGoal extends Goal {
         if (tick % actionDelay == 0) {
             BlockPos pos = new BlockPos(minionEntity.getPosX(), minionEntity.getPosY() - 1, minionEntity.getPosZ());
 
+            minionEntity.lookAt(EntityAnchorArgument.Type.EYES, new Vec3d(pos));
+            minionEntity.lookAt(EntityAnchorArgument.Type.FEET, new Vec3d(pos));
+
 
             if (!blockPlace(pos)) { //Attempt to place a block. If unsuccessful, destroy a block instead.
                 this.removeBlock(pos);
@@ -131,9 +136,8 @@ public class MiningGoal extends Goal {
         for (BlockPos position : positions) {
             if (world.isAirBlock(position)) { //Only change block if block is air.
                 world.setBlockState(position, this.block.getDefaultState());
-                minionEntity.rotateTowards(
-                        Math.atan2(position.getZ() - minionEntity.getPosZ(), position.getX() - minionEntity.getPosX()),
-                        0);
+                minionEntity.lookAt(EntityAnchorArgument.Type.EYES, new Vec3d(position));
+                minionEntity.lookAt(EntityAnchorArgument.Type.FEET, new Vec3d(position));
                 return true;
             }
         }

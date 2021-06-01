@@ -24,11 +24,6 @@ public abstract class MinionEntity extends CreatureEntity {
 		this.minionInv = new MinionInv(36);
 	}
 
-	/**
-	 * Disable killing with items. TODO: Make minions invinsable.
-	 *
-	 *
-	 */
 	@Override
 	public boolean canBeAttackedWithItem() {
 		return false;

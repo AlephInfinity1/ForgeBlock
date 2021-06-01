@@ -94,7 +94,7 @@ public class EntityRenderHandler {
         /*
         Added the distance, so your computer doesn't just die when you load in heaps of entitys.
          */
-        if (Minecraft.getInstance().player.getPosition().withinDistance(entityIn.getPosition(), 20)) {
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.getPosition().withinDistance(entityIn.getPosition(), 20)) {
             matrixStackIn.translate(0.0D, (double) f, 0.0D);
             matrixStackIn.rotate(renderManager.getCameraOrientation());
             matrixStackIn.scale(-0.025F, -0.025F, 0.025F);
