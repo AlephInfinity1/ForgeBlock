@@ -19,9 +19,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 public class SkillArgument implements ArgumentType<SkillType> {
 	
-	public static final DynamicCommandExceptionType SKILL_UNKNOWN = new DynamicCommandExceptionType((p_208662_0_) -> {
-		return new TranslationTextComponent("skill.unknown", p_208662_0_);
-	});
+	public static final DynamicCommandExceptionType SKILL_UNKNOWN = new DynamicCommandExceptionType((p_208662_0_) -> new TranslationTextComponent("skill.unknown", p_208662_0_));
 	
 	public static SkillArgument skill() {
 		return new SkillArgument();

@@ -61,7 +61,7 @@ public interface ISkills {
 	 * Gets the XP required to level up from the current level.
 	 * E.g. If the player is at Combat 23, this method will return 600k.
 	 * Note: the XP required for {@code 23 -> 24} would be returned, not {@code 22 -> 23}.
-	 * (no longer todo) bugginess when dealing with Lv50 skills.
+	 * (no longer to do) bugginess when dealing with Lv50 skills.
 	 * 
 	 * @param skill SkillType
 	 * @return double, XP needed to level up to the next level.

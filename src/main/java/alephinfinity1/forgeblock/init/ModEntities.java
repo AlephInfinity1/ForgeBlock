@@ -3,6 +3,7 @@ package alephinfinity1.forgeblock.init;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.entity.*;
 import alephinfinity1.forgeblock.entity.minion.MinionEntity;
+import alephinfinity1.forgeblock.entity.minion.impl.CoalMinion;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -56,8 +57,12 @@ public class ModEntities {
     		EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "golden_ghoul").toString());
 
     public static final EntityType<MinionEntity> MINION_TYPE = EntityType.Builder.<MinionEntity>create(
-            MinionEntity::new,
+            CoalMinion::new,
             EntityClassification.MISC).size(0.50f, 0.50f).build(new ResourceLocation(ForgeBlock.MOD_ID, "minion").toString());
+
+    
+
+
 
     public static final EntityType<FBArrowEntity> FB_ARROW_TYPE = EntityType.Builder.<FBArrowEntity>create(
             FBArrowEntity::new,
@@ -74,7 +79,6 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CryptGhoulEntity>> CRYPT_GHOUL = ENTITIES.register("crypt_ghoul", () -> CRYPT_GHOUL_TYPE);
     public static final RegistryObject<EntityType<GoldenGhoulEntity>> GOLDEN_GHOUL = ENTITIES.register("golden_ghoul", () -> GOLDEN_GHOUL_TYPE);
     public static final RegistryObject<EntityType<FBArrowEntity>> FB_ARROW = ENTITIES.register("arrow", () -> FB_ARROW_TYPE);
-
 
     public static final RegistryObject<EntityType<MinionEntity>> MINION = ENTITIES.register("minion", () -> MINION_TYPE);
 

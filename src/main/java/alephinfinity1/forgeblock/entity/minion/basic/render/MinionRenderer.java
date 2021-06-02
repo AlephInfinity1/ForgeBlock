@@ -1,8 +1,8 @@
-package alephinfinity1.forgeblock.entity.minion.render;
+package alephinfinity1.forgeblock.entity.minion.basic.render;
 
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.entity.minion.MinionEntity;
-import alephinfinity1.forgeblock.entity.minion.model.MinionModel;
+import alephinfinity1.forgeblock.entity.minion.basic.model.MinionModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
