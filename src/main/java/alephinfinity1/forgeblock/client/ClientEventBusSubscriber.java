@@ -40,6 +40,7 @@ public class ClientEventBusSubscriber {
     public static void onClientSetup(FMLClientSetupEvent event) {
         //Entities
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_ZOMBIE.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.TANK_ZOMBIE.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LAPIS_ZOMBIE.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZEALOT.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPECIAL_ZEALOT.get(), EndermanRenderer::new);

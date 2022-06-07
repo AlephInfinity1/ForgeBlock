@@ -23,6 +23,10 @@ public class ModEntities {
     public static final EntityType<LapisZombieEntity> LAPIS_ZOMBIE_TYPE = EntityType.Builder.create(
             LapisZombieEntity::new,
             EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "lapis_zombie").toString());
+    
+    public static final EntityType<TankZombieEntity> TANK_ZOMBIE_TYPE = EntityType.Builder.create(
+            TankZombieEntity::new,
+            EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "tank_zombie").toString());
 
     public static final EntityType<ZealotEntity> ZEALOT_TYPE = EntityType.Builder.create(
             ZealotEntity::new,
@@ -69,6 +73,7 @@ public class ModEntities {
             EntityClassification.MISC).size(0.1f, 0.1f).build(new ResourceLocation(ForgeBlock.MOD_ID, "arrow").toString());
 
     public static final RegistryObject<EntityType<Lv1ZombieEntity>> LV1_ZOMBIE = ENTITIES.register("lv1_zombie", () -> LV1_ZOMBIE_TYPE);
+    public static final RegistryObject<EntityType<TankZombieEntity>> TANK_ZOMBIE = ENTITIES.register("tank_zombie", () -> TANK_ZOMBIE_TYPE);
     public static final RegistryObject<EntityType<LapisZombieEntity>> LAPIS_ZOMBIE = ENTITIES.register("lapis_zombie", () -> LAPIS_ZOMBIE_TYPE);
     public static final RegistryObject<EntityType<ZealotEntity>> ZEALOT = ENTITIES.register("zealot", () -> ZEALOT_TYPE);
     public static final RegistryObject<EntityType<SpecialZealotEntity>> SPECIAL_ZEALOT = ENTITIES.register("special_zealot", () -> SPECIAL_ZEALOT_TYPE);

@@ -215,6 +215,7 @@
     "item.forgeblock.savanna_bow": "Savanna Bow",
     
     "item.forgeblock.lv1_zombie_spawn_egg": "Zombie (Lv1) Spawn Egg",
+    "item.forgeblock.tank_zombie_spawn_egg": "Tank Zombie Spawn Egg",
     "item.forgeblock.lapis_zombie_spawn_egg": "Lapis Zombie Spawn Egg",
     "item.forgeblock.zealot_spawn_egg": "Zealot Spawn Egg",
     "item.forgeblock.minion_spawn_egg": "Minion Spawn Egg",
@@ -246,6 +247,7 @@
     "entity.forgeblock.lapis_zombie": "Lapis Zombie",
     "entity.forgeblock.zealot": "Zealot",
     "entity.forgeblock.special_zealot": "Zealot",
+    "entity.forgeblock.tank_zombie": "Tank Zombie",
     "entity.forgeblock.minion": "Minion",
     "entity.forgeblock.lv15_wolf": "Wolf",
     "entity.forgeblock.old_wolf": "Old Wolf",
