@@ -4,7 +4,6 @@ import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
 import alephinfinity1.forgeblock.init.ModItems;
 import alephinfinity1.forgeblock.item.armor.FBArmorItem;
-import alephinfinity1.forgeblock.item.swords.FBSwordItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.ZombieEntity;
@@ -23,6 +22,12 @@ public class TankZombieEntity extends Lv1ZombieEntity {
 		this.setChild(false);
 	}
 	
+	// cannot take knockback
+	@Override
+	public boolean canBePushed() {
+		return false;
+	}
+
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
@@ -49,14 +54,14 @@ public class TankZombieEntity extends Lv1ZombieEntity {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		this.playSound(SoundEvents.ITEM_SHIELD_BREAK, 1.0F, 1.0F);
+		this.playSound(SoundEvents.BLOCK_ANVIL_BREAK, 1.0F, 0.75F);
 		return SoundEvents.ENTITY_ZOMBIE_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
 		this.playSound(SoundEvents.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, 1.0F, 1.0F);
-		return SoundEvents.ENTITY_ZOMBIE_HURT;
+		return SoundEvents.ENTITY_ZOMBIE_DEATH;
 	}
 	
 	@Override

@@ -19,6 +19,11 @@ public class DeformedRevenantEntity extends Lv1ZombieEntity {
 		super(type, worldIn);
 		this.setChild(false);
 	}
+
+	@Override
+	public boolean isPushedByWater() {
+		return false;
+	}
 	
 	@Override
 	protected void registerAttributes() {

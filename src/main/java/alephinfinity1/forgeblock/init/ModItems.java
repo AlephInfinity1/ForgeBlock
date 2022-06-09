@@ -352,6 +352,18 @@ public class ModItems {
 	public static final RegistryObject<Item> REVENANT_CHAMPION_SPAWN_EGG = ITEMS.register("revenant_champion_spawn_egg", () -> new SpawnEggItem(ModEntities.REVENANT_CHAMPION_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> REVENANT_SYCOPHANT_SPAWN_EGG = ITEMS.register("revenant_sycophant_spawn_egg", () -> new SpawnEggItem(ModEntities.REVENANT_SYCOPHANT_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> GOLDEN_GHOUL_SPAWN_EGG = ITEMS.register("golden_ghoul_spawn_egg", () -> new SpawnEggItem(ModEntities.GOLDEN_GHOUL_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> DASHER_SPIDER_SPAWN_EGG = ITEMS.register("dasher_spider_spawn_egg", () -> new SpawnEggItem(ModEntities.DASHER_SPIDER_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> SPLITTER_SPIDER_SPAWN_EGG = ITEMS.register("splitter_spider_spawn_egg", () -> new SpawnEggItem(ModEntities.SPLITTER_SPIDER_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> TARANTULA_BEAST_SPAWN_EGG = ITEMS.register("tarantula_beast_spawn_egg", () -> new SpawnEggItem(ModEntities.TARANTULA_BEAST_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> TARANTULA_VERMIN_SPAWN_EGG = ITEMS.register("tarantula_vermin_spawn_egg", () -> new SpawnEggItem(ModEntities.TARANTULA_VERMIN_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> PACK_ENFORCER_SPAWN_EGG = ITEMS.register("pack_enforcer_spawn_egg", () -> new SpawnEggItem(ModEntities.PACK_ENFORCER_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> SVEN_FOLLOWER_SPAWN_EGG = ITEMS.register("sven_follower_spawn_egg", () -> new SpawnEggItem(ModEntities.SVEN_FOLLOWER_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> SVEN_ALPHA_SPAWN_EGG = ITEMS.register("sven_alpha_spawn_egg", () -> new SpawnEggItem(ModEntities.SVEN_ALPHA_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> VOIDLING_DEVOTEE_SPAWN_EGG = ITEMS.register("voidling_devotee_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_DEVOTEE_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> VOIDLING_MANIAC_SPAWN_EGG = ITEMS.register("voidling_maniac_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_MANIAC_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> VOIDLING_RADICAL_SPAWN_EGG = ITEMS.register("voidling_radical_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_RADICAL_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+
+
 
 	/**
 	 * Not final

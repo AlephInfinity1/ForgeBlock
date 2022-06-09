@@ -7,7 +7,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.world.World;
 
-public class SpecialZealotEntity extends ZealotEntity implements IFBEntity {
+public class SpecialZealotEntity extends ZealotEntity {
 
 	public SpecialZealotEntity(EntityType<? extends EndermanEntity> type, World worldIn) {
 		super(type, worldIn);

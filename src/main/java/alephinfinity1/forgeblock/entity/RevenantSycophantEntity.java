@@ -21,6 +21,11 @@ public class RevenantSycophantEntity extends Lv1ZombieEntity {
 	}
 	
 	@Override
+	public boolean isPushedByWater() {
+		return false;
+	}
+
+	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
 		this.registerFBAttributes();
