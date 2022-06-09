@@ -346,6 +346,11 @@ public class ModItems {
 	public static final RegistryObject<Item> LV1_ZOMBIE_VILLAGER_SPAWN_EGG = ITEMS.register("lv1_zombie_villager_spawn_egg", () -> new SpawnEggItem(ModEntities.LV1_ZOMBIE_VILLAGER_TYPE, 5651507, 7969893, (new Item.Properties()).group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> TANK_ZOMBIE_SPAWN_EGG = ITEMS.register("tank_zombie_spawn_egg", () -> new SpawnEggItem(ModEntities.TANK_ZOMBIE_TYPE, 5651507, 7969893, (new Item.Properties()).group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> CRYPT_GHOUL_SPAWN_EGG = ITEMS.register("crypt_ghoul_spawn_egg", () -> new SpawnEggItem(ModEntities.CRYPT_GHOUL_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> ATONED_REVENANT_SPAWN_EGG = ITEMS.register("atoned_revenant_spawn_egg", () -> new SpawnEggItem(ModEntities.ATONED_REVENANT_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> ATONED_CHAMPION_SPAWN_EGG = ITEMS.register("atoned_champion_spawn_egg", () -> new SpawnEggItem(ModEntities.ATONED_CHAMPION_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> DEFORMED_REVENANT_SPAWN_EGG = ITEMS.register("deformed_revenant_spawn_egg", () -> new SpawnEggItem(ModEntities.DEFORMED_REVENANT_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> REVENANT_CHAMPION_SPAWN_EGG = ITEMS.register("revenant_champion_spawn_egg", () -> new SpawnEggItem(ModEntities.REVENANT_CHAMPION_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> REVENANT_SYCOPHANT_SPAWN_EGG = ITEMS.register("revenant_sycophant_spawn_egg", () -> new SpawnEggItem(ModEntities.REVENANT_SYCOPHANT_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> GOLDEN_GHOUL_SPAWN_EGG = ITEMS.register("golden_ghoul_spawn_egg", () -> new SpawnEggItem(ModEntities.GOLDEN_GHOUL_TYPE, 0xFFCC00, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 
 	/**

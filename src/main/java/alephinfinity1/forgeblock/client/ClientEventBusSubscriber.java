@@ -41,6 +41,11 @@ public class ClientEventBusSubscriber {
         //Entities
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_ZOMBIE.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.TANK_ZOMBIE.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ATONED_CHAMPION.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ATONED_REVENANT.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.DEFORMED_REVENANT.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.REVENANT_CHAMPION.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.REVENANT_SYCOPHANT.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LAPIS_ZOMBIE.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZEALOT.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPECIAL_ZEALOT.get(), EndermanRenderer::new);

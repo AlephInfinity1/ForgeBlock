@@ -16,6 +16,26 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, ForgeBlock.MOD_ID);
     public static final DeferredRegister<EntityType<?>> OVERRIDE = DeferredRegister.create(ForgeRegistries.ENTITIES, ForgeBlock.MINECRAFT_ID);
 
+    public static final EntityType<AtonedChampionEntity> ATONED_CHAMPION_TYPE = EntityType.Builder.create(
+            AtonedChampionEntity::new,
+            EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "atoned_champion").toString());
+
+    public static final EntityType<AtonedRevenantEntity> ATONED_REVENANT_TYPE = EntityType.Builder.create(
+            AtonedRevenantEntity::new,
+            EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "atoned_revenant").toString());
+    
+    public static final EntityType<DeformedRevenantEntity> DEFORMED_REVENANT_TYPE = EntityType.Builder.create(
+            DeformedRevenantEntity::new,
+            EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "deformed_revenant").toString());
+        
+    public static final EntityType<RevenantChampionEntity> REVENANT_CHAMPION_TYPE = EntityType.Builder.create(
+            RevenantChampionEntity::new,
+            EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "revenant_champion").toString());
+            
+    public static final EntityType<RevenantSycophantEntity> REVENANT_SYCOPHANT_TYPE = EntityType.Builder.create(
+            RevenantSycophantEntity::new,
+            EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "revenant_sycophant").toString());
+
     public static final EntityType<Lv1ZombieEntity> LV1_ZOMBIE_TYPE = EntityType.Builder.create(
             Lv1ZombieEntity::new,
             EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "lv1_zombie").toString());
@@ -84,6 +104,11 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CryptGhoulEntity>> CRYPT_GHOUL = ENTITIES.register("crypt_ghoul", () -> CRYPT_GHOUL_TYPE);
     public static final RegistryObject<EntityType<GoldenGhoulEntity>> GOLDEN_GHOUL = ENTITIES.register("golden_ghoul", () -> GOLDEN_GHOUL_TYPE);
     public static final RegistryObject<EntityType<FBArrowEntity>> FB_ARROW = ENTITIES.register("arrow", () -> FB_ARROW_TYPE);
+    public static final RegistryObject<EntityType<AtonedChampionEntity>> ATONED_CHAMPION = ENTITIES.register("atoned_champion", () -> ATONED_CHAMPION_TYPE);
+    public static final RegistryObject<EntityType<AtonedRevenantEntity>> ATONED_REVENANT = ENTITIES.register("atoned_revenant", () -> ATONED_REVENANT_TYPE);
+    public static final RegistryObject<EntityType<DeformedRevenantEntity>> DEFORMED_REVENANT = ENTITIES.register("deformed_revenant", () -> DEFORMED_REVENANT_TYPE);
+    public static final RegistryObject<EntityType<RevenantChampionEntity>> REVENANT_CHAMPION = ENTITIES.register("revenant_champion", () -> REVENANT_CHAMPION_TYPE);
+    public static final RegistryObject<EntityType<RevenantSycophantEntity>> REVENANT_SYCOPHANT = ENTITIES.register("revenant_sycophant", () -> REVENANT_SYCOPHANT_TYPE);
 
     public static final RegistryObject<EntityType<MinionEntity>> MINION = ENTITIES.register("minion", () -> MINION_TYPE);
 
