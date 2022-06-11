@@ -54,7 +54,7 @@ public class TankZombieEntity extends Lv1ZombieEntity {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		this.playSound(SoundEvents.BLOCK_ANVIL_BREAK, 1.0F, 0.75F);
+		this.playSound(SoundEvents.BLOCK_ANVIL_PLACE, 1.0F, 0.75F);
 		return SoundEvents.ENTITY_ZOMBIE_HURT;
 	}
 

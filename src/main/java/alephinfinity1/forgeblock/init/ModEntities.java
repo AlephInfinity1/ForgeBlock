@@ -113,6 +113,18 @@ public class ModEntities {
                 OldWolfEntity::new,
                 EntityClassification.MONSTER).size(0.6f, 0.85f).build(new ResourceLocation(ForgeBlock.MOD_ID, "old_wolf").toString());
         
+        public static final EntityType<PackSpiritEntity> PACK_SPIRIT_TYPE = EntityType.Builder.create(
+                PackSpiritEntity::new,
+                EntityClassification.MONSTER).size(0.6f, 0.85f).build(new ResourceLocation(ForgeBlock.MOD_ID, "pack_spirit").toString());
+
+        public static final EntityType<SoulOfTheAlphaEntity> SOUL_OF_THE_ALPHA_TYPE = EntityType.Builder.create(
+                SoulOfTheAlphaEntity::new,
+                EntityClassification.MONSTER).size(0.6f, 0.85f).build(new ResourceLocation(ForgeBlock.MOD_ID, "soul_of_the_alpha").toString());
+
+        public static final EntityType<HowlingSpiritEntity> HOWLING_SPIRIT_TYPE = EntityType.Builder.create(
+                HowlingSpiritEntity::new,
+                EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "howling_spirit_wolf").toString());
+
         public static final EntityType<Lv1ZombieVillagerEntity> LV1_ZOMBIE_VILLAGER_TYPE = EntityType.Builder.create(
                 Lv1ZombieVillagerEntity::new,
                 EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "lv1_zombie_villager").toString());
@@ -131,8 +143,6 @@ public class ModEntities {
 
         
 
-
-
         public static final EntityType<FBArrowEntity> FB_ARROW_TYPE = EntityType.Builder.<FBArrowEntity>create(
                 FBArrowEntity::new,
                 EntityClassification.MISC).size(0.1f, 0.1f).build(new ResourceLocation(ForgeBlock.MOD_ID, "arrow").toString());
@@ -145,6 +155,9 @@ public class ModEntities {
         public static final RegistryObject<EntityType<FBExperienceBottleEntity>> FB_EXPERIENCE_BOTTLE = ENTITIES.register("fb_experience_bottle", () -> FB_EXPERIENCE_BOTTLE_TYPE);
         public static final RegistryObject<EntityType<Lv15WolfEntity>> LV15_WOLF = ENTITIES.register("lv15_wolf", () -> LV15_WOLF_TYPE);
         public static final RegistryObject<EntityType<OldWolfEntity>> OLD_WOLF = ENTITIES.register("old_wolf", () -> OLD_WOLF_TYPE);
+        public static final RegistryObject<EntityType<PackSpiritEntity>> PACK_SPIRIT = ENTITIES.register("pack_spirit", () -> PACK_SPIRIT_TYPE);
+        public static final RegistryObject<EntityType<SoulOfTheAlphaEntity>> SOUL_OF_THE_ALPHA = ENTITIES.register("soul_of_the_alpha", () -> SOUL_OF_THE_ALPHA_TYPE);
+        public static final RegistryObject<EntityType<HowlingSpiritEntity>> HOWLING_SPIRIT = ENTITIES.register("howling_spirit_wolf", () -> HOWLING_SPIRIT_TYPE);
         public static final RegistryObject<EntityType<Lv1ZombieVillagerEntity>> LV1_ZOMBIE_VILLAGER = ENTITIES.register("lv1_zombie_villager", () -> LV1_ZOMBIE_VILLAGER_TYPE);
         public static final RegistryObject<EntityType<CryptGhoulEntity>> CRYPT_GHOUL = ENTITIES.register("crypt_ghoul", () -> CRYPT_GHOUL_TYPE);
         public static final RegistryObject<EntityType<GoldenGhoulEntity>> GOLDEN_GHOUL = ENTITIES.register("golden_ghoul", () -> GOLDEN_GHOUL_TYPE);
