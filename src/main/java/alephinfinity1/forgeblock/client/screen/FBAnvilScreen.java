@@ -34,9 +34,9 @@ public class FBAnvilScreen extends ContainerScreen<RepairContainer> implements I
 	protected void init() {
 		super.init();
 		this.minecraft.keyboardListener.enableRepeatEvents(true);
+		/*
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
-		/*
 		this.nameField = new TextFieldWidget(this.font, i + 62, j + 24, 103, 12, I18n.format("container.repair"));
 		this.nameField.setCanLoseFocus(false);
 		this.nameField.changeFocus(true);

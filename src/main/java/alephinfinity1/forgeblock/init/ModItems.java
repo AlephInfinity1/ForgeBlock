@@ -339,6 +339,9 @@ public class ModItems {
 	 * Spawn Eggs
 	 */
 	public static final RegistryObject<Item> LV1_ZOMBIE_SPAWN_EGG = ITEMS.register("lv1_zombie_spawn_egg", () -> new SpawnEggItem(ModEntities.LV1_ZOMBIE_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> LV42_ENDERMAN_SPAWN_EGG = ITEMS.register("lv42_enderman_spawn_egg", () -> new SpawnEggItem(ModEntities.LV42_ENDERMAN_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> LV45_ENDERMAN_SPAWN_EGG = ITEMS.register("lv45_enderman_spawn_egg", () -> new SpawnEggItem(ModEntities.LV45_ENDERMAN_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	public static final RegistryObject<Item> LV50_ENDERMAN_SPAWN_EGG = ITEMS.register("lv50_enderman_spawn_egg", () -> new SpawnEggItem(ModEntities.LV50_ENDERMAN_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> LAPIS_ZOMBIE_SPAWN_EGG = ITEMS.register("lapis_zombie_spawn_egg", () -> new SpawnEggItem(ModEntities.LAPIS_ZOMBIE_TYPE, 1269462, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> ZEALOT_SPAWN_EGG = ITEMS.register("zealot_spawn_egg", () -> new SpawnEggItem(ModEntities.ZEALOT_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> LV15_WOLF_SPAWN_EGG = ITEMS.register("lv15_wolf_spawn_egg", () -> new SpawnEggItem(ModEntities.LV15_WOLF_TYPE, 14144467, 13545366, (new Item.Properties()).group(ModItemGroups.FB_MOBS)));
@@ -365,6 +368,9 @@ public class ModItems {
 	public static final RegistryObject<Item> VOIDLING_DEVOTEE_SPAWN_EGG = ITEMS.register("voidling_devotee_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_DEVOTEE_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> VOIDLING_MANIAC_SPAWN_EGG = ITEMS.register("voidling_maniac_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_MANIAC_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> VOIDLING_RADICAL_SPAWN_EGG = ITEMS.register("voidling_radical_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_RADICAL_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
+	
+	
+
 
 
 

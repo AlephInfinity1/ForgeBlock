@@ -17,6 +17,7 @@ public class ModEntities {
         public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, ForgeBlock.MOD_ID);
         public static final DeferredRegister<EntityType<?>> OVERRIDE = DeferredRegister.create(ForgeRegistries.ENTITIES, ForgeBlock.MINECRAFT_ID);
 
+
         public static final EntityType<AtonedChampionEntity> ATONED_CHAMPION_TYPE = EntityType.Builder.create(
                 AtonedChampionEntity::new,
                 EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "atoned_champion").toString());
@@ -76,6 +77,18 @@ public class ModEntities {
         public static final EntityType<Lv1ZombieEntity> LV1_ZOMBIE_TYPE = EntityType.Builder.create(
                 Lv1ZombieEntity::new,
                 EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "lv1_zombie").toString());
+
+        public static final EntityType<Lv42EndermanEntity> LV42_ENDERMAN_TYPE = EntityType.Builder.create(
+                Lv42EndermanEntity::new,
+                EntityClassification.MONSTER).size(0.6f, 2.9f).build(new ResourceLocation(ForgeBlock.MOD_ID, "lv42_enderman").toString());
+
+        public static final EntityType<Lv45EndermanEntity> LV45_ENDERMAN_TYPE = EntityType.Builder.create(
+                Lv45EndermanEntity::new,
+                EntityClassification.MONSTER).size(0.6f, 2.9f).build(new ResourceLocation(ForgeBlock.MOD_ID, "lv45_enderman").toString());
+
+        public static final EntityType<Lv50EndermanEntity> LV50_ENDERMAN_TYPE = EntityType.Builder.create(
+                Lv50EndermanEntity::new,
+                EntityClassification.MONSTER).size(0.6f, 2.9f).build(new ResourceLocation(ForgeBlock.MOD_ID, "lv50_enderman").toString());
 
         public static final EntityType<LapisZombieEntity> LAPIS_ZOMBIE_TYPE = EntityType.Builder.create(
                 LapisZombieEntity::new,
@@ -151,6 +164,9 @@ public class ModEntities {
         public static final RegistryObject<EntityType<TankZombieEntity>> TANK_ZOMBIE = ENTITIES.register("tank_zombie", () -> TANK_ZOMBIE_TYPE);
         public static final RegistryObject<EntityType<LapisZombieEntity>> LAPIS_ZOMBIE = ENTITIES.register("lapis_zombie", () -> LAPIS_ZOMBIE_TYPE);
         public static final RegistryObject<EntityType<ZealotEntity>> ZEALOT = ENTITIES.register("zealot", () -> ZEALOT_TYPE);
+        public static final RegistryObject<EntityType<Lv42EndermanEntity>> LV42_ENDERMAN = ENTITIES.register("lv42_enderman", () -> LV42_ENDERMAN_TYPE);
+        public static final RegistryObject<EntityType<Lv45EndermanEntity>> LV45_ENDERMAN = ENTITIES.register("lv45_enderman", () -> LV45_ENDERMAN_TYPE);
+        public static final RegistryObject<EntityType<Lv50EndermanEntity>> LV50_ENDERMAN = ENTITIES.register("lv50_enderman", () -> LV50_ENDERMAN_TYPE);
         public static final RegistryObject<EntityType<SpecialZealotEntity>> SPECIAL_ZEALOT = ENTITIES.register("special_zealot", () -> SPECIAL_ZEALOT_TYPE);
         public static final RegistryObject<EntityType<FBExperienceBottleEntity>> FB_EXPERIENCE_BOTTLE = ENTITIES.register("fb_experience_bottle", () -> FB_EXPERIENCE_BOTTLE_TYPE);
         public static final RegistryObject<EntityType<Lv15WolfEntity>> LV15_WOLF = ENTITIES.register("lv15_wolf", () -> LV15_WOLF_TYPE);

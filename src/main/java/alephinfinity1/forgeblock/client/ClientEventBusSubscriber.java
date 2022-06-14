@@ -40,18 +40,35 @@ public class ClientEventBusSubscriber {
     public static void onClientSetup(FMLClientSetupEvent event) {
         //Entities
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_ZOMBIE.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV42_ENDERMAN.get(), EndermanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV45_ENDERMAN.get(), EndermanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV50_ENDERMAN.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.TANK_ZOMBIE.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ATONED_CHAMPION.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ATONED_REVENANT.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.DEFORMED_REVENANT.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.REVENANT_CHAMPION.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.REVENANT_SYCOPHANT.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPLITTER_SPIDER.get(), SpiderRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.DASHER_SPIDER.get(), SpiderRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.TARANTULA_BEAST.get(), SpiderRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.TARANTULA_VERMIN.get(), SpiderRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MUTANT_TARANTULA.get(), SpiderRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PACK_ENFORCER.get(), WolfRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SVEN_ALPHA.get(), WolfRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SVEN_FOLLOWER.get(), WolfRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.VOIDLING_DEVOTEE.get(), EndermanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.VOIDLING_MANIAC.get(), EndermanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.VOIDLING_RADICAL.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LAPIS_ZOMBIE.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZEALOT.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPECIAL_ZEALOT.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FB_EXPERIENCE_BOTTLE.get(), (erm) -> new SpriteRenderer<FBExperienceBottleEntity>(erm, mc.getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV15_WOLF.get(), WolfRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.OLD_WOLF.get(), WolfRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PACK_SPIRIT.get(), WolfRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SOUL_OF_THE_ALPHA.get(), WolfRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.HOWLING_SPIRIT.get(), WolfRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_ZOMBIE_VILLAGER.get(), (erm) -> new ZombieVillagerRenderer(erm, mc.resourceManager));
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.CRYPT_GHOUL.get(), ZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GOLDEN_GHOUL.get(), ZombieRenderer::new);
