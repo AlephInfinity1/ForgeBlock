@@ -265,7 +265,7 @@
     "itemGroup.forgeblock_mobs": "ForgeBlock Mobs",
     "itemGroup.forgeblock_misc": "ForgeBlock Misc Items",
     
-    "entity.forgeblock.lv1_zombie": "Zombie",
+    "entity.forgeblock.lv1_zombie": "Zombie", 
     "entity.forgeblock.lv42_enderman": "Enderman",
     "entity.forgeblock.lv45_enderman": "Enderman",
     "entity.forgeblock.lv50_enderman": "Enderman",

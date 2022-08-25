@@ -22,7 +22,7 @@ public class TankZombieEntity extends Lv1ZombieEntity {
 		this.setChild(false);
 	}
 	
-	// cannot take knockback
+	// cannot be pushed
 	@Override
 	public boolean canBePushed() {
 		return false;
@@ -35,8 +35,8 @@ public class TankZombieEntity extends Lv1ZombieEntity {
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.255);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1500.0);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(80.0);
-		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(800.0);
+		this.getAttribute(FBAttributes.DEFENSE).setBaseValue(800.0);
+		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(19999.0);
 	}
 	
 	@Override

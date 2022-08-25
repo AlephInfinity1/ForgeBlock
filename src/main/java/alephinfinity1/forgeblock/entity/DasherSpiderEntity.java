@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
@@ -24,7 +25,7 @@ public class DasherSpiderEntity extends SpiderEntity implements IFBEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new SwimGoal(this));
-		this.goalSelector.addGoal(2, new LeapAtTargetGoal(this, 5.0F));
+		this.goalSelector.addGoal(2, new LeapAtTargetGoal(this, 1));
 		this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.0D, true));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
 		this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
@@ -32,6 +33,8 @@ public class DasherSpiderEntity extends SpiderEntity implements IFBEntity {
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SpiderEntity.class, true));
 	}
 
 	@Override

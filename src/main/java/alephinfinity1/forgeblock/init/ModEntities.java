@@ -17,7 +17,6 @@ public class ModEntities {
         public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, ForgeBlock.MOD_ID);
         public static final DeferredRegister<EntityType<?>> OVERRIDE = DeferredRegister.create(ForgeRegistries.ENTITIES, ForgeBlock.MINECRAFT_ID);
 
-
         public static final EntityType<AtonedChampionEntity> ATONED_CHAMPION_TYPE = EntityType.Builder.create(
                 AtonedChampionEntity::new,
                 EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "atoned_champion").toString());
@@ -154,12 +153,10 @@ public class ModEntities {
                 CoalMinion::new,
                 EntityClassification.MISC).size(0.50f, 0.50f).build(new ResourceLocation(ForgeBlock.MOD_ID, "minion").toString());
 
-        
-
         public static final EntityType<FBArrowEntity> FB_ARROW_TYPE = EntityType.Builder.<FBArrowEntity>create(
                 FBArrowEntity::new,
                 EntityClassification.MISC).size(0.1f, 0.1f).build(new ResourceLocation(ForgeBlock.MOD_ID, "arrow").toString());
-
+        
         public static final RegistryObject<EntityType<Lv1ZombieEntity>> LV1_ZOMBIE = ENTITIES.register("lv1_zombie", () -> LV1_ZOMBIE_TYPE);
         public static final RegistryObject<EntityType<TankZombieEntity>> TANK_ZOMBIE = ENTITIES.register("tank_zombie", () -> TANK_ZOMBIE_TYPE);
         public static final RegistryObject<EntityType<LapisZombieEntity>> LAPIS_ZOMBIE = ENTITIES.register("lapis_zombie", () -> LAPIS_ZOMBIE_TYPE);

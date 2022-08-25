@@ -369,10 +369,6 @@ public class ModItems {
 	public static final RegistryObject<Item> VOIDLING_MANIAC_SPAWN_EGG = ITEMS.register("voidling_maniac_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_MANIAC_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> VOIDLING_RADICAL_SPAWN_EGG = ITEMS.register("voidling_radical_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_RADICAL_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	
-	
-
-
-
 
 	/**
 	 * Not final

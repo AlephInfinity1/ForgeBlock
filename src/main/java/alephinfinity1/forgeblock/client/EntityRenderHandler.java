@@ -138,14 +138,14 @@ public class EntityRenderHandler {
          * Name colour based on entity type
          * Monster -> red
          * Player -> dark cyan
-         * Passive -> dark green
+         * Passive -> green
          */
         if (entity instanceof MonsterEntity || entity instanceof SlimeEntity || entity instanceof EnderDragonEntity || entity instanceof FlyingEntity || entity.getClassification(false).equals(EntityClassification.MONSTER)) {
             str.append("\u00A78] \u00A7c");
         } else if (entity instanceof PlayerEntity) {
             str.append("\u00A78] \u00A73");
         } else {
-            str.append("\u00A78] \u00A72");
+            str.append("\u00A78] \u00A7a");
         }
         str.append(entity.getName().getString());
 

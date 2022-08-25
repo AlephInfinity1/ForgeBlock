@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import alephinfinity1.forgeblock.attribute.AttributeLimitsRemover;
 import alephinfinity1.forgeblock.client.ClientEventBusSubscriber;
 import alephinfinity1.forgeblock.config.FBModConfig;
-import alephinfinity1.forgeblock.discordRPC.DiscordRpc;
+// import alephinfinity1.forgeblock.discordRPC.DiscordRpc;
 import alephinfinity1.forgeblock.init.ModBlocks;
 import alephinfinity1.forgeblock.init.ModCollections;
 import alephinfinity1.forgeblock.init.ModContainerTypes;
@@ -120,7 +120,7 @@ public class ForgeBlock {
 
 		//Checks if this a client, if so start discordRCP, if not just do nothing.
 		if (FMLEnvironment.dist.isClient()) {
-			DiscordRpc.getInstance().startRpc();
+			//DiscordRpc.getInstance().startRpc();
 		}
 	}
 
