@@ -36,3 +36,4 @@ forge*changelog.txt
 *.DS_Store
 .DS_Store
 *.icloud
+.vscode
