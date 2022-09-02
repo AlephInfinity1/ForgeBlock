@@ -77,7 +77,7 @@ public class VoidlingManiacEntity extends EndermanEntity implements IFBEntity {
 	
 	@Override
 	public boolean teleportTo(double x, double y, double z) {
-		return false;
+		return true;
 	}
 	
 	@Override
