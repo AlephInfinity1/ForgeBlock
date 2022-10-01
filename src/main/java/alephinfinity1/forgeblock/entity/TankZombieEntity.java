@@ -29,7 +29,8 @@ public class TankZombieEntity extends Lv1ZombieEntity {
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.255);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1500.0);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(80.0);
-		this.getAttribute(FBAttributes.DEFENSE).setBaseValue(1000.0);
+		this.getAttribute(FBAttributes.DEFENSE).setBaseValue(800.0);
+		// Defense works, but the damage the mob takes vs what it's displayed is incorrect
 		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(19999.0);
 	}
 	
