@@ -25,7 +25,7 @@ public class ZealotEntity extends EndermanEntity implements IFBEntity {
 	public ZealotEntity(EntityType<? extends EndermanEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
-	
+
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();

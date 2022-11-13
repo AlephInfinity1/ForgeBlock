@@ -19,7 +19,6 @@ public class AtonedChampionEntity extends Lv1ZombieEntity {
 		super(type, worldIn);
 		this.setChild(false);
 	}
-
 	@Override
 	public boolean isPushedByWater() {
 		return false;

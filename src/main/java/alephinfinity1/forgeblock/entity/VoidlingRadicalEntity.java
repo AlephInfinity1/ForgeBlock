@@ -25,7 +25,7 @@ public class VoidlingRadicalEntity extends EndermanEntity implements IFBEntity {
 	public VoidlingRadicalEntity(EntityType<? extends EndermanEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
-	
+
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();

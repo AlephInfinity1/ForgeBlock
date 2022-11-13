@@ -126,7 +126,7 @@ public class ShadowFuryItem extends FBSwordItem implements IAbilityItem {
 
 	@Override
 	public int getCooldown(ItemStack stack) {
-		return 100;
+		return 300;
 	}
 
 	@Override

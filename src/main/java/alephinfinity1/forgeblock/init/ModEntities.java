@@ -7,6 +7,7 @@ import alephinfinity1.forgeblock.entity.minion.MinionEntity;
 import alephinfinity1.forgeblock.entity.minion.impl.CoalMinion;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -16,7 +17,7 @@ public class ModEntities {
 
         public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, ForgeBlock.MOD_ID);
         public static final DeferredRegister<EntityType<?>> OVERRIDE = DeferredRegister.create(ForgeRegistries.ENTITIES, ForgeBlock.MINECRAFT_ID);
-
+        
         public static final EntityType<AtonedChampionEntity> ATONED_CHAMPION_TYPE = EntityType.Builder.create(
                 AtonedChampionEntity::new,
                 EntityClassification.MONSTER).size(0.6f, 1.95f).build(new ResourceLocation(ForgeBlock.MOD_ID, "atoned_champion").toString());
@@ -156,7 +157,17 @@ public class ModEntities {
         public static final EntityType<FBArrowEntity> FB_ARROW_TYPE = EntityType.Builder.<FBArrowEntity>create(
                 FBArrowEntity::new,
                 EntityClassification.MISC).size(0.1f, 0.1f).build(new ResourceLocation(ForgeBlock.MOD_ID, "arrow").toString());
-        
+
+        public static final EntityType<YoungLostAdventurerEntity> YOUNG_LOST_ADVENTURER_TYPE = EntityType.Builder.create(
+                YoungLostAdventurerEntity::new,
+                EntityClassification.MONSTER).size(0.5f, 2.0f).build(new ResourceLocation(ForgeBlock.MOD_ID, "young_lost_adventurer").toString());
+
+        public static final EntityType<TribeMember01Entity> TRIBE_MEMBER_TYPE = EntityType.Builder.create(
+                TribeMember01Entity::new,
+                EntityClassification.CREATURE).size(0.5f, 2.0f).build(new ResourceLocation(ForgeBlock.MOD_ID, "kalhuiki_tribe_member").toString());
+
+        public static final RegistryObject<EntityType<TribeMember01Entity>> KALHUIKI_TRIBE_MEMBER = ENTITIES.register("kalhuiki_tribe_member", () -> TRIBE_MEMBER_TYPE);
+        public static final RegistryObject<EntityType<YoungLostAdventurerEntity>> YOUNG_LOST_ADVENTURER = ENTITIES.register("young_lost_adventurer", () -> YOUNG_LOST_ADVENTURER_TYPE);
         public static final RegistryObject<EntityType<Lv1ZombieEntity>> LV1_ZOMBIE = ENTITIES.register("lv1_zombie", () -> LV1_ZOMBIE_TYPE);
         public static final RegistryObject<EntityType<TankZombieEntity>> TANK_ZOMBIE = ENTITIES.register("tank_zombie", () -> TANK_ZOMBIE_TYPE);
         public static final RegistryObject<EntityType<LapisZombieEntity>> LAPIS_ZOMBIE = ENTITIES.register("lapis_zombie", () -> LAPIS_ZOMBIE_TYPE);
@@ -170,7 +181,7 @@ public class ModEntities {
         public static final RegistryObject<EntityType<OldWolfEntity>> OLD_WOLF = ENTITIES.register("old_wolf", () -> OLD_WOLF_TYPE);
         public static final RegistryObject<EntityType<PackSpiritEntity>> PACK_SPIRIT = ENTITIES.register("pack_spirit", () -> PACK_SPIRIT_TYPE);
         public static final RegistryObject<EntityType<SoulOfTheAlphaEntity>> SOUL_OF_THE_ALPHA = ENTITIES.register("soul_of_the_alpha", () -> SOUL_OF_THE_ALPHA_TYPE);
-        public static final RegistryObject<EntityType<HowlingSpiritEntity>> HOWLING_SPIRIT = ENTITIES.register("howling_spirit_wolf", () -> HOWLING_SPIRIT_TYPE);
+        public static final RegistryObject<EntityType<HowlingSpiritEntity>> HOWLING_SPIRIT = ENTITIES.register("howling_spirit", () -> HOWLING_SPIRIT_TYPE);
         public static final RegistryObject<EntityType<Lv1ZombieVillagerEntity>> LV1_ZOMBIE_VILLAGER = ENTITIES.register("lv1_zombie_villager", () -> LV1_ZOMBIE_VILLAGER_TYPE);
         public static final RegistryObject<EntityType<CryptGhoulEntity>> CRYPT_GHOUL = ENTITIES.register("crypt_ghoul", () -> CRYPT_GHOUL_TYPE);
         public static final RegistryObject<EntityType<GoldenGhoulEntity>> GOLDEN_GHOUL = ENTITIES.register("golden_ghoul", () -> GOLDEN_GHOUL_TYPE);
@@ -191,10 +202,6 @@ public class ModEntities {
         public static final RegistryObject<EntityType<PackEnforcerEntity>> PACK_ENFORCER = ENTITIES.register("pack_enforcer", () -> PACK_ENFORCER_TYPE);
         public static final RegistryObject<EntityType<SvenAlphaEntity>> SVEN_ALPHA = ENTITIES.register("sven_alpha", () -> SVEN_ALPHA_TYPE);
         public static final RegistryObject<EntityType<SvenFollowerEntity>> SVEN_FOLLOWER = ENTITIES.register("sven_follower", () -> SVEN_FOLLOWER_TYPE);
-
-
-
-        
         
         public static final RegistryObject<EntityType<MinionEntity>> MINION = ENTITIES.register("minion", () -> MINION_TYPE);
 

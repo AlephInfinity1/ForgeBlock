@@ -13,7 +13,7 @@ public class SplitterSpiderEntity extends DasherSpiderEntity {
 	public SplitterSpiderEntity(EntityType<? extends SpiderEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
-	
+
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();

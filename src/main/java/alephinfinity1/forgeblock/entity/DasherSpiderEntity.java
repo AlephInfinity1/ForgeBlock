@@ -19,7 +19,8 @@ public class DasherSpiderEntity extends SpiderEntity implements IFBEntity {
 	public DasherSpiderEntity(EntityType<? extends SpiderEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
-	
+
+
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new SwimGoal(this));

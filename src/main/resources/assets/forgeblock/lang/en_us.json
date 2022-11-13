@@ -246,6 +246,8 @@
     "item.forgeblock.soul_of_the_alpha_spawn_egg": "Soul of the Alpha Spawn Egg",
     "item.forgeblock.pack_spirit_spawn_egg": "Pack Spirit Spawn Egg",
     "item.forgeblock.howling_spirit_spawn_egg": "Howling Spirit Spawn Egg",
+    "item.forgeblock.young_lost_adventurer_spawn_egg": "Young Adventurer Spawn Egg",
+    "item.forgeblock.kalhuiki_tribe_member_spawn_egg": "Kalhuiki Tribe Member Spawn Egg",
     
     "item.forgeblock.grand_experience_bottle": "Grand Experience Bottle",
     "item.forgeblock.titanic_experience_bottle": "Titanic Experience Bottle",
@@ -298,6 +300,8 @@
     "entity.forgeblock.voidling_devotee": "Voidling Devotee",
     "entity.forgeblock.voidling_maniac": "Voidling Maniac",
     "entity.forgeblock.voidling_radical": "Voidling Radical",
+    "entity.forgeblock.young_lost_adventurer": "Young Lost Adventurer",
+    "entity.forgeblock.kalhuiki_tribe_member": "Kalhuiki Tribe Member",
     
     "misc.forgeblock.tier.poor": "POOR",
     "misc.forgeblock.tier.common": "COMMON",

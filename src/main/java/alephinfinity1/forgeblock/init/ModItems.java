@@ -338,6 +338,7 @@ public class ModItems {
 	/*
 	 * Spawn Eggs
 	 */
+	public static final RegistryObject<Item> YOUNG_LOST_ADVENTURER_SPAWN_EGG = ITEMS.register("young_lost_adventurer_spawn_egg", () -> new SpawnEggItem(ModEntities.YOUNG_LOST_ADVENTURER_TYPE,14144467, 13545366, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> LV1_ZOMBIE_SPAWN_EGG = ITEMS.register("lv1_zombie_spawn_egg", () -> new SpawnEggItem(ModEntities.LV1_ZOMBIE_TYPE, 44975, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> LV42_ENDERMAN_SPAWN_EGG = ITEMS.register("lv42_enderman_spawn_egg", () -> new SpawnEggItem(ModEntities.LV42_ENDERMAN_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> LV45_ENDERMAN_SPAWN_EGG = ITEMS.register("lv45_enderman_spawn_egg", () -> new SpawnEggItem(ModEntities.LV45_ENDERMAN_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
@@ -368,7 +369,7 @@ public class ModItems {
 	public static final RegistryObject<Item> VOIDLING_DEVOTEE_SPAWN_EGG = ITEMS.register("voidling_devotee_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_DEVOTEE_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> VOIDLING_MANIAC_SPAWN_EGG = ITEMS.register("voidling_maniac_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_MANIAC_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 	public static final RegistryObject<Item> VOIDLING_RADICAL_SPAWN_EGG = ITEMS.register("voidling_radical_spawn_egg", () -> new SpawnEggItem(ModEntities.VOIDLING_RADICAL_TYPE, 1447446, 0, new Item.Properties().group(ModItemGroups.FB_MOBS)));
-	
+	public static final RegistryObject<Item> KALHUIKI_TRIBE_MEMBER_SPAWN_EGG = ITEMS.register("kalhuiki_tribe_member_spawn_egg", () -> new SpawnEggItem(ModEntities.TRIBE_MEMBER_TYPE, 1447446, 7969893, new Item.Properties().group(ModItemGroups.FB_MOBS)));
 
 	/**
 	 * Not final

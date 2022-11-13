@@ -24,6 +24,7 @@ public class Lv45EndermanEntity extends EndermanEntity implements IFBEntity {
 	public Lv45EndermanEntity(EntityType<? extends EndermanEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
+
 	
 	@Override
 	protected void registerAttributes() {
