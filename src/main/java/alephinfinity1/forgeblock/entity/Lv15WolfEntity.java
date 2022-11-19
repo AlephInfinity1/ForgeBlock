@@ -91,6 +91,11 @@ public class Lv15WolfEntity extends WolfEntity implements IFBEntity {
 	}
 	
 	@Override
+	protected int getExperiencePoints(PlayerEntity player) {
+		return 4;
+	}
+
+	@Override
 	public int getLevel() {
 		return 15;
 	}

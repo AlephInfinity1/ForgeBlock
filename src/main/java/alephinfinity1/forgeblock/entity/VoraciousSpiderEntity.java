@@ -4,6 +4,7 @@ import alephinfinity1.forgeblock.attribute.FBAttributes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.SpiderEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
 public class VoraciousSpiderEntity extends DasherSpiderEntity {
@@ -22,6 +23,11 @@ public class VoraciousSpiderEntity extends DasherSpiderEntity {
 		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0D);
 	}
 	
+	@Override
+	protected int getExperiencePoints(PlayerEntity player) {
+		return 3;
+	}
+
 	@Override
 	public int getLevel() {
 		return 10;

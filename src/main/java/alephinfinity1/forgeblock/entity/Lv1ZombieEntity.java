@@ -26,12 +26,13 @@ import net.minecraft.world.World;
 
 public class Lv1ZombieEntity extends ZombieEntity implements IFBEntity {
 	
-	public final int level = 1;
 
 	public Lv1ZombieEntity(EntityType<? extends ZombieEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.setChild(false);
 	}
+
+	public int level = 1;
 	
 	@Override
 	protected void registerGoals() {
@@ -74,15 +75,15 @@ public class Lv1ZombieEntity extends ZombieEntity implements IFBEntity {
 	protected boolean shouldBurnInDay() {
 		return false;
 	}
-	
+
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
 		this.registerFBAttributes();
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
 		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20);
 	}
 	
 	@Override
@@ -109,7 +110,7 @@ public class Lv1ZombieEntity extends ZombieEntity implements IFBEntity {
 
 	@Override
 	public int getLevel() {
-		return 1;
+		return level;
 	}
 
 	@Override
@@ -126,4 +127,4 @@ public class Lv1ZombieEntity extends ZombieEntity implements IFBEntity {
 	public EntityClassification getClassification(boolean forSpawnCount) {
 		return EntityClassification.MONSTER;
 	}
-}
+};

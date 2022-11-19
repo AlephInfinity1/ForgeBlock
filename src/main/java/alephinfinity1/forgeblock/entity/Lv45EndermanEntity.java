@@ -66,6 +66,11 @@ public class Lv45EndermanEntity extends EndermanEntity implements IFBEntity {
 	}
 	
 	@Override
+	protected int getExperiencePoints(PlayerEntity player) {
+		return 9;
+	}
+
+	@Override
 	public int getLevel() {
 		return 45;
 	}

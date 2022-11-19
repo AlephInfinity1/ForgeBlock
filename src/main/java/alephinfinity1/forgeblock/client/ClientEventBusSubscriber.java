@@ -2,7 +2,7 @@ package alephinfinity1.forgeblock.client;
 
 import java.lang.reflect.Field;
 
-import alephinfinity1.forgeblock.entity.FBArrowEntity;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.model.PlayerModel;
@@ -13,9 +13,9 @@ import org.apache.logging.log4j.MarkerManager.Log4jMarker;
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.client.particles.NumericDamageIndicatorParticle;
 import alephinfinity1.forgeblock.client.screen.FBAnvilScreen;
-import alephinfinity1.forgeblock.entity.FBExperienceBottleEntity;
-import alephinfinity1.forgeblock.entity.TribeMember01Entity;
-import alephinfinity1.forgeblock.entity.YoungLostAdventurerEntity;
+
+import alephinfinity1.forgeblock.entity.*;
+
 import alephinfinity1.forgeblock.entity.minion.basic.render.MinionRenderer;
 import alephinfinity1.forgeblock.init.ModContainerTypes;
 import alephinfinity1.forgeblock.init.ModEntities;
@@ -26,6 +26,7 @@ import net.minecraft.client.particle.ParticleManager;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
+
 import net.minecraft.entity.EntitySpawnPlacementRegistry.PlacementType;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -55,17 +56,19 @@ public class ClientEventBusSubscriber {
         EntitySpawnPlacementRegistry.register(ModEntities.VOIDLING_MANIAC.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
         EntitySpawnPlacementRegistry.register(ModEntities.VOIDLING_DEVOTEE.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
         EntitySpawnPlacementRegistry.register(ModEntities.ZEALOT.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
-        EntitySpawnPlacementRegistry.register(ModEntities.ATONED_REVENANT.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
+
+        EntitySpawnPlacementRegistry.register(ModEntities.ATONED_REVENANT.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawnInLight);
         EntitySpawnPlacementRegistry.register(ModEntities.YOUNG_LOST_ADVENTURER.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
         EntitySpawnPlacementRegistry.register(ModEntities.CRYPT_GHOUL.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
-        EntitySpawnPlacementRegistry.register(ModEntities.GOLDEN_GHOUL.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
+        EntitySpawnPlacementRegistry.register(ModEntities.GOLDEN_GHOUL.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawnInLight);
         EntitySpawnPlacementRegistry.register(ModEntities.PACK_ENFORCER.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
         EntitySpawnPlacementRegistry.register(ModEntities.PACK_SPIRIT.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES,AnimalEntity::canAnimalSpawn);
         EntitySpawnPlacementRegistry.register(ModEntities.LV15_WOLF.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
         EntitySpawnPlacementRegistry.register(ModEntities.OLD_WOLF.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
         EntitySpawnPlacementRegistry.register(ModEntities.SOUL_OF_THE_ALPHA.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
-        EntitySpawnPlacementRegistry.register(ModEntities.LV1_ZOMBIE.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
-        EntitySpawnPlacementRegistry.register(ModEntities.LV1_ZOMBIE_VILLAGER.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
+        EntitySpawnPlacementRegistry.register(ModEntities.LV1_ZOMBIE.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawnInLight);
+        EntitySpawnPlacementRegistry.register(ModEntities.LV1_ZOMBIE_VILLAGER.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawnInLight);
+        EntitySpawnPlacementRegistry.register(ModEntities.REDSTONE_PIGMAN.get(), PlacementType.ON_GROUND, Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::canMonsterSpawn);
 
         for (Biome biome : ForgeRegistries.BIOMES) {
 
@@ -74,9 +77,11 @@ public class ClientEventBusSubscriber {
                 biome.getSpawns(EntityClassification.MONSTER)
                         .add(new Biome.SpawnListEntry(ModEntities.ATONED_REVENANT.get(), 1, 1, 1));
                 biome.getSpawns(EntityClassification.MONSTER)
-                        .add(new Biome.SpawnListEntry(ModEntities.LV50_ENDERMAN.get(), 40, 1, 6));
+                        .add(new Biome.SpawnListEntry(ModEntities.LV50_ENDERMAN.get(), 20, 1, 6));
                 biome.getSpawns(EntityClassification.MONSTER)
                         .add(new Biome.SpawnListEntry(ModEntities.YOUNG_LOST_ADVENTURER.get(), 1, 1, 1));
+                biome.getSpawns(EntityClassification.MONSTER)
+                        .add(new Biome.SpawnListEntry(ModEntities.REDSTONE_PIGMAN.get(), 80, 6, 10));
                 
             }
             // Mega spice in the end
@@ -111,6 +116,9 @@ public class ClientEventBusSubscriber {
                         .add(new Biome.SpawnListEntry(ModEntities.TARANTULA_BEAST.get(), 3, 1, 3));
                     biome.getSpawns(EntityClassification.MONSTER)
                         .add(new Biome.SpawnListEntry(ModEntities.TARANTULA_VERMIN.get(), 15, 1, 5));
+
+                }
+                else if(biome.getCategory() == Biome.Category.FOREST || biome.getCategory() == Biome.Category.SAVANNA){
                     biome.getSpawns(EntityClassification.MONSTER)
                         .add(new Biome.SpawnListEntry(ModEntities.PACK_ENFORCER.get(), 10, 2, 3));
                     biome.getSpawns(EntityClassification.MONSTER)
@@ -131,9 +139,12 @@ public class ClientEventBusSubscriber {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         //Entities
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.KALHUIKI_TRIBE_MEMBER.get(), (erm) -> new RenderPlayerMob<TribeMember01Entity, PlayerModel<TribeMember01Entity>>(erm, new PlayerModel<>(0, false), 0));
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.YOUNG_LOST_ADVENTURER.get(), (erm) -> new RenderPlayerMob<YoungLostAdventurerEntity, PlayerModel<YoungLostAdventurerEntity>>(erm, new PlayerModel<>(0, false), 0));
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.KALHUIKI_TRIBE_MEMBER.get(), (erm) -> new TribeMemberRender<TribeMember01Entity, PlayerModel<TribeMember01Entity>>(erm, new PlayerModel<>(0, false), 0));
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.YOUNG_LOST_ADVENTURER.get(), (erm) -> new LostAdventurerRender<YoungLostAdventurerEntity, PlayerModel<YoungLostAdventurerEntity>>(erm, new PlayerModel<>(0, false), 0));
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_ZOMBIE.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_SLIME.get(), SlimeRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_ENDERMAN.get(), EndermanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV1_SPIDER.get(), SpiderRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV42_ENDERMAN.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV45_ENDERMAN.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LV50_ENDERMAN.get(), EndermanRenderer::new);
@@ -147,6 +158,7 @@ public class ClientEventBusSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.DASHER_SPIDER.get(), SpiderRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.TARANTULA_BEAST.get(), SpiderRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.TARANTULA_VERMIN.get(), SpiderRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.WEAVER_SPIDER.get(), SpiderRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MUTANT_TARANTULA.get(), SpiderRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.PACK_ENFORCER.get(), WolfRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SVEN_ALPHA.get(), WolfRenderer::new);
@@ -155,6 +167,7 @@ public class ClientEventBusSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.VOIDLING_MANIAC.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.VOIDLING_RADICAL.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LAPIS_ZOMBIE.get(), ZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.REDSTONE_PIGMAN.get(), PigZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZEALOT.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPECIAL_ZEALOT.get(), EndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FB_EXPERIENCE_BOTTLE.get(), (erm) -> new SpriteRenderer<FBExperienceBottleEntity>(erm, mc.getItemRenderer()));

@@ -215,6 +215,8 @@
     "item.forgeblock.savanna_bow": "Savanna Bow",
     
     "item.forgeblock.lv1_zombie_spawn_egg": "Zombie (Lv1) Spawn Egg",
+    "item.forgeblock.lv1_spider_spawn_egg": "Spider (Lv1) Spawn Egg",
+    "item.forgeblock.lv1_slime_spawn_egg": "Slime (Lv1) Spawn Egg",
     "item.forgeblock.tank_zombie_spawn_egg": "Tank Zombie Spawn Egg",
     "item.forgeblock.lapis_zombie_spawn_egg": "Lapis Zombie Spawn Egg",
     "item.forgeblock.zealot_spawn_egg": "Zealot Spawn Egg",
@@ -225,6 +227,7 @@
     "item.forgeblock.lv42_enderman_spawn_egg": "Enderman (Lv42) Spawn Egg",
     "item.forgeblock.lv45_enderman_spawn_egg": "Enderman (Lv45) Spawn Egg",
     "item.forgeblock.lv50_enderman_spawn_egg": "Enderman (Lv50) Spawn Egg",
+    "item.forgeblock.lv1_enderman_spawn_egg": "Enderman (Lv1) Spawn Egg",
     "item.forgeblock.crypt_ghoul_spawn_egg": "Crypt Ghoul Spawn Egg",
     "item.forgeblock.golden_ghoul_spawn_egg": "Golden Ghoul Spawn Egg",
     "item.forgeblock.atoned_champion_spawn_egg": "Atoned Champion Spawn Egg",
@@ -268,7 +271,10 @@
     "itemGroup.forgeblock_misc": "ForgeBlock Misc Items",
     
     "entity.forgeblock.lv1_zombie": "Zombie", 
+    "entity.forgeblock.lv1_spider": "Spider",
+    "entity.forgeblock.lv1_slime": "Slime",
     "entity.forgeblock.lv42_enderman": "Enderman",
+    "entity.forgeblock.lv1_enderman": "Enderman",
     "entity.forgeblock.lv45_enderman": "Enderman",
     "entity.forgeblock.lv50_enderman": "Enderman",
     "entity.forgeblock.lapis_zombie": "Lapis Zombie",
@@ -300,6 +306,8 @@
     "entity.forgeblock.voidling_devotee": "Voidling Devotee",
     "entity.forgeblock.voidling_maniac": "Voidling Maniac",
     "entity.forgeblock.voidling_radical": "Voidling Radical",
+    "entity.forgeblock.weaver_spider": "Weaver Spider",
+    "entity.forgeblock.redstone_pigman": "Redstone Pigman",
     "entity.forgeblock.young_lost_adventurer": "Young Lost Adventurer",
     "entity.forgeblock.kalhuiki_tribe_member": "Kalhuiki Tribe Member",
     

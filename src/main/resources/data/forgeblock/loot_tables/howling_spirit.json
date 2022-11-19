@@ -1,0 +1,45 @@
+{
+	"type": "entity",
+	"pools": [
+		{
+			"name": "howling_logs",
+			"rolls": 1,
+			
+			"functions": [
+				{
+					"function": "minecraft:set_count",
+					"count": {
+						"type": "uniform",
+						"min": 0,
+						"max": 1
+					}
+				},
+				{
+					"function": "minecraft:looting_enchant",
+					"count": {
+						"min": 0,
+						"max": 1
+					}
+				}
+			],
+			
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:dark_oak_log",
+					"weight": 1
+				},
+				{
+					"type":"item",
+					"name":"minecraft:acacia_log",
+					"weight":1
+				},
+				{
+					"type":"item",
+					"name":"minecraft:spruce_log",
+					"weight":1
+				}
+			]
+		}
+	]
+}

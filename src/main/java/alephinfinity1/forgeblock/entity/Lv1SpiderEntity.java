@@ -14,9 +14,9 @@ import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-public class DasherSpiderEntity extends SpiderEntity implements IFBEntity {
+public class Lv1SpiderEntity extends SpiderEntity implements IFBEntity {
 
-	public DasherSpiderEntity(EntityType<? extends SpiderEntity> type, World worldIn) {
+	public Lv1SpiderEntity(EntityType<? extends SpiderEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
 
@@ -24,7 +24,7 @@ public class DasherSpiderEntity extends SpiderEntity implements IFBEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new SwimGoal(this));
-		this.goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0));
+		this.goalSelector.addGoal(2, new LeapAtTargetGoal(this, (float) 0.5D));
 		this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.0D, true));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
 		this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
@@ -38,29 +38,24 @@ public class DasherSpiderEntity extends SpiderEntity implements IFBEntity {
 		super.registerAttributes();
 		this.registerFBAttributes();
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.45F);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(170.0D);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(55.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(120.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(44.0D);
 		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0D);
 	}
 	
 	@Override
-	protected int getExperiencePoints(PlayerEntity player) {
-		return 10;
-	}
-
-	@Override
 	public int getLevel() {
-		return 4;
+		return 1;
 	}
 
 	@Override
 	public double getCoins() {
-		return 4.0D;
+		return 1.0D;
 	}
 
 	@Override
 	public double getCombatXP() {
-		return 10;
+		return 8;
 	}
 
 }

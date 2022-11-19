@@ -5,6 +5,7 @@ import alephinfinity1.forgeblock.attribute.FBAttributes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.WolfEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -26,9 +27,14 @@ public class HowlingSpiritEntity extends Lv15WolfEntity {
 	
 	@Override
 	public ResourceLocation getLootTable() {
-		return new ResourceLocation(ForgeBlock.MOD_ID, "old_wolf");
+		return new ResourceLocation(ForgeBlock.MOD_ID, "howling_spirit");
 	}
 	
+	@Override
+	protected int getExperiencePoints(PlayerEntity player) {
+		return 10;
+	}
+
 	@Override
 	public int getLevel() {
 		return 35;

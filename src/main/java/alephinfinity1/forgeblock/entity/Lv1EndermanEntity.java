@@ -19,9 +19,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class Lv42EndermanEntity extends EndermanEntity implements IFBEntity {
+public class Lv1EndermanEntity extends EndermanEntity implements IFBEntity {
 
-	public Lv42EndermanEntity(EntityType<? extends EndermanEntity> type, World worldIn) {
+	public Lv1EndermanEntity(EntityType<? extends EndermanEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
 
@@ -29,8 +29,8 @@ public class Lv42EndermanEntity extends EndermanEntity implements IFBEntity {
 	protected void registerAttributes() {
 		super.registerAttributes();
 		this.registerFBAttributes();
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4500.0D);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(500.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(160.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(40.0D);
 		this.getAttribute(FBAttributes.CRIT_CHANCE).setBaseValue(0.0D);
 	}
 	
@@ -63,25 +63,20 @@ public class Lv42EndermanEntity extends EndermanEntity implements IFBEntity {
 			return super.attackEntityFrom(source, amount);
 		}
 	}
-
-	@Override
-	protected int getExperiencePoints(PlayerEntity player) {
-		return 8;
-	}
 	
 	@Override
 	public int getLevel() {
-		return 42;
+		return 1;
 	}
 
 	@Override
 	public double getCoins() {
-		return 10.0D;
+		return 2.0D;
 	}
 
 	@Override
 	public double getCombatXP() {
-		return 28.0D;
+		return 15.0D;
 	}
 	
 	@Override

@@ -1,6 +1,5 @@
 package alephinfinity1.forgeblock.entity;
 
-import java.util.Random;
 
 import alephinfinity1.forgeblock.ForgeBlock;
 import alephinfinity1.forgeblock.attribute.FBAttributes;
@@ -10,17 +9,18 @@ import alephinfinity1.forgeblock.item.swords.FBSwordItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
+
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.EndermanEntity;
-import net.minecraft.entity.monster.MonsterEntity;
+
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -30,18 +30,13 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IWorld;
+
 import net.minecraft.world.World;
 
 public class YoungLostAdventurerEntity extends ZombieEntity implements IFBEntity{
 
 	public int level = 163;
-	
-	private static final ResourceLocation mobTextures = new ResourceLocation("textures/entities/lost_adventurer.png");
 
-	public ResourceLocation getEntityTexture(YoungLostAdventurerEntity entity) {
-		return mobTextures;
-	}
 
 	public YoungLostAdventurerEntity(EntityType<? extends ZombieEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -51,14 +46,15 @@ public class YoungLostAdventurerEntity extends ZombieEntity implements IFBEntity
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new SwimGoal(this));
 		this.goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
-		this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.0D, false));
-		this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
-		this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 5.0F));
+
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
+		this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
+		this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 5.0F));
 		this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Lv1ZombieEntity.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<EndermanEntity>(this, EndermanEntity.class, 5, true, true, (entity) -> {return entity instanceof EndermanEntity;}));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Lv1ZombieEntity.class, true));
+		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<EndermanEntity>(this, EndermanEntity.class, 5, true, true, (entity) -> {return entity instanceof EndermanEntity;}));
 	}
 
 	@Override
